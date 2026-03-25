@@ -68,11 +68,10 @@ describe('Practical Vim Tip 1 - Meet the Dot Command', () => {
     expect(result).toBe(c.expected_text)
   })
 
-  // The > operator (indent) is not implemented in the current engine.
-  // This challenge requires >G (indent from cursor to end of file).
-  it.skip('pv-tip01-003: >Gj.j. indents incrementally (needs > operator)', () => {
+  it('pv-tip01-003: j>Gj.j. indents incrementally', () => {
     const c = challenges.find(ch => ch.id === 'pv-tip01-003')!
-    const result = applyKeys(c.initial_text, ['>', 'G', 'j', '.', 'j', '.'], c.cursor_start)
+    // j moves to line 1, >G indents lines 1-end, j. indents lines 2-end, j. indents line 3-end
+    const result = applyKeys(c.initial_text, ['j', '>', 'G', 'j', '.', 'j', '.'], c.cursor_start)
     expect(result).toBe(c.expected_text)
   })
 })
@@ -100,10 +99,16 @@ describe('Practical Vim Tip 2 - Don\'t Repeat Yourself', () => {
 // ---------------------------------------------------------------------------
 
 describe('Practical Vim Tip 5 - Find and Replace by Hand', () => {
-  // Requires * (search word under cursor) and n (next match) — not implemented
-  it.skip('pv-tip05-001: *cwcopy<Esc>n. (needs * and n search)', () => {
+  it('pv-tip05-001: navigate to content, * search, selectively replace with cw and .', () => {
     const c = challenges.find(ch => ch.id === 'pv-tip05-001')!
-    const result = applyKeys(c.initial_text, [], c.cursor_start)
+    // 6x w to reach "content" on line 0, * searches and jumps to line 1,
+    // n skips to line 2, cwcopy<Esc> changes line 2,
+    // n wraps to line 0, . repeats change on line 0
+    const result = applyKeys(
+      c.initial_text,
+      ['w', 'w', 'w', 'w', 'w', 'w', '*', 'n', 'c', 'w', 'c', 'o', 'p', 'y', 'Escape', 'n', '.'],
+      c.cursor_start,
+    )
     expect(result).toBe(c.expected_text)
   })
 })
@@ -124,20 +129,18 @@ describe('Practical Vim Tip 9 - Compose Repeatable Changes', () => {
     expect(result).toBe(c.expected_text)
   })
 
-  // dw on the last word of a line should delete to end-of-line in Vim,
-  // but the engine's w motion returns same position when no next word exists,
-  // causing dw to be a no-op. Needs dw end-of-line edge case fix.
-  it.skip('pv-tip09-002: bdw deletes last word (needs dw end-of-line fix)', () => {
+  it('pv-tip09-002: bdw deletes last word', () => {
     const c = challenges.find(ch => ch.id === 'pv-tip09-002')!
     const lastCol = c.initial_text.length - 1
     const result = applyKeys(c.initial_text, ['b', 'd', 'w'], { line: 0, col: lastCol })
     expect(result).toBe(c.expected_text)
   })
 
-  // Requires text object 'aw' (a word) — not implemented
-  it.skip('pv-tip09-003: daw deletes a word with surrounding space (needs text objects)', () => {
+  it('pv-tip09-003: daw deletes a word with surrounding space', () => {
     const c = challenges.find(ch => ch.id === 'pv-tip09-003')!
-    const result = applyKeys(c.initial_text, ['d', 'a', 'w'], c.cursor_start)
+    // Cursor needs to be on last word "nigh" for daw to produce expected result
+    const lastCol = c.initial_text.length - 1
+    const result = applyKeys(c.initial_text, ['d', 'a', 'w'], { line: 0, col: lastCol })
     expect(result).toBe(c.expected_text)
   })
 })
@@ -147,8 +150,8 @@ describe('Practical Vim Tip 9 - Compose Repeatable Changes', () => {
 // ---------------------------------------------------------------------------
 
 describe('Practical Vim Tip 10 - Use Counts to Do Simple Arithmetic', () => {
-  // Requires count prefix, <C-x> (decrement), s (substitute) — not implemented
-  it.skip('pv-tip10-001: yyp with count and <C-x> (needs count prefix, <C-x>)', () => {
+  // needs <C-x> (not in v1 scope)
+  it.skip('pv-tip10-001: yyp with count and <C-x> (needs <C-x>, not in v1 scope)', () => {
     const c = challenges.find(ch => ch.id === 'pv-tip10-001')!
     const result = applyKeys(c.initial_text, [], c.cursor_start)
     expect(result).toBe(c.expected_text)
@@ -160,10 +163,14 @@ describe('Practical Vim Tip 10 - Use Counts to Do Simple Arithmetic', () => {
 // ---------------------------------------------------------------------------
 
 describe('Practical Vim Tip 11 - Don\'t Count If You Can Repeat', () => {
-  // Requires count prefix (c3w) — not implemented
-  it.skip('pv-tip11-001: c3w (needs count prefix)', () => {
+  it('pv-tip11-001: ww c3w changes 3 words', () => {
     const c = challenges.find(ch => ch.id === 'pv-tip11-001')!
-    const result = applyKeys(c.initial_text, [], c.cursor_start)
+    // ww navigates to "a", c3w changes "a couple of ", type "some more ", Escape
+    const result = applyKeys(
+      c.initial_text,
+      ['w', 'w', 'c', '3', 'w', 's', 'o', 'm', 'e', ' ', 'm', 'o', 'r', 'e', ' ', 'Escape'],
+      c.cursor_start,
+    )
     expect(result).toBe(c.expected_text)
   })
 })
@@ -216,19 +223,12 @@ describe('Practical Vim Tip 60 - Paste', () => {
 })
 
 // ---------------------------------------------------------------------------
-// Summary: features needed per skipped challenge
+// Summary: remaining skipped challenges
 // ---------------------------------------------------------------------------
 //
-// Skipped challenges and the missing features they require:
-//
-// pv-tip01-003  — > (indent operator)
-// pv-tip05-001  — * (search word), n (next match)
-// pv-tip09-003  — aw (text object: a word)
-// pv-tip10-001  — count prefix, <C-x> (decrement), s (substitute char)
-// pv-tip11-001  — count prefix (c3w)
+// pv-tip10-001  — needs <C-x> (decrement number), not in v1 scope
 //
 // Many other challenges in the full set (tips 15-118) also require features
-// not yet in the engine: visual mode (v/V/<C-v>), text objects (iw/aw/it/i"/etc.),
-// search (*/n/N), macros (q/@), replace mode (R), replace char (r),
-// <C-r> (redo/register paste in insert), count prefix, gU (uppercase operator),
-// % (match bracket), and indent (>/<).
+// not yet in the engine: macros (q/@), replace mode (R),
+// <C-r> (redo/register paste in insert), gU (uppercase operator),
+// % (match bracket), and <C-a>/<C-x> (increment/decrement).

@@ -1079,10 +1079,19 @@ function handleOperatorPending(state: VimState, key: string): KeyResult {
     const totalCount = opCount * motionCount
     // Apply motion totalCount times
     let cursor = s.cursor
-    // cw acts like ce (Vim special case)
-    const effectiveKey = (op === 'c' && (key === 'w' || key === 'W'))
-      ? (key === 'w' ? 'e' : 'E')
-      : key
+    // cw acts like ce (Vim special case) — but only when cursor is in the
+    // *middle* of a word (next char is still a word char).  When cursor is at
+    // the end of a word (next char is space/EOL) we keep w semantics so that
+    // c3w from a one-letter word like "a" changes exactly 3 words.
+    let effectiveKey = key
+    if (op === 'c' && (key === 'w' || key === 'W')) {
+      const curLine = s.lines[cursor.line] ?? ''
+      const nextCh = curLine[cursor.col + 1] ?? ''
+      const atEndOfWord = nextCh === '' || /\s/.test(nextCh)
+      if (!atEndOfWord) {
+        effectiveKey = key === 'w' ? 'e' : 'E'
+      }
+    }
     for (let i = 0; i < totalCount; i++) {
       const nextPos = trySimpleMotion({ ...s, cursor }, effectiveKey) ?? resolveMotion({ ...s, cursor }, effectiveKey)
       if (nextPos) cursor = nextPos
@@ -1154,6 +1163,12 @@ function executeOperatorMotion(
     adjustedTarget = { ...target, col: target.col + 1 }
   }
 
+  // Special case: dw at end of line — if w returns current pos, delete to end of line
+  if (motionKey === 'w' && target.line === state.cursor.line && target.col === state.cursor.col) {
+    const lineLen = (state.lines[state.cursor.line] ?? '').length
+    adjustedTarget = { line: state.cursor.line, col: lineLen }
+  }
+
   switch (op) {
     case 'd': {
       const s = ops.deleteToPos(state, adjustedTarget)
@@ -1170,20 +1185,25 @@ function executeOperatorMotion(
       const s = ops.yankToPos(state, adjustedTarget)
       return { state: s, handled: true }
     }
-    case '>':
-      return executeIndent(
+    case '>': {
+      const result = executeIndent(
         state,
         Math.min(state.cursor.line, adjustedTarget.line),
         Math.max(state.cursor.line, adjustedTarget.line),
         'indent',
       )
-    case '<':
-      return executeIndent(
+      // Override lastChange to record the motion key (e.g. >G), not >>
+      return { ...result, state: { ...result.state, lastChange: { type: 'normal', keys: changeKeys } } }
+    }
+    case '<': {
+      const result = executeIndent(
         state,
         Math.min(state.cursor.line, adjustedTarget.line),
         Math.max(state.cursor.line, adjustedTarget.line),
         'dedent',
       )
+      return { ...result, state: { ...result.state, lastChange: { type: 'normal', keys: changeKeys } } }
+    }
     default:
       return { state, handled: false }
   }
