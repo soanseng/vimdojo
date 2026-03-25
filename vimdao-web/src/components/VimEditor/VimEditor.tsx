@@ -59,7 +59,7 @@ export default function VimEditor({ state, onKey, title, showKeyLog = true }: Vi
             ))}
           </div>
           {/* Editor content */}
-          <div className="flex-1 py-2 pl-3">
+          <div className="flex-1 py-2 pl-3 whitespace-pre">
             {state.lines.map((line, lineIdx) => (
               <div
                 key={lineIdx}
