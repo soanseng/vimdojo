@@ -287,6 +287,7 @@ func runMerge(dir1, dir2, outputDir string) error {
 				return &idx, nil
 			}
 		}
+		fmt.Printf("  warning: no *_commands.json found in %s\n", dir)
 		return nil, nil
 	}
 

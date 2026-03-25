@@ -22,7 +22,7 @@ func MergeIndices(indices ...*CommandIndex) *CommandIndex {
 			existing.Chapters = mergeIntSlice(existing.Chapters, entry.Chapters)
 			existing.Sections = mergeStringSlice(existing.Sections, entry.Sections)
 			for _, ex := range entry.ContextExamples {
-				if len(existing.ContextExamples) < 5 {
+				if len(existing.ContextExamples) < 3 {
 					existing.ContextExamples = append(existing.ContextExamples, ex)
 				}
 			}
