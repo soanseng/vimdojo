@@ -1,4 +1,4 @@
-export type VimMode = 'normal' | 'insert' | 'operator-pending'
+export type VimMode = 'normal' | 'insert' | 'operator-pending' | 'visual' | 'command'
 
 export interface CursorPos {
   line: number
@@ -21,6 +21,9 @@ export interface VimState {
   isDotReplaying: boolean      // true during dot command replay (prevents re-recording)
   countPrefix: number | null   // accumulated count prefix (e.g. 3 in 3w, 12 in 12j)
   operatorCount: number | null  // count before operator (e.g. 2 in 2d3w -> total 6)
+  searchPattern: string | null
+  searchDirection: 'forward' | 'backward'
+  commandBuffer: string         // for / and : command input
 }
 
 export interface FindParams {

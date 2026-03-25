@@ -246,6 +246,50 @@ describe('s command', () => {
   })
 })
 
+describe('search', () => {
+  it('/ searches forward on Enter', () => {
+    const s = applyKeysState('hello world hello', ['/', 'h', 'e', 'l', 'l', 'o', 'Enter'])
+    expect(s.cursor.col).toBe(12)
+    expect(s.searchPattern).toBe('hello')
+  })
+  it('n repeats search (wraps)', () => {
+    const s = applyKeysState('aaa bbb aaa', ['/', 'a', 'a', 'a', 'Enter', 'n'])
+    expect(s.cursor.col).toBe(0) // wraps back
+  })
+  it('N reverses search direction', () => {
+    const s = applyKeysState('hello world hello', ['/', 'h', 'e', 'l', 'l', 'o', 'Enter', 'N'])
+    expect(s.cursor.col).toBe(0) // searches backward from col 12
+  })
+  it('* searches word under cursor', () => {
+    const s = applyKeysState('the content of content', ['w', '*'])
+    expect(s.cursor.col).toBe(15)
+  })
+  it('# searches word under cursor backward', () => {
+    // Cursor starts at col 0 ("content"), move to col 11 via motions (2w)
+    const s = applyKeysState('content of content', ['2', 'w', '#'])
+    expect(s.cursor.col).toBe(0)
+    expect(s.searchDirection).toBe('backward')
+  })
+  it('Escape cancels search', () => {
+    const s = applyKeysState('hello', ['/', 'h', 'Escape'])
+    expect(s.mode).toBe('normal')
+    expect(s.cursor.col).toBe(0) // didn't move
+  })
+  it('search mode shows in state', () => {
+    const s = applyKeysState('hello', ['/', 'h'])
+    expect(s.mode).toBe('command')
+    expect(s.commandBuffer).toBe('/h')
+  })
+  it('Backspace removes char from search buffer', () => {
+    const s = applyKeysState('hello', ['/', 'h', 'e', 'Backspace'])
+    expect(s.commandBuffer).toBe('/h')
+  })
+  it('Backspace on empty search pattern cancels', () => {
+    const s = applyKeysState('hello', ['/', 'Backspace'])
+    expect(s.mode).toBe('normal')
+  })
+})
+
 describe('count prefix', () => {
   it('3w moves 3 words forward', () => {
     const s = applyKeysState('one two three four', ['3', 'w'])

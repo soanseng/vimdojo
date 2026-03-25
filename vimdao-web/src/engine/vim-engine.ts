@@ -2,6 +2,7 @@ import type { VimState, KeyResult, CursorPos, FindParams } from './vim-types'
 import { clampCursor } from './vim-state'
 import * as motions from './vim-motions'
 import * as ops from './vim-operations'
+import { searchForward, searchBackward, searchWordUnderCursor } from './vim-search'
 
 // ---------------------------------------------------------------------------
 // Inclusive motions — these include the character at the target position
@@ -22,6 +23,8 @@ export function processKey(state: VimState, key: string): KeyResult {
       return handleInsertMode(s, key)
     case 'normal':
       return handleNormalMode(s, key)
+    case 'command':
+      return handleCommandMode(s, key)
     default:
       return { state: s, handled: false }
   }
@@ -359,6 +362,153 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
   // --- Dot command ---
   if (key === '.') {
     return executeDot(state)
+  }
+
+  // --- Search ---
+  if (key === '/') {
+    return { state: { ...state, mode: 'command', commandBuffer: '/' }, handled: true }
+  }
+
+  if (key === 'n') {
+    if (state.searchPattern) {
+      const count = state.countPrefix ?? 1
+      let cursor = state.cursor
+      const searchFn = state.searchDirection === 'forward' ? searchForward : searchBackward
+      for (let i = 0; i < count; i++) {
+        const pos = searchFn({ ...state, cursor }, state.searchPattern)
+        if (pos) cursor = pos
+        else break
+      }
+      return { state: { ...state, cursor, countPrefix: null }, handled: true }
+    }
+    return { state, handled: true }
+  }
+
+  if (key === 'N') {
+    if (state.searchPattern) {
+      const count = state.countPrefix ?? 1
+      let cursor = state.cursor
+      const searchFn = state.searchDirection === 'forward' ? searchBackward : searchForward
+      for (let i = 0; i < count; i++) {
+        const pos = searchFn({ ...state, cursor }, state.searchPattern)
+        if (pos) cursor = pos
+        else break
+      }
+      return { state: { ...state, cursor, countPrefix: null }, handled: true }
+    }
+    return { state, handled: true }
+  }
+
+  if (key === '*') {
+    const result = searchWordUnderCursor(state)
+    if (result) {
+      return {
+        state: {
+          ...state,
+          cursor: result.pos,
+          searchPattern: result.pattern,
+          searchDirection: 'forward',
+          countPrefix: null,
+        },
+        handled: true,
+      }
+    }
+    return { state, handled: true }
+  }
+
+  if (key === '#') {
+    const { lines, cursor } = state
+    const line = lines[cursor.line] ?? ''
+    const col = cursor.col
+    const ch = line[col]
+    if (ch && /\w/.test(ch)) {
+      let wordStart = col
+      let wordEnd = col
+      while (wordStart > 0 && /\w/.test(line[wordStart - 1] ?? '')) wordStart--
+      while (wordEnd < line.length - 1 && /\w/.test(line[wordEnd + 1] ?? '')) wordEnd++
+      const word = line.slice(wordStart, wordEnd + 1)
+      const pos = searchBackward(state, word)
+      if (pos) {
+        return {
+          state: {
+            ...state,
+            cursor: pos,
+            searchPattern: word,
+            searchDirection: 'backward',
+            countPrefix: null,
+          },
+          handled: true,
+        }
+      }
+    }
+    return { state, handled: true }
+  }
+
+  return { state, handled: false }
+}
+
+// ---------------------------------------------------------------------------
+// Command mode (/ search, : commands)
+// ---------------------------------------------------------------------------
+
+function handleCommandMode(state: VimState, key: string): KeyResult {
+  if (key === 'Escape') {
+    return {
+      state: { ...state, mode: 'normal', commandBuffer: '' },
+      handled: true,
+    }
+  }
+
+  if (key === 'Backspace') {
+    if (state.commandBuffer.length <= 1) {
+      // Only the prefix char remains — cancel
+      return {
+        state: { ...state, mode: 'normal', commandBuffer: '' },
+        handled: true,
+      }
+    }
+    return {
+      state: { ...state, commandBuffer: state.commandBuffer.slice(0, -1) },
+      handled: true,
+    }
+  }
+
+  if (key === 'Enter') {
+    const buf = state.commandBuffer
+    if (buf.startsWith('/')) {
+      const pattern = buf.slice(1)
+      if (pattern.length === 0) {
+        return {
+          state: { ...state, mode: 'normal', commandBuffer: '' },
+          handled: true,
+        }
+      }
+      const pos = searchForward(state, pattern)
+      return {
+        state: {
+          ...state,
+          mode: 'normal',
+          commandBuffer: '',
+          searchPattern: pattern,
+          searchDirection: 'forward',
+          cursor: pos ?? state.cursor,
+        },
+        handled: true,
+      }
+    }
+    // Other command types (e.g. :) will be handled in future tasks
+    return {
+      state: { ...state, mode: 'normal', commandBuffer: '' },
+      handled: true,
+    }
+  }
+
+  // Regular character — append to buffer
+  if (key.length === 1) {
+    return {
+      state: { ...state, commandBuffer: state.commandBuffer + key },
+      handled: true,
+    }
   }
 
   return { state, handled: false }

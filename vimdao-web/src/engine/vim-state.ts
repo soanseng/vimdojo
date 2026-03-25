@@ -18,6 +18,9 @@ export function createState(text: string, cursor?: CursorPos): VimState {
     isDotReplaying: false,
     countPrefix: null,
     operatorCount: null,
+    searchPattern: null,
+    searchDirection: 'forward' as const,
+    commandBuffer: '',
   }
 }
 
