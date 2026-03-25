@@ -1,0 +1,2825 @@
+[
+  {
+    "keys": "Control-D",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 1,
+    "section_id": "1.1",
+    "requires": "neovim"
+  },
+  {
+    "keys": "gcc",
+    "description_en": "",
+    "category": "comment",
+    "plugin": "Comment.nvim",
+    "chapter": 1,
+    "section_id": "1.6",
+    "requires": "neovim"
+  },
+  {
+    "keys": "Control-C",
+    "description_en": "The Control-C keyboard combination also works to exit Insert mode, with no\nremapping required. I don’t like this because it’s two keystrokes and on my\nDvorak keyboard, Control-C is harder to hit than on a qwerty keyboard where\nC is on the bottom row near the Control key.",
+    "category": "neovim-builtin",
+    "chapter": 2,
+    "section_id": "2.1",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-r",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 2,
+    "section_id": "2.1",
+    "requires": "vim"
+  },
+  {
+    "keys": "gi",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 2,
+    "section_id": "2.1",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-r",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 2,
+    "section_id": "2.3",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-y",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 2,
+    "section_id": "2.3",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-R",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 2,
+    "section_id": "2.3",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-d",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 3,
+    "section_id": "3.2",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-u",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 3,
+    "section_id": "3.2",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-f",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 3,
+    "section_id": "3.2",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-b",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 3,
+    "section_id": "3.2",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-y",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 3,
+    "section_id": "3.2",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-e",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 3,
+    "section_id": "3.2",
+    "requires": "vim"
+  },
+  {
+    "keys": "\u003cSpace\u003efc",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 3,
+    "section_id": "3.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "ge",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 3,
+    "section_id": "3.6",
+    "requires": "vim"
+  },
+  {
+    "keys": "gE",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 3,
+    "section_id": "3.7",
+    "requires": "vim"
+  },
+  {
+    "keys": "gg",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 3,
+    "section_id": "3.9",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-o",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 3,
+    "section_id": "3.10",
+    "requires": "vim"
+  },
+  {
+    "keys": "gg",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 3,
+    "section_id": "3.10",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-i",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 3,
+    "section_id": "3.10",
+    "requires": "vim"
+  },
+  {
+    "keys": "Alt-s",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 4,
+    "section_id": "4.1",
+    "requires": "neovim"
+  },
+  {
+    "keys": "Control-d",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 4,
+    "section_id": "4.1",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-u",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 4,
+    "section_id": "4.1",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-f",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 4,
+    "section_id": "4.1",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-b",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 4,
+    "section_id": "4.1",
+    "requires": "vim"
+  },
+  {
+    "keys": "\u003cSpace\u003e\u003cSpace\u003e",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 4,
+    "section_id": "4.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ef",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 4,
+    "section_id": "4.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eff",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 4,
+    "section_id": "4.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003efF",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 4,
+    "section_id": "4.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003e-e",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 4,
+    "section_id": "4.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003e-E",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 4,
+    "section_id": "4.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eff",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 4,
+    "section_id": "4.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ee",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 4,
+    "section_id": "4.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003efF",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 4,
+    "section_id": "4.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eE",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 4,
+    "section_id": "4.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "Control-d",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 4,
+    "section_id": "4.3",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-u",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 4,
+    "section_id": "4.3",
+    "requires": "vim"
+  },
+  {
+    "keys": "Alt-s",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 4,
+    "section_id": "4.3",
+    "requires": "neovim"
+  },
+  {
+    "keys": "\u003cSpace\u003efm",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 4,
+    "section_id": "4.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003efM",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 4,
+    "section_id": "4.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ef",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 4,
+    "section_id": "4.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003efc",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 5,
+    "section_id": "5.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ee",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 5,
+    "section_id": "5.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eE",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 5,
+    "section_id": "5.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003efm",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 5,
+    "section_id": "5.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003e",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 5,
+    "section_id": "5.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eqs",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 5,
+    "section_id": "5.5",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "gJ",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 6,
+    "section_id": "6.6",
+    "requires": "vim"
+  },
+  {
+    "keys": "gU",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 6,
+    "section_id": "6.7",
+    "requires": "vim"
+  },
+  {
+    "keys": "gJ",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 6,
+    "section_id": "6.7",
+    "requires": "vim"
+  },
+  {
+    "keys": "gu",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 6,
+    "section_id": "6.7",
+    "requires": "vim"
+  },
+  {
+    "keys": "gUU",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 6,
+    "section_id": "6.7",
+    "requires": "vim"
+  },
+  {
+    "keys": "guu",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 6,
+    "section_id": "6.7",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-r",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 6,
+    "section_id": "6.10",
+    "requires": "vim"
+  },
+  {
+    "keys": "[(",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[{",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[%",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]%",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[c",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]c",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[f",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]f",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[m",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]m",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[C",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]C",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[F",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[M",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]M",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]F",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "Control-d",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "vim"
+  },
+  {
+    "keys": "[i",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]i",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[d",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]d",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[e",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]e",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[w",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]w",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eus",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[s",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]s",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[t",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]t",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[h",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]h",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "gU",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 7,
+    "section_id": "7.2",
+    "requires": "vim"
+  },
+  {
+    "keys": "gg",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 7,
+    "section_id": "7.2",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-o",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 7,
+    "section_id": "7.3",
+    "requires": "vim"
+  },
+  {
+    "keys": "gsai[(",
+    "description_en": "select the contents of a set of square brackets (using i[)\nand place parentheses separated by spaces inside the square brackets. So if you\nstart with [foo bar] and type gsai[(, you will end up with [( foo bar )].",
+    "category": "surround",
+    "chapter": 7,
+    "section_id": "7.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "gsai[)",
+    "description_en": "does the same thing, except there are no spaces added, so the same\n[foo bar] will become [(foo bar)].",
+    "category": "surround",
+    "chapter": 7,
+    "section_id": "7.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "gsaa[)",
+    "description_en": "place the parentheses outside the square brackets, because\nyou selected with a[ instead of i[. So this time, our example becomes\n([foo bar]).",
+    "category": "surround",
+    "chapter": 7,
+    "section_id": "7.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "gsa$\"",
+    "description_en": "surround all the text between the current cursor position and\nthe end of the line with double quotation marks.",
+    "category": "surround",
+    "chapter": 7,
+    "section_id": "7.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "gsaSb'",
+    "description_en": "surround the text object that you select with the label b\nafter an S operation with single quotation marks.",
+    "category": "surround",
+    "chapter": 7,
+    "section_id": "7.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "gsaraa3e*",
+    "description_en": "surround the remote object that starts with a that is\nlabelled with an a followed by the next three words with an asterisk at each\nend of the three words.",
+    "category": "surround",
+    "chapter": 7,
+    "section_id": "7.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "gsa",
+    "description_en": "",
+    "category": "surround",
+    "plugin": "mini.surround",
+    "chapter": 7,
+    "section_id": "7.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "gsd",
+    "description_en": "",
+    "category": "surround",
+    "plugin": "mini.surround",
+    "chapter": 7,
+    "section_id": "7.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "gsd[",
+    "description_en": "",
+    "category": "surround",
+    "plugin": "mini.surround",
+    "chapter": 7,
+    "section_id": "7.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "gsr",
+    "description_en": "",
+    "category": "surround",
+    "plugin": "mini.surround",
+    "chapter": 7,
+    "section_id": "7.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "gsr\"'",
+    "description_en": "",
+    "category": "surround",
+    "plugin": "mini.surround",
+    "chapter": 7,
+    "section_id": "7.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[(",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 7,
+    "section_id": "7.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "gsf",
+    "description_en": "",
+    "category": "surround",
+    "plugin": "mini.surround",
+    "chapter": 7,
+    "section_id": "7.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "gsF",
+    "description_en": "",
+    "category": "surround",
+    "plugin": "mini.surround",
+    "chapter": 7,
+    "section_id": "7.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "gsh(",
+    "description_en": "",
+    "category": "surround",
+    "plugin": "mini.surround",
+    "chapter": 7,
+    "section_id": "7.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "gsaapt",
+    "description_en": "",
+    "category": "surround",
+    "plugin": "mini.surround",
+    "chapter": 7,
+    "section_id": "7.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "gs",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 7,
+    "section_id": "7.4",
+    "requires": "neovim"
+  },
+  {
+    "keys": "Control-r",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 8,
+    "section_id": "8.1",
+    "requires": "vim"
+  },
+  {
+    "keys": "gv",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 8,
+    "section_id": "8.3",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-v",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 8,
+    "section_id": "8.3",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-V$",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 8,
+    "section_id": "8.3",
+    "requires": "neovim"
+  },
+  {
+    "keys": "\u003cSpace\u003es\"",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 8,
+    "section_id": "8.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "Ctrl-r",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 8,
+    "section_id": "8.4",
+    "requires": "neovim"
+  },
+  {
+    "keys": "Control-c",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 8,
+    "section_id": "8.4",
+    "requires": "vim"
+  },
+  {
+    "keys": "\u003cSpace\u003ep",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 8,
+    "section_id": "8.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[y",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 8,
+    "section_id": "8.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]y",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 8,
+    "section_id": "8.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[p",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 8,
+    "section_id": "8.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]p",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 8,
+    "section_id": "8.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[b",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 9,
+    "section_id": "9.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]b",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 9,
+    "section_id": "9.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003e\u003cBacktick\u003e",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003e\u003ccomma\u003e",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003e\u003cSpace\u003e",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ebd",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eb",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ebD",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ebl",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ebr",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ebo",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ebP",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ebp",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003e,",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "Control-x",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 9,
+    "section_id": "9.2",
+    "requires": "vim"
+  },
+  {
+    "keys": "\u003cSpace\u003e.",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eS",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ewq",
+    "description_en": "closes the window, and if it is the only window open,\nexits (quits) Neovim.",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ewc",
+    "description_en": "closes the window unless it is the only window open,\nin which case it displays an error and refuses to close.",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ewd",
+    "description_en": "deletes the window. It is actually doing exactly\nthe same operation as \u003cSpace\u003ewc, but it is helpful for muscle memory\nfor its symmetry with \u003cSpace\u003ebd to “delete” an open buffer.",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ew",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "Control-w",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "neovim"
+  },
+  {
+    "keys": "\u003cSpace\u003ewv",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ews",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ewh",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003e|",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003e\u003cMinus\u003e",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "Control-v",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-s",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "neovim"
+  },
+  {
+    "keys": "\u003cSpace\u003ebd",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ewo",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ew+",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ew-",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ew\u003e",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ew\u003c",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ew=",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ew\u003cSpace\u003e",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ew\u003cSpace\u003evvvs",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003euz",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003euZ",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ewq",
+    "description_en": "Just close the last window in the tab (i.e. with \u003cSpace\u003ewq) and the tab will\ndisappear.",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003e\u003ctab\u003ed",
+    "description_en": "The \u003cSpace\u003e\u003ctab\u003ed keybinding will close all the windows in a tab as well\nas the tab itself. The buffers will stay open.",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003e\u003cTab\u003e",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003e\u003cTab\u003e\u003cTab\u003e",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ewT",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "gt",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 9,
+    "section_id": "9.4",
+    "requires": "neovim"
+  },
+  {
+    "keys": "gT",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 9,
+    "section_id": "9.4",
+    "requires": "neovim"
+  },
+  {
+    "keys": "\u003cSpace\u003e\u003cTab\u003e[",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003e\u003cTab\u003e]",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eqq",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eqs",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eqS",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eqd",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 9,
+    "section_id": "9.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ecs",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 10,
+    "section_id": "10.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ec",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 10,
+    "section_id": "10.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ecm",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 10,
+    "section_id": "10.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003esn",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 10,
+    "section_id": "10.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003esnd",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 10,
+    "section_id": "10.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ecl",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 10,
+    "section_id": "10.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[d",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 10,
+    "section_id": "10.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[w",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 10,
+    "section_id": "10.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[e",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 10,
+    "section_id": "10.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]d",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 10,
+    "section_id": "10.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]w",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 10,
+    "section_id": "10.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]e",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 10,
+    "section_id": "10.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ecd",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 10,
+    "section_id": "10.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[t",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 10,
+    "section_id": "10.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]t",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 10,
+    "section_id": "10.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[q",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 10,
+    "section_id": "10.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]q",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 10,
+    "section_id": "10.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003exx",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 10,
+    "section_id": "10.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003exX",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 10,
+    "section_id": "10.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "Control-q",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 10,
+    "section_id": "10.4",
+    "requires": "neovim"
+  },
+  {
+    "keys": "Alt-t",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 10,
+    "section_id": "10.4",
+    "requires": "neovim"
+  },
+  {
+    "keys": "]d",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 10,
+    "section_id": "10.5",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eca",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 10,
+    "section_id": "10.5",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ecf",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 10,
+    "section_id": "10.7",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "gd",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 11,
+    "section_id": "11.1",
+    "requires": "neovim"
+  },
+  {
+    "keys": "Control-o",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 11,
+    "section_id": "11.1",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-i",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 11,
+    "section_id": "11.1",
+    "requires": "vim"
+  },
+  {
+    "keys": "gr",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 11,
+    "section_id": "11.2",
+    "requires": "neovim"
+  },
+  {
+    "keys": "\u003cSpace\u003esR",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 11,
+    "section_id": "11.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "Alt-a",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 11,
+    "section_id": "11.2",
+    "requires": "neovim"
+  },
+  {
+    "keys": "Control-t",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 11,
+    "section_id": "11.2",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-q",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 11,
+    "section_id": "11.2",
+    "requires": "neovim"
+  },
+  {
+    "keys": "\u003cSpace\u003ess",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 11,
+    "section_id": "11.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "Control-q",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 11,
+    "section_id": "11.4",
+    "requires": "neovim"
+  },
+  {
+    "keys": "Control-t",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 11,
+    "section_id": "11.4",
+    "requires": "vim"
+  },
+  {
+    "keys": "\u003cSpace\u003esS",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 11,
+    "section_id": "11.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ecs",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 11,
+    "section_id": "11.5",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ew\u003c",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 11,
+    "section_id": "11.5",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ew\u003e",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 11,
+    "section_id": "11.5",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eut",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 11,
+    "section_id": "11.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eu",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 11,
+    "section_id": "11.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "Control-o",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 11,
+    "section_id": "11.7",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-i",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 11,
+    "section_id": "11.7",
+    "requires": "vim"
+  },
+  {
+    "keys": "\u003cSpace\u003eqs",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 11,
+    "section_id": "11.7",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003esm",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 11,
+    "section_id": "11.7",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003e/",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 12,
+    "section_id": "12.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "Alt-s",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 12,
+    "section_id": "12.4",
+    "requires": "neovim"
+  },
+  {
+    "keys": "Alt-t",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 12,
+    "section_id": "12.4",
+    "requires": "neovim"
+  },
+  {
+    "keys": "]q",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 12,
+    "section_id": "12.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[q",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 12,
+    "section_id": "12.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003e/",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 12,
+    "section_id": "12.5",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "Control-Enter",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 13,
+    "section_id": "13.1",
+    "requires": "neovim"
+  },
+  {
+    "keys": "gv",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 13,
+    "section_id": "13.2",
+    "requires": "vim"
+  },
+  {
+    "keys": "\u003cSpace\u003esr",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 13,
+    "section_id": "13.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "ga",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 13,
+    "section_id": "13.4",
+    "requires": "neovim"
+  },
+  {
+    "keys": "gap",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 13,
+    "section_id": "13.4",
+    "requires": "neovim"
+  },
+  {
+    "keys": "gao",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 13,
+    "section_id": "13.4",
+    "requires": "neovim"
+  },
+  {
+    "keys": "Control-v",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 13,
+    "section_id": "13.5",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-v\u003cEscape\u003e",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 13,
+    "section_id": "13.5",
+    "requires": "neovim"
+  },
+  {
+    "keys": "Control-v Escape",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 13,
+    "section_id": "13.5",
+    "requires": "neovim"
+  },
+  {
+    "keys": "Control-F",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 13,
+    "section_id": "13.6",
+    "requires": "neovim"
+  },
+  {
+    "keys": "Control-u",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 13,
+    "section_id": "13.6",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-C",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 13,
+    "section_id": "13.6",
+    "requires": "vim"
+  },
+  {
+    "keys": "\u003cSpace\u003ewq",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 13,
+    "section_id": "13.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "gc",
+    "description_en": "",
+    "category": "comment",
+    "plugin": "Comment.nvim",
+    "chapter": 14,
+    "section_id": "14.3",
+    "requires": "neovim"
+  },
+  {
+    "keys": "gcSh",
+    "description_en": "",
+    "category": "comment",
+    "plugin": "Comment.nvim",
+    "chapter": 14,
+    "section_id": "14.3",
+    "requires": "neovim"
+  },
+  {
+    "keys": "gcc",
+    "description_en": "",
+    "category": "comment",
+    "plugin": "Comment.nvim",
+    "chapter": 14,
+    "section_id": "14.3",
+    "requires": "neovim"
+  },
+  {
+    "keys": "gcO",
+    "description_en": "",
+    "category": "comment",
+    "plugin": "Comment.nvim",
+    "chapter": 14,
+    "section_id": "14.3",
+    "requires": "neovim"
+  },
+  {
+    "keys": "gco",
+    "description_en": "",
+    "category": "comment",
+    "plugin": "Comment.nvim",
+    "chapter": 14,
+    "section_id": "14.3",
+    "requires": "neovim"
+  },
+  {
+    "keys": "Control-a",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 14,
+    "section_id": "14.4",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-x",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 14,
+    "section_id": "14.4",
+    "requires": "vim"
+  },
+  {
+    "keys": "gq",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 14,
+    "section_id": "14.5",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-t",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 14,
+    "section_id": "14.5",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-d",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 14,
+    "section_id": "14.5",
+    "requires": "vim"
+  },
+  {
+    "keys": "gw",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 14,
+    "section_id": "14.6",
+    "requires": "vim"
+  },
+  {
+    "keys": "gww",
+    "description_en": "",
+    "category": "g-prefix",
+    "chapter": 14,
+    "section_id": "14.6",
+    "requires": "vim"
+  },
+  {
+    "keys": "\u003cSpace\u003eus",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 14,
+    "section_id": "14.8",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[s",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 14,
+    "section_id": "14.8",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]s",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 14,
+    "section_id": "14.8",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[d",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 14,
+    "section_id": "14.8",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]d",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 14,
+    "section_id": "14.8",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "ctrl-o",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 14,
+    "section_id": "14.9",
+    "requires": "neovim"
+  },
+  {
+    "keys": "Control-o\u003ccommand\u003e",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 14,
+    "section_id": "14.9",
+    "requires": "neovim"
+  },
+  {
+    "keys": "Control-a",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 14,
+    "section_id": "14.9",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-r",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 14,
+    "section_id": "14.9",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-r.",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 14,
+    "section_id": "14.9",
+    "requires": "neovim"
+  },
+  {
+    "keys": "CTRL-U",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 14,
+    "section_id": "14.9",
+    "requires": "neovim"
+  },
+  {
+    "keys": "Control-O",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 14,
+    "section_id": "14.9",
+    "requires": "neovim"
+  },
+  {
+    "keys": "\u003cSpace\u003e",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 14,
+    "section_id": "14.9",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003e",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 14,
+    "section_id": "14.10",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "Control-]",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 14,
+    "section_id": "14.10",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-n",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 14,
+    "section_id": "14.11",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-p",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 14,
+    "section_id": "14.11",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-y",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 14,
+    "section_id": "14.11",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-z",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 15,
+    "section_id": "15.1",
+    "requires": "neovim"
+  },
+  {
+    "keys": "Control-/",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 15,
+    "section_id": "15.2",
+    "requires": "neovim"
+  },
+  {
+    "keys": "\u003cSpace\u003egs",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003egc",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003egh",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.5",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eghS",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.5",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[h",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 15,
+    "section_id": "15.5",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]h",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 15,
+    "section_id": "15.5",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eghs",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.5",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eghr",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.5",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eghR",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.5",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eghu",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.5",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eghb",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eghp",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eghd",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eghD",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003egh",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eh",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003egg",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.7",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eh",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.7",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eghd",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.8",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eghD",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.8",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ebd",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.8",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eghs",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.8",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eghr",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.8",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eghu",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.8",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[h",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 15,
+    "section_id": "15.8",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]h",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 15,
+    "section_id": "15.8",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[c",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 15,
+    "section_id": "15.8",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]c",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 15,
+    "section_id": "15.8",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003e\u003ccomma\u003e",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.9",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eho",
+    "description_en": "Choose the top version",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.10",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eht",
+    "description_en": "Choose the bottom version",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.10",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ehb",
+    "description_en": "Choose both",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.10",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eh0",
+    "description_en": "Go back to whatever is in the middle",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.10",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eh",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 15,
+    "section_id": "15.10",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]x",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 15,
+    "section_id": "15.10",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eaa",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 16,
+    "section_id": "16.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "Control-s",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 16,
+    "section_id": "16.3",
+    "requires": "neovim"
+  },
+  {
+    "keys": "Control-y",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 16,
+    "section_id": "16.3",
+    "requires": "vim"
+  },
+  {
+    "keys": "Control-l",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 16,
+    "section_id": "16.3",
+    "requires": "neovim"
+  },
+  {
+    "keys": "\u003cSpace\u003ea",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 16,
+    "section_id": "16.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eap",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 16,
+    "section_id": "16.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ead",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 16,
+    "section_id": "16.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ed",
+    "description_en": "The one on the left contains a toolbar with common debugging actions (most of\nwhich can also be accessed from the \u003cSpace\u003ed mini-mode). Depending on\nlanguage and environment, this window sometimes includes the program output, or\nmessages about actions you’ve taken since the debug session started. In my\nPython setup, it remains blank.",
+    "category": "leader-key",
+    "chapter": 17,
+    "section_id": "17.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003edu",
+    "description_en": "Shows a list of all the breakpoints currently set. In this case,\nthere is only one, but we can see it is at line 5 and get a preview of that line\nof code. This information is also highlighted in the code window itself with an\narrow pointing at the currently breakpointed line or a big dot if it is not the\ncurrent breakpoint. This icon stays visible even after I hide the DAP UI with\n\u003cSpace\u003edu.",
+    "category": "leader-key",
+    "chapter": 17,
+    "section_id": "17.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003edb",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 17,
+    "section_id": "17.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eda",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 17,
+    "section_id": "17.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003edc",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 17,
+    "section_id": "17.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003edO",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 17,
+    "section_id": "17.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003edo",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 17,
+    "section_id": "17.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003edi",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 17,
+    "section_id": "17.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003edB",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 17,
+    "section_id": "17.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003edl",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 17,
+    "section_id": "17.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003edb",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 17,
+    "section_id": "17.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003edc",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 17,
+    "section_id": "17.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ecm",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 17,
+    "section_id": "17.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003edb",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 17,
+    "section_id": "17.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003edc",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 17,
+    "section_id": "17.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003edi",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 17,
+    "section_id": "17.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003et",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 18,
+    "section_id": "18.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ett",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 18,
+    "section_id": "18.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003etr",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 18,
+    "section_id": "18.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eto",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 18,
+    "section_id": "18.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003etO",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 18,
+    "section_id": "18.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "]q",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 18,
+    "section_id": "18.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "[q",
+    "description_en": "",
+    "category": "bracket-jump",
+    "chapter": 18,
+    "section_id": "18.2",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003etT",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 18,
+    "section_id": "18.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ets",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 18,
+    "section_id": "18.3",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003etw",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 18,
+    "section_id": "18.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003etd",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 18,
+    "section_id": "18.4",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ett",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 18,
+    "section_id": "18.5",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ecm",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 18,
+    "section_id": "18.5",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003ett",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 18,
+    "section_id": "18.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003esna",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 18,
+    "section_id": "18.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003eqq",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 18,
+    "section_id": "18.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003etT",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 18,
+    "section_id": "18.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003etr",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 18,
+    "section_id": "18.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003efc",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 19,
+    "section_id": "19.1",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003e/",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 19,
+    "section_id": "19.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003e?",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 19,
+    "section_id": "19.6",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "ctrl-k",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 19,
+    "section_id": "19.6",
+    "requires": "neovim"
+  },
+  {
+    "keys": "\u003cSpace\u003eub",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 19,
+    "section_id": "19.8",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "\u003cSpace\u003euC",
+    "description_en": "",
+    "category": "leader-key",
+    "chapter": 19,
+    "section_id": "19.8",
+    "requires": "lazyvim"
+  },
+  {
+    "keys": "Control-]",
+    "description_en": "",
+    "category": "neovim-builtin",
+    "chapter": 20,
+    "section_id": "20.2",
+    "requires": "vim"
+  }
+]

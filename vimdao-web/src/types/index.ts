@@ -61,3 +61,26 @@ export interface UserProgress {
   streak_days: number
   last_practice_date: string
 }
+
+export interface CommandEntry {
+  command: string
+  frequency: number
+  chapters: number[]
+  sections: string[]
+  category: string
+  context_examples?: string[]
+}
+
+export interface CommandIndex {
+  commands: CommandEntry[]
+}
+
+export interface KeybindingEntry {
+  keys: string
+  description_en: string
+  category: string
+  plugin?: string
+  chapter: number
+  section_id?: string
+  requires: string
+}
