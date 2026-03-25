@@ -54,7 +54,7 @@ export default function ChallengeList() {
         const q = searchQuery.toLowerCase()
         return c.title_zh.toLowerCase().includes(q) ||
                c.title_en.toLowerCase().includes(q) ||
-               c.tags.some(t => t.includes(q))
+               (c.tags ?? []).some(t => t.includes(q))
       }
       return true
     })

@@ -2,10 +2,10 @@ import { SKILL_LINES, MASTERY_PER_CHALLENGE, MASTERY_MAX } from './constants'
 import type { SkillLineId } from './constants'
 
 /** Map challenge tags + category to affected skill line IDs. */
-export function getAffectedSkills(tags: string[], category: string): SkillLineId[] {
+export function getAffectedSkills(tags: string[] | null | undefined, category: string): SkillLineId[] {
   const skills = new Set<SkillLineId>()
 
-  for (const tag of tags) {
+  for (const tag of (tags ?? [])) {
     for (const line of SKILL_LINES) {
       if (line.tags.includes(tag)) {
         skills.add(line.id)

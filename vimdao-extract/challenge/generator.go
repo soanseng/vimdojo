@@ -101,8 +101,8 @@ func buildChallenge(abbr string, ch extract.Chapter, sec extract.Section,
 		HintCommands:     orderedUnique,
 		HintKeystrokes:   cb.Keystrokes,
 		HintText:         hintText,
-		Tags:             mergedStrs,
-		ConceptsZh:       conceptsZh,
+		Tags:             nonNil(mergedStrs),
+		ConceptsZh:       nonNil(conceptsZh),
 		NeedsTranslation: needsTranslation,
 	}
 }
@@ -124,38 +124,21 @@ func buildTitleZh(tipTitle string, cmds []string) string {
 }
 
 func buildDescriptionZh(cmds []string, keystrokes string) string {
-	// Build a natural-language description based on the operation sequence
-	var steps []string
-	for _, cmd := range cmds {
-		if d := translate.CommandDesc(cmd); d != "" {
-			steps = append(steps, fmt.Sprintf("%s（%s）", cmd, d))
-		}
-	}
-	if len(steps) > 0 {
-		return "依序按 " + strings.Join(steps, " → ") + "\n按鍵序列：" + keystrokes
-	}
-	return "按鍵序列：" + keystrokes
+	return "將初始文字修改為目標文字。\n提示按鍵：" + keystrokes
 }
 
 func buildHintTextZh(cmds []string, keystrokes string) string {
-	// Explain each unique command, then show the full keystroke sequence
-	var explanations []string
+	var sb strings.Builder
+
+	sb.WriteString("按鍵順序：" + keystrokes + "\n\n")
+
 	for _, cmd := range cmds {
 		if d := translate.CommandDesc(cmd); d != "" {
-			explanations = append(explanations, fmt.Sprintf("• %s — %s", cmd, d))
+			sb.WriteString("• " + cmd + " — " + d + "\n")
 		}
 	}
 
-	var sb strings.Builder
-	if len(explanations) > 0 {
-		sb.WriteString("指令說明：\n")
-		sb.WriteString(strings.Join(explanations, "\n"))
-		sb.WriteString("\n\n")
-	}
-	sb.WriteString("完整按鍵序列：" + keystrokes)
-	sb.WriteString("\n（請依序輸入以上按鍵，注意 . 是重複上一個修改操作，必須先執行一次操作後才有效）")
-
-	return sb.String()
+	return strings.TrimSpace(sb.String())
 }
 
 // uniquePreserveOrder deduplicates while preserving first-occurrence order.
@@ -215,6 +198,13 @@ func dominantCategory(cmds []detect.CommandInfo) string {
 		return "combo"
 	}
 	return best
+}
+
+func nonNil(s []string) []string {
+	if s == nil {
+		return []string{}
+	}
+	return s
 }
 
 func slugAbbrev(slug string) string {

@@ -54,7 +54,7 @@ export function checkAchievements(
   }
 
   // dot-master
-  const dotChallenges = challenges.filter(c => c.tags.includes('.'))
+  const dotChallenges = challenges.filter(c => c.tags?.includes('.'))
   if (dotChallenges.length > 0 && dotChallenges.every(c => completedIds.includes(c.id))) {
     award('dot-master')
   }
