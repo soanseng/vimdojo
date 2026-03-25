@@ -1,0 +1,1506 @@
+{
+  "commands": [
+    {
+      "command": "j",
+      "frequency": 21,
+      "chapters": [
+        1,
+        3,
+        4,
+        5,
+        10,
+        11,
+        14,
+        19
+      ],
+      "sections": [
+        "1.1",
+        "1.2",
+        "10.60",
+        "10.61",
+        "10.62",
+        "10.63",
+        "11.65",
+        "11.68",
+        "11.69",
+        "11.70",
+        "11.71",
+        "14.93",
+        "19.118",
+        "3.15",
+        "4.22",
+        "4.23",
+        "4.24",
+        "4.25",
+        "4.26",
+        "5.29",
+        "5.30"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 1: Meet the Dot Command",
+        "Tip 2: Don’t Repeat Yourself",
+        "Tip 15: Paste from a Register Without Leaving Insert Mode"
+      ]
+    },
+    {
+      "command": ".",
+      "frequency": 12,
+      "chapters": [
+        1,
+        2,
+        3,
+        4,
+        8,
+        13
+      ],
+      "sections": [
+        "1.1",
+        "1.2",
+        "1.5",
+        "13.83",
+        "13.84",
+        "2.10",
+        "3.15",
+        "4.22",
+        "4.23",
+        "4.24",
+        "8.50",
+        "8.54"
+      ],
+      "category": "other",
+      "context_examples": [
+        "Tip 1: Meet the Dot Command",
+        "Tip 2: Don’t Repeat Yourself",
+        "Tip 5: Find and Replace by Hand"
+      ]
+    },
+    {
+      "command": "a",
+      "frequency": 11,
+      "chapters": [
+        4,
+        8,
+        10,
+        11,
+        13,
+        19
+      ],
+      "sections": [
+        "10.61",
+        "11.65",
+        "11.68",
+        "11.70",
+        "11.71",
+        "11.72",
+        "13.83",
+        "19.117",
+        "4.25",
+        "4.26",
+        "8.49"
+      ],
+      "category": "insert",
+      "context_examples": [
+        "Tip 25: Change Columns of Text",
+        "Tip 26: Append After a Ragged Visual Block",
+        "Tip 49: Move Word-Wise"
+      ]
+    },
+    {
+      "command": "w",
+      "frequency": 11,
+      "chapters": [
+        1,
+        2,
+        5,
+        8,
+        10,
+        11
+      ],
+      "sections": [
+        "1.5",
+        "10.60",
+        "10.61",
+        "10.62",
+        "10.63",
+        "11.68",
+        "2.10",
+        "2.11",
+        "2.9",
+        "5.33",
+        "8.49"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 5: Find and Replace by Hand",
+        "Tip 9: Compose Repeatable Changes",
+        "Tip 10: Use Counts to Do Simple Arithmetic"
+      ]
+    },
+    {
+      "command": "c",
+      "frequency": 10,
+      "chapters": [
+        1,
+        2,
+        4,
+        5,
+        8,
+        10,
+        13
+      ],
+      "sections": [
+        "1.5",
+        "10.63",
+        "13.85",
+        "2.10",
+        "2.11",
+        "4.25",
+        "5.33",
+        "8.49",
+        "8.52",
+        "8.53"
+      ],
+      "category": "operator",
+      "context_examples": [
+        "Tip 5: Find and Replace by Hand",
+        "Tip 10: Use Counts to Do Simple Arithmetic",
+        "Tip 11: Don’t Count If You Can Repeat"
+      ]
+    },
+    {
+      "command": "A",
+      "frequency": 9,
+      "chapters": [
+        1,
+        3,
+        4,
+        5,
+        11
+      ],
+      "sections": [
+        "1.2",
+        "11.65",
+        "11.69",
+        "11.70",
+        "3.15",
+        "3.16",
+        "4.26",
+        "5.30",
+        "5.34"
+      ],
+      "category": "insert",
+      "context_examples": [
+        "Tip 2: Don’t Repeat Yourself",
+        "Tip 15: Paste from a Register Without Leaving Insert Mode",
+        "Tip 16: Do Back-of-the-Envelope Calculations in Place"
+      ]
+    },
+    {
+      "command": "V",
+      "frequency": 9,
+      "chapters": [
+        4,
+        5,
+        11,
+        14
+      ],
+      "sections": [
+        "11.68",
+        "11.71",
+        "14.93",
+        "4.22",
+        "4.24",
+        "4.25",
+        "4.26",
+        "5.29",
+        "5.30"
+      ],
+      "category": "visual",
+      "context_examples": [
+        "Tip 22: Repeat Line-Wise Visual Commands",
+        "Tip 24: Edit Tabular Data with Visual-Block Mode",
+        "Tip 25: Change Columns of Text"
+      ]
+    },
+    {
+      "command": "o",
+      "frequency": 9,
+      "chapters": [
+        1,
+        4,
+        5,
+        8,
+        11,
+        19
+      ],
+      "sections": [
+        "1.5",
+        "11.70",
+        "19.116",
+        "4.21",
+        "4.25",
+        "4.26",
+        "5.33",
+        "8.49",
+        "8.53"
+      ],
+      "category": "insert",
+      "context_examples": [
+        "Tip 5: Find and Replace by Hand",
+        "Tip 21: Define a Visual Selection",
+        "Tip 25: Change Columns of Text"
+      ]
+    },
+    {
+      "command": "v",
+      "frequency": 9,
+      "chapters": [
+        4,
+        8,
+        10,
+        14,
+        15
+      ],
+      "sections": [
+        "10.62",
+        "14.93",
+        "15.101",
+        "4.21",
+        "4.23",
+        "4.24",
+        "8.51",
+        "8.52",
+        "8.55"
+      ],
+      "category": "visual",
+      "context_examples": [
+        "Tip 21: Define a Visual Selection",
+        "Tip 23: Prefer Operators to Visual Commands Where Possible",
+        "Tip 24: Edit Tabular Data with Visual-Block Mode"
+      ]
+    },
+    {
+      "command": "d",
+      "frequency": 8,
+      "chapters": [
+        2,
+        8,
+        10
+      ],
+      "sections": [
+        "10.60",
+        "10.61",
+        "10.62",
+        "2.9",
+        "8.50",
+        "8.51",
+        "8.53",
+        "8.55"
+      ],
+      "category": "operator",
+      "context_examples": [
+        "Tip 9: Compose Repeatable Changes",
+        "Tip 50: Find by Character",
+        "Tip 51: Search to Navigate"
+      ]
+    },
+    {
+      "command": "f",
+      "frequency": 7,
+      "chapters": [
+        3,
+        8,
+        10,
+        11,
+        13,
+        16
+      ],
+      "sections": [
+        "10.62",
+        "11.68",
+        "11.72",
+        "13.85",
+        "16.104",
+        "3.19",
+        "8.50"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 19: Overwrite Existing Text with Replace Mode",
+        "Tip 50: Find by Character",
+        "Tip 62: Replace a Visual Selection with a Register"
+      ]
+    },
+    {
+      "command": "s",
+      "frequency": 7,
+      "chapters": [
+        2,
+        4,
+        8,
+        11,
+        19
+      ],
+      "sections": [
+        "11.72",
+        "19.118",
+        "2.10",
+        "2.11",
+        "4.25",
+        "4.26",
+        "8.49"
+      ],
+      "category": "insert",
+      "context_examples": [
+        "Tip 10: Use Counts to Do Simple Arithmetic",
+        "Tip 11: Don’t Count If You Can Repeat",
+        "Tip 25: Change Columns of Text"
+      ]
+    },
+    {
+      "command": "y",
+      "frequency": 7,
+      "chapters": [
+        3,
+        8,
+        10,
+        14
+      ],
+      "sections": [
+        "10.60",
+        "10.61",
+        "10.62",
+        "10.63",
+        "14.93",
+        "3.15",
+        "8.49"
+      ],
+      "category": "operator",
+      "context_examples": [
+        "Tip 15: Paste from a Register Without Leaving Insert Mode",
+        "Tip 49: Move Word-Wise",
+        "Tip 60: Delete, Yank, and Put with Vim’s Unnamed Register"
+      ]
+    },
+    {
+      "command": "0",
+      "frequency": 6,
+      "chapters": [
+        2,
+        3,
+        10,
+        11
+      ],
+      "sections": [
+        "10.61",
+        "10.63",
+        "11.68",
+        "11.72",
+        "2.10",
+        "3.15"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 10: Use Counts to Do Simple Arithmetic",
+        "Tip 15: Paste from a Register Without Leaving Insert Mode",
+        "Tip 61: Grok Vim’s Registers"
+      ]
+    },
+    {
+      "command": "dd",
+      "frequency": 6,
+      "chapters": [
+        1,
+        2,
+        5,
+        10,
+        11
+      ],
+      "sections": [
+        "1.1",
+        "10.60",
+        "10.63",
+        "11.72",
+        "2.12",
+        "5.28"
+      ],
+      "category": "other",
+      "context_examples": [
+        "Tip 1: Meet the Dot Command",
+        "Tip 12: Combine and Conquer",
+        "Tip 28: Execute a Command on One or More Consecutive Lines"
+      ]
+    },
+    {
+      "command": "e",
+      "frequency": 6,
+      "chapters": [
+        2,
+        4,
+        8,
+        10
+      ],
+      "sections": [
+        "10.62",
+        "2.10",
+        "4.21",
+        "4.25",
+        "8.49",
+        "8.55"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 10: Use Counts to Do Simple Arithmetic",
+        "Tip 21: Define a Visual Selection",
+        "Tip 25: Change Columns of Text"
+      ]
+    },
+    {
+      "command": "*",
+      "frequency": 5,
+      "chapters": [
+        1,
+        3,
+        5,
+        10,
+        13
+      ],
+      "sections": [
+        "1.5",
+        "10.61",
+        "13.87",
+        "3.16",
+        "5.33"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 5: Find and Replace by Hand",
+        "Tip 16: Do Back-of-the-Envelope Calculations in Place",
+        "Tip 33: Insert the Current Word at the Command Prompt"
+      ]
+    },
+    {
+      "command": "G",
+      "frequency": 5,
+      "chapters": [
+        1,
+        5,
+        11
+      ],
+      "sections": [
+        "1.1",
+        "11.68",
+        "11.70",
+        "11.71",
+        "5.30"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 1: Meet the Dot Command",
+        "Tip 30: Run Normal Mode Commands Across a Range",
+        "Tip 68: Repeat a Change on Contiguous Lines"
+      ]
+    },
+    {
+      "command": "P",
+      "frequency": 5,
+      "chapters": [
+        10,
+        14
+      ],
+      "sections": [
+        "10.60",
+        "10.61",
+        "10.62",
+        "10.63",
+        "14.93"
+      ],
+      "category": "other",
+      "context_examples": [
+        "Tip 60: Delete, Yank, and Put with Vim’s Unnamed Register",
+        "Tip 61: Grok Vim’s Registers",
+        "Tip 62: Replace a Visual Selection with a Register"
+      ]
+    },
+    {
+      "command": "iw",
+      "frequency": 5,
+      "chapters": [
+        8,
+        10
+      ],
+      "sections": [
+        "10.60",
+        "10.61",
+        "10.62",
+        "10.63",
+        "8.53"
+      ],
+      "category": "text-object",
+      "context_examples": [
+        "Tip 53: Delete Around, or Change Inside",
+        "Tip 60: Delete, Yank, and Put with Vim’s Unnamed Register",
+        "Tip 61: Grok Vim’s Registers"
+      ]
+    },
+    {
+      "command": "q",
+      "frequency": 5,
+      "chapters": [
+        11
+      ],
+      "sections": [
+        "11.65",
+        "11.68",
+        "11.69",
+        "11.70",
+        "11.71"
+      ],
+      "category": "other",
+      "context_examples": [
+        "Tip 65: Record and Execute a Macro",
+        "Tip 68: Repeat a Change on Contiguous Lines",
+        "Tip 69: Append Commands to a Macro"
+      ]
+    },
+    {
+      "command": "yy",
+      "frequency": 5,
+      "chapters": [
+        2,
+        4,
+        5,
+        10
+      ],
+      "sections": [
+        "10.60",
+        "10.63",
+        "2.10",
+        "4.24",
+        "5.29"
+      ],
+      "category": "other",
+      "context_examples": [
+        "Tip 10: Use Counts to Do Simple Arithmetic",
+        "Tip 24: Edit Tabular Data with Visual-Block Mode",
+        "Tip 29: Duplicate or Move Lines Using ‘:t’ and ‘:m’ Commands"
+      ]
+    },
+    {
+      "command": "\u003cC-r\u003e",
+      "frequency": 4,
+      "chapters": [
+        3,
+        10,
+        13
+      ],
+      "sections": [
+        "10.63",
+        "13.85",
+        "3.15",
+        "3.16"
+      ],
+      "category": "other",
+      "context_examples": [
+        "Tip 15: Paste from a Register Without Leaving Insert Mode",
+        "Tip 16: Do Back-of-the-Envelope Calculations in Place",
+        "Tip 63: Paste from a Register"
+      ]
+    },
+    {
+      "command": "\u003cC-x\u003e",
+      "frequency": 4,
+      "chapters": [
+        2,
+        19
+      ],
+      "sections": [
+        "19.116",
+        "19.117",
+        "19.118",
+        "2.10"
+      ],
+      "category": "other",
+      "context_examples": [
+        "Tip 10: Use Counts to Do Simple Arithmetic",
+        "Tip 116: Autocomplete Entire Lines",
+        "Tip 117: Autocomplete Sequences of Words"
+      ]
+    },
+    {
+      "command": "\u003e",
+      "frequency": 4,
+      "chapters": [
+        1,
+        4,
+        8,
+        11
+      ],
+      "sections": [
+        "1.1",
+        "11.70",
+        "4.22",
+        "8.54"
+      ],
+      "category": "operator",
+      "context_examples": [
+        "Tip 1: Meet the Dot Command",
+        "Tip 22: Repeat Line-Wise Visual Commands",
+        "Tip 54: Mark Your Place and Snap Back to It"
+      ]
+    },
+    {
+      "command": "n",
+      "frequency": 4,
+      "chapters": [
+        1,
+        2,
+        13
+      ],
+      "sections": [
+        "1.5",
+        "13.83",
+        "13.84",
+        "2.10"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 5: Find and Replace by Hand",
+        "Tip 10: Use Counts to Do Simple Arithmetic",
+        "Tip 83: Offset the Cursor to the End of a Search Match"
+      ]
+    },
+    {
+      "command": "p",
+      "frequency": 4,
+      "chapters": [
+        2,
+        4,
+        10
+      ],
+      "sections": [
+        "10.60",
+        "10.62",
+        "2.10",
+        "4.24"
+      ],
+      "category": "other",
+      "context_examples": [
+        "Tip 10: Use Counts to Do Simple Arithmetic",
+        "Tip 24: Edit Tabular Data with Visual-Block Mode",
+        "Tip 60: Delete, Yank, and Put with Vim’s Unnamed Register"
+      ]
+    },
+    {
+      "command": "x",
+      "frequency": 4,
+      "chapters": [
+        1,
+        2,
+        4,
+        10
+      ],
+      "sections": [
+        "1.1",
+        "10.60",
+        "2.9",
+        "4.24"
+      ],
+      "category": "other",
+      "context_examples": [
+        "Tip 1: Meet the Dot Command",
+        "Tip 9: Compose Repeatable Changes",
+        "Tip 24: Edit Tabular Data with Visual-Block Mode"
+      ]
+    },
+    {
+      "command": "\u003cC-v\u003e",
+      "frequency": 3,
+      "chapters": [
+        4
+      ],
+      "sections": [
+        "4.24",
+        "4.25",
+        "4.26"
+      ],
+      "category": "other",
+      "context_examples": [
+        "Tip 24: Edit Tabular Data with Visual-Block Mode",
+        "Tip 25: Change Columns of Text",
+        "Tip 26: Append After a Ragged Visual Block"
+      ]
+    },
+    {
+      "command": "@",
+      "frequency": 3,
+      "chapters": [
+        11
+      ],
+      "sections": [
+        "11.65",
+        "11.68",
+        "11.70"
+      ],
+      "category": "other",
+      "context_examples": [
+        "Tip 65: Record and Execute a Macro",
+        "Tip 68: Repeat a Change on Contiguous Lines",
+        "Tip 70: Act Upon a Collection of Files"
+      ]
+    },
+    {
+      "command": "I",
+      "frequency": 3,
+      "chapters": [
+        4,
+        11
+      ],
+      "sections": [
+        "11.65",
+        "11.71",
+        "4.25"
+      ],
+      "category": "insert",
+      "context_examples": [
+        "Tip 25: Change Columns of Text",
+        "Tip 65: Record and Execute a Macro",
+        "Tip 71: Evaluate an Iterator to Number Items in a List"
+      ]
+    },
+    {
+      "command": "N",
+      "frequency": 3,
+      "chapters": [
+        4,
+        6
+      ],
+      "sections": [
+        "4.25",
+        "4.26",
+        "6.40"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 25: Change Columns of Text",
+        "Tip 26: Append After a Ragged Visual Block",
+        "Tip 40: Divide Your Workspace into Split Windows"
+      ]
+    },
+    {
+      "command": "gU",
+      "frequency": 3,
+      "chapters": [
+        2,
+        4,
+        13
+      ],
+      "sections": [
+        "13.84",
+        "2.12",
+        "4.23"
+      ],
+      "category": "operator",
+      "context_examples": [
+        "Tip 12: Combine and Conquer",
+        "Tip 23: Prefer Operators to Visual Commands Where Possible",
+        "Tip 84: Operate on a Complete Search Match"
+      ]
+    },
+    {
+      "command": "gg",
+      "frequency": 3,
+      "chapters": [
+        2,
+        11
+      ],
+      "sections": [
+        "11.66",
+        "11.70",
+        "2.12"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 12: Combine and Conquer",
+        "Tip 66: Normalize, Strike, Abort",
+        "Tip 70: Act Upon a Collection of Files"
+      ]
+    },
+    {
+      "command": "i",
+      "frequency": 3,
+      "chapters": [
+        8,
+        13,
+        19
+      ],
+      "sections": [
+        "13.85",
+        "19.118",
+        "8.52"
+      ],
+      "category": "insert",
+      "context_examples": [
+        "Tip 52: Trace Your Selection with Precision Text Objects",
+        "Tip 85: Create Complex Patterns by Iterating upon Search History",
+        "Tip 118: Autocomplete Filenames"
+      ]
+    },
+    {
+      "command": "it",
+      "frequency": 3,
+      "chapters": [
+        4,
+        8
+      ],
+      "sections": [
+        "4.23",
+        "8.49",
+        "8.52"
+      ],
+      "category": "text-object",
+      "context_examples": [
+        "Tip 23: Prefer Operators to Visual Commands Where Possible",
+        "Tip 49: Move Word-Wise",
+        "Tip 52: Trace Your Selection with Precision Text Objects"
+      ]
+    },
+    {
+      "command": "r",
+      "frequency": 3,
+      "chapters": [
+        4,
+        8,
+        11
+      ],
+      "sections": [
+        "11.68",
+        "4.24",
+        "8.55"
+      ],
+      "category": "other",
+      "context_examples": [
+        "Tip 24: Edit Tabular Data with Visual-Block Mode",
+        "Tip 55: Jump Between Matching Parentheses",
+        "Tip 68: Repeat a Change on Contiguous Lines"
+      ]
+    },
+    {
+      "command": "t",
+      "frequency": 3,
+      "chapters": [
+        3,
+        8
+      ],
+      "sections": [
+        "3.15",
+        "8.50",
+        "8.55"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 15: Paste from a Register Without Leaving Insert Mode",
+        "Tip 50: Find by Character",
+        "Tip 55: Jump Between Matching Parentheses"
+      ]
+    },
+    {
+      "command": "u",
+      "frequency": 3,
+      "chapters": [
+        4,
+        14
+      ],
+      "sections": [
+        "14.93",
+        "4.25",
+        "4.26"
+      ],
+      "category": "other",
+      "context_examples": [
+        "Tip 25: Change Columns of Text",
+        "Tip 26: Append After a Ragged Visual Block",
+        "Tip 93: Repeat the Previous Substitute Command"
+      ]
+    },
+    {
+      "command": "{",
+      "frequency": 3,
+      "chapters": [
+        4,
+        8
+      ],
+      "sections": [
+        "4.25",
+        "4.26",
+        "8.55"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 25: Change Columns of Text",
+        "Tip 26: Append After a Ragged Visual Block",
+        "Tip 55: Jump Between Matching Parentheses"
+      ]
+    },
+    {
+      "command": "%",
+      "frequency": 2,
+      "chapters": [
+        8,
+        13
+      ],
+      "sections": [
+        "13.85",
+        "8.55"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 55: Jump Between Matching Parentheses",
+        "Tip 85: Create Complex Patterns by Iterating upon Search History"
+      ]
+    },
+    {
+      "command": ",",
+      "frequency": 2,
+      "chapters": [
+        3,
+        8
+      ],
+      "sections": [
+        "3.15",
+        "8.50"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 15: Paste from a Register Without Leaving Insert Mode",
+        "Tip 50: Find by Character"
+      ]
+    },
+    {
+      "command": "\u003c",
+      "frequency": 2,
+      "chapters": [
+        8,
+        16
+      ],
+      "sections": [
+        "16.104",
+        "8.54"
+      ],
+      "category": "operator",
+      "context_examples": [
+        "Tip 54: Mark Your Place and Snap Back to It",
+        "Tip 104: Navigate Keyword Definitions with Vim’s Tag Navigation Commands"
+      ]
+    },
+    {
+      "command": "=",
+      "frequency": 2,
+      "chapters": [
+        3,
+        6
+      ],
+      "sections": [
+        "3.16",
+        "6.40"
+      ],
+      "category": "operator",
+      "context_examples": [
+        "Tip 16: Do Back-of-the-Envelope Calculations in Place",
+        "Tip 40: Divide Your Workspace into Split Windows"
+      ]
+    },
+    {
+      "command": "W",
+      "frequency": 2,
+      "chapters": [
+        2,
+        8
+      ],
+      "sections": [
+        "2.10",
+        "8.49"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 10: Use Counts to Do Simple Arithmetic",
+        "Tip 49: Move Word-Wise"
+      ]
+    },
+    {
+      "command": "aw",
+      "frequency": 2,
+      "chapters": [
+        2,
+        8
+      ],
+      "sections": [
+        "2.9",
+        "8.53"
+      ],
+      "category": "text-object",
+      "context_examples": [
+        "Tip 9: Compose Repeatable Changes",
+        "Tip 53: Delete Around, or Change Inside"
+      ]
+    },
+    {
+      "command": "b",
+      "frequency": 2,
+      "chapters": [
+        2,
+        4
+      ],
+      "sections": [
+        "2.9",
+        "4.21"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 9: Compose Repeatable Changes",
+        "Tip 21: Define a Visual Selection"
+      ]
+    },
+    {
+      "command": "h",
+      "frequency": 2,
+      "chapters": [
+        8
+      ],
+      "sections": [
+        "8.51",
+        "8.55"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 51: Search to Navigate",
+        "Tip 55: Jump Between Matching Parentheses"
+      ]
+    },
+    {
+      "command": "is",
+      "frequency": 2,
+      "chapters": [
+        4
+      ],
+      "sections": [
+        "4.25",
+        "4.26"
+      ],
+      "category": "text-object",
+      "context_examples": [
+        "Tip 25: Change Columns of Text",
+        "Tip 26: Append After a Ragged Visual Block"
+      ]
+    },
+    {
+      "command": "l",
+      "frequency": 2,
+      "chapters": [
+        8
+      ],
+      "sections": [
+        "8.52",
+        "8.55"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 52: Trace Your Selection with Precision Text Objects",
+        "Tip 55: Jump Between Matching Parentheses"
+      ]
+    },
+    {
+      "command": "#",
+      "frequency": 1,
+      "chapters": [
+        8
+      ],
+      "sections": [
+        "8.52"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 52: Trace Your Selection with Precision Text Objects"
+      ]
+    },
+    {
+      "command": "$",
+      "frequency": 1,
+      "chapters": [
+        4
+      ],
+      "sections": [
+        "4.26"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 26: Append After a Ragged Visual Block"
+      ]
+    },
+    {
+      "command": "(",
+      "frequency": 1,
+      "chapters": [
+        13
+      ],
+      "sections": [
+        "13.85"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 85: Create Complex Patterns by Iterating upon Search History"
+      ]
+    },
+    {
+      "command": ")",
+      "frequency": 1,
+      "chapters": [
+        13
+      ],
+      "sections": [
+        "13.85"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 85: Create Complex Patterns by Iterating upon Search History"
+      ]
+    },
+    {
+      "command": ";",
+      "frequency": 1,
+      "chapters": [
+        8
+      ],
+      "sections": [
+        "8.50"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 50: Find by Character"
+      ]
+    },
+    {
+      "command": "\u003cC-f\u003e",
+      "frequency": 1,
+      "chapters": [
+        19
+      ],
+      "sections": [
+        "19.118"
+      ],
+      "category": "other",
+      "context_examples": [
+        "Tip 118: Autocomplete Filenames"
+      ]
+    },
+    {
+      "command": "\u003cC-l\u003e",
+      "frequency": 1,
+      "chapters": [
+        19
+      ],
+      "sections": [
+        "19.116"
+      ],
+      "category": "other",
+      "context_examples": [
+        "Tip 116: Autocomplete Entire Lines"
+      ]
+    },
+    {
+      "command": "\u003cC-p\u003e",
+      "frequency": 1,
+      "chapters": [
+        19
+      ],
+      "sections": [
+        "19.117"
+      ],
+      "category": "other",
+      "context_examples": [
+        "Tip 117: Autocomplete Sequences of Words"
+      ]
+    },
+    {
+      "command": "\u003cC-w\u003e",
+      "frequency": 1,
+      "chapters": [
+        6
+      ],
+      "sections": [
+        "6.40"
+      ],
+      "category": "other",
+      "context_examples": [
+        "Tip 40: Divide Your Workspace into Split Windows"
+      ]
+    },
+    {
+      "command": "C",
+      "frequency": 1,
+      "chapters": [
+        16
+      ],
+      "sections": [
+        "16.104"
+      ],
+      "category": "insert",
+      "context_examples": [
+        "Tip 104: Navigate Keyword Definitions with Vim’s Tag Navigation Commands"
+      ]
+    },
+    {
+      "command": "F",
+      "frequency": 1,
+      "chapters": [
+        10
+      ],
+      "sections": [
+        "10.60"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 60: Delete, Yank, and Put with Vim’s Unnamed Register"
+      ]
+    },
+    {
+      "command": "J",
+      "frequency": 1,
+      "chapters": [
+        5
+      ],
+      "sections": [
+        "5.34"
+      ],
+      "category": "other",
+      "context_examples": [
+        "Tip 34: Recall Commands from History"
+      ]
+    },
+    {
+      "command": "O",
+      "frequency": 1,
+      "chapters": [
+        11
+      ],
+      "sections": [
+        "11.70"
+      ],
+      "category": "insert",
+      "context_examples": [
+        "Tip 70: Act Upon a Collection of Files"
+      ]
+    },
+    {
+      "command": "R",
+      "frequency": 1,
+      "chapters": [
+        3
+      ],
+      "sections": [
+        "3.19"
+      ],
+      "category": "insert",
+      "context_examples": [
+        "Tip 19: Overwrite Existing Text with Replace Mode"
+      ]
+    },
+    {
+      "command": "S",
+      "frequency": 1,
+      "chapters": [
+        8
+      ],
+      "sections": [
+        "8.55"
+      ],
+      "category": "insert",
+      "context_examples": [
+        "Tip 55: Jump Between Matching Parentheses"
+      ]
+    },
+    {
+      "command": "^",
+      "frequency": 1,
+      "chapters": [
+        8
+      ],
+      "sections": [
+        "8.54"
+      ],
+      "category": "motion",
+      "context_examples": [
+        "Tip 54: Mark Your Place and Snap Back to It"
+      ]
+    },
+    {
+      "command": "a\"",
+      "frequency": 1,
+      "chapters": [
+        8
+      ],
+      "sections": [
+        "8.52"
+      ],
+      "category": "text-object",
+      "context_examples": [
+        "Tip 52: Trace Your Selection with Precision Text Objects"
+      ]
+    },
+    {
+      "command": "a]",
+      "frequency": 1,
+      "chapters": [
+        8
+      ],
+      "sections": [
+        "8.52"
+      ],
+      "category": "text-object",
+      "context_examples": [
+        "Tip 52: Trace Your Selection with Precision Text Objects"
+      ]
+    },
+    {
+      "command": "ap",
+      "frequency": 1,
+      "chapters": [
+        10
+      ],
+      "sections": [
+        "10.63"
+      ],
+      "category": "text-object",
+      "context_examples": [
+        "Tip 63: Paste from a Register"
+      ]
+    },
+    {
+      "command": "at",
+      "frequency": 1,
+      "chapters": [
+        8
+      ],
+      "sections": [
+        "8.52"
+      ],
+      "category": "text-object",
+      "context_examples": [
+        "Tip 52: Trace Your Selection with Precision Text Objects"
+      ]
+    },
+    {
+      "command": "cc",
+      "frequency": 1,
+      "chapters": [
+        17
+      ],
+      "sections": [
+        "17.106"
+      ],
+      "category": "other",
+      "context_examples": [
+        "Tip 106: Browse the Quickfix List"
+      ]
+    },
+    {
+      "command": "gu",
+      "frequency": 1,
+      "chapters": [
+        2
+      ],
+      "sections": [
+        "2.12"
+      ],
+      "category": "operator",
+      "context_examples": [
+        "Tip 12: Combine and Conquer"
+      ]
+    },
+    {
+      "command": "g~",
+      "frequency": 1,
+      "chapters": [
+        2
+      ],
+      "sections": [
+        "2.12"
+      ],
+      "category": "operator",
+      "context_examples": [
+        "Tip 12: Combine and Conquer"
+      ]
+    },
+    {
+      "command": "i\"",
+      "frequency": 1,
+      "chapters": [
+        8
+      ],
+      "sections": [
+        "8.52"
+      ],
+      "category": "text-object",
+      "context_examples": [
+        "Tip 52: Trace Your Selection with Precision Text Objects"
+      ]
+    },
+    {
+      "command": "i\u003e",
+      "frequency": 1,
+      "chapters": [
+        8
+      ],
+      "sections": [
+        "8.52"
+      ],
+      "category": "text-object",
+      "context_examples": [
+        "Tip 52: Trace Your Selection with Precision Text Objects"
+      ]
+    },
+    {
+      "command": "i{",
+      "frequency": 1,
+      "chapters": [
+        15
+      ],
+      "sections": [
+        "15.101"
+      ],
+      "category": "text-object",
+      "context_examples": [
+        "Tip 101: Alphabetize the Properties of Each Rule in a CSS File"
+      ]
+    },
+    {
+      "command": "i}",
+      "frequency": 1,
+      "chapters": [
+        8
+      ],
+      "sections": [
+        "8.52"
+      ],
+      "category": "text-object",
+      "context_examples": [
+        "Tip 52: Trace Your Selection with Precision Text Objects"
+      ]
+    },
+    {
+      "command": "~",
+      "frequency": 1,
+      "chapters": [
+        11
+      ],
+      "sections": [
+        "11.68"
+      ],
+      "category": "other",
+      "context_examples": [
+        "Tip 68: Repeat a Change on Contiguous Lines"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2572 @@
+{
+  "source_book": "Practical Vim",
+  "generated_at": "2026-03-25T17:38:56+08:00",
+  "challenges": [
+    {
+      "id": "pv-tip01-001",
+      "source": {
+        "book": "pv",
+        "chapter": 1,
+        "section": "1.1",
+        "tip_number": 1
+      },
+      "title_zh": "練習：. (重複上次修改)、x (刪除游標下的字元)",
+      "title_en": "Meet the Dot Command",
+      "description_zh": "使用 用 . 重複上次修改，用 x 刪除游標下的字元。按鍵序列：x...",
+      "description_en": "Meet the Dot Command",
+      "category": "other",
+      "difficulty": 1,
+      "initial_text": "Line one\nLine two\nLine three\nLine four",
+      "expected_text": " one\nLine two\nLine three\nLine four",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        ".",
+        "x"
+      ],
+      "hint_text": "1. . — 重複上次修改\n2. x — 刪除游標下的字元",
+      "tags": [
+        ".",
+        "x"
+      ],
+      "concepts_zh": [
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip01-002",
+      "source": {
+        "book": "pv",
+        "chapter": 1,
+        "section": "1.1",
+        "tip_number": 1
+      },
+      "title_zh": "練習：. (重複上次修改)、dd (刪除整行)",
+      "title_en": "Meet the Dot Command",
+      "description_zh": "使用 用 . 重複上次修改，用 dd 刪除整行。按鍵序列：dd.",
+      "description_en": "Meet the Dot Command",
+      "category": "other",
+      "difficulty": 1,
+      "initial_text": "Line one\nLine two\nLine three\nLine four",
+      "expected_text": "Line three\nLine four",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        ".",
+        "dd"
+      ],
+      "hint_text": "1. . — 重複上次修改\n2. dd — 刪除整行",
+      "tags": [
+        ".",
+        "dd"
+      ],
+      "concepts_zh": [
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip01-003",
+      "source": {
+        "book": "pv",
+        "chapter": 1,
+        "section": "1.1",
+        "tip_number": 1
+      },
+      "title_zh": "練習：. (重複上次修改)、\u003e (增加縮排)",
+      "title_en": "Meet the Dot Command",
+      "description_zh": "使用 用 . 重複上次修改，用 \u003e 增加縮排，用 G 移到檔案結尾，用 j 向下移動。按鍵序列：\u003eGj.j.",
+      "description_en": "Meet the Dot Command",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "Line one\nLine two\nLine three\nLine four",
+      "expected_text": "Line one\n  Line two\n    Line three\n      Line four",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        ".",
+        "\u003e",
+        "G",
+        "j"
+      ],
+      "hint_text": "1. . — 重複上次修改\n2. \u003e — 增加縮排\n3. G — 移到檔案結尾\n4. j — 向下移動",
+      "tags": [
+        ".",
+        "\u003e",
+        "G",
+        "j"
+      ],
+      "concepts_zh": [
+        "操作符",
+        "移動指令",
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip02-001",
+      "source": {
+        "book": "pv",
+        "chapter": 1,
+        "section": "1.2",
+        "tip_number": 2
+      },
+      "title_zh": "練習：. (重複上次修改)、A (在行尾進入插入模式)",
+      "title_en": "Don’t Repeat Yourself",
+      "description_zh": "使用 用 . 重複上次修改，用 A 在行尾進入插入模式，用 j 向下移動。按鍵序列：A;\u003cEsc\u003ej.j.",
+      "description_en": "Don’t Repeat Yourself",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "var foo = 1\nvar bar = 'a'\nvar foobar = foo + bar",
+      "expected_text": "var foo = 1;\nvar bar = 'a';\nvar foobar = foo + bar;",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        ".",
+        "A",
+        "j"
+      ],
+      "hint_text": "1. . — 重複上次修改\n2. A — 在行尾進入插入模式\n3. j — 向下移動",
+      "tags": [
+        ".",
+        "A",
+        "j"
+      ],
+      "concepts_zh": [
+        "插入模式",
+        "移動指令",
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip05-001",
+      "source": {
+        "book": "pv",
+        "chapter": 1,
+        "section": "1.5",
+        "tip_number": 5
+      },
+      "title_zh": "練習：* (搜尋游標下的單字)、. (重複上次修改)",
+      "title_en": "Find and Replace by Hand",
+      "description_zh": "使用 用 * 搜尋游標下的單字，用 . 重複上次修改，用 c 修改（刪除並進入插入模式），用 n 搜尋下一個匹配，用 o 在下方新增一行並進入插入模式，用 w 移到下一個單字字首。按鍵序列：*cwcopy\u003cEsc\u003en.",
+      "description_en": "Find and Replace by Hand",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "...We're waiting for content before the site can go live...\n...If you are content with this, let's go ahead with it...\n...We'll launch as soon as we have the content...",
+      "expected_text": "...We're waiting for copy before the site can go live...\n...If you are content with this, let's go ahead with it...\n...We'll launch as soon as we have the copy...",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "*",
+        ".",
+        "c",
+        "n",
+        "o",
+        "w"
+      ],
+      "hint_text": "1. * — 搜尋游標下的單字\n2. . — 重複上次修改\n3. c — 修改（刪除並進入插入模式）\n4. n — 搜尋下一個匹配\n5. o — 在下方新增一行並進入插入模式\n6. w — 移到下一個單字字首",
+      "tags": [
+        "*",
+        ".",
+        "c",
+        "n",
+        "o",
+        "w"
+      ],
+      "concepts_zh": [
+        "移動指令",
+        "操作符",
+        "插入模式",
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip09-001",
+      "source": {
+        "book": "pv",
+        "chapter": 2,
+        "section": "2.9",
+        "tip_number": 9
+      },
+      "title_zh": "練習：b (移到上一個單字字首)、d (刪除)",
+      "title_en": "Compose Repeatable Changes",
+      "description_zh": "使用 用 b 移到上一個單字字首，用 d 刪除，用 x 刪除游標下的字元。按鍵序列：dbx",
+      "description_en": "Compose Repeatable Changes",
+      "category": "combo",
+      "difficulty": 1,
+      "initial_text": "The end is nigh",
+      "expected_text": "The end is ",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "b",
+        "d",
+        "x"
+      ],
+      "hint_text": "1. b — 移到上一個單字字首\n2. d — 刪除\n3. x — 刪除游標下的字元",
+      "tags": [
+        "b",
+        "d",
+        "x"
+      ],
+      "concepts_zh": [
+        "操作符",
+        "移動指令",
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip09-002",
+      "source": {
+        "book": "pv",
+        "chapter": 2,
+        "section": "2.9",
+        "tip_number": 9
+      },
+      "title_zh": "練習：b (移到上一個單字字首)、d (刪除)",
+      "title_en": "Compose Repeatable Changes",
+      "description_zh": "使用 用 b 移到上一個單字字首，用 d 刪除，用 w 移到下一個單字字首。按鍵序列：bdw",
+      "description_en": "Compose Repeatable Changes",
+      "category": "combo",
+      "difficulty": 1,
+      "initial_text": "The end is nigh",
+      "expected_text": "The end is ",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "b",
+        "d",
+        "w"
+      ],
+      "hint_text": "1. b — 移到上一個單字字首\n2. d — 刪除\n3. w — 移到下一個單字字首",
+      "tags": [
+        "b",
+        "d",
+        "w"
+      ],
+      "concepts_zh": [
+        "移動指令",
+        "操作符"
+      ]
+    },
+    {
+      "id": "pv-tip09-003",
+      "source": {
+        "book": "pv",
+        "chapter": 2,
+        "section": "2.9",
+        "tip_number": 9
+      },
+      "title_zh": "練習：aw (游標所在的單字含空白（a word）)、d (刪除)",
+      "title_en": "Compose Repeatable Changes",
+      "description_zh": "使用 用 aw 游標所在的單字含空白（a word），用 d 刪除。按鍵序列：daw",
+      "description_en": "Compose Repeatable Changes",
+      "category": "combo",
+      "difficulty": 1,
+      "initial_text": "The end is nigh",
+      "expected_text": "The end is",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "aw",
+        "d"
+      ],
+      "hint_text": "1. aw — 游標所在的單字含空白（a word）\n2. d — 刪除",
+      "tags": [
+        "aw",
+        "d"
+      ],
+      "concepts_zh": [
+        "操作符",
+        "文字物件"
+      ]
+    },
+    {
+      "id": "pv-tip10-001",
+      "source": {
+        "book": "pv",
+        "chapter": 2,
+        "section": "2.10",
+        "tip_number": 10
+      },
+      "title_zh": "練習：. (重複上次修改)、0 (移到行首)",
+      "title_en": "Use Counts to Do Simple Arithmetic",
+      "description_zh": "使用 用 . 重複上次修改，用 0 移到行首，用 W 移到下一個 WORD 字首，用 c 修改（刪除並進入插入模式），用 e 移到單字字尾，用 n 搜尋下一個匹配，用 p 貼上到游標後，用 s 刪除字元並進入插入模式，用 w 移到下一個單字字首，用 yy 複製整行。按鍵序列：yypcW.news\u003cEsc\u003e180\u003cC-x\u003e",
+      "description_en": "Use Counts to Do Simple Arithmetic",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": ".blog, .news { background-image: url(/sprite.png); }\n.blog { background-position: 0px 0px }",
+      "expected_text": ".blog, .news { background-image: url(/sprite.png); }\n.blog { background-position: 0px 0px }\n.news { background-position: -180px 0px }",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        ".",
+        "0",
+        "\u003cC-x\u003e",
+        "W",
+        "c",
+        "e",
+        "n",
+        "p",
+        "s",
+        "w",
+        "yy"
+      ],
+      "hint_text": "1. . — 重複上次修改\n2. 0 — 移到行首\n4. W — 移到下一個 WORD 字首\n5. c — 修改（刪除並進入插入模式）\n6. e — 移到單字字尾\n7. n — 搜尋下一個匹配\n8. p — 貼上到游標後\n9. s — 刪除字元並進入插入模式\n10. w — 移到下一個單字字首\n11. yy — 複製整行",
+      "tags": [
+        ".",
+        "0",
+        "\u003cC-x\u003e",
+        "W",
+        "c",
+        "e",
+        "n",
+        "p",
+        "s",
+        "w",
+        "yy"
+      ],
+      "concepts_zh": [
+        "其他",
+        "操作符",
+        "移動指令",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip11-001",
+      "source": {
+        "book": "pv",
+        "chapter": 2,
+        "section": "2.11",
+        "tip_number": 11
+      },
+      "title_zh": "練習：c (修改（刪除並進入插入模式）)、s (刪除字元並進入插入模式)",
+      "title_en": "Don’t Count If You Can Repeat",
+      "description_zh": "使用 用 c 修改（刪除並進入插入模式），用 s 刪除字元並進入插入模式，用 w 移到下一個單字字首。按鍵序列：c3wsome more\u003cEsc\u003e",
+      "description_en": "Don’t Count If You Can Repeat",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "I have a couple of questions.",
+      "expected_text": "I have some more questions.",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "c",
+        "s",
+        "w"
+      ],
+      "hint_text": "1. c — 修改（刪除並進入插入模式）\n2. s — 刪除字元並進入插入模式\n3. w — 移到下一個單字字首",
+      "tags": [
+        "c",
+        "s",
+        "w"
+      ],
+      "concepts_zh": [
+        "操作符",
+        "移動指令",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip15-001",
+      "source": {
+        "book": "pv",
+        "chapter": 3,
+        "section": "3.15",
+        "tip_number": 15
+      },
+      "title_zh": "練習：, (反向重複上次 f/t 搜尋)、A (在行尾進入插入模式)",
+      "title_en": "Paste from a Register Without Leaving Insert Mode",
+      "description_zh": "使用 用 , 反向重複上次 f/t 搜尋，用 A 在行尾進入插入模式，用 j 向下移動，用 t 向右搜尋字元（游標停在前一格），用 y 複製（yank）。按鍵序列：yt,jA\u003cC-r\u003e0.\u003cEsc\u003e",
+      "description_en": "Paste from a Register Without Leaving Insert Mode",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "Practical Vim, by Drew Neil\nRead Drew Neil's",
+      "expected_text": "Practical Vim, by Drew Neil\nRead Drew Neil's Practical Vim.",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        ",",
+        "A",
+        "j",
+        "t",
+        "y"
+      ],
+      "hint_text": "1. , — 反向重複上次 f/t 搜尋\n2. A — 在行尾進入插入模式\n3. j — 向下移動\n4. t — 向右搜尋字元（游標停在前一格）\n5. y — 複製（yank）",
+      "tags": [
+        ",",
+        "A",
+        "j",
+        "t",
+        "y"
+      ],
+      "concepts_zh": [
+        "操作符",
+        "移動指令",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip16-001",
+      "source": {
+        "book": "pv",
+        "chapter": 3,
+        "section": "3.16",
+        "tip_number": 16
+      },
+      "title_zh": "練習：A (在行尾進入插入模式)",
+      "title_en": "Do Back-of-the-Envelope Calculations in Place",
+      "description_zh": "使用 用 A 在行尾進入插入模式。按鍵序列：A\u003cC-r\u003e=6*35\u003cCR\u003e",
+      "description_en": "Do Back-of-the-Envelope Calculations in Place",
+      "category": "insert",
+      "difficulty": 1,
+      "initial_text": "6 chairs, each costing $35, totals $ ",
+      "expected_text": "6 chairs, each costing $35, totals $210 ",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "A"
+      ],
+      "hint_text": "1. A — 在行尾進入插入模式",
+      "tags": [
+        "A"
+      ],
+      "concepts_zh": [
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip19-001",
+      "source": {
+        "book": "pv",
+        "chapter": 3,
+        "section": "3.19",
+        "tip_number": 19
+      },
+      "title_zh": "練習：R (進入取代模式)、f (向右搜尋字元)",
+      "title_en": "Overwrite Existing Text with Replace Mode",
+      "description_zh": "使用 用 R 進入取代模式，用 f 向右搜尋字元。按鍵序列：f.R,b\u003cEsc\u003e",
+      "description_en": "Overwrite Existing Text with Replace Mode",
+      "category": "combo",
+      "difficulty": 1,
+      "initial_text": "Typing in Insert mode extends the line. But in Replace mode\nthe line length doesn't change.",
+      "expected_text": "Typing in Insert mode extends the line, but in Replace mode\nthe line length doesn't change.",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "R",
+        "f"
+      ],
+      "hint_text": "1. R — 進入取代模式\n2. f — 向右搜尋字元",
+      "tags": [
+        "R",
+        "f"
+      ],
+      "concepts_zh": [
+        "移動指令",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip22-001",
+      "source": {
+        "book": "pv",
+        "chapter": 4,
+        "section": "4.22",
+        "tip_number": 22
+      },
+      "title_zh": "練習：. (重複上次修改)、\u003e (增加縮排)",
+      "title_en": "Repeat Line-Wise Visual Commands",
+      "description_zh": "使用 用 . 重複上次修改，用 \u003e 增加縮排，用 V 進入視覺模式（行選取），用 j 向下移動。按鍵序列：Vj\u003e.",
+      "description_en": "Repeat Line-Wise Visual Commands",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "def fib(n):\n    a, b = 0, 1\n    while a \u003c n:\nprint a,\na, b = b, a+b\nfib(42)",
+      "expected_text": "def fib(n):\n    a, b = 0, 1\n    while a \u003c n:\n        print a,\n        a, b = b, a+b\nfib(42)",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        ".",
+        "\u003e",
+        "V",
+        "j"
+      ],
+      "hint_text": "1. . — 重複上次修改\n2. \u003e — 增加縮排\n3. V — 進入視覺模式（行選取）\n4. j — 向下移動",
+      "tags": [
+        ".",
+        "\u003e",
+        "V",
+        "j"
+      ],
+      "concepts_zh": [
+        "視覺模式",
+        "移動指令",
+        "操作符",
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip23-001",
+      "source": {
+        "book": "pv",
+        "chapter": 4,
+        "section": "4.23",
+        "tip_number": 23
+      },
+      "title_zh": "練習：it (HTML 標籤內的文字)、v (進入視覺模式（字元選取）)",
+      "title_en": "Prefer Operators to Visual Commands Where Possible",
+      "description_zh": "使用 用 it HTML 標籤內的文字，用 v 進入視覺模式（字元選取）。按鍵序列：vitU",
+      "description_en": "Prefer Operators to Visual Commands Where Possible",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "\u003ca href=\"#\"\u003eone\u003c/a\u003e\n\u003ca href=\"#\"\u003etwo\u003c/a\u003e\n\u003ca href=\"#\"\u003ethree\u003c/a\u003e",
+      "expected_text": "\u003ca href=\"#\"\u003eONE\u003c/a\u003e\n\u003ca href=\"#\"\u003etwo\u003c/a\u003e\n\u003ca href=\"#\"\u003ethree\u003c/a\u003e",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "it",
+        "v"
+      ],
+      "hint_text": "1. it — HTML 標籤內的文字\n2. v — 進入視覺模式（字元選取）",
+      "tags": [
+        "it",
+        "v"
+      ],
+      "concepts_zh": [
+        "視覺模式",
+        "文字物件"
+      ]
+    },
+    {
+      "id": "pv-tip23-002",
+      "source": {
+        "book": "pv",
+        "chapter": 4,
+        "section": "4.23",
+        "tip_number": 23
+      },
+      "title_zh": "練習：. (重複上次修改)、gU (轉大寫)",
+      "title_en": "Prefer Operators to Visual Commands Where Possible",
+      "description_zh": "使用 用 . 重複上次修改，用 gU 轉大寫，用 it HTML 標籤內的文字，用 j 向下移動。按鍵序列：gUitj.j.",
+      "description_en": "Prefer Operators to Visual Commands Where Possible",
+      "category": "combo",
+      "difficulty": 3,
+      "initial_text": "\u003ca href=\"#\"\u003eone\u003c/a\u003e\n\u003ca href=\"#\"\u003etwo\u003c/a\u003e\n\u003ca href=\"#\"\u003ethree\u003c/a\u003e",
+      "expected_text": "\u003ca href=\"#\"\u003eONE\u003c/a\u003e\n\u003ca href=\"#\"\u003eTWO\u003c/a\u003e\n\u003ca href=\"#\"\u003eTHREE\u003c/a\u003e",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        ".",
+        "gU",
+        "it",
+        "j"
+      ],
+      "hint_text": "1. . — 重複上次修改\n2. gU — 轉大寫\n3. it — HTML 標籤內的文字\n4. j — 向下移動",
+      "tags": [
+        ".",
+        "gU",
+        "it",
+        "j"
+      ],
+      "concepts_zh": [
+        "操作符",
+        "文字物件",
+        "移動指令",
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip24-001",
+      "source": {
+        "book": "pv",
+        "chapter": 4,
+        "section": "4.24",
+        "tip_number": 24
+      },
+      "title_zh": "練習：. (重複上次修改)、\u003cC-v\u003e (進入視覺模式（區塊選取）)",
+      "title_en": "Edit Tabular Data with Visual-Block Mode",
+      "description_zh": "使用 用 . 重複上次修改，用 \u003cC-v\u003e 進入視覺模式（區塊選取），用 V 進入視覺模式（行選取），用 j 向下移動，用 p 貼上到游標後，用 r 替換游標下的字元，用 v 進入視覺模式（字元選取），用 x 刪除游標下的字元，用 yy 複製整行。按鍵序列：\u003cC-v\u003e3jx...gvr|yypVr-",
+      "description_en": "Edit Tabular Data with Visual-Block Mode",
+      "category": "combo",
+      "difficulty": 3,
+      "initial_text": "Chapter            Page\nNormal mode          15\nInsert mode          31\nVisual mode          44",
+      "expected_text": "Chapter      |  Page\n--------------------\nNormal mode  |    15\nInsert mode  |    31\nVisual mode  |    44",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        ".",
+        "\u003cC-v\u003e",
+        "V",
+        "j",
+        "p",
+        "r",
+        "v",
+        "x",
+        "yy"
+      ],
+      "hint_text": "1. . — 重複上次修改\n2. \u003cC-v\u003e — 進入視覺模式（區塊選取）\n3. V — 進入視覺模式（行選取）\n4. j — 向下移動\n5. p — 貼上到游標後\n6. r — 替換游標下的字元\n7. v — 進入視覺模式（字元選取）\n8. x — 刪除游標下的字元\n9. yy — 複製整行",
+      "tags": [
+        ".",
+        "\u003cC-v\u003e",
+        "V",
+        "j",
+        "p",
+        "r",
+        "v",
+        "x",
+        "yy"
+      ],
+      "concepts_zh": [
+        "其他",
+        "移動指令",
+        "視覺模式"
+      ]
+    },
+    {
+      "id": "pv-tip25-001",
+      "source": {
+        "book": "pv",
+        "chapter": 4,
+        "section": "4.25",
+        "tip_number": 25
+      },
+      "title_zh": "練習：N (搜尋上一個匹配)、o (在下方新增一行並進入插入模式)",
+      "title_en": "Change Columns of Text",
+      "description_zh": "使用 用 N 搜尋上一個匹配，用 o 在下方新增一行並進入插入模式，用 s 刪除字元並進入插入模式，用 { 移到上一個段落。按鍵序列：{start}Normal mode\u003cC-v\u003ejjeVisual modecInsert modecomponentsInsert mode\u003cEsc\u003eNormal mode",
+      "description_en": "Change Columns of Text",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "li.one   a{ background-image: url('/images/sprite.png'); }\nli.two   a{ background-image: url('/images/sprite.png'); }\nli.three a{ background-image: url('/images/sprite.png'); }",
+      "expected_text": "li.one   a{ background-image: url('/components/sprite.png'); }\nli.two   a{ background-image: url('/components/sprite.png'); }\nli.three a{ background-image: url('/components/sprite.png'); }",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "N",
+        "o",
+        "s",
+        "{"
+      ],
+      "hint_text": "1. N — 搜尋上一個匹配\n2. o — 在下方新增一行並進入插入模式\n3. s — 刪除字元並進入插入模式\n4. { — 移到上一個段落",
+      "tags": [
+        "N",
+        "o",
+        "s",
+        "{"
+      ],
+      "concepts_zh": [
+        "移動指令",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip26-001",
+      "source": {
+        "book": "pv",
+        "chapter": 4,
+        "section": "4.26",
+        "tip_number": 26
+      },
+      "title_zh": "練習：N (搜尋上一個匹配)、o (在下方新增一行並進入插入模式)",
+      "title_en": "Append After a Ragged Visual Block",
+      "description_zh": "使用 用 N 搜尋上一個匹配，用 o 在下方新增一行並進入插入模式，用 s 刪除字元並進入插入模式，用 { 移到上一個段落。按鍵序列：{start}Normal mode\u003cC-v\u003ejj$Visual-BlockA;Insert mode\u003cEsc\u003eNormal mode",
+      "description_en": "Append After a Ragged Visual Block",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "var foo = 1\nvar bar = 'a'\nvar foobar = foo + bar",
+      "expected_text": "var foo = 1;\nvar bar = 'a';\nvar foobar = foo + bar;",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "N",
+        "o",
+        "s",
+        "{"
+      ],
+      "hint_text": "1. N — 搜尋上一個匹配\n2. o — 在下方新增一行並進入插入模式\n3. s — 刪除字元並進入插入模式\n4. { — 移到上一個段落",
+      "tags": [
+        "N",
+        "o",
+        "s",
+        "{"
+      ],
+      "concepts_zh": [
+        "移動指令",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip29-001",
+      "source": {
+        "book": "pv",
+        "chapter": 5,
+        "section": "5.29",
+        "tip_number": 29
+      },
+      "title_zh": "Duplicate or Move Lines Using ‘:t’ and ‘:m’ Commands",
+      "title_en": "Duplicate or Move Lines Using ‘:t’ and ‘:m’ Commands",
+      "description_zh": "按鍵序列：",
+      "description_en": "Duplicate or Move Lines Using ‘:t’ and ‘:m’ Commands",
+      "category": "other",
+      "difficulty": 1,
+      "initial_text": "Shopping list\n    Hardware Store\n        Buy new hammer\n    Beauty Parlor\n        Buy nail polish remover\n        Buy nails",
+      "expected_text": "Shopping list\n    Hardware Store\n        Buy nails\n        Buy new hammer\n    Beauty Parlor\n        Buy nail polish remover\n        Buy nails",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": null,
+      "hint_text": "",
+      "tags": null,
+      "concepts_zh": null,
+      "needs_translation": true
+    },
+    {
+      "id": "pv-tip29-002",
+      "source": {
+        "book": "pv",
+        "chapter": 5,
+        "section": "5.29",
+        "tip_number": 29
+      },
+      "title_zh": "練習：V (進入視覺模式（行選取）)、j (向下移動)",
+      "title_en": "Duplicate or Move Lines Using ‘:t’ and ‘:m’ Commands",
+      "description_zh": "使用 用 V 進入視覺模式（行選取），用 j 向下移動。按鍵序列：Vjj",
+      "description_en": "Duplicate or Move Lines Using ‘:t’ and ‘:m’ Commands",
+      "category": "combo",
+      "difficulty": 1,
+      "initial_text": "Shopping list\n    Hardware Store\n        Buy nails\n        Buy new hammer\n    Beauty Parlor\n        Buy nail polish remover\n        Buy nails",
+      "expected_text": "Shopping list\n    Beauty Parlor\n        Buy nail polish remover\n        Buy nails\n    Hardware Store\n        Buy nails\n        Buy new hammer",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "V",
+        "j"
+      ],
+      "hint_text": "1. V — 進入視覺模式（行選取）\n2. j — 向下移動",
+      "tags": [
+        "V",
+        "j"
+      ],
+      "concepts_zh": [
+        "視覺模式",
+        "移動指令"
+      ]
+    },
+    {
+      "id": "pv-tip30-001",
+      "source": {
+        "book": "pv",
+        "chapter": 5,
+        "section": "5.30",
+        "tip_number": 30
+      },
+      "title_zh": "練習：A (在行尾進入插入模式)",
+      "title_en": "Run Normal Mode Commands Across a Range",
+      "description_zh": "使用 用 A 在行尾進入插入模式。按鍵序列：A;\u003cEsc\u003e",
+      "description_en": "Run Normal Mode Commands Across a Range",
+      "category": "insert",
+      "difficulty": 1,
+      "initial_text": "var foo = 1\nvar bar = 'a'\nvar baz = 'z'\nvar foobar = foo + bar\nvar foobarbaz = foo + bar + baz",
+      "expected_text": "var foo = 1;\nvar bar = 'a'\nvar baz = 'z'\nvar foobar = foo + bar\nvar foobarbaz = foo + bar + baz",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "A"
+      ],
+      "hint_text": "1. A — 在行尾進入插入模式",
+      "tags": [
+        "A"
+      ],
+      "concepts_zh": [
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip30-002",
+      "source": {
+        "book": "pv",
+        "chapter": 5,
+        "section": "5.30",
+        "tip_number": 30
+      },
+      "title_zh": "練習：G (移到檔案結尾)、V (進入視覺模式（行選取）)",
+      "title_en": "Run Normal Mode Commands Across a Range",
+      "description_zh": "使用 用 G 移到檔案結尾，用 V 進入視覺模式（行選取），用 j 向下移動。按鍵序列：jVG",
+      "description_en": "Run Normal Mode Commands Across a Range",
+      "category": "combo",
+      "difficulty": 1,
+      "initial_text": "var foo = 1;\nvar bar = ’a’\nvar baz = ’z’ \nvar foobar = foo + bar \nvar foobarbaz = foo + bar + baz ",
+      "expected_text": "var foo = 1;\nvar bar = 'a';\nvar baz = 'z';\nvar foobar = foo + bar;\nvar foobarbaz = foo + bar + baz;",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "G",
+        "V",
+        "j"
+      ],
+      "hint_text": "1. G — 移到檔案結尾\n2. V — 進入視覺模式（行選取）\n3. j — 向下移動",
+      "tags": [
+        "G",
+        "V",
+        "j"
+      ],
+      "concepts_zh": [
+        "移動指令",
+        "視覺模式"
+      ]
+    },
+    {
+      "id": "pv-tip33-001",
+      "source": {
+        "book": "pv",
+        "chapter": 5,
+        "section": "5.33",
+        "tip_number": 33
+      },
+      "title_zh": "練習：* (搜尋游標下的單字)、c (修改（刪除並進入插入模式）)",
+      "title_en": "Insert the Current Word at the Command Prompt",
+      "description_zh": "使用 用 * 搜尋游標下的單字，用 c 修改（刪除並進入插入模式），用 o 在下方新增一行並進入插入模式，用 w 移到下一個單字字首。按鍵序列：*cwcounter\u003cEsc\u003e",
+      "description_en": "Insert the Current Word at the Command Prompt",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "var tally;\nfor (tally=1; tally \u003c= 10; tally++) {\n  // do something with tally\n};",
+      "expected_text": "var tally;\nfor (counter=1; tally \u003c= 10; tally++) {\n  // do something with tally\n};",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "*",
+        "c",
+        "o",
+        "w"
+      ],
+      "hint_text": "1. * — 搜尋游標下的單字\n2. c — 修改（刪除並進入插入模式）\n3. o — 在下方新增一行並進入插入模式\n4. w — 移到下一個單字字首",
+      "tags": [
+        "*",
+        "c",
+        "o",
+        "w"
+      ],
+      "concepts_zh": [
+        "移動指令",
+        "操作符",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip34-001",
+      "source": {
+        "book": "pv",
+        "chapter": 5,
+        "section": "5.34",
+        "tip_number": 34
+      },
+      "title_zh": "練習：A (在行尾進入插入模式)、J (合併下一行)",
+      "title_en": "Recall Commands from History",
+      "description_zh": "使用 用 A 在行尾進入插入模式，用 J 合併下一行。按鍵序列：A|\u003cEsc\u003eJ",
+      "description_en": "Recall Commands from History",
+      "category": "insert",
+      "difficulty": 1,
+      "initial_text": "write\n!ruby %",
+      "expected_text": "update | !ruby %",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "A",
+        "J"
+      ],
+      "hint_text": "1. A — 在行尾進入插入模式\n2. J — 合併下一行",
+      "tags": [
+        "A",
+        "J"
+      ],
+      "concepts_zh": [
+        "插入模式",
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip49-001",
+      "source": {
+        "book": "pv",
+        "chapter": 8,
+        "section": "8.49",
+        "tip_number": 49
+      },
+      "title_zh": "練習：a (在游標後進入插入模式)、e (移到單字字尾)",
+      "title_en": "Move Word-Wise",
+      "description_zh": "使用 用 a 在游標後進入插入模式，用 e 移到單字字尾。按鍵序列：eaer\u003cEsc\u003e",
+      "description_en": "Move Word-Wise",
+      "category": "combo",
+      "difficulty": 1,
+      "initial_text": "Go fast.",
+      "expected_text": "Go faster.",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "a",
+        "e"
+      ],
+      "hint_text": "1. a — 在游標後進入插入模式\n2. e — 移到單字字尾",
+      "tags": [
+        "a",
+        "e"
+      ],
+      "concepts_zh": [
+        "移動指令",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip49-002",
+      "source": {
+        "book": "pv",
+        "chapter": 8,
+        "section": "8.49",
+        "tip_number": 49
+      },
+      "title_zh": "練習：c (修改（刪除並進入插入模式）)、o (在下方新增一行並進入插入模式)",
+      "title_en": "Move Word-Wise",
+      "description_zh": "使用 用 c 修改（刪除並進入插入模式），用 o 在下方新增一行並進入插入模式，用 w 移到下一個單字字首，用 y 複製（yank）。按鍵序列：cwyou\u003cEsc\u003e",
+      "description_en": "Move Word-Wise",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "e.g. we're going too slow",
+      "expected_text": "e.g. you're going too slow",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "c",
+        "o",
+        "w",
+        "y"
+      ],
+      "hint_text": "1. c — 修改（刪除並進入插入模式）\n2. o — 在下方新增一行並進入插入模式\n3. w — 移到下一個單字字首\n4. y — 複製（yank）",
+      "tags": [
+        "c",
+        "o",
+        "w",
+        "y"
+      ],
+      "concepts_zh": [
+        "操作符",
+        "移動指令",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip49-003",
+      "source": {
+        "book": "pv",
+        "chapter": 8,
+        "section": "8.49",
+        "tip_number": 49
+      },
+      "title_zh": "練習：W (移到下一個 WORD 字首)、c (修改（刪除並進入插入模式）)",
+      "title_en": "Move Word-Wise",
+      "description_zh": "使用 用 W 移到下一個 WORD 字首，用 c 修改（刪除並進入插入模式），用 it HTML 標籤內的文字，用 s 刪除字元並進入插入模式。按鍵序列：cWit’s\u003cEsc\u003e",
+      "description_en": "Move Word-Wise",
+      "category": "combo",
+      "difficulty": 3,
+      "initial_text": "e.g. we're going too slow",
+      "expected_text": "e.g. it's going too slow",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "W",
+        "c",
+        "it",
+        "s"
+      ],
+      "hint_text": "1. W — 移到下一個 WORD 字首\n2. c — 修改（刪除並進入插入模式）\n3. it — HTML 標籤內的文字\n4. s — 刪除字元並進入插入模式",
+      "tags": [
+        "W",
+        "c",
+        "it",
+        "s"
+      ],
+      "concepts_zh": [
+        "操作符",
+        "移動指令",
+        "文字物件",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip50-001",
+      "source": {
+        "book": "pv",
+        "chapter": 8,
+        "section": "8.50",
+        "tip_number": 50
+      },
+      "title_zh": "練習：. (重複上次修改)、d (刪除)",
+      "title_en": "Find by Character",
+      "description_zh": "使用 用 . 重複上次修改，用 d 刪除，用 f 向右搜尋字元，用 t 向右搜尋字元（游標停在前一格）。按鍵序列：f,dt.",
+      "description_en": "Find by Character",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "I've been expecting you, Mister Bond.",
+      "expected_text": "I've been expecting you.",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        ".",
+        "d",
+        "f",
+        "t"
+      ],
+      "hint_text": "1. . — 重複上次修改\n2. d — 刪除\n3. f — 向右搜尋字元\n4. t — 向右搜尋字元（游標停在前一格）",
+      "tags": [
+        ".",
+        "d",
+        "f",
+        "t"
+      ],
+      "concepts_zh": [
+        "移動指令",
+        "操作符",
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip51-001",
+      "source": {
+        "book": "pv",
+        "chapter": 8,
+        "section": "8.51",
+        "tip_number": 51
+      },
+      "title_zh": "練習：d (刪除)、h (向左移動)",
+      "title_en": "Search to Navigate",
+      "description_zh": "使用 用 d 刪除，用 h 向左移動，用 v 進入視覺模式（字元選取）。按鍵序列：v\u003cCR\u003ehd",
+      "description_en": "Search to Navigate",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "This phrase takes time but\neventually gets to the point.",
+      "expected_text": "This phrase gets to the point.",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "d",
+        "h",
+        "v"
+      ],
+      "hint_text": "1. d — 刪除\n2. h — 向左移動\n3. v — 進入視覺模式（字元選取）",
+      "tags": [
+        "d",
+        "h",
+        "v"
+      ],
+      "concepts_zh": [
+        "視覺模式",
+        "移動指令",
+        "操作符"
+      ]
+    },
+    {
+      "id": "pv-tip51-002",
+      "source": {
+        "book": "pv",
+        "chapter": 8,
+        "section": "8.51",
+        "tip_number": 51
+      },
+      "title_zh": "練習：d (刪除)",
+      "title_en": "Search to Navigate",
+      "description_zh": "使用 用 d 刪除。按鍵序列：d\u003cCR\u003e",
+      "description_en": "Search to Navigate",
+      "category": "operator",
+      "difficulty": 1,
+      "initial_text": "This phrase takes time but\neventually gets to the point.",
+      "expected_text": "This phrase gets to the point.",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "d"
+      ],
+      "hint_text": "1. d — 刪除",
+      "tags": [
+        "d"
+      ],
+      "concepts_zh": [
+        "操作符"
+      ]
+    },
+    {
+      "id": "pv-tip52-001",
+      "source": {
+        "book": "pv",
+        "chapter": 8,
+        "section": "8.52",
+        "tip_number": 52
+      },
+      "title_zh": "練習：a\" (雙引號內的文字含引號)、a] (方括號內的文字含方括號)",
+      "title_en": "Trace Your Selection with Precision Text Objects",
+      "description_zh": "使用 用 a\" 雙引號內的文字含引號，用 a] 方括號內的文字含方括號，用 at HTML 標籤內的文字含標籤，用 i\u003e 角括號內的文字，用 it HTML 標籤內的文字，用 i} 大括號內的文字，用 v 進入視覺模式（字元選取）。按鍵序列：vi}a\"i\u003eitata]",
+      "description_en": "Trace Your Selection with Precision Text Objects",
+      "category": "combo",
+      "difficulty": 3,
+      "initial_text": "var tpl = [\n  '\u003ca href=\"{url}\"\u003e{title}\u003c/a\u003e'\n]",
+      "expected_text": "var tpl = [ \n  ’\u003ca href=\"{url}\"\u003e{title}\u003c/a\u003e’ \n]",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "a\"",
+        "a]",
+        "at",
+        "i\u003e",
+        "it",
+        "i}",
+        "v"
+      ],
+      "hint_text": "1. a\" — 雙引號內的文字含引號\n2. a] — 方括號內的文字含方括號\n3. at — HTML 標籤內的文字含標籤\n4. i\u003e — 角括號內的文字\n5. it — HTML 標籤內的文字\n6. i} — 大括號內的文字\n7. v — 進入視覺模式（字元選取）",
+      "tags": [
+        "a\"",
+        "a]",
+        "at",
+        "i\u003e",
+        "it",
+        "i}",
+        "v"
+      ],
+      "concepts_zh": [
+        "視覺模式",
+        "文字物件"
+      ]
+    },
+    {
+      "id": "pv-tip52-002",
+      "source": {
+        "book": "pv",
+        "chapter": 8,
+        "section": "8.52",
+        "tip_number": 52
+      },
+      "title_zh": "練習：# (反向搜尋游標下的單字)、c (修改（刪除並進入插入模式）)",
+      "title_en": "Trace Your Selection with Precision Text Objects",
+      "description_zh": "使用 用 # 反向搜尋游標下的單字，用 c 修改（刪除並進入插入模式），用 i 在游標前進入插入模式，用 i\" 雙引號內的文字，用 it HTML 標籤內的文字，用 l 向右移動。按鍵序列：ci\"#\u003cEsc\u003ecitclick here\u003cEsc\u003e",
+      "description_en": "Trace Your Selection with Precision Text Objects",
+      "category": "combo",
+      "difficulty": 3,
+      "initial_text": "'\u003ca href=\"{url}\"\u003e{title}\u003c/a\u003e'",
+      "expected_text": "'\u003ca href=\"#\"\u003eclick here\u003c/a\u003e'",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "#",
+        "c",
+        "i",
+        "i\"",
+        "it",
+        "l"
+      ],
+      "hint_text": "1. # — 反向搜尋游標下的單字\n2. c — 修改（刪除並進入插入模式）\n3. i — 在游標前進入插入模式\n4. i\" — 雙引號內的文字\n5. it — HTML 標籤內的文字\n6. l — 向右移動",
+      "tags": [
+        "#",
+        "c",
+        "i",
+        "i\"",
+        "it",
+        "l"
+      ],
+      "concepts_zh": [
+        "操作符",
+        "文字物件",
+        "移動指令",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip53-001",
+      "source": {
+        "book": "pv",
+        "chapter": 8,
+        "section": "8.53",
+        "tip_number": 53
+      },
+      "title_zh": "練習：aw (游標所在的單字含空白（a word）)、d (刪除)",
+      "title_en": "Delete Around, or Change Inside",
+      "description_zh": "使用 用 aw 游標所在的單字含空白（a word），用 d 刪除。按鍵序列：daw",
+      "description_en": "Delete Around, or Change Inside",
+      "category": "combo",
+      "difficulty": 1,
+      "initial_text": "Improve your writing by deleting excellent adjectives.",
+      "expected_text": "Improve your writing by deleting adjectives.",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "aw",
+        "d"
+      ],
+      "hint_text": "1. aw — 游標所在的單字含空白（a word）\n2. d — 刪除",
+      "tags": [
+        "aw",
+        "d"
+      ],
+      "concepts_zh": [
+        "操作符",
+        "文字物件"
+      ]
+    },
+    {
+      "id": "pv-tip53-002",
+      "source": {
+        "book": "pv",
+        "chapter": 8,
+        "section": "8.53",
+        "tip_number": 53
+      },
+      "title_zh": "練習：c (修改（刪除並進入插入模式）)、iw (游標所在的單字（inner word）)",
+      "title_en": "Delete Around, or Change Inside",
+      "description_zh": "使用 用 c 修改（刪除並進入插入模式），用 iw 游標所在的單字（inner word），用 o 在下方新增一行並進入插入模式。按鍵序列：ciwmost\u003cEsc\u003e",
+      "description_en": "Delete Around, or Change Inside",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "Improve your writing by deleting excellent adjectives.",
+      "expected_text": "Improve your writing by deleting most adjectives.",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "c",
+        "iw",
+        "o"
+      ],
+      "hint_text": "1. c — 修改（刪除並進入插入模式）\n2. iw — 游標所在的單字（inner word）\n3. o — 在下方新增一行並進入插入模式",
+      "tags": [
+        "c",
+        "iw",
+        "o"
+      ],
+      "concepts_zh": [
+        "操作符",
+        "文字物件",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip55-001",
+      "source": {
+        "book": "pv",
+        "chapter": 8,
+        "section": "8.55",
+        "tip_number": 55
+      },
+      "title_zh": "練習：% (跳到配對的括號)、d (刪除)",
+      "title_en": "Jump Between Matching Parentheses",
+      "description_zh": "使用 用 % 跳到配對的括號，用 d 刪除，用 r 替換游標下的字元，用 t 向右搜尋字元（游標停在前一格），用 { 移到上一個段落。按鍵序列：dt{%r]``r[",
+      "description_en": "Jump Between Matching Parentheses",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "cities = %w{London Berlin New\\ York}",
+      "expected_text": "cities = [London Berlin New\\ York]",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "%",
+        "d",
+        "r",
+        "t",
+        "{"
+      ],
+      "hint_text": "1. % — 跳到配對的括號\n2. d — 刪除\n3. r — 替換游標下的字元\n4. t — 向右搜尋字元（游標停在前一格）\n5. { — 移到上一個段落",
+      "tags": [
+        "%",
+        "d",
+        "r",
+        "t",
+        "{"
+      ],
+      "concepts_zh": [
+        "操作符",
+        "移動指令",
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip55-002",
+      "source": {
+        "book": "pv",
+        "chapter": 8,
+        "section": "8.55",
+        "tip_number": 55
+      },
+      "title_zh": "練習：S (刪除整行並進入插入模式)、e (移到單字字尾)",
+      "title_en": "Jump Between Matching Parentheses",
+      "description_zh": "使用 用 S 刪除整行並進入插入模式，用 e 移到單字字尾，用 v 進入視覺模式（字元選取）。按鍵序列：veeS\"",
+      "description_en": "Jump Between Matching Parentheses",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "cities = [\"London\", \"Berlin\", New York]",
+      "expected_text": "cities = [\"London\", \"Berlin\", \"New York\"]",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "S",
+        "e",
+        "v"
+      ],
+      "hint_text": "1. S — 刪除整行並進入插入模式\n2. e — 移到單字字尾\n3. v — 進入視覺模式（字元選取）",
+      "tags": [
+        "S",
+        "e",
+        "v"
+      ],
+      "concepts_zh": [
+        "視覺模式",
+        "移動指令",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip60-001",
+      "source": {
+        "book": "pv",
+        "chapter": 10,
+        "section": "10.60",
+        "tip_number": 60
+      },
+      "title_zh": "練習：F (向左搜尋字元)、p (貼上到游標後)",
+      "title_en": "Delete, Yank, and Put with Vim’s Unnamed Register",
+      "description_zh": "使用 用 F 向左搜尋字元，用 p 貼上到游標後。按鍵序列：Fxp",
+      "description_en": "Delete, Yank, and Put with Vim’s Unnamed Register",
+      "category": "motion",
+      "difficulty": 1,
+      "initial_text": "Practica lvim",
+      "expected_text": "Practical vim",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "F",
+        "p"
+      ],
+      "hint_text": "1. F — 向左搜尋字元\n2. p — 貼上到游標後",
+      "tags": [
+        "F",
+        "p"
+      ],
+      "concepts_zh": [
+        "移動指令",
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip60-002",
+      "source": {
+        "book": "pv",
+        "chapter": 10,
+        "section": "10.60",
+        "tip_number": 60
+      },
+      "title_zh": "練習：dd (刪除整行)、p (貼上到游標後)",
+      "title_en": "Delete, Yank, and Put with Vim’s Unnamed Register",
+      "description_zh": "使用 用 dd 刪除整行，用 p 貼上到游標後。按鍵序列：ddp",
+      "description_en": "Delete, Yank, and Put with Vim’s Unnamed Register",
+      "category": "other",
+      "difficulty": 1,
+      "initial_text": "2) line two\n1) line one\n3) line three",
+      "expected_text": "1) line one\n2) line two\n3) line three",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "dd",
+        "p"
+      ],
+      "hint_text": "1. dd — 刪除整行\n2. p — 貼上到游標後",
+      "tags": [
+        "dd",
+        "p"
+      ],
+      "concepts_zh": [
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip60-003",
+      "source": {
+        "book": "pv",
+        "chapter": 10,
+        "section": "10.60",
+        "tip_number": 60
+      },
+      "title_zh": "練習：p (貼上到游標後)、yy (複製整行)",
+      "title_en": "Delete, Yank, and Put with Vim’s Unnamed Register",
+      "description_zh": "使用 用 p 貼上到游標後，用 yy 複製整行。按鍵序列：yyp",
+      "description_en": "Delete, Yank, and Put with Vim’s Unnamed Register",
+      "category": "other",
+      "difficulty": 1,
+      "initial_text": "1) line one\n2) line two",
+      "expected_text": "1) line one\n2) line two\n2) line two",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "p",
+        "yy"
+      ],
+      "hint_text": "1. p — 貼上到游標後\n2. yy — 複製整行",
+      "tags": [
+        "p",
+        "yy"
+      ],
+      "concepts_zh": [
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip61-001",
+      "source": {
+        "book": "pv",
+        "chapter": 10,
+        "section": "10.61",
+        "tip_number": 61
+      },
+      "title_zh": "練習：0 (移到行首)、P (貼上到游標前)",
+      "title_en": "Grok Vim’s Registers",
+      "description_zh": "使用 用 0 移到行首，用 P 貼上到游標前，用 d 刪除，用 iw 游標所在的單字（inner word），用 j 向下移動，用 w 移到下一個單字字首，用 y 複製（yank）。按鍵序列：yiwjwwdiw\"0P",
+      "description_en": "Grok Vim’s Registers",
+      "category": "combo",
+      "difficulty": 3,
+      "initial_text": "collection = getCollection();\nprocess(somethingInTheWay, target);",
+      "expected_text": "collection = getCollection();\nprocess(collection, target);",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "0",
+        "P",
+        "d",
+        "iw",
+        "j",
+        "w",
+        "y"
+      ],
+      "hint_text": "1. 0 — 移到行首\n2. P — 貼上到游標前\n3. d — 刪除\n4. iw — 游標所在的單字（inner word）\n5. j — 向下移動\n6. w — 移到下一個單字字首\n7. y — 複製（yank）",
+      "tags": [
+        "0",
+        "P",
+        "d",
+        "iw",
+        "j",
+        "w",
+        "y"
+      ],
+      "concepts_zh": [
+        "操作符",
+        "文字物件",
+        "移動指令",
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip61-002",
+      "source": {
+        "book": "pv",
+        "chapter": 10,
+        "section": "10.61",
+        "tip_number": 61
+      },
+      "title_zh": "練習：a (在游標後進入插入模式)",
+      "title_en": "Grok Vim’s Registers",
+      "description_zh": "使用 用 a 在游標後進入插入模式。按鍵序列：\"ayiwjwwdiw\"aP",
+      "description_en": "Grok Vim’s Registers",
+      "category": "insert",
+      "difficulty": 1,
+      "initial_text": "collection = getCollection();\nprocess(somethingInTheWay, target);",
+      "expected_text": "collection = getCollection();\nprocess(collection, target);",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "a"
+      ],
+      "hint_text": "1. a — 在游標後進入插入模式",
+      "tags": [
+        "a"
+      ],
+      "concepts_zh": [
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip61-003",
+      "source": {
+        "book": "pv",
+        "chapter": 10,
+        "section": "10.61",
+        "tip_number": 61
+      },
+      "title_zh": "練習：P (貼上到游標前)、d (刪除)",
+      "title_en": "Grok Vim’s Registers",
+      "description_zh": "使用 用 P 貼上到游標前，用 d 刪除，用 iw 游標所在的單字（inner word），用 j 向下移動，用 w 移到下一個單字字首，用 y 複製（yank）。按鍵序列：yiwjww\"_diwP",
+      "description_en": "Grok Vim’s Registers",
+      "category": "combo",
+      "difficulty": 3,
+      "initial_text": "collection = getCollection();\nprocess(somethingInTheWay, target);",
+      "expected_text": "collection = getCollection();\nprocess(collection, target);",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "P",
+        "d",
+        "iw",
+        "j",
+        "w",
+        "y"
+      ],
+      "hint_text": "1. P — 貼上到游標前\n2. d — 刪除\n3. iw — 游標所在的單字（inner word）\n4. j — 向下移動\n5. w — 移到下一個單字字首\n6. y — 複製（yank）",
+      "tags": [
+        "P",
+        "d",
+        "iw",
+        "j",
+        "w",
+        "y"
+      ],
+      "concepts_zh": [
+        "操作符",
+        "文字物件",
+        "移動指令",
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip62-001",
+      "source": {
+        "book": "pv",
+        "chapter": 10,
+        "section": "10.62",
+        "tip_number": 62
+      },
+      "title_zh": "練習：e (移到單字字尾)、iw (游標所在的單字（inner word）)",
+      "title_en": "Replace a Visual Selection with a Register",
+      "description_zh": "使用 用 e 移到單字字尾，用 iw 游標所在的單字（inner word），用 j 向下移動，用 p 貼上到游標後，用 v 進入視覺模式（字元選取），用 w 移到下一個單字字首，用 y 複製（yank）。按鍵序列：yiwjwwvep",
+      "description_en": "Replace a Visual Selection with a Register",
+      "category": "combo",
+      "difficulty": 3,
+      "initial_text": "collection = getCollection();\nprocess(somethingInTheWay, target);",
+      "expected_text": "collection = getCollection();\nprocess(collection, target);",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "e",
+        "iw",
+        "j",
+        "p",
+        "v",
+        "w",
+        "y"
+      ],
+      "hint_text": "1. e — 移到單字字尾\n2. iw — 游標所在的單字（inner word）\n3. j — 向下移動\n4. p — 貼上到游標後\n5. v — 進入視覺模式（字元選取）\n6. w — 移到下一個單字字首\n7. y — 複製（yank）",
+      "tags": [
+        "e",
+        "iw",
+        "j",
+        "p",
+        "v",
+        "w",
+        "y"
+      ],
+      "concepts_zh": [
+        "操作符",
+        "文字物件",
+        "移動指令",
+        "視覺模式",
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip62-002",
+      "source": {
+        "book": "pv",
+        "chapter": 10,
+        "section": "10.62",
+        "tip_number": 62
+      },
+      "title_zh": "練習：P (貼上到游標前)、d (刪除)",
+      "title_en": "Replace a Visual Selection with a Register",
+      "description_zh": "使用 用 P 貼上到游標前，用 d 刪除，用 e 移到單字字尾，用 f 向右搜尋字元，用 p 貼上到游標後，用 v 進入視覺模式（字元選取），用 w 移到下一個單字字首。按鍵序列：fcdemmwwvep`mP",
+      "description_en": "Replace a Visual Selection with a Register",
+      "category": "combo",
+      "difficulty": 3,
+      "initial_text": "I like chips and fish.",
+      "expected_text": "I like fish and chips.",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "P",
+        "d",
+        "e",
+        "f",
+        "p",
+        "v",
+        "w"
+      ],
+      "hint_text": "1. P — 貼上到游標前\n2. d — 刪除\n3. e — 移到單字字尾\n4. f — 向右搜尋字元\n5. p — 貼上到游標後\n6. v — 進入視覺模式（字元選取）\n7. w — 移到下一個單字字首",
+      "tags": [
+        "P",
+        "d",
+        "e",
+        "f",
+        "p",
+        "v",
+        "w"
+      ],
+      "concepts_zh": [
+        "移動指令",
+        "操作符",
+        "視覺模式",
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip63-001",
+      "source": {
+        "book": "pv",
+        "chapter": 10,
+        "section": "10.63",
+        "tip_number": 63
+      },
+      "title_zh": "練習：0 (移到行首)、c (修改（刪除並進入插入模式）)",
+      "title_en": "Paste from a Register",
+      "description_zh": "使用 用 0 移到行首，用 c 修改（刪除並進入插入模式），用 iw 游標所在的單字（inner word），用 j 向下移動，用 w 移到下一個單字字首，用 y 複製（yank）。按鍵序列：yiwjwwciw\u003cC-r\u003e0\u003cEsc\u003e",
+      "description_en": "Paste from a Register",
+      "category": "combo",
+      "difficulty": 3,
+      "initial_text": "collection = getCollection();\nprocess(somethingInTheWay, target);",
+      "expected_text": "collection = getCollection();\nprocess(collection, target);",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "0",
+        "\u003cC-r\u003e",
+        "c",
+        "iw",
+        "j",
+        "w",
+        "y"
+      ],
+      "hint_text": "1. 0 — 移到行首\n3. c — 修改（刪除並進入插入模式）\n4. iw — 游標所在的單字（inner word）\n5. j — 向下移動\n6. w — 移到下一個單字字首\n7. y — 複製（yank）",
+      "tags": [
+        "0",
+        "\u003cC-r\u003e",
+        "c",
+        "iw",
+        "j",
+        "w",
+        "y"
+      ],
+      "concepts_zh": [
+        "操作符",
+        "文字物件",
+        "移動指令",
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip63-002",
+      "source": {
+        "book": "pv",
+        "chapter": 10,
+        "section": "10.63",
+        "tip_number": 63
+      },
+      "title_zh": "練習：P (貼上到游標前)、y (複製（yank）)",
+      "title_en": "Paste from a Register",
+      "description_zh": "使用 用 P 貼上到游標前，用 y 複製（yank）。按鍵序列：yapgP",
+      "description_en": "Paste from a Register",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "\u003ctable\u003e\n\n  \u003ctr\u003e\n    \u003ctd\u003eSymbol\u003c/td\u003e\n    \u003ctd\u003eName\u003c/td\u003e\n  \u003c/tr\u003e\n\n\u003c/table\u003e",
+      "expected_text": "\u003ctable\u003e\n\n  \u003ctr\u003e\n    \u003ctd\u003eSymbol\u003c/td\u003e\n    \u003ctd\u003eName\u003c/td\u003e\n  \u003c/tr\u003e\n\n  \u003ctr\u003e\n    \u003ctd\u003eSymbol\u003c/td\u003e\n    \u003ctd\u003eName\u003c/td\u003e\n  \u003c/tr\u003e\n\n\u003c/table\u003e",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "P",
+        "ap",
+        "y"
+      ],
+      "hint_text": "1. P — 貼上到游標前\n3. y — 複製（yank）",
+      "tags": [
+        "P",
+        "ap",
+        "y"
+      ],
+      "concepts_zh": [
+        "操作符",
+        "文字物件",
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip65-001",
+      "source": {
+        "book": "pv",
+        "chapter": 11,
+        "section": "11.65",
+        "tip_number": 65
+      },
+      "title_zh": "練習：I (在行首進入插入模式)、a (在游標後進入插入模式)",
+      "title_en": "Record and Execute a Macro",
+      "description_zh": "使用 用 I 在行首進入插入模式，用 a 在游標後進入插入模式，用 q 錄製巨集。按鍵序列：qaA;\u003cEsc\u003eIvar\u003cEsc\u003eq",
+      "description_en": "Record and Execute a Macro",
+      "category": "insert",
+      "difficulty": 3,
+      "initial_text": "foo = 1\nbar = 'a'\nfoobar = foo + bar",
+      "expected_text": "var foo = 1;\nbar = 'a'\nfoobar = foo + bar",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "I",
+        "a",
+        "q"
+      ],
+      "hint_text": "1. I — 在行首進入插入模式\n2. a — 在游標後進入插入模式\n3. q — 錄製巨集",
+      "tags": [
+        "I",
+        "a",
+        "q"
+      ],
+      "concepts_zh": [
+        "其他",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip65-002",
+      "source": {
+        "book": "pv",
+        "chapter": 11,
+        "section": "11.65",
+        "tip_number": 65
+      },
+      "title_zh": "練習：@ (播放巨集)、a (在游標後進入插入模式)",
+      "title_en": "Record and Execute a Macro",
+      "description_zh": "使用 用 @ 播放巨集，用 a 在游標後進入插入模式，用 j 向下移動。按鍵序列：j@aj@@",
+      "description_en": "Record and Execute a Macro",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "var foo = 1;\nbar = 'a'\nfoobar = foo + bar",
+      "expected_text": "var foo = 1;\nvar bar = 'a';\nvar foobar = foo + bar;",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "@",
+        "a",
+        "j"
+      ],
+      "hint_text": "1. @ — 播放巨集\n2. a — 在游標後進入插入模式\n3. j — 向下移動",
+      "tags": [
+        "@",
+        "a",
+        "j"
+      ],
+      "concepts_zh": [
+        "移動指令",
+        "其他",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip68-001",
+      "source": {
+        "book": "pv",
+        "chapter": 11,
+        "section": "11.68",
+        "tip_number": 68
+      },
+      "title_zh": "練習：a (在游標後進入插入模式)、q (錄製巨集)",
+      "title_en": "Repeat a Change on Contiguous Lines",
+      "description_zh": "使用 用 a 在游標後進入插入模式，用 q 錄製巨集。按鍵序列：qa0f.r)w~jq",
+      "description_en": "Repeat a Change on Contiguous Lines",
+      "category": "insert",
+      "difficulty": 2,
+      "initial_text": "1. one\n2. two",
+      "expected_text": "1) One\n2. two",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "a",
+        "q"
+      ],
+      "hint_text": "1. a — 在游標後進入插入模式\n2. q — 錄製巨集",
+      "tags": [
+        "a",
+        "q"
+      ],
+      "concepts_zh": [
+        "其他",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip68-002",
+      "source": {
+        "book": "pv",
+        "chapter": 11,
+        "section": "11.68",
+        "tip_number": 68
+      },
+      "title_zh": "練習：@ (播放巨集)、a (在游標後進入插入模式)",
+      "title_en": "Repeat a Change on Contiguous Lines",
+      "description_zh": "使用 用 @ 播放巨集，用 a 在游標後進入插入模式。按鍵序列：3@a",
+      "description_en": "Repeat a Change on Contiguous Lines",
+      "category": "insert",
+      "difficulty": 1,
+      "initial_text": "1) One\n2. two\n3. three\n4. four",
+      "expected_text": "1) One\n2) Two\n3) Three\n4) Four",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "@",
+        "a"
+      ],
+      "hint_text": "1. @ — 播放巨集\n2. a — 在游標後進入插入模式",
+      "tags": [
+        "@",
+        "a"
+      ],
+      "concepts_zh": [
+        "其他",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip68-003",
+      "source": {
+        "book": "pv",
+        "chapter": 11,
+        "section": "11.68",
+        "tip_number": 68
+      },
+      "title_zh": "練習：@ (播放巨集)、a (在游標後進入插入模式)",
+      "title_en": "Repeat a Change on Contiguous Lines",
+      "description_zh": "使用 用 @ 播放巨集，用 a 在游標後進入插入模式。按鍵序列：5@a",
+      "description_en": "Repeat a Change on Contiguous Lines",
+      "category": "insert",
+      "difficulty": 1,
+      "initial_text": "1. one\n2. two\n// break up the monotony\n3. three\n4. four",
+      "expected_text": "1) One\n2) Two\n// break up the monotony\n3. three\n4. four",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "@",
+        "a"
+      ],
+      "hint_text": "1. @ — 播放巨集\n2. a — 在游標後進入插入模式",
+      "tags": [
+        "@",
+        "a"
+      ],
+      "concepts_zh": [
+        "其他",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip68-004",
+      "source": {
+        "book": "pv",
+        "chapter": 11,
+        "section": "11.68",
+        "tip_number": 68
+      },
+      "title_zh": "練習：a (在游標後進入插入模式)、q (錄製巨集)",
+      "title_en": "Repeat a Change on Contiguous Lines",
+      "description_zh": "使用 用 a 在游標後進入插入模式，用 q 錄製巨集。按鍵序列：qa0f.r)w~qjVG",
+      "description_en": "Repeat a Change on Contiguous Lines",
+      "category": "insert",
+      "difficulty": 2,
+      "initial_text": "1. one",
+      "expected_text": "1) One\n2) Two\n// break up the monotony\n3) Three\n4) Four",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "a",
+        "q"
+      ],
+      "hint_text": "1. a — 在游標後進入插入模式\n2. q — 錄製巨集",
+      "tags": [
+        "a",
+        "q"
+      ],
+      "concepts_zh": [
+        "其他",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip70-001",
+      "source": {
+        "book": "pv",
+        "chapter": 11,
+        "section": "11.70",
+        "tip_number": 70
+      },
+      "title_zh": "練習：\u003e (增加縮排)、G (移到檔案結尾)",
+      "title_en": "Act Upon a Collection of Files",
+      "description_zh": "使用 用 \u003e 增加縮排，用 G 移到檔案結尾，用 a 在游標後進入插入模式，用 j 向下移動，用 o 在下方新增一行並進入插入模式，用 q 錄製巨集。按鍵序列：qagg\u003cCR\u003eOmodule Rank\u003cEsc\u003ej\u003eGGoend\u003cEsc\u003eq",
+      "description_en": "Act Upon a Collection of Files",
+      "category": "combo",
+      "difficulty": 3,
+      "initial_text": "# ...[end of copyright notice]\nclass Animal\n  # implementation...\nend",
+      "expected_text": "# ...[end of copyright notice]\nmodule Rank\n  class Animal\n    # implementation...\n  end\nend",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "\u003e",
+        "G",
+        "a",
+        "j",
+        "o",
+        "q"
+      ],
+      "hint_text": "1. \u003e — 增加縮排\n2. G — 移到檔案結尾\n3. a — 在游標後進入插入模式\n4. j — 向下移動\n5. o — 在下方新增一行並進入插入模式\n6. q — 錄製巨集",
+      "tags": [
+        "\u003e",
+        "G",
+        "a",
+        "j",
+        "o",
+        "q"
+      ],
+      "concepts_zh": [
+        "其他",
+        "插入模式",
+        "移動指令",
+        "操作符"
+      ]
+    },
+    {
+      "id": "pv-tip70-002",
+      "source": {
+        "book": "pv",
+        "chapter": 11,
+        "section": "11.70",
+        "tip_number": 70
+      },
+      "title_zh": "練習：A (在行尾進入插入模式)、q (錄製巨集)",
+      "title_en": "Act Upon a Collection of Files",
+      "description_zh": "使用 用 A 在行尾進入插入模式，用 q 錄製巨集。按鍵序列：qAq22@a",
+      "description_en": "Act Upon a Collection of Files",
+      "category": "insert",
+      "difficulty": 2,
+      "initial_text": "module Rank\n  class Animal\n    # implementation...\n  end\nend",
+      "expected_text": "module Rank\n  class Person\n    # implementation...\n  end\nend",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "A",
+        "q"
+      ],
+      "hint_text": "1. A — 在行尾進入插入模式\n2. q — 錄製巨集",
+      "tags": [
+        "A",
+        "q"
+      ],
+      "concepts_zh": [
+        "其他",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip71-001",
+      "source": {
+        "book": "pv",
+        "chapter": 11,
+        "section": "11.71",
+        "tip_number": 71
+      },
+      "title_zh": "練習：a (在游標後進入插入模式)、q (錄製巨集)",
+      "title_en": "Evaluate an Iterator to Number Items in a List",
+      "description_zh": "使用 用 a 在游標後進入插入模式，用 q 錄製巨集。按鍵序列：qaI\u003cC-r\u003e=i\u003cCR\u003e) \u003cEsc\u003eq",
+      "description_en": "Evaluate an Iterator to Number Items in a List",
+      "category": "insert",
+      "difficulty": 2,
+      "initial_text": "partridge in a pear tree",
+      "expected_text": "1) partridge in a pear tree",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "a",
+        "q"
+      ],
+      "hint_text": "1. a — 在游標後進入插入模式\n2. q — 錄製巨集",
+      "tags": [
+        "a",
+        "q"
+      ],
+      "concepts_zh": [
+        "其他",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip71-002",
+      "source": {
+        "book": "pv",
+        "chapter": 11,
+        "section": "11.71",
+        "tip_number": 71
+      },
+      "title_zh": "練習：G (移到檔案結尾)、V (進入視覺模式（行選取）)",
+      "title_en": "Evaluate an Iterator to Number Items in a List",
+      "description_zh": "使用 用 G 移到檔案結尾，用 V 進入視覺模式（行選取），用 j 向下移動。按鍵序列：jVG",
+      "description_en": "Evaluate an Iterator to Number Items in a List",
+      "category": "combo",
+      "difficulty": 1,
+      "initial_text": "1) partridge in a pear tree\nturtle doves\nFrench hens\ncalling birds\ngolden rings",
+      "expected_text": "1) partridge in a pear tree\n2) turtle doves\n3) French hens\n4) calling birds\n5) golden rings",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "G",
+        "V",
+        "j"
+      ],
+      "hint_text": "1. G — 移到檔案結尾\n2. V — 進入視覺模式（行選取）\n3. j — 向下移動",
+      "tags": [
+        "G",
+        "V",
+        "j"
+      ],
+      "concepts_zh": [
+        "移動指令",
+        "視覺模式"
+      ]
+    },
+    {
+      "id": "pv-tip72-001",
+      "source": {
+        "book": "pv",
+        "chapter": 11,
+        "section": "11.72",
+        "tip_number": 72
+      },
+      "title_zh": "練習：f (向右搜尋字元)、s (刪除字元並進入插入模式)",
+      "title_en": "Edit the Contents of a Macro",
+      "description_zh": "使用 用 f 向右搜尋字元，用 s 刪除字元並進入插入模式。按鍵序列：f~svU\u003cEsc\u003e",
+      "description_en": "Edit the Contents of a Macro",
+      "category": "combo",
+      "difficulty": 1,
+      "initial_text": "0f.r)w~j",
+      "expected_text": "0f.r)wvUj",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "f",
+        "s"
+      ],
+      "hint_text": "1. f — 向右搜尋字元\n2. s — 刪除字元並進入插入模式",
+      "tags": [
+        "f",
+        "s"
+      ],
+      "concepts_zh": [
+        "移動指令",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip72-002",
+      "source": {
+        "book": "pv",
+        "chapter": 11,
+        "section": "11.72",
+        "tip_number": 72
+      },
+      "title_zh": "練習：0 (移到行首)、a (在游標後進入插入模式)",
+      "title_en": "Edit the Contents of a Macro",
+      "description_zh": "使用 用 0 移到行首，用 a 在游標後進入插入模式。按鍵序列：0\"ay$dd",
+      "description_en": "Edit the Contents of a Macro",
+      "category": "combo",
+      "difficulty": 1,
+      "initial_text": "// last line of the file proper\n0f.r)wvUj",
+      "expected_text": "// last line of the file proper",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "0",
+        "a"
+      ],
+      "hint_text": "1. 0 — 移到行首\n2. a — 在游標後進入插入模式",
+      "tags": [
+        "0",
+        "a"
+      ],
+      "concepts_zh": [
+        "移動指令",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip83-001",
+      "source": {
+        "book": "pv",
+        "chapter": 13,
+        "section": "13.83",
+        "tip_number": 83
+      },
+      "title_zh": "練習：. (重複上次修改)、a (在游標後進入插入模式)",
+      "title_en": "Offset the Cursor to the End of a Search Match",
+      "description_zh": "使用 用 . 重複上次修改，用 a 在游標後進入插入模式，用 n 搜尋下一個匹配。按鍵序列：\u003cCR\u003eauage\u003cEsc\u003en.n.",
+      "description_en": "Offset the Cursor to the End of a Search Match",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "Aim to learn a new programming lang each year.\nWhich lang did you pick up last year?\nWhich langs would you like to learn?",
+      "expected_text": "Aim to learn a new programming language each year.\nWhich language did you pick up last year?\nWhich languages would you like to learn?",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        ".",
+        "a",
+        "n"
+      ],
+      "hint_text": "1. . — 重複上次修改\n2. a — 在游標後進入插入模式\n3. n — 搜尋下一個匹配",
+      "tags": [
+        ".",
+        "a",
+        "n"
+      ],
+      "concepts_zh": [
+        "插入模式",
+        "移動指令",
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip84-001",
+      "source": {
+        "book": "pv",
+        "chapter": 13,
+        "section": "13.84",
+        "tip_number": 84
+      },
+      "title_zh": "練習：. (重複上次修改)、gU (轉大寫)",
+      "title_en": "Operate on a Complete Search Match",
+      "description_zh": "使用 用 . 重複上次修改，用 gU 轉大寫，用 n 搜尋下一個匹配。按鍵序列：\u003cCR\u003egUgnn.n..",
+      "description_en": "Operate on a Complete Search Match",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "class XhtmlDocument \u003c XmlDocument; end\nclass XhtmlTag \u003c XmlTag; end",
+      "expected_text": "class XHTMLDocument \u003c XMLDocument; end\nclass XHTMLTag \u003c XMLTag; end",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        ".",
+        "gU",
+        "n"
+      ],
+      "hint_text": "1. . — 重複上次修改\n2. gU — 轉大寫\n3. n — 搜尋下一個匹配",
+      "tags": [
+        ".",
+        "gU",
+        "n"
+      ],
+      "concepts_zh": [
+        "操作符",
+        "移動指令",
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip85-001",
+      "source": {
+        "book": "pv",
+        "chapter": 13,
+        "section": "13.85",
+        "tip_number": 85
+      },
+      "title_zh": "練習：% (跳到配對的括號)、( (移到上一個句子)",
+      "title_en": "Create Complex Patterns by Iterating upon Search History",
+      "description_zh": "使用 用 % 跳到配對的括號，用 ( 移到上一個句子，用 ) 移到下一個句子，用 c 修改（刪除並進入插入模式），用 f 向右搜尋字元，用 i 在游標前進入插入模式。按鍵序列：f[c%(\u003cC-r\u003e\")\u003cEsc\u003ei|’\\w\u003cEsc\u003e",
+      "description_en": "Create Complex Patterns by Iterating upon Search History",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "\\v'[^']+'",
+      "expected_text": "\\v'([^']|'\\w)+'",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "%",
+        "(",
+        ")",
+        "\u003cC-r\u003e",
+        "c",
+        "f",
+        "i"
+      ],
+      "hint_text": "1. % — 跳到配對的括號\n2. ( — 移到上一個句子\n3. ) — 移到下一個句子\n5. c — 修改（刪除並進入插入模式）\n6. f — 向右搜尋字元\n7. i — 在游標前進入插入模式",
+      "tags": [
+        "%",
+        "(",
+        ")",
+        "\u003cC-r\u003e",
+        "c",
+        "f",
+        "i"
+      ],
+      "concepts_zh": [
+        "移動指令",
+        "操作符",
+        "其他",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip93-001",
+      "source": {
+        "book": "pv",
+        "chapter": 14,
+        "section": "14.93",
+        "tip_number": 93
+      },
+      "title_zh": "練習：P (貼上到游標前)、V (進入視覺模式（行選取）)",
+      "title_en": "Repeat the Previous Substitute Command",
+      "description_zh": "使用 用 P 貼上到游標前，用 V 進入視覺模式（行選取），用 j 向下移動，用 y 複製（yank）。按鍵序列：VjjyP",
+      "description_en": "Repeat the Previous Substitute Command",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "mixin = {\n    applyName: function(config) {\n        return Factory(config, this.getName());\n    },\n}",
+      "expected_text": "mixin = {\n    applyNumber: function(config) {\n        return Factory(config, this.getNumber());\n    },\n    applyNumber: function(config) {\n        return Factory(config, this.getNumber());\n    },\n}",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "P",
+        "V",
+        "j",
+        "y"
+      ],
+      "hint_text": "1. P — 貼上到游標前\n2. V — 進入視覺模式（行選取）\n3. j — 向下移動\n4. y — 複製（yank）",
+      "tags": [
+        "P",
+        "V",
+        "j",
+        "y"
+      ],
+      "concepts_zh": [
+        "視覺模式",
+        "移動指令",
+        "操作符",
+        "其他"
+      ]
+    },
+    {
+      "id": "pv-tip93-002",
+      "source": {
+        "book": "pv",
+        "chapter": 14,
+        "section": "14.93",
+        "tip_number": 93
+      },
+      "title_zh": "練習：u (復原)、v (進入視覺模式（字元選取）)",
+      "title_en": "Repeat the Previous Substitute Command",
+      "description_zh": "使用 用 u 復原，用 v 進入視覺模式（字元選取）。按鍵序列：ugv",
+      "description_en": "Repeat the Previous Substitute Command",
+      "category": "visual",
+      "difficulty": 1,
+      "initial_text": "mixin = {\n    applyName: function(config) {\n        return Factory(config, this.getName());\n    },\n    applyName: function(config) {\n        return Factory(config, this.getName());\n    },\n}",
+      "expected_text": "mixin = {\n    applyName: function(config) {\n        return Factory(config, this.getName());\n    },\n    applyNumber: function(config) {\n        return Factory(config, this.getNumber());\n    },\n}",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "u",
+        "v"
+      ],
+      "hint_text": "1. u — 復原\n2. v — 進入視覺模式（字元選取）",
+      "tags": [
+        "u",
+        "v"
+      ],
+      "concepts_zh": [
+        "其他",
+        "視覺模式"
+      ]
+    },
+    {
+      "id": "pv-tip101-001",
+      "source": {
+        "book": "pv",
+        "chapter": 15,
+        "section": "15.101",
+        "tip_number": 101
+      },
+      "title_zh": "練習：i{ (大括號內的文字)、v (進入視覺模式（字元選取）)",
+      "title_en": "Alphabetize the Properties of Each Rule in a CSS File",
+      "description_zh": "使用 用 i{ 大括號內的文字，用 v 進入視覺模式（字元選取）。按鍵序列：vi{",
+      "description_en": "Alphabetize the Properties of Each Rule in a CSS File",
+      "category": "combo",
+      "difficulty": 1,
+      "initial_text": "html {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n}",
+      "expected_text": "html {\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  margin: 0;\n  padding: 0;\n  vertical-align: baseline;\n}",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "i{",
+        "v"
+      ],
+      "hint_text": "1. i{ — 大括號內的文字\n2. v — 進入視覺模式（字元選取）",
+      "tags": [
+        "i{",
+        "v"
+      ],
+      "concepts_zh": [
+        "視覺模式",
+        "文字物件"
+      ]
+    },
+    {
+      "id": "pv-tip104-001",
+      "source": {
+        "book": "pv",
+        "chapter": 16,
+        "section": "16.104",
+        "tip_number": 104
+      },
+      "title_zh": "練習：\u003c (減少縮排)、C (修改到行尾)",
+      "title_en": "Navigate Keyword Definitions with Vim’s Tag Navigation Commands",
+      "description_zh": "使用 用 \u003c 減少縮排，用 C 修改到行尾，用 f 向右搜尋字元。按鍵序列：fS\u003cC-]\u003e",
+      "description_en": "Navigate Keyword Definitions with Vim’s Tag Navigation Commands",
+      "category": "combo",
+      "difficulty": 2,
+      "initial_text": "require './speaker.rb'\nclass Anglophone \u003c Speaker\n  def speak\n    puts \"Hello, my name is #{@name}\"\n  end\nend\nAnglophone.new('Jack').speak",
+      "expected_text": "class Speaker\n  def initialize(name)\n    @name = name\n  end\n  def speak\n    puts \"#{name}\"\n  end\nend",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "\u003c",
+        "C",
+        "f"
+      ],
+      "hint_text": "1. \u003c — 減少縮排\n2. C — 修改到行尾\n3. f — 向右搜尋字元",
+      "tags": [
+        "\u003c",
+        "C",
+        "f"
+      ],
+      "concepts_zh": [
+        "移動指令",
+        "操作符",
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip116-001",
+      "source": {
+        "book": "pv",
+        "chapter": 19,
+        "section": "19.116",
+        "tip_number": 116
+      },
+      "title_zh": "練習：o (在下方新增一行並進入插入模式)",
+      "title_en": "Autocomplete Entire Lines",
+      "description_zh": "使用 用 o 在下方新增一行並進入插入模式。按鍵序列：oba\u003cC-x\u003e\u003cC-l\u003e\u003cEsc\u003e",
+      "description_en": "Autocomplete Entire Lines",
+      "category": "insert",
+      "difficulty": 1,
+      "initial_text": ".top {\n  background-color: #ef66ef; }\n.bottom {",
+      "expected_text": ".top {\n  background-color: #ef66ef; }\n.bottom {\n  background-color: #ef66ef; }",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "o"
+      ],
+      "hint_text": "1. o — 在下方新增一行並進入插入模式",
+      "tags": [
+        "o"
+      ],
+      "concepts_zh": [
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip117-001",
+      "source": {
+        "book": "pv",
+        "chapter": 19,
+        "section": "19.117",
+        "tip_number": 117
+      },
+      "title_zh": "練習：a (在游標後進入插入模式)",
+      "title_en": "Autocomplete Sequences of Words",
+      "description_zh": "使用 用 a 在游標後進入插入模式。按鍵序列：a\u003cC-x\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e",
+      "description_en": "Autocomplete Sequences of Words",
+      "category": "insert",
+      "difficulty": 1,
+      "initial_text": "\u003cvimr",
+      "expected_text": "\u003cvimref href=\"http://vimhelp ",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "a"
+      ],
+      "hint_text": "1. a — 在游標後進入插入模式",
+      "tags": [
+        "a"
+      ],
+      "concepts_zh": [
+        "插入模式"
+      ]
+    },
+    {
+      "id": "pv-tip118-001",
+      "source": {
+        "book": "pv",
+        "chapter": 19,
+        "section": "19.118",
+        "tip_number": 118
+      },
+      "title_zh": "練習：i (在游標前進入插入模式)",
+      "title_en": "Autocomplete Filenames",
+      "description_zh": "使用 用 i 在游標前進入插入模式。按鍵序列：ijs/ap\u003cC-x\u003e\u003cC-f\u003e",
+      "description_en": "Autocomplete Filenames",
+      "category": "insert",
+      "difficulty": 1,
+      "initial_text": "\u003cscript src=\"\"/\u003e",
+      "expected_text": "\u003cscript src=\"js/application.js\"/\u003e",
+      "cursor_start": {
+        "line": 0,
+        "col": 0
+      },
+      "hint_commands": [
+        "i"
+      ],
+      "hint_text": "1. i — 在游標前進入插入模式",
+      "tags": [
+        "i"
+      ],
+      "concepts_zh": [
+        "插入模式"
+      ]
+    }
+  ]
+}
