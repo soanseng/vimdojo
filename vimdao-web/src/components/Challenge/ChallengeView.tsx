@@ -306,6 +306,12 @@ export default function ChallengeView() {
           <p className="text-sm text-ctp-subtext0 whitespace-pre-wrap">{challenge.description_zh}</p>
         </div>
 
+        {/* Target text preview */}
+        <div className="bg-ctp-surface0 rounded-lg p-4">
+          <h3 className="text-xs font-medium text-ctp-subtext0 mb-2">目標文字</h3>
+          <pre className="text-sm font-mono text-ctp-green whitespace-pre-wrap">{challenge.expected_text}</pre>
+        </div>
+
         {/* Flavor text */}
         {challenge.flavor_zh && (
           <p className="text-sm italic text-ctp-overlay1">
