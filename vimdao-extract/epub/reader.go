@@ -62,6 +62,10 @@ func Open(filepath string) (*Book, error) {
 
 	files := make(map[string]*zip.File)
 	for _, f := range r.File {
+		// Reject ZIP entries with path traversal
+		if strings.Contains(f.Name, "..") {
+			continue
+		}
 		files[f.Name] = f
 	}
 
@@ -71,7 +75,12 @@ func Open(filepath string) (*Book, error) {
 		return nil, err
 	}
 
-	opfData, err := readZipFile(files[opfPath])
+	opfFile, ok := files[opfPath]
+	if !ok {
+		return nil, fmt.Errorf("OPF file %q referenced but not found in EPUB", opfPath)
+	}
+
+	opfData, err := readZipFile(opfFile)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read OPF: %w", err)
 	}
@@ -102,10 +111,7 @@ func Open(filepath string) (*Book, error) {
 		}
 
 		href := mItem.Href
-		fullPath := href
-		if opfDir != "." {
-			fullPath = opfDir + "/" + href
-		}
+		fullPath := path.Join(opfDir, href)
 
 		zf, ok := files[fullPath]
 		if !ok {
@@ -159,13 +165,16 @@ func findOPFPath(files map[string]*zip.File) (string, error) {
 	return "", fmt.Errorf("no OPF file found in EPUB")
 }
 
+// maxEntrySize limits decompressed size of a single ZIP entry (50 MB).
+const maxEntrySize = 50 << 20
+
 func readZipFile(f *zip.File) ([]byte, error) {
 	rc, err := f.Open()
 	if err != nil {
 		return nil, err
 	}
 	defer rc.Close()
-	return io.ReadAll(rc)
+	return io.ReadAll(io.LimitReader(rc, maxEntrySize))
 }
 
 func isXHTML(mediaType string) bool {

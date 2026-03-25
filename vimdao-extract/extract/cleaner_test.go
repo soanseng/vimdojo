@@ -20,6 +20,19 @@ func loadTestBook(t *testing.T) *epub.Book {
 	return book
 }
 
+func loadLazyVimBook(t *testing.T) *epub.Book {
+	t.Helper()
+	epubPath := "../../resources/LazyVim for Ambitious Developers - Dusty Phillips.epub"
+	if _, err := os.Stat(epubPath); os.IsNotExist(err) {
+		t.Skip("LazyVim EPUB file not found")
+	}
+	book, err := epub.Open(epubPath)
+	if err != nil {
+		t.Fatalf("epub.Open() error: %v", err)
+	}
+	return book
+}
+
 func TestParseChapterPage(t *testing.T) {
 	book := loadTestBook(t)
 

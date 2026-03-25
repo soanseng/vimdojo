@@ -210,6 +210,13 @@ func DetectCommands(keystrokes string) []CommandInfo {
 		if hasNext && !nextIsSpecial {
 			two := keystrokes[pos : pos+2]
 
+			// r{char} — replace single char, consume the target
+			if ch == 'r' {
+				add("r", CatOther)
+				pos += 2 // skip the replacement char
+				continue
+			}
+
 			// Text objects: iw, aw, i", a(, etc.
 			if (ch == 'i' || ch == 'a') && textObjectChars[keystrokes[pos+1]] {
 				add(two, CatTextObject)

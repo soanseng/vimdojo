@@ -436,20 +436,22 @@ func extractCodeLine(tr *html.Node) string {
 	return ""
 }
 
+// textNormalizer is a package-level Replacer for Unicode normalization.
+var textNormalizer = strings.NewReplacer(
+	"\u200b", "", // zero-width space
+	"\u200c", "", // zero-width non-joiner
+	"\u200d", "", // zero-width joiner
+	"\ufeff", "", // BOM / zero-width no-break space
+	"\u2002", " ", // en space → regular space
+	"\u2003", " ", // em space → regular space
+	"\u00a0", " ", // non-breaking space → regular space
+	"\u2009", " ", // thin space → regular space
+	"\u202f", " ", // narrow no-break space → regular space
+)
+
 // normalizeText cleans up Unicode special characters from extracted text.
 func normalizeText(s string) string {
-	r := strings.NewReplacer(
-		"\u200b", "", // zero-width space
-		"\u200c", "", // zero-width non-joiner
-		"\u200d", "", // zero-width joiner
-		"\ufeff", "", // BOM / zero-width no-break space
-		"\u2002", " ", // en space → regular space
-		"\u2003", " ", // em space → regular space
-		"\u00a0", " ", // non-breaking space → regular space
-		"\u2009", " ", // thin space → regular space
-		"\u202f", " ", // narrow no-break space → regular space
-	)
-	return r.Replace(s)
+	return textNormalizer.Replace(s)
 }
 
 // extractText recursively collects all text content from a node.
