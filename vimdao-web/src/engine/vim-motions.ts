@@ -418,6 +418,56 @@ export function reverseFind(state: VimState, params: FindParams): CursorPos | nu
   return repeatFind(state, reversed)
 }
 
+// --- Paragraph motions ---
+
+export function paragraphBackward(state: VimState): CursorPos {
+  // Vim { motion: move to the previous blank line.
+  // If on non-blank lines, skip upward until we hit a blank line.
+  // If on blank lines, skip blanks then skip non-blanks to find the prev blank.
+  let line = state.cursor.line - 1
+  const curLineContent = state.lines[state.cursor.line]?.trim() ?? ''
+
+  if (curLineContent === '') {
+    // Currently on a blank line — skip blanks first, then non-blanks
+    while (line >= 0 && (state.lines[line]?.trim() ?? '') === '') {
+      line--
+    }
+    while (line >= 0 && (state.lines[line]?.trim() ?? '') !== '') {
+      line--
+    }
+  } else {
+    // Currently on a non-blank line — find previous blank line
+    while (line >= 0 && (state.lines[line]?.trim() ?? '') !== '') {
+      line--
+    }
+  }
+  return { line: Math.max(0, line), col: 0 }
+}
+
+export function paragraphForward(state: VimState): CursorPos {
+  // Vim } motion: move to the line after the next block of text.
+  // If on non-blank lines, skip until we hit a blank line.
+  // If on blank lines, skip blanks then skip non-blanks to find the next blank.
+  let line = state.cursor.line + 1
+  const curLineContent = state.lines[state.cursor.line]?.trim() ?? ''
+
+  if (curLineContent === '') {
+    // Currently on a blank line — skip blanks first, then non-blanks
+    while (line < state.lines.length && (state.lines[line]?.trim() ?? '') === '') {
+      line++
+    }
+    while (line < state.lines.length && (state.lines[line]?.trim() ?? '') !== '') {
+      line++
+    }
+  } else {
+    // Currently on a non-blank line — find next blank line
+    while (line < state.lines.length && (state.lines[line]?.trim() ?? '') !== '') {
+      line++
+    }
+  }
+  return { line: Math.min(state.lines.length - 1, line), col: 0 }
+}
+
 // --- File position motions ---
 
 export function gg(_state: VimState): CursorPos {

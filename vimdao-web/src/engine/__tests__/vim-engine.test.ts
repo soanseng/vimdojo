@@ -199,3 +199,49 @@ describe('Practical Vim Tip 2', () => {
     )).toBe("var foo = 1;\nvar bar = 'a';\nvar foobar = foo + bar;")
   })
 })
+
+describe('paragraph motions', () => {
+  it('} moves to next blank line', () => {
+    const s = createState('aaa\nbbb\n\nccc\nddd')
+    const result = processKey(s, '}').state
+    expect(result.cursor).toEqual({ line: 2, col: 0 })
+  })
+  it('{ moves to previous blank line', () => {
+    const s = createState('aaa\nbbb\n\nccc\nddd')
+    s.cursor = { line: 4, col: 0 }
+    const result = processKey(s, '{').state
+    expect(result.cursor).toEqual({ line: 2, col: 0 })
+  })
+  it('} at last paragraph goes to end of file', () => {
+    const s = createState('aaa\nbbb\nccc')
+    const result = processKey(s, '}').state
+    expect(result.cursor).toEqual({ line: 2, col: 0 })
+  })
+  it('{ at first paragraph goes to start of file', () => {
+    const s = createState('aaa\nbbb\nccc')
+    s.cursor = { line: 2, col: 0 }
+    const result = processKey(s, '{').state
+    expect(result.cursor).toEqual({ line: 0, col: 0 })
+  })
+  it('} skips consecutive blank lines', () => {
+    const s = createState('aaa\n\n\nbbb')
+    const result = processKey(s, '}').state
+    // Should land on the first blank line
+    expect(result.cursor).toEqual({ line: 1, col: 0 })
+  })
+})
+
+describe('s command', () => {
+  it('s deletes char and enters insert mode', () => {
+    const result = applyKeys('hello', ['s', 'H', 'Escape'])
+    expect(result).toBe('Hello')
+  })
+  it('s on empty line enters insert mode', () => {
+    const s = applyKeysState('', ['s'])
+    expect(s.mode).toBe('insert')
+  })
+  it('. repeats s command', () => {
+    const result = applyKeys('abc', ['s', 'X', 'Escape', 'l', '.'])
+    expect(result).toBe('XXc')
+  })
+})

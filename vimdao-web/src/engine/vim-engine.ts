@@ -195,6 +195,11 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
   }
 
   // --- Direct edits ---
+  if (key === 's') {
+    const s = ops.deleteChar(state)
+    return { state: startInsertRecording({ ...s, mode: 'insert' }, ['s']), handled: true }
+  }
+
   if (key === 'x') {
     const s = ops.deleteChar(state)
     return {
@@ -524,6 +529,8 @@ function trySimpleMotion(state: VimState, key: string): CursorPos | null {
     case '0': return motions.zero(state)
     case '^': return motions.caret(state)
     case '$': return motions.dollar(state)
+    case '{': return motions.paragraphBackward(state)
+    case '}': return motions.paragraphForward(state)
     default: return null
   }
 }
