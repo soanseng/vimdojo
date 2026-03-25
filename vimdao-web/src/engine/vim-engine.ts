@@ -136,6 +136,24 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
     return { state: s, handled: false }
   }
 
+  // --- Pending r{char} — replace character under cursor ---
+  if (state.pendingKeys === 'r') {
+    const s: VimState = { ...state, pendingKeys: '' }
+    if (key === 'Escape') return { state: s, handled: true }
+    if (key.length !== 1) return { state: s, handled: false }
+    // Replace char
+    const line = s.lines[s.cursor.line] ?? ''
+    if (s.cursor.col >= line.length) return { state: s, handled: true }
+    const newLine = line.slice(0, s.cursor.col) + key + line.slice(s.cursor.col + 1)
+    const newLines = [...s.lines]
+    newLines[s.cursor.line] = newLine
+    const withUndo = pushUndo(s)
+    return {
+      state: { ...withUndo, lines: newLines, lastChange: { type: 'normal', keys: ['r', key] } },
+      handled: true,
+    }
+  }
+
   // --- Pending find (f/F/t/T waiting for char), possibly with operator ---
   if (state.pendingKeys === 'f' || state.pendingKeys === 'F' ||
       state.pendingKeys === 't' || state.pendingKeys === 'T') {
@@ -183,6 +201,11 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
       ? { line: Math.min(count - 1, state.lines.length - 1), col: 0 }
       : motions.G(state)
     return { state: { ...state, cursor: pos, countPrefix: null }, handled: true }
+  }
+
+  // --- r{char} — replace character under cursor ---
+  if (key === 'r') {
+    return { state: { ...state, pendingKeys: 'r' }, handled: true }
   }
 
   // --- Find motions (f/F/t/T) ---
@@ -246,8 +269,8 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
     }
   }
 
-  // --- Operators (d/c/y) — transfer count to operator ---
-  if (key === 'd' || key === 'c' || key === 'y') {
+  // --- Operators (d/c/y/>/< ) — transfer count to operator ---
+  if (key === 'd' || key === 'c' || key === 'y' || key === '>' || key === '<') {
     return {
       state: { ...state, pendingOperator: key, operatorCount: state.countPrefix, countPrefix: null },
       handled: true,
@@ -395,6 +418,11 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
   // --- Search ---
   if (key === '/') {
     return { state: { ...state, mode: 'command', commandBuffer: '/' }, handled: true }
+  }
+
+  // --- Command mode (:) ---
+  if (key === ':') {
+    return { state: { ...state, mode: 'command', commandBuffer: ':' }, handled: true }
   }
 
   if (key === 'n') {
@@ -807,7 +835,13 @@ function handleCommandMode(state: VimState, key: string): KeyResult {
         handled: true,
       }
     }
-    // Other command types (e.g. :) will be handled in future tasks
+    // Ex-commands (: prefix)
+    if (buf.startsWith(':')) {
+      const cmd = buf.slice(1)
+      return executeExCommand({ ...state, mode: 'normal', commandBuffer: '' }, cmd)
+    }
+
+    // Unknown prefix — just return to normal
     return {
       state: { ...state, mode: 'normal', commandBuffer: '' },
       handled: true,
@@ -823,6 +857,43 @@ function handleCommandMode(state: VimState, key: string): KeyResult {
   }
 
   return { state, handled: false }
+}
+
+// ---------------------------------------------------------------------------
+// Ex-command execution
+// ---------------------------------------------------------------------------
+
+function executeExCommand(state: VimState, cmd: string): KeyResult {
+  // :w — set lastCommand for ChallengeView to detect
+  if (cmd === 'w') {
+    return { state: { ...state, lastCommand: 'write' }, handled: true }
+  }
+  // :q
+  if (cmd === 'q') {
+    return { state: { ...state, lastCommand: 'quit' }, handled: true }
+  }
+  // :wq
+  if (cmd === 'wq') {
+    return { state: { ...state, lastCommand: 'wq' }, handled: true }
+  }
+  // :%s/pattern/replacement/g
+  const subMatch = cmd.match(/^%s\/(.+?)\/(.+?)\/(g?)$/)
+  if (subMatch) {
+    const [, pattern, replacement, globalFlag] = subMatch
+    const s = pushUndo(state)
+    const newLines = s.lines.map(line => {
+      if (globalFlag === 'g') {
+        return line.split(pattern!).join(replacement!)
+      }
+      return line.replace(pattern!, replacement!)
+    })
+    return {
+      state: { ...s, lines: newLines, lastChange: { type: 'normal', keys: [':'] } },
+      handled: true,
+    }
+  }
+  // Unknown command — just return to normal
+  return { state, handled: true }
 }
 
 // ---------------------------------------------------------------------------
@@ -932,11 +1003,19 @@ function handleOperatorPending(state: VimState, key: string): KeyResult {
     }
   }
 
-  // Double-press: dd, cc, yy
+  // Double-press: dd, cc, yy, >>, <<
   if (key === op) {
     const opCount = s.operatorCount ?? 1
     const motionCount = s.countPrefix ?? 1
     const totalCount = opCount * motionCount
+    if (op === '>' || op === '<') {
+      return executeIndent(
+        { ...s, countPrefix: null, operatorCount: null, pendingOperator: null },
+        s.cursor.line,
+        s.cursor.line + totalCount - 1,
+        op === '>' ? 'indent' : 'dedent',
+      )
+    }
     return executeLineOp({ ...s, countPrefix: null, operatorCount: null }, op, totalCount)
   }
 
@@ -1047,6 +1126,20 @@ function executeOperatorMotion(
       const s = ops.yankToPos(state, adjustedTarget)
       return { state: s, handled: true }
     }
+    case '>':
+      return executeIndent(
+        state,
+        Math.min(state.cursor.line, adjustedTarget.line),
+        Math.max(state.cursor.line, adjustedTarget.line),
+        'indent',
+      )
+    case '<':
+      return executeIndent(
+        state,
+        Math.min(state.cursor.line, adjustedTarget.line),
+        Math.max(state.cursor.line, adjustedTarget.line),
+        'dedent',
+      )
     default:
       return { state, handled: false }
   }
@@ -1086,6 +1179,38 @@ function resolveMotion(state: VimState, key: string): CursorPos | null {
   if (key === 'G') return motions.G(state)
 
   return null
+}
+
+// ---------------------------------------------------------------------------
+// Indent / dedent
+// ---------------------------------------------------------------------------
+
+function executeIndent(
+  state: VimState,
+  startLine: number,
+  endLine: number,
+  direction: 'indent' | 'dedent',
+): KeyResult {
+  const s = pushUndo(state)
+  const newLines = [...s.lines]
+  const end = Math.min(endLine, newLines.length - 1)
+  for (let i = startLine; i <= end; i++) {
+    const line = newLines[i] ?? ''
+    if (direction === 'indent') {
+      newLines[i] = '  ' + line // 2-space indent
+    } else {
+      newLines[i] = line.replace(/^  /, '') // remove up to 2 leading spaces
+    }
+  }
+  return {
+    state: {
+      ...s,
+      lines: newLines,
+      pendingOperator: null,
+      lastChange: { type: 'normal', keys: direction === 'indent' ? ['>', '>'] : ['<', '<'] },
+    },
+    handled: true,
+  }
 }
 
 // ---------------------------------------------------------------------------

@@ -401,3 +401,65 @@ describe('visual mode', () => {
     expect(applyKeys('aaa\nbbb\nccc', ['v', 'j', 'd'])).toBe('bb\nccc')
   })
 })
+
+describe('r{char} replace', () => {
+  it('r replaces char under cursor', () => {
+    expect(applyKeys('hello', ['r', 'X'])).toBe('Xello')
+  })
+  it('r at col 3', () => {
+    const s = createState('hello')
+    s.cursor = { line: 0, col: 3 }
+    let result = s
+    for (const k of ['r', 'X']) result = processKey(result, k).state
+    expect(getText(result)).toBe('helXo')
+  })
+  it('r is repeatable with dot', () => {
+    expect(applyKeys('abc', ['r', 'X', 'l', '.'])).toBe('XXc')
+  })
+  it('r + Escape cancels', () => {
+    expect(applyKeys('hello', ['r', 'Escape'])).toBe('hello')
+  })
+})
+
+describe('> indent', () => {
+  it('>> indents current line', () => {
+    expect(applyKeys('hello', ['>', '>'])).toBe('  hello')
+  })
+  it('>j indents 2 lines', () => {
+    expect(applyKeys('aaa\nbbb\nccc', ['>', 'j'])).toBe('  aaa\n  bbb\nccc')
+  })
+  it('>G indents to end of file', () => {
+    const s = createState('aaa\nbbb\nccc')
+    s.cursor = { line: 1, col: 0 }
+    let result = s
+    for (const k of ['>', 'G']) result = processKey(result, k).state
+    expect(getText(result)).toBe('aaa\n  bbb\n  ccc')
+  })
+  it('<< dedents current line', () => {
+    expect(applyKeys('  hello', ['<', '<'])).toBe('hello')
+  })
+})
+
+describe('command mode', () => {
+  it(':w sets lastCommand to write', () => {
+    const s = applyKeysState('hello', [':', 'w', 'Enter'])
+    expect(s.mode).toBe('normal')
+    expect(s.lastCommand).toBe('write')
+  })
+  it(':q sets lastCommand to quit', () => {
+    const s = applyKeysState('hello', [':', 'q', 'Enter'])
+    expect(s.lastCommand).toBe('quit')
+  })
+  it(':%s/old/new/g substitutes globally', () => {
+    const keys = ':%s/he/HE/g'.split('').concat(['Enter'])
+    expect(applyKeys('hello he', keys)).toBe('HEllo HE')
+  })
+  it(':%s without /g replaces first per line', () => {
+    const keys = ':%s/aa/XX/'.split('').concat(['Enter'])
+    expect(applyKeys('aa bb aa', keys)).toBe('XX bb aa')
+  })
+  it('Escape exits command mode', () => {
+    const s = applyKeysState('hello', [':', 'w', 'Escape'])
+    expect(s.mode).toBe('normal')
+  })
+})

@@ -23,6 +23,7 @@ export function createState(text: string, cursor?: CursorPos): VimState {
     commandBuffer: '',
     visualStart: null,
     visualMode: null,
+    lastCommand: null,
   }
 }
 

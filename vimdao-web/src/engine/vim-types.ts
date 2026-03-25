@@ -26,6 +26,7 @@ export interface VimState {
   commandBuffer: string         // for / and : command input
   visualStart: CursorPos | null  // anchor point where selection started
   visualMode: 'char' | 'line' | null  // character-wise or line-wise
+  lastCommand: string | null      // last ex-command result (e.g. 'write', 'quit')
 }
 
 export interface FindParams {
