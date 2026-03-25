@@ -55,15 +55,25 @@ func runExtract(epubPath, outputDir string) error {
 	}
 	fmt.Printf("Book: %s by %s (%d spine items)\n", book.Title, book.Author, len(book.Items))
 
-	fmt.Println("Extracting content...")
+	// Derive slug from filename
+	slug := slugFromPath(epubPath)
+	subDir := filepath.Join(outputDir, slug)
+
+	// Detect book format and use appropriate extraction
+	isLazyVim := detectIsLazyVim(book)
+
+	if isLazyVim {
+		return runLazyVimExtract(book, subDir, slug)
+	}
+	return runPracticalVimExtract(book, subDir, slug)
+}
+
+func runPracticalVimExtract(book *epub.Book, subDir, slug string) error {
+	fmt.Println("Extracting content (Practical Vim format)...")
 	extracted, err := extract.ExtractBook(book)
 	if err != nil {
 		return fmt.Errorf("extraction failed: %w", err)
 	}
-
-	// Derive slug from filename
-	slug := slugFromPath(epubPath)
-	subDir := filepath.Join(outputDir, slug)
 
 	fmt.Printf("Writing to %s/\n", subDir)
 	if err := output.WriteExtracted(extracted, subDir, slug); err != nil {
@@ -73,7 +83,6 @@ func runExtract(epubPath, outputDir string) error {
 		return err
 	}
 
-	// Print summary
 	totalTips := 0
 	totalCodeBlocks := 0
 	for _, ch := range extracted.Chapters {
@@ -92,6 +101,79 @@ func runExtract(epubPath, outputDir string) error {
 	fmt.Printf("             %s/%s_commands.json\n", subDir, slug)
 
 	return nil
+}
+
+func runLazyVimExtract(book *epub.Book, subDir, slug string) error {
+	fmt.Println("Extracting content (LazyVim/Neovim format)...")
+	lvBook, err := extract.ExtractLazyVimBook(book)
+	if err != nil {
+		return fmt.Errorf("extraction failed: %w", err)
+	}
+
+	fmt.Printf("Writing to %s/\n", subDir)
+	if err := output.WriteLazyVimBook(lvBook, subDir, slug); err != nil {
+		return err
+	}
+	if err := output.WriteLazyVimKeybindings(lvBook, subDir, slug); err != nil {
+		return err
+	}
+	if err := output.WriteLazyVimTips(lvBook, subDir, slug); err != nil {
+		return err
+	}
+
+	// Count stats
+	totalSections := 0
+	totalCommands := 0
+	totalKeybindings := 0
+	categoryCount := make(map[string]int)
+	requiresCount := make(map[string]int)
+
+	for _, ch := range lvBook.Chapters {
+		totalSections += len(ch.Sections)
+		for _, sec := range ch.Sections {
+			totalCommands += len(sec.Commands)
+			totalKeybindings += len(sec.Keybindings)
+		}
+	}
+	for _, kb := range lvBook.Keybindings {
+		categoryCount[kb.Category]++
+		requiresCount[kb.Requires]++
+	}
+
+	fmt.Println()
+	fmt.Printf("=== LazyVim/Neovim Extraction Summary ===\n")
+	fmt.Printf("Chapters:     %d\n", len(lvBook.Chapters))
+	fmt.Printf("Sections:     %d\n", totalSections)
+	fmt.Printf("Commands:     %d\n", totalCommands)
+	fmt.Printf("Keybindings:  %d\n", len(lvBook.Keybindings))
+	fmt.Printf("Tips/Notes:   %d\n", len(lvBook.Tips))
+	fmt.Println()
+	fmt.Println("Keybindings by category:")
+	for cat, count := range categoryCount {
+		fmt.Printf("  %-20s %d\n", cat, count)
+	}
+	fmt.Println("Keybindings by requirement:")
+	for req, count := range requiresCount {
+		fmt.Printf("  %-20s %d\n", req, count)
+	}
+	fmt.Printf("\nOutput: %s/%s_full.json\n", subDir, slug)
+	fmt.Printf("        %s/%s_keybindings.json\n", subDir, slug)
+	fmt.Printf("        %s/%s_tips.json\n", subDir, slug)
+
+	return nil
+}
+
+func detectIsLazyVim(book *epub.Book) bool {
+	for i, item := range book.Items {
+		if i > 5 {
+			break
+		}
+		content := string(item.Content)
+		if strings.Contains(content, `class="chapter"`) && strings.Contains(content, `class="sect2"`) {
+			return true
+		}
+	}
+	return false
 }
 
 func slugFromPath(path string) string {

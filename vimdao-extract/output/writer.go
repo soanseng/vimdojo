@@ -116,6 +116,36 @@ func categorize(cmd string) detect.Category {
 	return detect.CatOther
 }
 
+// WriteLazyVimBook writes the full LazyVim extraction result as a single JSON.
+func WriteLazyVimBook(book *extract.LazyVimBook, outputDir, bookSlug string) error {
+	if err := os.MkdirAll(outputDir, 0o755); err != nil {
+		return fmt.Errorf("failed to create output dir: %w", err)
+	}
+
+	path := filepath.Join(outputDir, bookSlug+"_full.json")
+	return writeJSON(path, book)
+}
+
+// WriteLazyVimKeybindings writes just the keybindings as a flat JSON array.
+func WriteLazyVimKeybindings(book *extract.LazyVimBook, outputDir, bookSlug string) error {
+	if err := os.MkdirAll(outputDir, 0o755); err != nil {
+		return fmt.Errorf("failed to create output dir: %w", err)
+	}
+
+	path := filepath.Join(outputDir, bookSlug+"_keybindings.json")
+	return writeJSON(path, book.Keybindings)
+}
+
+// WriteLazyVimTips writes just the tips as a flat JSON array.
+func WriteLazyVimTips(book *extract.LazyVimBook, outputDir, bookSlug string) error {
+	if err := os.MkdirAll(outputDir, 0o755); err != nil {
+		return fmt.Errorf("failed to create output dir: %w", err)
+	}
+
+	path := filepath.Join(outputDir, bookSlug+"_tips.json")
+	return writeJSON(path, book.Tips)
+}
+
 func writeJSON(path string, v any) error {
 	data, err := json.MarshalIndent(v, "", "  ")
 	if err != nil {

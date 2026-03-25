@@ -274,3 +274,138 @@ func (s Section) HasVimContent() bool {
 func countWords(s string) int {
 	return len(strings.Fields(s))
 }
+
+// ExtractLazyVimBook processes the LazyVim EPUB into a keybinding/command
+// reference with Neovim-specific content.
+func ExtractLazyVimBook(book *epub.Book) (*LazyVimBook, error) {
+	lvSkip := map[string]bool{
+		"preamble": true, "about the author": true,
+	}
+
+	result := &LazyVimBook{
+		BookTitle:   book.Title,
+		Author:      book.Author,
+		ExtractedAt: time.Now().Format(time.RFC3339),
+	}
+
+	for _, item := range book.Items {
+		page, err := ParseLazyVimChapter(item.Content)
+		if err != nil {
+			continue
+		}
+		if page.ChapterTitle == "" || lvSkip[strings.ToLower(page.ChapterTitle)] {
+			continue
+		}
+		if page.ChapterNum == 0 && page.ChapterTitle == "" {
+			continue
+		}
+
+		ch := LazyVimChapter{
+			ChapterID: page.ChapterNum,
+			Title:     page.ChapterTitle,
+			Sections:  []LazyVimSection{},
+		}
+
+		sectionNum := 0
+		for _, lvSec := range page.Sections {
+			sectionNum++
+			sectionID := fmt.Sprintf("%d.%d", page.ChapterNum, sectionNum)
+
+			sec := LazyVimSection{
+				SectionID: sectionID,
+				Title:     lvSec.Title,
+				RawText:   lvSec.BodyText,
+				WordCount: countWords(lvSec.BodyText),
+			}
+
+			// Extract command explanations from principal spans
+			for _, pe := range lvSec.Principals {
+				cmd, explanation := ExtractCommandFromPrincipal(pe)
+				if cmd == "" || explanation == "" {
+					continue
+				}
+				if !IsKeybinding(cmd) {
+					continue
+				}
+				cat, req, _ := ClassifyKeybinding(cmd)
+				ce := CommandExplanation{
+					Command:       cmd,
+					ExplanationEn: explanation,
+					Chapter:       page.ChapterNum,
+					SectionID:     sectionID,
+					Requires:      req,
+				}
+				sec.Commands = append(sec.Commands, ce)
+
+				// Also add as a keybinding if it's a Neovim/LazyVim feature
+				if req != "vim" || cat != CatVimCore {
+					kb := Keybinding{
+						Keys:          cmd,
+						DescriptionEn: explanation,
+						Category:      cat,
+						Chapter:       page.ChapterNum,
+						SectionID:     sectionID,
+						Requires:      req,
+					}
+					sec.Keybindings = append(sec.Keybindings, kb)
+					result.Keybindings = append(result.Keybindings, kb)
+				}
+			}
+
+			// Extract keybindings from inline codes
+			seen := make(map[string]bool)
+			for _, ce := range sec.Commands {
+				seen[ce.Command] = true
+			}
+			for _, code := range lvSec.InlineCodes {
+				if seen[code] || !IsKeybinding(code) {
+					continue
+				}
+				seen[code] = true
+
+				cat, req, plugin := ClassifyKeybinding(code)
+				if req == "vim" && cat == CatVimCore {
+					continue // skip basic Vim — already covered by Practical Vim
+				}
+
+				kb := Keybinding{
+					Keys:     code,
+					Category: cat,
+					Plugin:   plugin,
+					Chapter:  page.ChapterNum,
+					SectionID: sectionID,
+					Requires: req,
+				}
+				sec.Keybindings = append(sec.Keybindings, kb)
+				result.Keybindings = append(result.Keybindings, kb)
+			}
+
+			// Extract tips from admonitions
+			for _, adm := range lvSec.Admonitions {
+				if adm.Text == "" {
+					continue
+				}
+				tip := Tip{
+					Text:      adm.Text,
+					TipType:   adm.Type,
+					Chapter:   page.ChapterNum,
+					SectionID: sectionID,
+				}
+				sec.Tips = append(sec.Tips, tip)
+				result.Tips = append(result.Tips, tip)
+			}
+
+			hasContent := len(sec.Commands) > 0 || len(sec.Keybindings) > 0 || len(sec.Tips) > 0
+			if hasContent {
+				ch.HasVimContent = true
+			}
+			ch.Sections = append(ch.Sections, sec)
+		}
+
+		if len(ch.Sections) > 0 {
+			result.Chapters = append(result.Chapters, ch)
+		}
+	}
+
+	return result, nil
+}
