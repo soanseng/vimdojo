@@ -19,6 +19,8 @@ export interface VimState {
   insertKeyBuf: string[]       // tracks keys typed during insert for dot replay
   isRecordingInsert: boolean   // true while recording an insert session
   isDotReplaying: boolean      // true during dot command replay (prevents re-recording)
+  countPrefix: number | null   // accumulated count prefix (e.g. 3 in 3w, 12 in 12j)
+  operatorCount: number | null  // count before operator (e.g. 2 in 2d3w -> total 6)
 }
 
 export interface FindParams {

@@ -16,6 +16,8 @@ export function createState(text: string, cursor?: CursorPos): VimState {
     insertKeyBuf: [],
     isRecordingInsert: false,
     isDotReplaying: false,
+    countPrefix: null,
+    operatorCount: null,
   }
 }
 

@@ -123,8 +123,9 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
   if (state.pendingKeys === 'g') {
     const s: VimState = { ...state, pendingKeys: '' }
     if (key === 'g') {
-      const pos = motions.gg(s)
-      return { state: { ...s, cursor: pos }, handled: true }
+      const count = s.countPrefix ?? 1
+      const pos = count === 1 ? motions.gg(s) : { line: Math.min(count - 1, s.lines.length - 1), col: 0 }
+      return { state: { ...s, cursor: pos, countPrefix: null }, handled: true }
     }
     // Unknown g-combo — ignore
     return { state: s, handled: false }
@@ -144,10 +145,25 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
     return handleOperatorPending(state, key)
   }
 
-  // --- Simple motions ---
+  // --- Digit accumulation: 1-9 starts count, 0 extends existing count ---
+  if ((key >= '1' && key <= '9') || (key === '0' && state.countPrefix !== null)) {
+    const digit = parseInt(key, 10)
+    const current = state.countPrefix ?? 0
+    return { state: { ...state, countPrefix: current * 10 + digit }, handled: true }
+  }
+
+  // --- Simple motions (with count support) ---
   const simpleMotion = trySimpleMotion(state, key)
   if (simpleMotion !== null) {
-    return { state: { ...state, cursor: simpleMotion }, handled: true }
+    const count = state.countPrefix ?? 1
+    const s: VimState = { ...state, countPrefix: null }
+    let cursor = s.cursor
+    for (let i = 0; i < count; i++) {
+      const nextPos = trySimpleMotion({ ...s, cursor }, key)
+      if (nextPos) cursor = nextPos
+      else break
+    }
+    return { state: { ...s, cursor }, handled: true }
   }
 
   // --- g prefix ---
@@ -155,10 +171,13 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
     return { state: { ...state, pendingKeys: 'g' }, handled: true }
   }
 
-  // --- G (go to last line) ---
+  // --- G (go to last line, or Nth line with count) ---
   if (key === 'G') {
-    const pos = motions.G(state)
-    return { state: { ...state, cursor: pos }, handled: true }
+    const count = state.countPrefix
+    const pos = count !== null
+      ? { line: Math.min(count - 1, state.lines.length - 1), col: 0 }
+      : motions.G(state)
+    return { state: { ...state, cursor: pos, countPrefix: null }, handled: true }
   }
 
   // --- Find motions (f/F/t/T) ---
@@ -168,28 +187,38 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
 
   // --- Find repeat ---
   if (key === ';') {
-    if (state.lastFind) {
-      const pos = motions.repeatFind(state, state.lastFind)
-      if (pos) {
-        return { state: { ...state, cursor: pos }, handled: true }
+    const count = state.countPrefix ?? 1
+    const s: VimState = { ...state, countPrefix: null }
+    if (s.lastFind) {
+      let cursor = s.cursor
+      for (let i = 0; i < count; i++) {
+        const pos = motions.repeatFind({ ...s, cursor }, s.lastFind)
+        if (pos) cursor = pos
+        else break
       }
+      return { state: { ...s, cursor }, handled: true }
     }
-    return { state, handled: true }
+    return { state: s, handled: true }
   }
   if (key === ',') {
-    if (state.lastFind) {
-      const pos = motions.reverseFind(state, state.lastFind)
-      if (pos) {
-        return { state: { ...state, cursor: pos }, handled: true }
+    const count = state.countPrefix ?? 1
+    const s: VimState = { ...state, countPrefix: null }
+    if (s.lastFind) {
+      let cursor = s.cursor
+      for (let i = 0; i < count; i++) {
+        const pos = motions.reverseFind({ ...s, cursor }, s.lastFind)
+        if (pos) cursor = pos
+        else break
       }
+      return { state: { ...s, cursor }, handled: true }
     }
-    return { state, handled: true }
+    return { state: s, handled: true }
   }
 
-  // --- Operators (d/c/y) ---
+  // --- Operators (d/c/y) — transfer count to operator ---
   if (key === 'd' || key === 'c' || key === 'y') {
     return {
-      state: { ...state, pendingOperator: key },
+      state: { ...state, pendingOperator: key, operatorCount: state.countPrefix, countPrefix: null },
       handled: true,
     }
   }
@@ -197,13 +226,19 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
   // --- Direct edits ---
   if (key === 's') {
     const s = ops.deleteChar(state)
-    return { state: startInsertRecording({ ...s, mode: 'insert' }, ['s']), handled: true }
+    return { state: startInsertRecording({ ...s, mode: 'insert', countPrefix: null }, ['s']), handled: true }
   }
 
   if (key === 'x') {
-    const s = ops.deleteChar(state)
+    const count = state.countPrefix ?? 1
+    let s = { ...state, countPrefix: null } as VimState
+    for (let i = 0; i < count; i++) {
+      const line = s.lines[s.cursor.line] ?? ''
+      if (line.length === 0 || s.cursor.col >= line.length) break
+      s = ops.deleteChar(s)
+    }
     return {
-      state: { ...s, lastChange: { type: 'normal', keys: ['x'] } },
+      state: { ...s, lastChange: { type: 'normal', keys: count > 1 ? [String(count), 'x'] : ['x'] } },
       handled: true,
     }
   }
@@ -423,12 +458,25 @@ function handleOperatorPending(state: VimState, key: string): KeyResult {
   const s: VimState = { ...state, pendingOperator: null }
 
   if (key === 'Escape') {
-    return { state: s, handled: true }
+    return { state: { ...s, countPrefix: null, operatorCount: null }, handled: true }
+  }
+
+  // Digit accumulation within operator-pending (e.g. d3w)
+  if ((key >= '1' && key <= '9') || (key === '0' && state.countPrefix !== null)) {
+    const digit = parseInt(key, 10)
+    const current = state.countPrefix ?? 0
+    return {
+      state: { ...state, countPrefix: current * 10 + digit },
+      handled: true,
+    }
   }
 
   // Double-press: dd, cc, yy
   if (key === op) {
-    return executeLineOp(s, op)
+    const opCount = s.operatorCount ?? 1
+    const motionCount = s.countPrefix ?? 1
+    const totalCount = opCount * motionCount
+    return executeLineOp({ ...s, countPrefix: null, operatorCount: null }, op, totalCount)
   }
 
   // Find motions as operator targets — need another char
@@ -439,37 +487,70 @@ function handleOperatorPending(state: VimState, key: string): KeyResult {
     }
   }
 
-  // Motion key — resolve motion and apply operator
+  // Motion key — resolve motion and apply operator with count
   const motion = resolveMotion(s, key)
   if (motion !== null) {
-    return executeOperatorMotion(s, op, key, motion)
+    const opCount = s.operatorCount ?? 1
+    const motionCount = s.countPrefix ?? 1
+    const totalCount = opCount * motionCount
+    // Apply motion totalCount times
+    let cursor = s.cursor
+    // cw acts like ce (Vim special case)
+    const effectiveKey = (op === 'c' && (key === 'w' || key === 'W'))
+      ? (key === 'w' ? 'e' : 'E')
+      : key
+    for (let i = 0; i < totalCount; i++) {
+      const nextPos = trySimpleMotion({ ...s, cursor }, effectiveKey) ?? resolveMotion({ ...s, cursor }, effectiveKey)
+      if (nextPos) cursor = nextPos
+      else break
+    }
+    return executeOperatorMotion({ ...s, countPrefix: null, operatorCount: null }, op, effectiveKey, cursor)
   }
 
   // Unknown — cancel
-  return { state: s, handled: false }
+  return { state: { ...s, countPrefix: null, operatorCount: null }, handled: false }
 }
 
 // ---------------------------------------------------------------------------
 // Operator execution
 // ---------------------------------------------------------------------------
 
-function executeLineOp(state: VimState, op: string): KeyResult {
-  let s: VimState
-  const changeKeys = [op, op]
+function executeLineOp(state: VimState, op: string, count: number = 1): KeyResult {
+  const changeKeys = count > 1 ? [String(count), op, op] : [op, op]
 
   switch (op) {
-    case 'd':
-      s = ops.deleteLine(state)
+    case 'd': {
+      let s = state
+      for (let i = 0; i < count; i++) {
+        s = ops.deleteLine(s)
+      }
       return {
         state: { ...s, lastChange: { type: 'normal', keys: changeKeys } },
         handled: true,
       }
-    case 'c':
-      s = ops.changeLine(state)
+    }
+    case 'c': {
+      // For count > 1, delete extra lines first, then change the remaining line
+      let s = state
+      for (let i = 1; i < count; i++) {
+        s = ops.deleteLine(s)
+      }
+      s = ops.changeLine(s)
       return { state: startInsertRecording(s, changeKeys), handled: true }
-    case 'y':
-      s = ops.yankLine(state)
+    }
+    case 'y': {
+      // For count > 1, yank count lines
+      let s = state
+      if (count > 1) {
+        const startLine = s.cursor.line
+        const endLine = Math.min(startLine + count - 1, s.lines.length - 1)
+        const yankedLines = s.lines.slice(startLine, endLine + 1)
+        s = { ...s, register: yankedLines.join('\n') + '\n' }
+      } else {
+        s = ops.yankLine(s)
+      }
       return { state: s, handled: true }
+    }
     default:
       return { state, handled: false }
   }

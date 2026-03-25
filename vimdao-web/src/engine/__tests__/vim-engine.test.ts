@@ -245,3 +245,58 @@ describe('s command', () => {
     expect(result).toBe('XXc')
   })
 })
+
+describe('count prefix', () => {
+  it('3w moves 3 words forward', () => {
+    const s = applyKeysState('one two three four', ['3', 'w'])
+    expect(s.cursor.col).toBe(14)
+  })
+
+  it('5j moves 5 lines down', () => {
+    const text = Array(10).fill('line').join('\n')
+    const s = applyKeysState(text, ['5', 'j'])
+    expect(s.cursor.line).toBe(5)
+  })
+
+  it('2l moves 2 right', () => {
+    const s = applyKeysState('hello', ['2', 'l'])
+    expect(s.cursor.col).toBe(2)
+  })
+
+  it('d2w deletes 2 words', () => {
+    expect(applyKeys('one two three', ['d', '2', 'w'])).toBe('three')
+  })
+
+  it('3dd deletes 3 lines', () => {
+    expect(applyKeys('a\nb\nc\nd\ne', ['3', 'd', 'd'])).toBe('d\ne')
+  })
+
+  it('2x deletes 2 chars', () => {
+    expect(applyKeys('hello', ['2', 'x'])).toBe('llo')
+  })
+
+  it('c3w changes 3 words (cw acts like ce)', () => {
+    expect(applyKeys('one two three four', ['c', '3', 'w', 'X', 'Escape'])).toBe('X four')
+  })
+
+  it('0 without count prefix goes to column 0', () => {
+    const s = createState('hello')
+    s.cursor = { line: 0, col: 3 }
+    const result = processKey(s, '0')
+    expect(result.state.cursor.col).toBe(0)
+  })
+
+  it('10l moves 10 right (multi-digit count)', () => {
+    const s = applyKeysState('a'.repeat(20), ['1', '0', 'l'])
+    expect(s.cursor.col).toBe(10)
+  })
+
+  it('count is cleared after motion', () => {
+    const s = applyKeysState('hello world', ['2', 'l'])
+    expect(s.countPrefix).toBeNull()
+  })
+
+  it('2d3w deletes 6 words (operator count * motion count)', () => {
+    expect(applyKeys('a b c d e f g', ['2', 'd', '3', 'w'])).toBe('g')
+  })
+})
