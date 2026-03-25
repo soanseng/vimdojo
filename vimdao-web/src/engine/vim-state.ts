@@ -21,6 +21,8 @@ export function createState(text: string, cursor?: CursorPos): VimState {
     searchPattern: null,
     searchDirection: 'forward' as const,
     commandBuffer: '',
+    visualStart: null,
+    visualMode: null,
   }
 }
 

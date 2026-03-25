@@ -23,6 +23,8 @@ export function processKey(state: VimState, key: string): KeyResult {
       return handleInsertMode(s, key)
     case 'normal':
       return handleNormalMode(s, key)
+    case 'visual':
+      return handleVisualMode(s, key)
     case 'command':
       return handleCommandMode(s, key)
     default:
@@ -216,6 +218,32 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
       return { state: { ...s, cursor }, handled: true }
     }
     return { state: s, handled: true }
+  }
+
+  // --- Visual mode entry ---
+  if (key === 'v') {
+    return {
+      state: {
+        ...state,
+        mode: 'visual',
+        visualMode: 'char',
+        visualStart: { ...state.cursor },
+        countPrefix: null,
+      },
+      handled: true,
+    }
+  }
+  if (key === 'V') {
+    return {
+      state: {
+        ...state,
+        mode: 'visual',
+        visualMode: 'line',
+        visualStart: { ...state.cursor },
+        countPrefix: null,
+      },
+      handled: true,
+    }
   }
 
   // --- Operators (d/c/y) — transfer count to operator ---
@@ -445,6 +473,289 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
   }
 
   return { state, handled: false }
+}
+
+// ---------------------------------------------------------------------------
+// Visual mode
+// ---------------------------------------------------------------------------
+
+function handleVisualMode(state: VimState, key: string): KeyResult {
+  // Escape — exit visual, clear selection
+  if (key === 'Escape') {
+    return {
+      state: {
+        ...state,
+        mode: 'normal',
+        visualStart: null,
+        visualMode: null,
+      },
+      handled: true,
+    }
+  }
+
+  // v toggles: if char visual, exit; if line visual, switch to char
+  if (key === 'v') {
+    if (state.visualMode === 'char') {
+      return {
+        state: {
+          ...state,
+          mode: 'normal',
+          visualStart: null,
+          visualMode: null,
+        },
+        handled: true,
+      }
+    }
+    // line -> char
+    return {
+      state: { ...state, visualMode: 'char' },
+      handled: true,
+    }
+  }
+
+  // V toggles: if line visual, exit; if char visual, switch to line
+  if (key === 'V') {
+    if (state.visualMode === 'line') {
+      return {
+        state: {
+          ...state,
+          mode: 'normal',
+          visualStart: null,
+          visualMode: null,
+        },
+        handled: true,
+      }
+    }
+    // char -> line
+    return {
+      state: { ...state, visualMode: 'line' },
+      handled: true,
+    }
+  }
+
+  // Handle pending g prefix in visual mode
+  if (state.pendingKeys === 'g') {
+    const s: VimState = { ...state, pendingKeys: '' }
+    if (key === 'g') {
+      const pos = motions.gg(s)
+      return {
+        state: { ...s, cursor: pos },
+        handled: true,
+      }
+    }
+    // Unknown g-combo — ignore
+    return { state: s, handled: false }
+  }
+
+  // Pending find (f/F/t/T waiting for char)
+  if (state.pendingKeys === 'f' || state.pendingKeys === 'F' ||
+      state.pendingKeys === 't' || state.pendingKeys === 'T') {
+    return handleVisualFindChar(state, key)
+  }
+
+  // Motions — move cursor, selection extends from visualStart to cursor
+  const motionPos = trySimpleMotion(state, key)
+    ?? resolveMotion(state, key)
+  if (motionPos !== null) {
+    return {
+      state: { ...state, cursor: motionPos },
+      handled: true,
+    }
+  }
+
+  // g prefix for gg
+  if (key === 'g') {
+    return { state: { ...state, pendingKeys: 'g' }, handled: true }
+  }
+
+  // G motion
+  if (key === 'G') {
+    const pos = motions.G(state)
+    return {
+      state: { ...state, cursor: pos },
+      handled: true,
+    }
+  }
+
+  // Find motions (f/F/t/T)
+  if (key === 'f' || key === 'F' || key === 't' || key === 'T') {
+    return { state: { ...state, pendingKeys: key }, handled: true }
+  }
+
+  // Operators: d, c, y
+  if (key === 'd' || key === 'c' || key === 'y') {
+    return executeVisualOperator(state, key)
+  }
+
+  return { state, handled: false }
+}
+
+function handleVisualFindChar(state: VimState, char: string): KeyResult {
+  const findKey = state.pendingKeys as 'f' | 'F' | 't' | 'T'
+  const s: VimState = { ...state, pendingKeys: '' }
+
+  if (char === 'Escape') {
+    return { state: s, handled: true }
+  }
+
+  const findFn = findKey === 'f' ? motions.f
+    : findKey === 'F' ? motions.F
+    : findKey === 't' ? motions.t
+    : motions.T
+
+  const pos = findFn(s, char)
+  const direction: 'forward' | 'backward' = (findKey === 'f' || findKey === 't') ? 'forward' : 'backward'
+  const findType: 'f' | 't' = (findKey === 'f' || findKey === 'F') ? 'f' : 't'
+  const findParams: FindParams = { char, direction, type: findType }
+
+  if (pos) {
+    return {
+      state: { ...s, cursor: pos, lastFind: findParams },
+      handled: true,
+    }
+  }
+
+  return { state: { ...s, lastFind: findParams }, handled: true }
+}
+
+function executeVisualOperator(state: VimState, op: string): KeyResult {
+  const anchor = state.visualStart!
+  const cursor = state.cursor
+
+  if (state.visualMode === 'line') {
+    return executeVisualLineOperator(state, op, anchor, cursor)
+  }
+
+  // Character-wise visual
+  return executeVisualCharOperator(state, op, anchor, cursor)
+}
+
+function executeVisualCharOperator(
+  state: VimState,
+  op: string,
+  anchor: CursorPos,
+  cursor: CursorPos,
+): KeyResult {
+  // Normalize start/end — selection is inclusive
+  const before = anchor.line < cursor.line
+    || (anchor.line === cursor.line && anchor.col <= cursor.col)
+  const start = before ? anchor : cursor
+  const end = before ? cursor : anchor
+
+  // The end position is inclusive — for delete/yank we need end+1 col
+  const endExclusive: CursorPos = { line: end.line, col: end.col + 1 }
+
+  const exitVisual = {
+    mode: 'normal' as const,
+    visualStart: null,
+    visualMode: null,
+  }
+
+  switch (op) {
+    case 'd': {
+      const s = ops.deleteToPos(
+        { ...state, cursor: start, ...exitVisual },
+        endExclusive,
+      )
+      return {
+        state: { ...s, lastChange: null },
+        handled: true,
+      }
+    }
+    case 'c': {
+      const s = ops.changeToPos(
+        { ...state, cursor: start, ...exitVisual },
+        endExclusive,
+      )
+      return {
+        state: s,
+        handled: true,
+      }
+    }
+    case 'y': {
+      // Yank without deleting
+      const lines = state.lines
+      const text = extractVisualText(lines, start, endExclusive)
+      return {
+        state: {
+          ...state,
+          ...exitVisual,
+          register: text,
+          cursor: start,
+        },
+        handled: true,
+      }
+    }
+    default:
+      return { state, handled: false }
+  }
+}
+
+function executeVisualLineOperator(
+  state: VimState,
+  op: string,
+  anchor: CursorPos,
+  cursor: CursorPos,
+): KeyResult {
+  const startLine = Math.min(anchor.line, cursor.line)
+  const endLine = Math.max(anchor.line, cursor.line)
+
+  const exitVisual = {
+    mode: 'normal' as const,
+    visualStart: null,
+    visualMode: null,
+  }
+
+  switch (op) {
+    case 'd': {
+      let s: VimState = { ...state, ...exitVisual, cursor: { line: startLine, col: 0 } }
+      // Delete lines from endLine down to startLine
+      const lineCount = endLine - startLine + 1
+      for (let i = 0; i < lineCount; i++) {
+        s = ops.deleteLine(s)
+      }
+      return {
+        state: { ...s, lastChange: null },
+        handled: true,
+      }
+    }
+    case 'c': {
+      let s: VimState = { ...state, ...exitVisual, cursor: { line: startLine, col: 0 } }
+      const lineCount = endLine - startLine + 1
+      for (let i = 1; i < lineCount; i++) {
+        s = ops.deleteLine(s)
+      }
+      s = ops.changeLine(s)
+      return { state: s, handled: true }
+    }
+    case 'y': {
+      const yankedLines = state.lines.slice(startLine, endLine + 1)
+      return {
+        state: {
+          ...state,
+          ...exitVisual,
+          register: yankedLines.join('\n') + '\n',
+          cursor: { line: startLine, col: 0 },
+        },
+        handled: true,
+      }
+    }
+    default:
+      return { state, handled: false }
+  }
+}
+
+function extractVisualText(lines: string[], start: CursorPos, endExcl: CursorPos): string {
+  if (start.line === endExcl.line) {
+    return (lines[start.line] ?? '').slice(start.col, endExcl.col)
+  }
+  const parts: string[] = []
+  parts.push((lines[start.line] ?? '').slice(start.col))
+  for (let i = start.line + 1; i < endExcl.line; i++) {
+    parts.push(lines[i] ?? '')
+  }
+  parts.push((lines[endExcl.line] ?? '').slice(0, endExcl.col))
+  return parts.join('\n')
 }
 
 // ---------------------------------------------------------------------------

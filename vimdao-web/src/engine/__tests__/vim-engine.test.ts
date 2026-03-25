@@ -344,3 +344,60 @@ describe('count prefix', () => {
     expect(applyKeys('a b c d e f g', ['2', 'd', '3', 'w'])).toBe('g')
   })
 })
+
+describe('visual mode', () => {
+  it('v enters char visual mode', () => {
+    const s = applyKeysState('hello', ['v'])
+    expect(s.mode).toBe('visual')
+    expect(s.visualMode).toBe('char')
+    expect(s.visualStart).toEqual({ line: 0, col: 0 })
+  })
+
+  it('v + e + d deletes selection', () => {
+    expect(applyKeys('hello world', ['v', 'e', 'd'])).toBe(' world')
+  })
+
+  it('v + w + d deletes to next word', () => {
+    expect(applyKeys('hello world foo', ['v', 'w', 'd'])).toBe('orld foo')
+  })
+
+  it('v + $ + d deletes to end of line', () => {
+    expect(applyKeys('hello world', ['v', '$', 'd'])).toBe('')
+  })
+
+  it('V selects whole line', () => {
+    const s = applyKeysState('aaa\nbbb', ['V'])
+    expect(s.mode).toBe('visual')
+    expect(s.visualMode).toBe('line')
+  })
+
+  it('V + j + d deletes 2 lines', () => {
+    expect(applyKeys('aaa\nbbb\nccc', ['V', 'j', 'd'])).toBe('ccc')
+  })
+
+  it('V + d deletes current line', () => {
+    expect(applyKeys('aaa\nbbb\nccc', ['V', 'd'])).toBe('bbb\nccc')
+  })
+
+  it('v + y yanks selection without deleting', () => {
+    const s = applyKeysState('hello world', ['v', 'e', 'y'])
+    expect(s.mode).toBe('normal')
+    expect(s.register).toBe('hello')
+  })
+
+  it('v + c deletes and enters insert', () => {
+    expect(applyKeys('hello world', ['v', 'e', 'c', 'X', 'Escape'])).toBe('X world')
+  })
+
+  it('Escape exits visual mode', () => {
+    const s = applyKeysState('hello', ['v', 'l', 'l', 'Escape'])
+    expect(s.mode).toBe('normal')
+    expect(s.visualStart).toBeNull()
+    expect(s.visualMode).toBeNull()
+  })
+
+  it('visual mode with j extends selection down', () => {
+    // v at (0,0), j to (1,0), d deletes from (0,0) to (1,0) inclusive = "aaa\nb"
+    expect(applyKeys('aaa\nbbb\nccc', ['v', 'j', 'd'])).toBe('bb\nccc')
+  })
+})

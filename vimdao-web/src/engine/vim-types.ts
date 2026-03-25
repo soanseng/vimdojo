@@ -24,6 +24,8 @@ export interface VimState {
   searchPattern: string | null
   searchDirection: 'forward' | 'backward'
   commandBuffer: string         // for / and : command input
+  visualStart: CursorPos | null  // anchor point where selection started
+  visualMode: 'char' | 'line' | null  // character-wise or line-wise
 }
 
 export interface FindParams {
