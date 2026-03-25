@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Dashboard from './components/Dashboard/Dashboard'
 import HomePage from './components/RPG/HomePage'
 import ChallengeList from './components/Challenge/ChallengeList'
 import ChallengeView from './components/Challenge/ChallengeView'
@@ -9,7 +10,8 @@ export default function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/path" element={<HomePage />} />
         <Route path="/practice" element={<ChallengeList />} />
         <Route path="/challenge/:id" element={<ChallengeView />} />
       </Routes>

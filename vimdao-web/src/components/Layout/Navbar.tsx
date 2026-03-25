@@ -22,6 +22,14 @@ export default function Navbar() {
             `text-sm font-medium transition-colors ${isActive ? 'text-ctp-blue' : 'text-ctp-subtext0 hover:text-ctp-text'}`
           }
         >
+          道場
+        </NavLink>
+        <NavLink
+          to="/path"
+          className={({ isActive }) =>
+            `text-sm font-medium transition-colors ${isActive ? 'text-ctp-blue' : 'text-ctp-subtext0 hover:text-ctp-text'}`
+          }
+        >
           修練路徑
         </NavLink>
         <NavLink
@@ -31,6 +39,22 @@ export default function Navbar() {
           }
         >
           自由練習
+        </NavLink>
+        <NavLink
+          to="/commands"
+          className={({ isActive }) =>
+            `text-sm font-medium transition-colors ${isActive ? 'text-ctp-blue' : 'text-ctp-subtext0 hover:text-ctp-text'}`
+          }
+        >
+          指令速查
+        </NavLink>
+        <NavLink
+          to="/library"
+          className={({ isActive }) =>
+            `text-sm font-medium transition-colors ${isActive ? 'text-ctp-blue' : 'text-ctp-subtext0 hover:text-ctp-text'}`
+          }
+        >
+          書庫
         </NavLink>
       </div>
 
