@@ -81,12 +81,12 @@ export default function ChallengeResult({
       <div className="bg-ctp-surface0 rounded-lg p-4 space-y-3">
         <h3 className="text-sm font-medium text-ctp-subtext1">書中解法</h3>
         <div className="flex flex-wrap gap-1 mb-2">
-          {challenge.hint_commands.map((cmd, i) => (
+          {[...challenge.hint_keystrokes].map((key, i) => (
             <span
               key={i}
               className="inline-flex items-center justify-center rounded bg-ctp-base px-2 py-1 text-sm font-mono text-ctp-blue font-bold shrink-0"
             >
-              {cmd}
+              {key}
             </span>
           ))}
         </div>
