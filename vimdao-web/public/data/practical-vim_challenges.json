@@ -1,6 +1,6 @@
 {
   "source_book": "Practical Vim",
-  "generated_at": "2026-03-25T20:48:23+08:00",
+  "generated_at": "2026-03-25T22:44:23+08:00",
   "challenges": [
     {
       "id": "pv-tip01-001",
@@ -10,9 +10,9 @@
         "section": "1.1",
         "tip_number": 1
       },
-      "title_zh": "練習：. (重複上次修改)、x (刪除游標下的字元)",
+      "title_zh": "練習：x (刪除游標下的字元)、. (重複上次修改)",
       "title_en": "Meet the Dot Command",
-      "description_zh": "使用 用 . 重複上次修改，用 x 刪除游標下的字元。按鍵序列：x...",
+      "description_zh": "依序按 x（刪除游標下的字元） → .（重複上次修改）\n按鍵序列：x...",
       "description_en": "Meet the Dot Command",
       "category": "other",
       "difficulty": 1,
@@ -23,10 +23,10 @@
         "col": 0
       },
       "hint_commands": [
-        ".",
-        "x"
+        "x",
+        "."
       ],
-      "hint_text": "1. . — 重複上次修改\n2. x — 刪除游標下的字元",
+      "hint_text": "步驟 1：按 x — 刪除游標下的字元\n步驟 2：按 . — 重複上次修改\n\n完整按鍵：x...",
       "tags": [
         ".",
         "x"
@@ -45,9 +45,9 @@
         "section": "1.1",
         "tip_number": 1
       },
-      "title_zh": "練習：. (重複上次修改)、dd (刪除整行)",
+      "title_zh": "練習：dd (刪除整行)、. (重複上次修改)",
       "title_en": "Meet the Dot Command",
-      "description_zh": "使用 用 . 重複上次修改，用 dd 刪除整行。按鍵序列：dd.",
+      "description_zh": "依序按 dd（刪除整行） → .（重複上次修改）\n按鍵序列：dd.",
       "description_en": "Meet the Dot Command",
       "category": "other",
       "difficulty": 1,
@@ -58,10 +58,10 @@
         "col": 0
       },
       "hint_commands": [
-        ".",
-        "dd"
+        "dd",
+        "."
       ],
-      "hint_text": "1. . — 重複上次修改\n2. dd — 刪除整行",
+      "hint_text": "步驟 1：按 dd — 刪除整行\n步驟 2：按 . — 重複上次修改\n\n完整按鍵：dd.",
       "tags": [
         ".",
         "dd"
@@ -80,9 +80,9 @@
         "section": "1.1",
         "tip_number": 1
       },
-      "title_zh": "練習：. (重複上次修改)、\u003e (增加縮排)",
+      "title_zh": "練習：\u003e (增加縮排)、G (移到檔案結尾)",
       "title_en": "Meet the Dot Command",
-      "description_zh": "使用 用 . 重複上次修改，用 \u003e 增加縮排，用 G 移到檔案結尾，用 j 向下移動。按鍵序列：\u003eGj.j.",
+      "description_zh": "依序按 \u003e（增加縮排） → G（移到檔案結尾） → j（向下移動） → .（重複上次修改）\n按鍵序列：\u003eGj.j.",
       "description_en": "Meet the Dot Command",
       "category": "combo",
       "difficulty": 2,
@@ -93,12 +93,12 @@
         "col": 0
       },
       "hint_commands": [
-        ".",
         "\u003e",
         "G",
-        "j"
+        "j",
+        "."
       ],
-      "hint_text": "1. . — 重複上次修改\n2. \u003e — 增加縮排\n3. G — 移到檔案結尾\n4. j — 向下移動",
+      "hint_text": "步驟 1：按 \u003e — 增加縮排\n步驟 2：按 G — 移到檔案結尾\n步驟 3：按 j — 向下移動\n步驟 4：按 . — 重複上次修改\n\n完整按鍵：\u003eGj.j.",
       "tags": [
         ".",
         "\u003e",
@@ -121,9 +121,9 @@
         "section": "1.2",
         "tip_number": 2
       },
-      "title_zh": "練習：. (重複上次修改)、A (在行尾進入插入模式)",
+      "title_zh": "練習：A (在行尾進入插入模式)、j (向下移動)",
       "title_en": "Don’t Repeat Yourself",
-      "description_zh": "使用 用 . 重複上次修改，用 A 在行尾進入插入模式，用 j 向下移動。按鍵序列：A;\u003cEsc\u003ej.j.",
+      "description_zh": "依序按 A（在行尾進入插入模式） → j（向下移動） → .（重複上次修改）\n按鍵序列：A;\u003cEsc\u003ej.j.",
       "description_en": "Don’t Repeat Yourself",
       "category": "combo",
       "difficulty": 2,
@@ -134,11 +134,11 @@
         "col": 0
       },
       "hint_commands": [
-        ".",
         "A",
-        "j"
+        "j",
+        "."
       ],
-      "hint_text": "1. . — 重複上次修改\n2. A — 在行尾進入插入模式\n3. j — 向下移動",
+      "hint_text": "步驟 1：按 A — 在行尾進入插入模式\n步驟 2：按 j — 向下移動\n步驟 3：按 . — 重複上次修改\n\n完整按鍵：A;\u003cEsc\u003ej.j.",
       "tags": [
         ".",
         "A",
@@ -160,9 +160,9 @@
         "section": "1.5",
         "tip_number": 5
       },
-      "title_zh": "練習：* (搜尋游標下的單字)、. (重複上次修改)",
+      "title_zh": "練習：* (搜尋游標下的單字)、c (修改（刪除並進入插入模式）)",
       "title_en": "Find and Replace by Hand",
-      "description_zh": "使用 用 * 搜尋游標下的單字，用 . 重複上次修改，用 c 修改（刪除並進入插入模式），用 n 搜尋下一個匹配，用 o 在下方新增一行並進入插入模式，用 w 移到下一個單字字首。按鍵序列：*cwcopy\u003cEsc\u003en.",
+      "description_zh": "依序按 *（搜尋游標下的單字） → c（修改（刪除並進入插入模式）） → w（移到下一個單字字首） → o（在下方新增一行並進入插入模式） → n（搜尋下一個匹配） → .（重複上次修改）\n按鍵序列：*cwcopy\u003cEsc\u003en.",
       "description_en": "Find and Replace by Hand",
       "category": "combo",
       "difficulty": 2,
@@ -174,13 +174,13 @@
       },
       "hint_commands": [
         "*",
-        ".",
         "c",
-        "n",
+        "w",
         "o",
-        "w"
+        "n",
+        "."
       ],
-      "hint_text": "1. * — 搜尋游標下的單字\n2. . — 重複上次修改\n3. c — 修改（刪除並進入插入模式）\n4. n — 搜尋下一個匹配\n5. o — 在下方新增一行並進入插入模式\n6. w — 移到下一個單字字首",
+      "hint_text": "步驟 1：按 * — 搜尋游標下的單字\n步驟 2：按 c — 修改（刪除並進入插入模式）\n步驟 3：按 w — 移到下一個單字字首\n步驟 4：按 o — 在下方新增一行並進入插入模式\n步驟 5：按 n — 搜尋下一個匹配\n步驟 6：按 . — 重複上次修改\n\n完整按鍵：*cwcopy\u003cEsc\u003en.",
       "tags": [
         "*",
         ".",
@@ -206,9 +206,9 @@
         "section": "2.9",
         "tip_number": 9
       },
-      "title_zh": "練習：b (移到上一個單字字首)、d (刪除)",
+      "title_zh": "練習：d (刪除)、b (移到上一個單字字首)",
       "title_en": "Compose Repeatable Changes",
-      "description_zh": "使用 用 b 移到上一個單字字首，用 d 刪除，用 x 刪除游標下的字元。按鍵序列：dbx",
+      "description_zh": "依序按 d（刪除） → b（移到上一個單字字首） → x（刪除游標下的字元）\n按鍵序列：dbx",
       "description_en": "Compose Repeatable Changes",
       "category": "combo",
       "difficulty": 1,
@@ -219,11 +219,11 @@
         "col": 0
       },
       "hint_commands": [
-        "b",
         "d",
+        "b",
         "x"
       ],
-      "hint_text": "1. b — 移到上一個單字字首\n2. d — 刪除\n3. x — 刪除游標下的字元",
+      "hint_text": "步驟 1：按 d — 刪除\n步驟 2：按 b — 移到上一個單字字首\n步驟 3：按 x — 刪除游標下的字元\n\n完整按鍵：dbx",
       "tags": [
         "b",
         "d",
@@ -247,7 +247,7 @@
       },
       "title_zh": "練習：b (移到上一個單字字首)、d (刪除)",
       "title_en": "Compose Repeatable Changes",
-      "description_zh": "使用 用 b 移到上一個單字字首，用 d 刪除，用 w 移到下一個單字字首。按鍵序列：bdw",
+      "description_zh": "依序按 b（移到上一個單字字首） → d（刪除） → w（移到下一個單字字首）\n按鍵序列：bdw",
       "description_en": "Compose Repeatable Changes",
       "category": "combo",
       "difficulty": 1,
@@ -262,7 +262,7 @@
         "d",
         "w"
       ],
-      "hint_text": "1. b — 移到上一個單字字首\n2. d — 刪除\n3. w — 移到下一個單字字首",
+      "hint_text": "步驟 1：按 b — 移到上一個單字字首\n步驟 2：按 d — 刪除\n步驟 3：按 w — 移到下一個單字字首\n\n完整按鍵：bdw",
       "tags": [
         "b",
         "d",
@@ -283,9 +283,9 @@
         "section": "2.9",
         "tip_number": 9
       },
-      "title_zh": "練習：aw (游標所在的單字含空白（a word）)、d (刪除)",
+      "title_zh": "練習：d (刪除)、aw (游標所在的單字含空白（a word）)",
       "title_en": "Compose Repeatable Changes",
-      "description_zh": "使用 用 aw 游標所在的單字含空白（a word），用 d 刪除。按鍵序列：daw",
+      "description_zh": "依序按 d（刪除） → aw（游標所在的單字含空白（a word））\n按鍵序列：daw",
       "description_en": "Compose Repeatable Changes",
       "category": "combo",
       "difficulty": 1,
@@ -296,10 +296,10 @@
         "col": 0
       },
       "hint_commands": [
-        "aw",
-        "d"
+        "d",
+        "aw"
       ],
-      "hint_text": "1. aw — 游標所在的單字含空白（a word）\n2. d — 刪除",
+      "hint_text": "步驟 1：按 d — 刪除\n步驟 2：按 aw — 游標所在的單字含空白（a word）\n\n完整按鍵：daw",
       "tags": [
         "aw",
         "d"
@@ -319,9 +319,9 @@
         "section": "2.10",
         "tip_number": 10
       },
-      "title_zh": "練習：. (重複上次修改)、0 (移到行首)",
+      "title_zh": "練習：yy (複製整行)、p (貼上到游標後)",
       "title_en": "Use Counts to Do Simple Arithmetic",
-      "description_zh": "使用 用 . 重複上次修改，用 0 移到行首，用 W 移到下一個 WORD 字首，用 c 修改（刪除並進入插入模式），用 e 移到單字字尾，用 n 搜尋下一個匹配，用 p 貼上到游標後，用 s 刪除字元並進入插入模式，用 w 移到下一個單字字首，用 yy 複製整行。按鍵序列：yypcW.news\u003cEsc\u003e180\u003cC-x\u003e",
+      "description_zh": "依序按 yy（複製整行） → p（貼上到游標後） → c（修改（刪除並進入插入模式）） → W（移到下一個 WORD 字首） → .（重複上次修改） → n（搜尋下一個匹配） → e（移到單字字尾） → w（移到下一個單字字首） → s（刪除字元並進入插入模式） → 0（移到行首）\n按鍵序列：yypcW.news\u003cEsc\u003e180\u003cC-x\u003e",
       "description_en": "Use Counts to Do Simple Arithmetic",
       "category": "motion",
       "difficulty": 2,
@@ -332,19 +332,19 @@
         "col": 0
       },
       "hint_commands": [
-        ".",
-        "0",
-        "\u003cC-x\u003e",
-        "W",
-        "c",
-        "e",
-        "n",
+        "yy",
         "p",
-        "s",
+        "c",
+        "W",
+        ".",
+        "n",
+        "e",
         "w",
-        "yy"
+        "s",
+        "0",
+        "\u003cC-x\u003e"
       ],
-      "hint_text": "1. . — 重複上次修改\n2. 0 — 移到行首\n4. W — 移到下一個 WORD 字首\n5. c — 修改（刪除並進入插入模式）\n6. e — 移到單字字尾\n7. n — 搜尋下一個匹配\n8. p — 貼上到游標後\n9. s — 刪除字元並進入插入模式\n10. w — 移到下一個單字字首\n11. yy — 複製整行",
+      "hint_text": "步驟 1：按 yy — 複製整行\n步驟 2：按 p — 貼上到游標後\n步驟 3：按 c — 修改（刪除並進入插入模式）\n步驟 4：按 W — 移到下一個 WORD 字首\n步驟 5：按 . — 重複上次修改\n步驟 6：按 n — 搜尋下一個匹配\n步驟 7：按 e — 移到單字字尾\n步驟 8：按 w — 移到下一個單字字首\n步驟 9：按 s — 刪除字元並進入插入模式\n步驟 10：按 0 — 移到行首\n\n完整按鍵：yypcW.news\u003cEsc\u003e180\u003cC-x\u003e",
       "tags": [
         ".",
         "0",
@@ -375,9 +375,9 @@
         "section": "2.11",
         "tip_number": 11
       },
-      "title_zh": "練習：c (修改（刪除並進入插入模式）)、s (刪除字元並進入插入模式)",
+      "title_zh": "練習：c (修改（刪除並進入插入模式）)、w (移到下一個單字字首)",
       "title_en": "Don’t Count If You Can Repeat",
-      "description_zh": "使用 用 c 修改（刪除並進入插入模式），用 s 刪除字元並進入插入模式，用 w 移到下一個單字字首。按鍵序列：c3wsome more\u003cEsc\u003e",
+      "description_zh": "依序按 c（修改（刪除並進入插入模式）） → w（移到下一個單字字首） → s（刪除字元並進入插入模式）\n按鍵序列：c3wsome more\u003cEsc\u003e",
       "description_en": "Don’t Count If You Can Repeat",
       "category": "combo",
       "difficulty": 2,
@@ -389,10 +389,10 @@
       },
       "hint_commands": [
         "c",
-        "s",
-        "w"
+        "w",
+        "s"
       ],
-      "hint_text": "1. c — 修改（刪除並進入插入模式）\n2. s — 刪除字元並進入插入模式\n3. w — 移到下一個單字字首",
+      "hint_text": "步驟 1：按 c — 修改（刪除並進入插入模式）\n步驟 2：按 w — 移到下一個單字字首\n步驟 3：按 s — 刪除字元並進入插入模式\n\n完整按鍵：c3wsome more\u003cEsc\u003e",
       "tags": [
         "c",
         "s",
@@ -414,9 +414,9 @@
         "section": "3.15",
         "tip_number": 15
       },
-      "title_zh": "練習：, (反向重複上次 f/t 搜尋)、A (在行尾進入插入模式)",
+      "title_zh": "練習：y (複製（yank）)、t (向右搜尋字元（游標停在前一格）)",
       "title_en": "Paste from a Register Without Leaving Insert Mode",
-      "description_zh": "使用 用 , 反向重複上次 f/t 搜尋，用 A 在行尾進入插入模式，用 j 向下移動，用 t 向右搜尋字元（游標停在前一格），用 y 複製（yank）。按鍵序列：yt,jA\u003cC-r\u003e0.\u003cEsc\u003e",
+      "description_zh": "依序按 y（複製（yank）） → t（向右搜尋字元（游標停在前一格）） → ,（反向重複上次 f/t 搜尋） → j（向下移動） → A（在行尾進入插入模式）\n按鍵序列：yt,jA\u003cC-r\u003e0.\u003cEsc\u003e",
       "description_en": "Paste from a Register Without Leaving Insert Mode",
       "category": "combo",
       "difficulty": 2,
@@ -427,13 +427,13 @@
         "col": 0
       },
       "hint_commands": [
-        ",",
-        "A",
-        "j",
+        "y",
         "t",
-        "y"
+        ",",
+        "j",
+        "A"
       ],
-      "hint_text": "1. , — 反向重複上次 f/t 搜尋\n2. A — 在行尾進入插入模式\n3. j — 向下移動\n4. t — 向右搜尋字元（游標停在前一格）\n5. y — 複製（yank）",
+      "hint_text": "步驟 1：按 y — 複製（yank）\n步驟 2：按 t — 向右搜尋字元（游標停在前一格）\n步驟 3：按 , — 反向重複上次 f/t 搜尋\n步驟 4：按 j — 向下移動\n步驟 5：按 A — 在行尾進入插入模式\n\n完整按鍵：yt,jA\u003cC-r\u003e0.\u003cEsc\u003e",
       "tags": [
         ",",
         "A",
@@ -459,7 +459,7 @@
       },
       "title_zh": "練習：A (在行尾進入插入模式)",
       "title_en": "Do Back-of-the-Envelope Calculations in Place",
-      "description_zh": "使用 用 A 在行尾進入插入模式。按鍵序列：A\u003cC-r\u003e=6*35\u003cCR\u003e",
+      "description_zh": "依序按 A（在行尾進入插入模式）\n按鍵序列：A\u003cC-r\u003e=6*35\u003cCR\u003e",
       "description_en": "Do Back-of-the-Envelope Calculations in Place",
       "category": "insert",
       "difficulty": 1,
@@ -472,7 +472,7 @@
       "hint_commands": [
         "A"
       ],
-      "hint_text": "1. A — 在行尾進入插入模式",
+      "hint_text": "步驟 1：按 A — 在行尾進入插入模式\n\n完整按鍵：A\u003cC-r\u003e=6*35\u003cCR\u003e",
       "tags": [
         "A"
       ],
@@ -490,9 +490,9 @@
         "section": "3.19",
         "tip_number": 19
       },
-      "title_zh": "練習：R (進入取代模式)、f (向右搜尋字元)",
+      "title_zh": "練習：f (向右搜尋字元)、R (進入取代模式)",
       "title_en": "Overwrite Existing Text with Replace Mode",
-      "description_zh": "使用 用 R 進入取代模式，用 f 向右搜尋字元。按鍵序列：f.R,b\u003cEsc\u003e",
+      "description_zh": "依序按 f（向右搜尋字元） → R（進入取代模式）\n按鍵序列：f.R,b\u003cEsc\u003e",
       "description_en": "Overwrite Existing Text with Replace Mode",
       "category": "combo",
       "difficulty": 1,
@@ -503,10 +503,10 @@
         "col": 0
       },
       "hint_commands": [
-        "R",
-        "f"
+        "f",
+        "R"
       ],
-      "hint_text": "1. R — 進入取代模式\n2. f — 向右搜尋字元",
+      "hint_text": "步驟 1：按 f — 向右搜尋字元\n步驟 2：按 R — 進入取代模式\n\n完整按鍵：f.R,b\u003cEsc\u003e",
       "tags": [
         "R",
         "f"
@@ -526,9 +526,9 @@
         "section": "4.22",
         "tip_number": 22
       },
-      "title_zh": "練習：. (重複上次修改)、\u003e (增加縮排)",
+      "title_zh": "練習：V (進入視覺模式（行選取）)、j (向下移動)",
       "title_en": "Repeat Line-Wise Visual Commands",
-      "description_zh": "使用 用 . 重複上次修改，用 \u003e 增加縮排，用 V 進入視覺模式（行選取），用 j 向下移動。按鍵序列：Vj\u003e.",
+      "description_zh": "依序按 V（進入視覺模式（行選取）） → j（向下移動） → \u003e（增加縮排） → .（重複上次修改）\n按鍵序列：Vj\u003e.",
       "description_en": "Repeat Line-Wise Visual Commands",
       "category": "combo",
       "difficulty": 2,
@@ -539,12 +539,12 @@
         "col": 0
       },
       "hint_commands": [
-        ".",
-        "\u003e",
         "V",
-        "j"
+        "j",
+        "\u003e",
+        "."
       ],
-      "hint_text": "1. . — 重複上次修改\n2. \u003e — 增加縮排\n3. V — 進入視覺模式（行選取）\n4. j — 向下移動",
+      "hint_text": "步驟 1：按 V — 進入視覺模式（行選取）\n步驟 2：按 j — 向下移動\n步驟 3：按 \u003e — 增加縮排\n步驟 4：按 . — 重複上次修改\n\n完整按鍵：Vj\u003e.",
       "tags": [
         ".",
         "\u003e",
@@ -568,9 +568,9 @@
         "section": "4.23",
         "tip_number": 23
       },
-      "title_zh": "練習：it (HTML 標籤內的文字)、v (進入視覺模式（字元選取）)",
+      "title_zh": "練習：v (進入視覺模式（字元選取）)、it (HTML 標籤內的文字)",
       "title_en": "Prefer Operators to Visual Commands Where Possible",
-      "description_zh": "使用 用 it HTML 標籤內的文字，用 v 進入視覺模式（字元選取）。按鍵序列：vitU",
+      "description_zh": "依序按 v（進入視覺模式（字元選取）） → it（HTML 標籤內的文字）\n按鍵序列：vitU",
       "description_en": "Prefer Operators to Visual Commands Where Possible",
       "category": "combo",
       "difficulty": 2,
@@ -581,10 +581,10 @@
         "col": 0
       },
       "hint_commands": [
-        "it",
-        "v"
+        "v",
+        "it"
       ],
-      "hint_text": "1. it — HTML 標籤內的文字\n2. v — 進入視覺模式（字元選取）",
+      "hint_text": "步驟 1：按 v — 進入視覺模式（字元選取）\n步驟 2：按 it — HTML 標籤內的文字\n\n完整按鍵：vitU",
       "tags": [
         "it",
         "v"
@@ -604,9 +604,9 @@
         "section": "4.23",
         "tip_number": 23
       },
-      "title_zh": "練習：. (重複上次修改)、gU (轉大寫)",
+      "title_zh": "練習：gU (轉大寫)、it (HTML 標籤內的文字)",
       "title_en": "Prefer Operators to Visual Commands Where Possible",
-      "description_zh": "使用 用 . 重複上次修改，用 gU 轉大寫，用 it HTML 標籤內的文字，用 j 向下移動。按鍵序列：gUitj.j.",
+      "description_zh": "依序按 gU（轉大寫） → it（HTML 標籤內的文字） → j（向下移動） → .（重複上次修改）\n按鍵序列：gUitj.j.",
       "description_en": "Prefer Operators to Visual Commands Where Possible",
       "category": "combo",
       "difficulty": 3,
@@ -617,12 +617,12 @@
         "col": 0
       },
       "hint_commands": [
-        ".",
         "gU",
         "it",
-        "j"
+        "j",
+        "."
       ],
-      "hint_text": "1. . — 重複上次修改\n2. gU — 轉大寫\n3. it — HTML 標籤內的文字\n4. j — 向下移動",
+      "hint_text": "步驟 1：按 gU — 轉大寫\n步驟 2：按 it — HTML 標籤內的文字\n步驟 3：按 j — 向下移動\n步驟 4：按 . — 重複上次修改\n\n完整按鍵：gUitj.j.",
       "tags": [
         ".",
         "gU",
@@ -646,9 +646,9 @@
         "section": "4.24",
         "tip_number": 24
       },
-      "title_zh": "練習：. (重複上次修改)、\u003cC-v\u003e (進入視覺模式（區塊選取）)",
+      "title_zh": "練習：\u003cC-v\u003e (進入視覺模式（區塊選取）)、j (向下移動)",
       "title_en": "Edit Tabular Data with Visual-Block Mode",
-      "description_zh": "使用 用 . 重複上次修改，用 \u003cC-v\u003e 進入視覺模式（區塊選取），用 V 進入視覺模式（行選取），用 j 向下移動，用 p 貼上到游標後，用 r 替換游標下的字元，用 v 進入視覺模式（字元選取），用 x 刪除游標下的字元，用 yy 複製整行。按鍵序列：\u003cC-v\u003e3jx...gvr|yypVr-",
+      "description_zh": "依序按 \u003cC-v\u003e（進入視覺模式（區塊選取）） → j（向下移動） → x（刪除游標下的字元） → .（重複上次修改） → v（進入視覺模式（字元選取）） → r（替換游標下的字元） → yy（複製整行） → p（貼上到游標後） → V（進入視覺模式（行選取））\n按鍵序列：\u003cC-v\u003e3jx...gvr|yypVr-",
       "description_en": "Edit Tabular Data with Visual-Block Mode",
       "category": "combo",
       "difficulty": 3,
@@ -659,17 +659,17 @@
         "col": 0
       },
       "hint_commands": [
-        ".",
         "\u003cC-v\u003e",
-        "V",
         "j",
-        "p",
-        "r",
-        "v",
         "x",
-        "yy"
+        ".",
+        "v",
+        "r",
+        "yy",
+        "p",
+        "V"
       ],
-      "hint_text": "1. . — 重複上次修改\n2. \u003cC-v\u003e — 進入視覺模式（區塊選取）\n3. V — 進入視覺模式（行選取）\n4. j — 向下移動\n5. p — 貼上到游標後\n6. r — 替換游標下的字元\n7. v — 進入視覺模式（字元選取）\n8. x — 刪除游標下的字元\n9. yy — 複製整行",
+      "hint_text": "步驟 1：按 \u003cC-v\u003e — 進入視覺模式（區塊選取）\n步驟 2：按 j — 向下移動\n步驟 3：按 x — 刪除游標下的字元\n步驟 4：按 . — 重複上次修改\n步驟 5：按 v — 進入視覺模式（字元選取）\n步驟 6：按 r — 替換游標下的字元\n步驟 7：按 yy — 複製整行\n步驟 8：按 p — 貼上到游標後\n步驟 9：按 V — 進入視覺模式（行選取）\n\n完整按鍵：\u003cC-v\u003e3jx...gvr|yypVr-",
       "tags": [
         ".",
         "\u003cC-v\u003e",
@@ -697,9 +697,9 @@
         "section": "4.25",
         "tip_number": 25
       },
-      "title_zh": "練習：N (搜尋上一個匹配)、o (在下方新增一行並進入插入模式)",
+      "title_zh": "練習：{ (移到上一個段落)、s (刪除字元並進入插入模式)",
       "title_en": "Change Columns of Text",
-      "description_zh": "使用 用 N 搜尋上一個匹配，用 o 在下方新增一行並進入插入模式，用 s 刪除字元並進入插入模式，用 { 移到上一個段落。按鍵序列：{start}Normal mode\u003cC-v\u003ejjeVisual modecInsert modecomponentsInsert mode\u003cEsc\u003eNormal mode",
+      "description_zh": "依序按 {（移到上一個段落） → s（刪除字元並進入插入模式） → N（搜尋上一個匹配） → o（在下方新增一行並進入插入模式）\n按鍵序列：{start}Normal mode\u003cC-v\u003ejjeVisual modecInsert modecomponentsInsert mode\u003cEsc\u003eNormal mode",
       "description_en": "Change Columns of Text",
       "category": "combo",
       "difficulty": 2,
@@ -710,12 +710,12 @@
         "col": 0
       },
       "hint_commands": [
-        "N",
-        "o",
+        "{",
         "s",
-        "{"
+        "N",
+        "o"
       ],
-      "hint_text": "1. N — 搜尋上一個匹配\n2. o — 在下方新增一行並進入插入模式\n3. s — 刪除字元並進入插入模式\n4. { — 移到上一個段落",
+      "hint_text": "步驟 1：按 { — 移到上一個段落\n步驟 2：按 s — 刪除字元並進入插入模式\n步驟 3：按 N — 搜尋上一個匹配\n步驟 4：按 o — 在下方新增一行並進入插入模式\n\n完整按鍵：{start}Normal mode\u003cC-v\u003ejjeVisual modecInsert modecomponentsInsert mode\u003cEsc\u003eNormal mode",
       "tags": [
         "N",
         "o",
@@ -737,9 +737,9 @@
         "section": "4.26",
         "tip_number": 26
       },
-      "title_zh": "練習：N (搜尋上一個匹配)、o (在下方新增一行並進入插入模式)",
+      "title_zh": "練習：{ (移到上一個段落)、s (刪除字元並進入插入模式)",
       "title_en": "Append After a Ragged Visual Block",
-      "description_zh": "使用 用 N 搜尋上一個匹配，用 o 在下方新增一行並進入插入模式，用 s 刪除字元並進入插入模式，用 { 移到上一個段落。按鍵序列：{start}Normal mode\u003cC-v\u003ejj$Visual-BlockA;Insert mode\u003cEsc\u003eNormal mode",
+      "description_zh": "依序按 {（移到上一個段落） → s（刪除字元並進入插入模式） → N（搜尋上一個匹配） → o（在下方新增一行並進入插入模式）\n按鍵序列：{start}Normal mode\u003cC-v\u003ejj$Visual-BlockA;Insert mode\u003cEsc\u003eNormal mode",
       "description_en": "Append After a Ragged Visual Block",
       "category": "combo",
       "difficulty": 2,
@@ -750,12 +750,12 @@
         "col": 0
       },
       "hint_commands": [
-        "N",
-        "o",
+        "{",
         "s",
-        "{"
+        "N",
+        "o"
       ],
-      "hint_text": "1. N — 搜尋上一個匹配\n2. o — 在下方新增一行並進入插入模式\n3. s — 刪除字元並進入插入模式\n4. { — 移到上一個段落",
+      "hint_text": "步驟 1：按 { — 移到上一個段落\n步驟 2：按 s — 刪除字元並進入插入模式\n步驟 3：按 N — 搜尋上一個匹配\n步驟 4：按 o — 在下方新增一行並進入插入模式\n\n完整按鍵：{start}Normal mode\u003cC-v\u003ejj$Visual-BlockA;Insert mode\u003cEsc\u003eNormal mode",
       "tags": [
         "N",
         "o",
@@ -790,7 +790,7 @@
         "col": 0
       },
       "hint_commands": null,
-      "hint_text": "",
+      "hint_text": "完整按鍵：",
       "tags": null,
       "concepts_zh": null,
       "needs_translation": true,
@@ -807,7 +807,7 @@
       },
       "title_zh": "練習：V (進入視覺模式（行選取）)、j (向下移動)",
       "title_en": "Duplicate or Move Lines Using ‘:t’ and ‘:m’ Commands",
-      "description_zh": "使用 用 V 進入視覺模式（行選取），用 j 向下移動。按鍵序列：Vjj",
+      "description_zh": "依序按 V（進入視覺模式（行選取）） → j（向下移動）\n按鍵序列：Vjj",
       "description_en": "Duplicate or Move Lines Using ‘:t’ and ‘:m’ Commands",
       "category": "combo",
       "difficulty": 1,
@@ -821,7 +821,7 @@
         "V",
         "j"
       ],
-      "hint_text": "1. V — 進入視覺模式（行選取）\n2. j — 向下移動",
+      "hint_text": "步驟 1：按 V — 進入視覺模式（行選取）\n步驟 2：按 j — 向下移動\n\n完整按鍵：Vjj",
       "tags": [
         "V",
         "j"
@@ -843,7 +843,7 @@
       },
       "title_zh": "練習：A (在行尾進入插入模式)",
       "title_en": "Run Normal Mode Commands Across a Range",
-      "description_zh": "使用 用 A 在行尾進入插入模式。按鍵序列：A;\u003cEsc\u003e",
+      "description_zh": "依序按 A（在行尾進入插入模式）\n按鍵序列：A;\u003cEsc\u003e",
       "description_en": "Run Normal Mode Commands Across a Range",
       "category": "insert",
       "difficulty": 1,
@@ -856,7 +856,7 @@
       "hint_commands": [
         "A"
       ],
-      "hint_text": "1. A — 在行尾進入插入模式",
+      "hint_text": "步驟 1：按 A — 在行尾進入插入模式\n\n完整按鍵：A;\u003cEsc\u003e",
       "tags": [
         "A"
       ],
@@ -874,9 +874,9 @@
         "section": "5.30",
         "tip_number": 30
       },
-      "title_zh": "練習：G (移到檔案結尾)、V (進入視覺模式（行選取）)",
+      "title_zh": "練習：j (向下移動)、V (進入視覺模式（行選取）)",
       "title_en": "Run Normal Mode Commands Across a Range",
-      "description_zh": "使用 用 G 移到檔案結尾，用 V 進入視覺模式（行選取），用 j 向下移動。按鍵序列：jVG",
+      "description_zh": "依序按 j（向下移動） → V（進入視覺模式（行選取）） → G（移到檔案結尾）\n按鍵序列：jVG",
       "description_en": "Run Normal Mode Commands Across a Range",
       "category": "combo",
       "difficulty": 1,
@@ -887,11 +887,11 @@
         "col": 0
       },
       "hint_commands": [
-        "G",
+        "j",
         "V",
-        "j"
+        "G"
       ],
-      "hint_text": "1. G — 移到檔案結尾\n2. V — 進入視覺模式（行選取）\n3. j — 向下移動",
+      "hint_text": "步驟 1：按 j — 向下移動\n步驟 2：按 V — 進入視覺模式（行選取）\n步驟 3：按 G — 移到檔案結尾\n\n完整按鍵：jVG",
       "tags": [
         "G",
         "V",
@@ -914,7 +914,7 @@
       },
       "title_zh": "練習：* (搜尋游標下的單字)、c (修改（刪除並進入插入模式）)",
       "title_en": "Insert the Current Word at the Command Prompt",
-      "description_zh": "使用 用 * 搜尋游標下的單字，用 c 修改（刪除並進入插入模式），用 o 在下方新增一行並進入插入模式，用 w 移到下一個單字字首。按鍵序列：*cwcounter\u003cEsc\u003e",
+      "description_zh": "依序按 *（搜尋游標下的單字） → c（修改（刪除並進入插入模式）） → w（移到下一個單字字首） → o（在下方新增一行並進入插入模式）\n按鍵序列：*cwcounter\u003cEsc\u003e",
       "description_en": "Insert the Current Word at the Command Prompt",
       "category": "combo",
       "difficulty": 2,
@@ -927,10 +927,10 @@
       "hint_commands": [
         "*",
         "c",
-        "o",
-        "w"
+        "w",
+        "o"
       ],
-      "hint_text": "1. * — 搜尋游標下的單字\n2. c — 修改（刪除並進入插入模式）\n3. o — 在下方新增一行並進入插入模式\n4. w — 移到下一個單字字首",
+      "hint_text": "步驟 1：按 * — 搜尋游標下的單字\n步驟 2：按 c — 修改（刪除並進入插入模式）\n步驟 3：按 w — 移到下一個單字字首\n步驟 4：按 o — 在下方新增一行並進入插入模式\n\n完整按鍵：*cwcounter\u003cEsc\u003e",
       "tags": [
         "*",
         "c",
@@ -955,7 +955,7 @@
       },
       "title_zh": "練習：A (在行尾進入插入模式)、J (合併下一行)",
       "title_en": "Recall Commands from History",
-      "description_zh": "使用 用 A 在行尾進入插入模式，用 J 合併下一行。按鍵序列：A|\u003cEsc\u003eJ",
+      "description_zh": "依序按 A（在行尾進入插入模式） → J（合併下一行）\n按鍵序列：A|\u003cEsc\u003eJ",
       "description_en": "Recall Commands from History",
       "category": "insert",
       "difficulty": 1,
@@ -969,7 +969,7 @@
         "A",
         "J"
       ],
-      "hint_text": "1. A — 在行尾進入插入模式\n2. J — 合併下一行",
+      "hint_text": "步驟 1：按 A — 在行尾進入插入模式\n步驟 2：按 J — 合併下一行\n\n完整按鍵：A|\u003cEsc\u003eJ",
       "tags": [
         "A",
         "J"
@@ -989,9 +989,9 @@
         "section": "8.49",
         "tip_number": 49
       },
-      "title_zh": "練習：a (在游標後進入插入模式)、e (移到單字字尾)",
+      "title_zh": "練習：e (移到單字字尾)、a (在游標後進入插入模式)",
       "title_en": "Move Word-Wise",
-      "description_zh": "使用 用 a 在游標後進入插入模式，用 e 移到單字字尾。按鍵序列：eaer\u003cEsc\u003e",
+      "description_zh": "依序按 e（移到單字字尾） → a（在游標後進入插入模式）\n按鍵序列：eaer\u003cEsc\u003e",
       "description_en": "Move Word-Wise",
       "category": "combo",
       "difficulty": 1,
@@ -1002,10 +1002,10 @@
         "col": 0
       },
       "hint_commands": [
-        "a",
-        "e"
+        "e",
+        "a"
       ],
-      "hint_text": "1. a — 在游標後進入插入模式\n2. e — 移到單字字尾",
+      "hint_text": "步驟 1：按 e — 移到單字字尾\n步驟 2：按 a — 在游標後進入插入模式\n\n完整按鍵：eaer\u003cEsc\u003e",
       "tags": [
         "a",
         "e"
@@ -1025,9 +1025,9 @@
         "section": "8.49",
         "tip_number": 49
       },
-      "title_zh": "練習：c (修改（刪除並進入插入模式）)、o (在下方新增一行並進入插入模式)",
+      "title_zh": "練習：c (修改（刪除並進入插入模式）)、w (移到下一個單字字首)",
       "title_en": "Move Word-Wise",
-      "description_zh": "使用 用 c 修改（刪除並進入插入模式），用 o 在下方新增一行並進入插入模式，用 w 移到下一個單字字首，用 y 複製（yank）。按鍵序列：cwyou\u003cEsc\u003e",
+      "description_zh": "依序按 c（修改（刪除並進入插入模式）） → w（移到下一個單字字首） → y（複製（yank）） → o（在下方新增一行並進入插入模式）\n按鍵序列：cwyou\u003cEsc\u003e",
       "description_en": "Move Word-Wise",
       "category": "combo",
       "difficulty": 2,
@@ -1039,11 +1039,11 @@
       },
       "hint_commands": [
         "c",
-        "o",
         "w",
-        "y"
+        "y",
+        "o"
       ],
-      "hint_text": "1. c — 修改（刪除並進入插入模式）\n2. o — 在下方新增一行並進入插入模式\n3. w — 移到下一個單字字首\n4. y — 複製（yank）",
+      "hint_text": "步驟 1：按 c — 修改（刪除並進入插入模式）\n步驟 2：按 w — 移到下一個單字字首\n步驟 3：按 y — 複製（yank）\n步驟 4：按 o — 在下方新增一行並進入插入模式\n\n完整按鍵：cwyou\u003cEsc\u003e",
       "tags": [
         "c",
         "o",
@@ -1066,9 +1066,9 @@
         "section": "8.49",
         "tip_number": 49
       },
-      "title_zh": "練習：W (移到下一個 WORD 字首)、c (修改（刪除並進入插入模式）)",
+      "title_zh": "練習：c (修改（刪除並進入插入模式）)、W (移到下一個 WORD 字首)",
       "title_en": "Move Word-Wise",
-      "description_zh": "使用 用 W 移到下一個 WORD 字首，用 c 修改（刪除並進入插入模式），用 it HTML 標籤內的文字，用 s 刪除字元並進入插入模式。按鍵序列：cWit’s\u003cEsc\u003e",
+      "description_zh": "依序按 c（修改（刪除並進入插入模式）） → W（移到下一個 WORD 字首） → it（HTML 標籤內的文字） → s（刪除字元並進入插入模式）\n按鍵序列：cWit’s\u003cEsc\u003e",
       "description_en": "Move Word-Wise",
       "category": "combo",
       "difficulty": 3,
@@ -1079,12 +1079,12 @@
         "col": 0
       },
       "hint_commands": [
-        "W",
         "c",
+        "W",
         "it",
         "s"
       ],
-      "hint_text": "1. W — 移到下一個 WORD 字首\n2. c — 修改（刪除並進入插入模式）\n3. it — HTML 標籤內的文字\n4. s — 刪除字元並進入插入模式",
+      "hint_text": "步驟 1：按 c — 修改（刪除並進入插入模式）\n步驟 2：按 W — 移到下一個 WORD 字首\n步驟 3：按 it — HTML 標籤內的文字\n步驟 4：按 s — 刪除字元並進入插入模式\n\n完整按鍵：cWit’s\u003cEsc\u003e",
       "tags": [
         "W",
         "c",
@@ -1108,9 +1108,9 @@
         "section": "8.50",
         "tip_number": 50
       },
-      "title_zh": "練習：. (重複上次修改)、d (刪除)",
+      "title_zh": "練習：f (向右搜尋字元)、d (刪除)",
       "title_en": "Find by Character",
-      "description_zh": "使用 用 . 重複上次修改，用 d 刪除，用 f 向右搜尋字元，用 t 向右搜尋字元（游標停在前一格）。按鍵序列：f,dt.",
+      "description_zh": "依序按 f（向右搜尋字元） → d（刪除） → t（向右搜尋字元（游標停在前一格）） → .（重複上次修改）\n按鍵序列：f,dt.",
       "description_en": "Find by Character",
       "category": "combo",
       "difficulty": 2,
@@ -1121,12 +1121,12 @@
         "col": 0
       },
       "hint_commands": [
-        ".",
-        "d",
         "f",
-        "t"
+        "d",
+        "t",
+        "."
       ],
-      "hint_text": "1. . — 重複上次修改\n2. d — 刪除\n3. f — 向右搜尋字元\n4. t — 向右搜尋字元（游標停在前一格）",
+      "hint_text": "步驟 1：按 f — 向右搜尋字元\n步驟 2：按 d — 刪除\n步驟 3：按 t — 向右搜尋字元（游標停在前一格）\n步驟 4：按 . — 重複上次修改\n\n完整按鍵：f,dt.",
       "tags": [
         ".",
         "d",
@@ -1149,9 +1149,9 @@
         "section": "8.51",
         "tip_number": 51
       },
-      "title_zh": "練習：d (刪除)、h (向左移動)",
+      "title_zh": "練習：v (進入視覺模式（字元選取）)、h (向左移動)",
       "title_en": "Search to Navigate",
-      "description_zh": "使用 用 d 刪除，用 h 向左移動，用 v 進入視覺模式（字元選取）。按鍵序列：v\u003cCR\u003ehd",
+      "description_zh": "依序按 v（進入視覺模式（字元選取）） → h（向左移動） → d（刪除）\n按鍵序列：v\u003cCR\u003ehd",
       "description_en": "Search to Navigate",
       "category": "combo",
       "difficulty": 2,
@@ -1162,11 +1162,11 @@
         "col": 0
       },
       "hint_commands": [
-        "d",
+        "v",
         "h",
-        "v"
+        "d"
       ],
-      "hint_text": "1. d — 刪除\n2. h — 向左移動\n3. v — 進入視覺模式（字元選取）",
+      "hint_text": "步驟 1：按 v — 進入視覺模式（字元選取）\n步驟 2：按 h — 向左移動\n步驟 3：按 d — 刪除\n\n完整按鍵：v\u003cCR\u003ehd",
       "tags": [
         "d",
         "h",
@@ -1190,7 +1190,7 @@
       },
       "title_zh": "練習：d (刪除)",
       "title_en": "Search to Navigate",
-      "description_zh": "使用 用 d 刪除。按鍵序列：d\u003cCR\u003e",
+      "description_zh": "依序按 d（刪除）\n按鍵序列：d\u003cCR\u003e",
       "description_en": "Search to Navigate",
       "category": "operator",
       "difficulty": 1,
@@ -1203,7 +1203,7 @@
       "hint_commands": [
         "d"
       ],
-      "hint_text": "1. d — 刪除",
+      "hint_text": "步驟 1：按 d — 刪除\n\n完整按鍵：d\u003cCR\u003e",
       "tags": [
         "d"
       ],
@@ -1221,9 +1221,9 @@
         "section": "8.52",
         "tip_number": 52
       },
-      "title_zh": "練習：a\" (雙引號內的文字含引號)、a] (方括號內的文字含方括號)",
+      "title_zh": "練習：v (進入視覺模式（字元選取）)、i} (大括號內的文字)",
       "title_en": "Trace Your Selection with Precision Text Objects",
-      "description_zh": "使用 用 a\" 雙引號內的文字含引號，用 a] 方括號內的文字含方括號，用 at HTML 標籤內的文字含標籤，用 i\u003e 角括號內的文字，用 it HTML 標籤內的文字，用 i} 大括號內的文字，用 v 進入視覺模式（字元選取）。按鍵序列：vi}a\"i\u003eitata]",
+      "description_zh": "依序按 v（進入視覺模式（字元選取）） → i}（大括號內的文字） → a\"（雙引號內的文字含引號） → i\u003e（角括號內的文字） → it（HTML 標籤內的文字） → at（HTML 標籤內的文字含標籤） → a]（方括號內的文字含方括號）\n按鍵序列：vi}a\"i\u003eitata]",
       "description_en": "Trace Your Selection with Precision Text Objects",
       "category": "text-object",
       "difficulty": 3,
@@ -1234,15 +1234,15 @@
         "col": 0
       },
       "hint_commands": [
+        "v",
+        "i}",
         "a\"",
-        "a]",
-        "at",
         "i\u003e",
         "it",
-        "i}",
-        "v"
+        "at",
+        "a]"
       ],
-      "hint_text": "1. a\" — 雙引號內的文字含引號\n2. a] — 方括號內的文字含方括號\n3. at — HTML 標籤內的文字含標籤\n4. i\u003e — 角括號內的文字\n5. it — HTML 標籤內的文字\n6. i} — 大括號內的文字\n7. v — 進入視覺模式（字元選取）",
+      "hint_text": "步驟 1：按 v — 進入視覺模式（字元選取）\n步驟 2：按 i} — 大括號內的文字\n步驟 3：按 a\" — 雙引號內的文字含引號\n步驟 4：按 i\u003e — 角括號內的文字\n步驟 5：按 it — HTML 標籤內的文字\n步驟 6：按 at — HTML 標籤內的文字含標籤\n步驟 7：按 a] — 方括號內的文字含方括號\n\n完整按鍵：vi}a\"i\u003eitata]",
       "tags": [
         "a\"",
         "a]",
@@ -1267,9 +1267,9 @@
         "section": "8.52",
         "tip_number": 52
       },
-      "title_zh": "練習：# (反向搜尋游標下的單字)、c (修改（刪除並進入插入模式）)",
+      "title_zh": "練習：c (修改（刪除並進入插入模式）)、i\" (雙引號內的文字)",
       "title_en": "Trace Your Selection with Precision Text Objects",
-      "description_zh": "使用 用 # 反向搜尋游標下的單字，用 c 修改（刪除並進入插入模式），用 i 在游標前進入插入模式，用 i\" 雙引號內的文字，用 it HTML 標籤內的文字，用 l 向右移動。按鍵序列：ci\"#\u003cEsc\u003ecitclick here\u003cEsc\u003e",
+      "description_zh": "依序按 c（修改（刪除並進入插入模式）） → i\"（雙引號內的文字） → #（反向搜尋游標下的單字） → it（HTML 標籤內的文字） → l（向右移動） → i（在游標前進入插入模式）\n按鍵序列：ci\"#\u003cEsc\u003ecitclick here\u003cEsc\u003e",
       "description_en": "Trace Your Selection with Precision Text Objects",
       "category": "combo",
       "difficulty": 3,
@@ -1280,14 +1280,14 @@
         "col": 0
       },
       "hint_commands": [
-        "#",
         "c",
-        "i",
         "i\"",
+        "#",
         "it",
-        "l"
+        "l",
+        "i"
       ],
-      "hint_text": "1. # — 反向搜尋游標下的單字\n2. c — 修改（刪除並進入插入模式）\n3. i — 在游標前進入插入模式\n4. i\" — 雙引號內的文字\n5. it — HTML 標籤內的文字\n6. l — 向右移動",
+      "hint_text": "步驟 1：按 c — 修改（刪除並進入插入模式）\n步驟 2：按 i\" — 雙引號內的文字\n步驟 3：按 # — 反向搜尋游標下的單字\n步驟 4：按 it — HTML 標籤內的文字\n步驟 5：按 l — 向右移動\n步驟 6：按 i — 在游標前進入插入模式\n\n完整按鍵：ci\"#\u003cEsc\u003ecitclick here\u003cEsc\u003e",
       "tags": [
         "#",
         "c",
@@ -1313,9 +1313,9 @@
         "section": "8.53",
         "tip_number": 53
       },
-      "title_zh": "練習：aw (游標所在的單字含空白（a word）)、d (刪除)",
+      "title_zh": "練習：d (刪除)、aw (游標所在的單字含空白（a word）)",
       "title_en": "Delete Around, or Change Inside",
-      "description_zh": "使用 用 aw 游標所在的單字含空白（a word），用 d 刪除。按鍵序列：daw",
+      "description_zh": "依序按 d（刪除） → aw（游標所在的單字含空白（a word））\n按鍵序列：daw",
       "description_en": "Delete Around, or Change Inside",
       "category": "combo",
       "difficulty": 1,
@@ -1326,10 +1326,10 @@
         "col": 0
       },
       "hint_commands": [
-        "aw",
-        "d"
+        "d",
+        "aw"
       ],
-      "hint_text": "1. aw — 游標所在的單字含空白（a word）\n2. d — 刪除",
+      "hint_text": "步驟 1：按 d — 刪除\n步驟 2：按 aw — 游標所在的單字含空白（a word）\n\n完整按鍵：daw",
       "tags": [
         "aw",
         "d"
@@ -1351,7 +1351,7 @@
       },
       "title_zh": "練習：c (修改（刪除並進入插入模式）)、iw (游標所在的單字（inner word）)",
       "title_en": "Delete Around, or Change Inside",
-      "description_zh": "使用 用 c 修改（刪除並進入插入模式），用 iw 游標所在的單字（inner word），用 o 在下方新增一行並進入插入模式。按鍵序列：ciwmost\u003cEsc\u003e",
+      "description_zh": "依序按 c（修改（刪除並進入插入模式）） → iw（游標所在的單字（inner word）） → o（在下方新增一行並進入插入模式）\n按鍵序列：ciwmost\u003cEsc\u003e",
       "description_en": "Delete Around, or Change Inside",
       "category": "combo",
       "difficulty": 2,
@@ -1366,7 +1366,7 @@
         "iw",
         "o"
       ],
-      "hint_text": "1. c — 修改（刪除並進入插入模式）\n2. iw — 游標所在的單字（inner word）\n3. o — 在下方新增一行並進入插入模式",
+      "hint_text": "步驟 1：按 c — 修改（刪除並進入插入模式）\n步驟 2：按 iw — 游標所在的單字（inner word）\n步驟 3：按 o — 在下方新增一行並進入插入模式\n\n完整按鍵：ciwmost\u003cEsc\u003e",
       "tags": [
         "c",
         "iw",
@@ -1388,9 +1388,9 @@
         "section": "8.55",
         "tip_number": 55
       },
-      "title_zh": "練習：% (跳到配對的括號)、d (刪除)",
+      "title_zh": "練習：d (刪除)、t (向右搜尋字元（游標停在前一格）)",
       "title_en": "Jump Between Matching Parentheses",
-      "description_zh": "使用 用 % 跳到配對的括號，用 d 刪除，用 r 替換游標下的字元，用 t 向右搜尋字元（游標停在前一格），用 { 移到上一個段落。按鍵序列：dt{%r]``r[",
+      "description_zh": "依序按 d（刪除） → t（向右搜尋字元（游標停在前一格）） → {（移到上一個段落） → %（跳到配對的括號） → r（替換游標下的字元）\n按鍵序列：dt{%r]``r[",
       "description_en": "Jump Between Matching Parentheses",
       "category": "motion",
       "difficulty": 2,
@@ -1401,13 +1401,13 @@
         "col": 0
       },
       "hint_commands": [
-        "%",
         "d",
-        "r",
         "t",
-        "{"
+        "{",
+        "%",
+        "r"
       ],
-      "hint_text": "1. % — 跳到配對的括號\n2. d — 刪除\n3. r — 替換游標下的字元\n4. t — 向右搜尋字元（游標停在前一格）\n5. { — 移到上一個段落",
+      "hint_text": "步驟 1：按 d — 刪除\n步驟 2：按 t — 向右搜尋字元（游標停在前一格）\n步驟 3：按 { — 移到上一個段落\n步驟 4：按 % — 跳到配對的括號\n步驟 5：按 r — 替換游標下的字元\n\n完整按鍵：dt{%r]``r[",
       "tags": [
         "%",
         "d",
@@ -1431,9 +1431,9 @@
         "section": "8.55",
         "tip_number": 55
       },
-      "title_zh": "練習：S (刪除整行並進入插入模式)、e (移到單字字尾)",
+      "title_zh": "練習：v (進入視覺模式（字元選取）)、e (移到單字字尾)",
       "title_en": "Jump Between Matching Parentheses",
-      "description_zh": "使用 用 S 刪除整行並進入插入模式，用 e 移到單字字尾，用 v 進入視覺模式（字元選取）。按鍵序列：veeS\"",
+      "description_zh": "依序按 v（進入視覺模式（字元選取）） → e（移到單字字尾） → S（刪除整行並進入插入模式）\n按鍵序列：veeS\"",
       "description_en": "Jump Between Matching Parentheses",
       "category": "combo",
       "difficulty": 2,
@@ -1444,11 +1444,11 @@
         "col": 0
       },
       "hint_commands": [
-        "S",
+        "v",
         "e",
-        "v"
+        "S"
       ],
-      "hint_text": "1. S — 刪除整行並進入插入模式\n2. e — 移到單字字尾\n3. v — 進入視覺模式（字元選取）",
+      "hint_text": "步驟 1：按 v — 進入視覺模式（字元選取）\n步驟 2：按 e — 移到單字字尾\n步驟 3：按 S — 刪除整行並進入插入模式\n\n完整按鍵：veeS\"",
       "tags": [
         "S",
         "e",
@@ -1472,7 +1472,7 @@
       },
       "title_zh": "練習：F (向左搜尋字元)、p (貼上到游標後)",
       "title_en": "Delete, Yank, and Put with Vim’s Unnamed Register",
-      "description_zh": "使用 用 F 向左搜尋字元，用 p 貼上到游標後。按鍵序列：Fxp",
+      "description_zh": "依序按 F（向左搜尋字元） → p（貼上到游標後）\n按鍵序列：Fxp",
       "description_en": "Delete, Yank, and Put with Vim’s Unnamed Register",
       "category": "motion",
       "difficulty": 1,
@@ -1486,7 +1486,7 @@
         "F",
         "p"
       ],
-      "hint_text": "1. F — 向左搜尋字元\n2. p — 貼上到游標後",
+      "hint_text": "步驟 1：按 F — 向左搜尋字元\n步驟 2：按 p — 貼上到游標後\n\n完整按鍵：Fxp",
       "tags": [
         "F",
         "p"
@@ -1508,7 +1508,7 @@
       },
       "title_zh": "練習：dd (刪除整行)、p (貼上到游標後)",
       "title_en": "Delete, Yank, and Put with Vim’s Unnamed Register",
-      "description_zh": "使用 用 dd 刪除整行，用 p 貼上到游標後。按鍵序列：ddp",
+      "description_zh": "依序按 dd（刪除整行） → p（貼上到游標後）\n按鍵序列：ddp",
       "description_en": "Delete, Yank, and Put with Vim’s Unnamed Register",
       "category": "other",
       "difficulty": 1,
@@ -1522,7 +1522,7 @@
         "dd",
         "p"
       ],
-      "hint_text": "1. dd — 刪除整行\n2. p — 貼上到游標後",
+      "hint_text": "步驟 1：按 dd — 刪除整行\n步驟 2：按 p — 貼上到游標後\n\n完整按鍵：ddp",
       "tags": [
         "dd",
         "p"
@@ -1541,9 +1541,9 @@
         "section": "10.60",
         "tip_number": 60
       },
-      "title_zh": "練習：p (貼上到游標後)、yy (複製整行)",
+      "title_zh": "練習：yy (複製整行)、p (貼上到游標後)",
       "title_en": "Delete, Yank, and Put with Vim’s Unnamed Register",
-      "description_zh": "使用 用 p 貼上到游標後，用 yy 複製整行。按鍵序列：yyp",
+      "description_zh": "依序按 yy（複製整行） → p（貼上到游標後）\n按鍵序列：yyp",
       "description_en": "Delete, Yank, and Put with Vim’s Unnamed Register",
       "category": "other",
       "difficulty": 1,
@@ -1554,10 +1554,10 @@
         "col": 0
       },
       "hint_commands": [
-        "p",
-        "yy"
+        "yy",
+        "p"
       ],
-      "hint_text": "1. p — 貼上到游標後\n2. yy — 複製整行",
+      "hint_text": "步驟 1：按 yy — 複製整行\n步驟 2：按 p — 貼上到游標後\n\n完整按鍵：yyp",
       "tags": [
         "p",
         "yy"
@@ -1576,9 +1576,9 @@
         "section": "10.61",
         "tip_number": 61
       },
-      "title_zh": "練習：0 (移到行首)、P (貼上到游標前)",
+      "title_zh": "練習：y (複製（yank）)、iw (游標所在的單字（inner word）)",
       "title_en": "Grok Vim’s Registers",
-      "description_zh": "使用 用 0 移到行首，用 P 貼上到游標前，用 d 刪除，用 iw 游標所在的單字（inner word），用 j 向下移動，用 w 移到下一個單字字首，用 y 複製（yank）。按鍵序列：yiwjwwdiw\"0P",
+      "description_zh": "依序按 y（複製（yank）） → iw（游標所在的單字（inner word）） → j（向下移動） → w（移到下一個單字字首） → d（刪除） → 0（移到行首） → P（貼上到游標前）\n按鍵序列：yiwjwwdiw\"0P",
       "description_en": "Grok Vim’s Registers",
       "category": "combo",
       "difficulty": 3,
@@ -1589,15 +1589,15 @@
         "col": 0
       },
       "hint_commands": [
-        "0",
-        "P",
-        "d",
+        "y",
         "iw",
         "j",
         "w",
-        "y"
+        "d",
+        "0",
+        "P"
       ],
-      "hint_text": "1. 0 — 移到行首\n2. P — 貼上到游標前\n3. d — 刪除\n4. iw — 游標所在的單字（inner word）\n5. j — 向下移動\n6. w — 移到下一個單字字首\n7. y — 複製（yank）",
+      "hint_text": "步驟 1：按 y — 複製（yank）\n步驟 2：按 iw — 游標所在的單字（inner word）\n步驟 3：按 j — 向下移動\n步驟 4：按 w — 移到下一個單字字首\n步驟 5：按 d — 刪除\n步驟 6：按 0 — 移到行首\n步驟 7：按 P — 貼上到游標前\n\n完整按鍵：yiwjwwdiw\"0P",
       "tags": [
         "0",
         "P",
@@ -1626,7 +1626,7 @@
       },
       "title_zh": "練習：a (在游標後進入插入模式)",
       "title_en": "Grok Vim’s Registers",
-      "description_zh": "使用 用 a 在游標後進入插入模式。按鍵序列：\"ayiwjwwdiw\"aP",
+      "description_zh": "依序按 a（在游標後進入插入模式）\n按鍵序列：\"ayiwjwwdiw\"aP",
       "description_en": "Grok Vim’s Registers",
       "category": "insert",
       "difficulty": 1,
@@ -1639,7 +1639,7 @@
       "hint_commands": [
         "a"
       ],
-      "hint_text": "1. a — 在游標後進入插入模式",
+      "hint_text": "步驟 1：按 a — 在游標後進入插入模式\n\n完整按鍵：\"ayiwjwwdiw\"aP",
       "tags": [
         "a"
       ],
@@ -1657,9 +1657,9 @@
         "section": "10.61",
         "tip_number": 61
       },
-      "title_zh": "練習：P (貼上到游標前)、d (刪除)",
+      "title_zh": "練習：y (複製（yank）)、iw (游標所在的單字（inner word）)",
       "title_en": "Grok Vim’s Registers",
-      "description_zh": "使用 用 P 貼上到游標前，用 d 刪除，用 iw 游標所在的單字（inner word），用 j 向下移動，用 w 移到下一個單字字首，用 y 複製（yank）。按鍵序列：yiwjww\"_diwP",
+      "description_zh": "依序按 y（複製（yank）） → iw（游標所在的單字（inner word）） → j（向下移動） → w（移到下一個單字字首） → d（刪除） → P（貼上到游標前）\n按鍵序列：yiwjww\"_diwP",
       "description_en": "Grok Vim’s Registers",
       "category": "combo",
       "difficulty": 3,
@@ -1670,14 +1670,14 @@
         "col": 0
       },
       "hint_commands": [
-        "P",
-        "d",
+        "y",
         "iw",
         "j",
         "w",
-        "y"
+        "d",
+        "P"
       ],
-      "hint_text": "1. P — 貼上到游標前\n2. d — 刪除\n3. iw — 游標所在的單字（inner word）\n4. j — 向下移動\n5. w — 移到下一個單字字首\n6. y — 複製（yank）",
+      "hint_text": "步驟 1：按 y — 複製（yank）\n步驟 2：按 iw — 游標所在的單字（inner word）\n步驟 3：按 j — 向下移動\n步驟 4：按 w — 移到下一個單字字首\n步驟 5：按 d — 刪除\n步驟 6：按 P — 貼上到游標前\n\n完整按鍵：yiwjww\"_diwP",
       "tags": [
         "P",
         "d",
@@ -1703,9 +1703,9 @@
         "section": "10.62",
         "tip_number": 62
       },
-      "title_zh": "練習：e (移到單字字尾)、iw (游標所在的單字（inner word）)",
+      "title_zh": "練習：y (複製（yank）)、iw (游標所在的單字（inner word）)",
       "title_en": "Replace a Visual Selection with a Register",
-      "description_zh": "使用 用 e 移到單字字尾，用 iw 游標所在的單字（inner word），用 j 向下移動，用 p 貼上到游標後，用 v 進入視覺模式（字元選取），用 w 移到下一個單字字首，用 y 複製（yank）。按鍵序列：yiwjwwvep",
+      "description_zh": "依序按 y（複製（yank）） → iw（游標所在的單字（inner word）） → j（向下移動） → w（移到下一個單字字首） → v（進入視覺模式（字元選取）） → e（移到單字字尾） → p（貼上到游標後）\n按鍵序列：yiwjwwvep",
       "description_en": "Replace a Visual Selection with a Register",
       "category": "combo",
       "difficulty": 3,
@@ -1716,15 +1716,15 @@
         "col": 0
       },
       "hint_commands": [
-        "e",
+        "y",
         "iw",
         "j",
-        "p",
-        "v",
         "w",
-        "y"
+        "v",
+        "e",
+        "p"
       ],
-      "hint_text": "1. e — 移到單字字尾\n2. iw — 游標所在的單字（inner word）\n3. j — 向下移動\n4. p — 貼上到游標後\n5. v — 進入視覺模式（字元選取）\n6. w — 移到下一個單字字首\n7. y — 複製（yank）",
+      "hint_text": "步驟 1：按 y — 複製（yank）\n步驟 2：按 iw — 游標所在的單字（inner word）\n步驟 3：按 j — 向下移動\n步驟 4：按 w — 移到下一個單字字首\n步驟 5：按 v — 進入視覺模式（字元選取）\n步驟 6：按 e — 移到單字字尾\n步驟 7：按 p — 貼上到游標後\n\n完整按鍵：yiwjwwvep",
       "tags": [
         "e",
         "iw",
@@ -1752,9 +1752,9 @@
         "section": "10.62",
         "tip_number": 62
       },
-      "title_zh": "練習：P (貼上到游標前)、d (刪除)",
+      "title_zh": "練習：f (向右搜尋字元)、d (刪除)",
       "title_en": "Replace a Visual Selection with a Register",
-      "description_zh": "使用 用 P 貼上到游標前，用 d 刪除，用 e 移到單字字尾，用 f 向右搜尋字元，用 p 貼上到游標後，用 v 進入視覺模式（字元選取），用 w 移到下一個單字字首。按鍵序列：fcdemmwwvep`mP",
+      "description_zh": "依序按 f（向右搜尋字元） → d（刪除） → e（移到單字字尾） → w（移到下一個單字字首） → v（進入視覺模式（字元選取）） → p（貼上到游標後） → P（貼上到游標前）\n按鍵序列：fcdemmwwvep`mP",
       "description_en": "Replace a Visual Selection with a Register",
       "category": "combo",
       "difficulty": 3,
@@ -1765,15 +1765,15 @@
         "col": 0
       },
       "hint_commands": [
-        "P",
+        "f",
         "d",
         "e",
-        "f",
-        "p",
+        "w",
         "v",
-        "w"
+        "p",
+        "P"
       ],
-      "hint_text": "1. P — 貼上到游標前\n2. d — 刪除\n3. e — 移到單字字尾\n4. f — 向右搜尋字元\n5. p — 貼上到游標後\n6. v — 進入視覺模式（字元選取）\n7. w — 移到下一個單字字首",
+      "hint_text": "步驟 1：按 f — 向右搜尋字元\n步驟 2：按 d — 刪除\n步驟 3：按 e — 移到單字字尾\n步驟 4：按 w — 移到下一個單字字首\n步驟 5：按 v — 進入視覺模式（字元選取）\n步驟 6：按 p — 貼上到游標後\n步驟 7：按 P — 貼上到游標前\n\n完整按鍵：fcdemmwwvep`mP",
       "tags": [
         "P",
         "d",
@@ -1800,9 +1800,9 @@
         "section": "10.63",
         "tip_number": 63
       },
-      "title_zh": "練習：0 (移到行首)、c (修改（刪除並進入插入模式）)",
+      "title_zh": "練習：y (複製（yank）)、iw (游標所在的單字（inner word）)",
       "title_en": "Paste from a Register",
-      "description_zh": "使用 用 0 移到行首，用 c 修改（刪除並進入插入模式），用 iw 游標所在的單字（inner word），用 j 向下移動，用 w 移到下一個單字字首，用 y 複製（yank）。按鍵序列：yiwjwwciw\u003cC-r\u003e0\u003cEsc\u003e",
+      "description_zh": "依序按 y（複製（yank）） → iw（游標所在的單字（inner word）） → j（向下移動） → w（移到下一個單字字首） → c（修改（刪除並進入插入模式）） → 0（移到行首）\n按鍵序列：yiwjwwciw\u003cC-r\u003e0\u003cEsc\u003e",
       "description_en": "Paste from a Register",
       "category": "combo",
       "difficulty": 3,
@@ -1813,15 +1813,15 @@
         "col": 0
       },
       "hint_commands": [
-        "0",
-        "\u003cC-r\u003e",
-        "c",
+        "y",
         "iw",
         "j",
         "w",
-        "y"
+        "c",
+        "\u003cC-r\u003e",
+        "0"
       ],
-      "hint_text": "1. 0 — 移到行首\n3. c — 修改（刪除並進入插入模式）\n4. iw — 游標所在的單字（inner word）\n5. j — 向下移動\n6. w — 移到下一個單字字首\n7. y — 複製（yank）",
+      "hint_text": "步驟 1：按 y — 複製（yank）\n步驟 2：按 iw — 游標所在的單字（inner word）\n步驟 3：按 j — 向下移動\n步驟 4：按 w — 移到下一個單字字首\n步驟 5：按 c — 修改（刪除並進入插入模式）\n步驟 6：按 0 — 移到行首\n\n完整按鍵：yiwjwwciw\u003cC-r\u003e0\u003cEsc\u003e",
       "tags": [
         "0",
         "\u003cC-r\u003e",
@@ -1848,9 +1848,9 @@
         "section": "10.63",
         "tip_number": 63
       },
-      "title_zh": "練習：P (貼上到游標前)、y (複製（yank）)",
+      "title_zh": "練習：y (複製（yank）)、P (貼上到游標前)",
       "title_en": "Paste from a Register",
-      "description_zh": "使用 用 P 貼上到游標前，用 y 複製（yank）。按鍵序列：yapgP",
+      "description_zh": "依序按 y（複製（yank）） → P（貼上到游標前）\n按鍵序列：yapgP",
       "description_en": "Paste from a Register",
       "category": "combo",
       "difficulty": 2,
@@ -1861,11 +1861,11 @@
         "col": 0
       },
       "hint_commands": [
-        "P",
+        "y",
         "ap",
-        "y"
+        "P"
       ],
-      "hint_text": "1. P — 貼上到游標前\n3. y — 複製（yank）",
+      "hint_text": "步驟 1：按 y — 複製（yank）\n步驟 2：按 P — 貼上到游標前\n\n完整按鍵：yapgP",
       "tags": [
         "P",
         "ap",
@@ -1887,9 +1887,9 @@
         "section": "11.65",
         "tip_number": 65
       },
-      "title_zh": "練習：I (在行首進入插入模式)、a (在游標後進入插入模式)",
+      "title_zh": "練習：q (錄製巨集)、a (在游標後進入插入模式)",
       "title_en": "Record and Execute a Macro",
-      "description_zh": "使用 用 I 在行首進入插入模式，用 a 在游標後進入插入模式，用 q 錄製巨集。按鍵序列：qaA;\u003cEsc\u003eIvar\u003cEsc\u003eq",
+      "description_zh": "依序按 q（錄製巨集） → a（在游標後進入插入模式） → I（在行首進入插入模式）\n按鍵序列：qaA;\u003cEsc\u003eIvar\u003cEsc\u003eq",
       "description_en": "Record and Execute a Macro",
       "category": "insert",
       "difficulty": 3,
@@ -1900,11 +1900,11 @@
         "col": 0
       },
       "hint_commands": [
-        "I",
+        "q",
         "a",
-        "q"
+        "I"
       ],
-      "hint_text": "1. I — 在行首進入插入模式\n2. a — 在游標後進入插入模式\n3. q — 錄製巨集",
+      "hint_text": "步驟 1：按 q — 錄製巨集\n步驟 2：按 a — 在游標後進入插入模式\n步驟 3：按 I — 在行首進入插入模式\n\n完整按鍵：qaA;\u003cEsc\u003eIvar\u003cEsc\u003eq",
       "tags": [
         "I",
         "a",
@@ -1925,9 +1925,9 @@
         "section": "11.65",
         "tip_number": 65
       },
-      "title_zh": "練習：@ (播放巨集)、a (在游標後進入插入模式)",
+      "title_zh": "練習：j (向下移動)、@ (播放巨集)",
       "title_en": "Record and Execute a Macro",
-      "description_zh": "使用 用 @ 播放巨集，用 a 在游標後進入插入模式，用 j 向下移動。按鍵序列：j@aj@@",
+      "description_zh": "依序按 j（向下移動） → @（播放巨集） → a（在游標後進入插入模式）\n按鍵序列：j@aj@@",
       "description_en": "Record and Execute a Macro",
       "category": "combo",
       "difficulty": 2,
@@ -1938,11 +1938,11 @@
         "col": 0
       },
       "hint_commands": [
+        "j",
         "@",
-        "a",
-        "j"
+        "a"
       ],
-      "hint_text": "1. @ — 播放巨集\n2. a — 在游標後進入插入模式\n3. j — 向下移動",
+      "hint_text": "步驟 1：按 j — 向下移動\n步驟 2：按 @ — 播放巨集\n步驟 3：按 a — 在游標後進入插入模式\n\n完整按鍵：j@aj@@",
       "tags": [
         "@",
         "a",
@@ -1964,9 +1964,9 @@
         "section": "11.68",
         "tip_number": 68
       },
-      "title_zh": "練習：a (在游標後進入插入模式)、q (錄製巨集)",
+      "title_zh": "練習：q (錄製巨集)、a (在游標後進入插入模式)",
       "title_en": "Repeat a Change on Contiguous Lines",
-      "description_zh": "使用 用 a 在游標後進入插入模式，用 q 錄製巨集。按鍵序列：qa0f.r)w~jq",
+      "description_zh": "依序按 q（錄製巨集） → a（在游標後進入插入模式）\n按鍵序列：qa0f.r)w~jq",
       "description_en": "Repeat a Change on Contiguous Lines",
       "category": "insert",
       "difficulty": 2,
@@ -1977,10 +1977,10 @@
         "col": 0
       },
       "hint_commands": [
-        "a",
-        "q"
+        "q",
+        "a"
       ],
-      "hint_text": "1. a — 在游標後進入插入模式\n2. q — 錄製巨集",
+      "hint_text": "步驟 1：按 q — 錄製巨集\n步驟 2：按 a — 在游標後進入插入模式\n\n完整按鍵：qa0f.r)w~jq",
       "tags": [
         "a",
         "q"
@@ -2002,7 +2002,7 @@
       },
       "title_zh": "練習：@ (播放巨集)、a (在游標後進入插入模式)",
       "title_en": "Repeat a Change on Contiguous Lines",
-      "description_zh": "使用 用 @ 播放巨集，用 a 在游標後進入插入模式。按鍵序列：3@a",
+      "description_zh": "依序按 @（播放巨集） → a（在游標後進入插入模式）\n按鍵序列：3@a",
       "description_en": "Repeat a Change on Contiguous Lines",
       "category": "insert",
       "difficulty": 1,
@@ -2016,7 +2016,7 @@
         "@",
         "a"
       ],
-      "hint_text": "1. @ — 播放巨集\n2. a — 在游標後進入插入模式",
+      "hint_text": "步驟 1：按 @ — 播放巨集\n步驟 2：按 a — 在游標後進入插入模式\n\n完整按鍵：3@a",
       "tags": [
         "@",
         "a"
@@ -2038,7 +2038,7 @@
       },
       "title_zh": "練習：@ (播放巨集)、a (在游標後進入插入模式)",
       "title_en": "Repeat a Change on Contiguous Lines",
-      "description_zh": "使用 用 @ 播放巨集，用 a 在游標後進入插入模式。按鍵序列：5@a",
+      "description_zh": "依序按 @（播放巨集） → a（在游標後進入插入模式）\n按鍵序列：5@a",
       "description_en": "Repeat a Change on Contiguous Lines",
       "category": "insert",
       "difficulty": 1,
@@ -2052,7 +2052,7 @@
         "@",
         "a"
       ],
-      "hint_text": "1. @ — 播放巨集\n2. a — 在游標後進入插入模式",
+      "hint_text": "步驟 1：按 @ — 播放巨集\n步驟 2：按 a — 在游標後進入插入模式\n\n完整按鍵：5@a",
       "tags": [
         "@",
         "a"
@@ -2072,9 +2072,9 @@
         "section": "11.68",
         "tip_number": 68
       },
-      "title_zh": "練習：a (在游標後進入插入模式)、q (錄製巨集)",
+      "title_zh": "練習：q (錄製巨集)、a (在游標後進入插入模式)",
       "title_en": "Repeat a Change on Contiguous Lines",
-      "description_zh": "使用 用 a 在游標後進入插入模式，用 q 錄製巨集。按鍵序列：qa0f.r)w~qjVG",
+      "description_zh": "依序按 q（錄製巨集） → a（在游標後進入插入模式）\n按鍵序列：qa0f.r)w~qjVG",
       "description_en": "Repeat a Change on Contiguous Lines",
       "category": "insert",
       "difficulty": 2,
@@ -2085,10 +2085,10 @@
         "col": 0
       },
       "hint_commands": [
-        "a",
-        "q"
+        "q",
+        "a"
       ],
-      "hint_text": "1. a — 在游標後進入插入模式\n2. q — 錄製巨集",
+      "hint_text": "步驟 1：按 q — 錄製巨集\n步驟 2：按 a — 在游標後進入插入模式\n\n完整按鍵：qa0f.r)w~qjVG",
       "tags": [
         "a",
         "q"
@@ -2108,9 +2108,9 @@
         "section": "11.70",
         "tip_number": 70
       },
-      "title_zh": "練習：\u003e (增加縮排)、G (移到檔案結尾)",
+      "title_zh": "練習：q (錄製巨集)、a (在游標後進入插入模式)",
       "title_en": "Act Upon a Collection of Files",
-      "description_zh": "使用 用 \u003e 增加縮排，用 G 移到檔案結尾，用 a 在游標後進入插入模式，用 j 向下移動，用 o 在下方新增一行並進入插入模式，用 q 錄製巨集。按鍵序列：qagg\u003cCR\u003eOmodule Rank\u003cEsc\u003ej\u003eGGoend\u003cEsc\u003eq",
+      "description_zh": "依序按 q（錄製巨集） → a（在游標後進入插入模式） → j（向下移動） → \u003e（增加縮排） → G（移到檔案結尾） → o（在下方新增一行並進入插入模式）\n按鍵序列：qagg\u003cCR\u003eOmodule Rank\u003cEsc\u003ej\u003eGGoend\u003cEsc\u003eq",
       "description_en": "Act Upon a Collection of Files",
       "category": "combo",
       "difficulty": 3,
@@ -2121,14 +2121,14 @@
         "col": 0
       },
       "hint_commands": [
-        "\u003e",
-        "G",
+        "q",
         "a",
         "j",
-        "o",
-        "q"
+        "\u003e",
+        "G",
+        "o"
       ],
-      "hint_text": "1. \u003e — 增加縮排\n2. G — 移到檔案結尾\n3. a — 在游標後進入插入模式\n4. j — 向下移動\n5. o — 在下方新增一行並進入插入模式\n6. q — 錄製巨集",
+      "hint_text": "步驟 1：按 q — 錄製巨集\n步驟 2：按 a — 在游標後進入插入模式\n步驟 3：按 j — 向下移動\n步驟 4：按 \u003e — 增加縮排\n步驟 5：按 G — 移到檔案結尾\n步驟 6：按 o — 在下方新增一行並進入插入模式\n\n完整按鍵：qagg\u003cCR\u003eOmodule Rank\u003cEsc\u003ej\u003eGGoend\u003cEsc\u003eq",
       "tags": [
         "\u003e",
         "G",
@@ -2154,9 +2154,9 @@
         "section": "11.70",
         "tip_number": 70
       },
-      "title_zh": "練習：A (在行尾進入插入模式)、q (錄製巨集)",
+      "title_zh": "練習：q (錄製巨集)、A (在行尾進入插入模式)",
       "title_en": "Act Upon a Collection of Files",
-      "description_zh": "使用 用 A 在行尾進入插入模式，用 q 錄製巨集。按鍵序列：qAq22@a",
+      "description_zh": "依序按 q（錄製巨集） → A（在行尾進入插入模式）\n按鍵序列：qAq22@a",
       "description_en": "Act Upon a Collection of Files",
       "category": "insert",
       "difficulty": 2,
@@ -2167,10 +2167,10 @@
         "col": 0
       },
       "hint_commands": [
-        "A",
-        "q"
+        "q",
+        "A"
       ],
-      "hint_text": "1. A — 在行尾進入插入模式\n2. q — 錄製巨集",
+      "hint_text": "步驟 1：按 q — 錄製巨集\n步驟 2：按 A — 在行尾進入插入模式\n\n完整按鍵：qAq22@a",
       "tags": [
         "A",
         "q"
@@ -2190,9 +2190,9 @@
         "section": "11.71",
         "tip_number": 71
       },
-      "title_zh": "練習：a (在游標後進入插入模式)、q (錄製巨集)",
+      "title_zh": "練習：q (錄製巨集)、a (在游標後進入插入模式)",
       "title_en": "Evaluate an Iterator to Number Items in a List",
-      "description_zh": "使用 用 a 在游標後進入插入模式，用 q 錄製巨集。按鍵序列：qaI\u003cC-r\u003e=i\u003cCR\u003e) \u003cEsc\u003eq",
+      "description_zh": "依序按 q（錄製巨集） → a（在游標後進入插入模式）\n按鍵序列：qaI\u003cC-r\u003e=i\u003cCR\u003e) \u003cEsc\u003eq",
       "description_en": "Evaluate an Iterator to Number Items in a List",
       "category": "insert",
       "difficulty": 2,
@@ -2203,10 +2203,10 @@
         "col": 0
       },
       "hint_commands": [
-        "a",
-        "q"
+        "q",
+        "a"
       ],
-      "hint_text": "1. a — 在游標後進入插入模式\n2. q — 錄製巨集",
+      "hint_text": "步驟 1：按 q — 錄製巨集\n步驟 2：按 a — 在游標後進入插入模式\n\n完整按鍵：qaI\u003cC-r\u003e=i\u003cCR\u003e) \u003cEsc\u003eq",
       "tags": [
         "a",
         "q"
@@ -2226,9 +2226,9 @@
         "section": "11.71",
         "tip_number": 71
       },
-      "title_zh": "練習：G (移到檔案結尾)、V (進入視覺模式（行選取）)",
+      "title_zh": "練習：j (向下移動)、V (進入視覺模式（行選取）)",
       "title_en": "Evaluate an Iterator to Number Items in a List",
-      "description_zh": "使用 用 G 移到檔案結尾，用 V 進入視覺模式（行選取），用 j 向下移動。按鍵序列：jVG",
+      "description_zh": "依序按 j（向下移動） → V（進入視覺模式（行選取）） → G（移到檔案結尾）\n按鍵序列：jVG",
       "description_en": "Evaluate an Iterator to Number Items in a List",
       "category": "combo",
       "difficulty": 1,
@@ -2239,11 +2239,11 @@
         "col": 0
       },
       "hint_commands": [
-        "G",
+        "j",
         "V",
-        "j"
+        "G"
       ],
-      "hint_text": "1. G — 移到檔案結尾\n2. V — 進入視覺模式（行選取）\n3. j — 向下移動",
+      "hint_text": "步驟 1：按 j — 向下移動\n步驟 2：按 V — 進入視覺模式（行選取）\n步驟 3：按 G — 移到檔案結尾\n\n完整按鍵：jVG",
       "tags": [
         "G",
         "V",
@@ -2266,7 +2266,7 @@
       },
       "title_zh": "練習：f (向右搜尋字元)、s (刪除字元並進入插入模式)",
       "title_en": "Edit the Contents of a Macro",
-      "description_zh": "使用 用 f 向右搜尋字元，用 s 刪除字元並進入插入模式。按鍵序列：f~svU\u003cEsc\u003e",
+      "description_zh": "依序按 f（向右搜尋字元） → s（刪除字元並進入插入模式）\n按鍵序列：f~svU\u003cEsc\u003e",
       "description_en": "Edit the Contents of a Macro",
       "category": "combo",
       "difficulty": 1,
@@ -2280,7 +2280,7 @@
         "f",
         "s"
       ],
-      "hint_text": "1. f — 向右搜尋字元\n2. s — 刪除字元並進入插入模式",
+      "hint_text": "步驟 1：按 f — 向右搜尋字元\n步驟 2：按 s — 刪除字元並進入插入模式\n\n完整按鍵：f~svU\u003cEsc\u003e",
       "tags": [
         "f",
         "s"
@@ -2302,7 +2302,7 @@
       },
       "title_zh": "練習：0 (移到行首)、a (在游標後進入插入模式)",
       "title_en": "Edit the Contents of a Macro",
-      "description_zh": "使用 用 0 移到行首，用 a 在游標後進入插入模式。按鍵序列：0\"ay$dd",
+      "description_zh": "依序按 0（移到行首） → a（在游標後進入插入模式）\n按鍵序列：0\"ay$dd",
       "description_en": "Edit the Contents of a Macro",
       "category": "combo",
       "difficulty": 1,
@@ -2316,7 +2316,7 @@
         "0",
         "a"
       ],
-      "hint_text": "1. 0 — 移到行首\n2. a — 在游標後進入插入模式",
+      "hint_text": "步驟 1：按 0 — 移到行首\n步驟 2：按 a — 在游標後進入插入模式\n\n完整按鍵：0\"ay$dd",
       "tags": [
         "0",
         "a"
@@ -2336,9 +2336,9 @@
         "section": "13.83",
         "tip_number": 83
       },
-      "title_zh": "練習：. (重複上次修改)、a (在游標後進入插入模式)",
+      "title_zh": "練習：a (在游標後進入插入模式)、n (搜尋下一個匹配)",
       "title_en": "Offset the Cursor to the End of a Search Match",
-      "description_zh": "使用 用 . 重複上次修改，用 a 在游標後進入插入模式，用 n 搜尋下一個匹配。按鍵序列：\u003cCR\u003eauage\u003cEsc\u003en.n.",
+      "description_zh": "依序按 a（在游標後進入插入模式） → n（搜尋下一個匹配） → .（重複上次修改）\n按鍵序列：\u003cCR\u003eauage\u003cEsc\u003en.n.",
       "description_en": "Offset the Cursor to the End of a Search Match",
       "category": "combo",
       "difficulty": 2,
@@ -2349,11 +2349,11 @@
         "col": 0
       },
       "hint_commands": [
-        ".",
         "a",
-        "n"
+        "n",
+        "."
       ],
-      "hint_text": "1. . — 重複上次修改\n2. a — 在游標後進入插入模式\n3. n — 搜尋下一個匹配",
+      "hint_text": "步驟 1：按 a — 在游標後進入插入模式\n步驟 2：按 n — 搜尋下一個匹配\n步驟 3：按 . — 重複上次修改\n\n完整按鍵：\u003cCR\u003eauage\u003cEsc\u003en.n.",
       "tags": [
         ".",
         "a",
@@ -2375,9 +2375,9 @@
         "section": "13.84",
         "tip_number": 84
       },
-      "title_zh": "練習：. (重複上次修改)、gU (轉大寫)",
+      "title_zh": "練習：gU (轉大寫)、n (搜尋下一個匹配)",
       "title_en": "Operate on a Complete Search Match",
-      "description_zh": "使用 用 . 重複上次修改，用 gU 轉大寫，用 n 搜尋下一個匹配。按鍵序列：\u003cCR\u003egUgnn.n..",
+      "description_zh": "依序按 gU（轉大寫） → n（搜尋下一個匹配） → .（重複上次修改）\n按鍵序列：\u003cCR\u003egUgnn.n..",
       "description_en": "Operate on a Complete Search Match",
       "category": "combo",
       "difficulty": 2,
@@ -2388,11 +2388,11 @@
         "col": 0
       },
       "hint_commands": [
-        ".",
         "gU",
-        "n"
+        "n",
+        "."
       ],
-      "hint_text": "1. . — 重複上次修改\n2. gU — 轉大寫\n3. n — 搜尋下一個匹配",
+      "hint_text": "步驟 1：按 gU — 轉大寫\n步驟 2：按 n — 搜尋下一個匹配\n步驟 3：按 . — 重複上次修改\n\n完整按鍵：\u003cCR\u003egUgnn.n..",
       "tags": [
         ".",
         "gU",
@@ -2414,9 +2414,9 @@
         "section": "13.85",
         "tip_number": 85
       },
-      "title_zh": "練習：% (跳到配對的括號)、( (移到上一個句子)",
+      "title_zh": "練習：f (向右搜尋字元)、c (修改（刪除並進入插入模式）)",
       "title_en": "Create Complex Patterns by Iterating upon Search History",
-      "description_zh": "使用 用 % 跳到配對的括號，用 ( 移到上一個句子，用 ) 移到下一個句子，用 c 修改（刪除並進入插入模式），用 f 向右搜尋字元，用 i 在游標前進入插入模式。按鍵序列：f[c%(\u003cC-r\u003e\")\u003cEsc\u003ei|’\\w\u003cEsc\u003e",
+      "description_zh": "依序按 f（向右搜尋字元） → c（修改（刪除並進入插入模式）） → %（跳到配對的括號） → (（移到上一個句子） → )（移到下一個句子） → i（在游標前進入插入模式）\n按鍵序列：f[c%(\u003cC-r\u003e\")\u003cEsc\u003ei|’\\w\u003cEsc\u003e",
       "description_en": "Create Complex Patterns by Iterating upon Search History",
       "category": "combo",
       "difficulty": 2,
@@ -2427,15 +2427,15 @@
         "col": 0
       },
       "hint_commands": [
+        "f",
+        "c",
         "%",
         "(",
-        ")",
         "\u003cC-r\u003e",
-        "c",
-        "f",
+        ")",
         "i"
       ],
-      "hint_text": "1. % — 跳到配對的括號\n2. ( — 移到上一個句子\n3. ) — 移到下一個句子\n5. c — 修改（刪除並進入插入模式）\n6. f — 向右搜尋字元\n7. i — 在游標前進入插入模式",
+      "hint_text": "步驟 1：按 f — 向右搜尋字元\n步驟 2：按 c — 修改（刪除並進入插入模式）\n步驟 3：按 % — 跳到配對的括號\n步驟 4：按 ( — 移到上一個句子\n步驟 5：按 ) — 移到下一個句子\n步驟 6：按 i — 在游標前進入插入模式\n\n完整按鍵：f[c%(\u003cC-r\u003e\")\u003cEsc\u003ei|’\\w\u003cEsc\u003e",
       "tags": [
         "%",
         "(",
@@ -2462,9 +2462,9 @@
         "section": "14.93",
         "tip_number": 93
       },
-      "title_zh": "練習：P (貼上到游標前)、V (進入視覺模式（行選取）)",
+      "title_zh": "練習：V (進入視覺模式（行選取）)、j (向下移動)",
       "title_en": "Repeat the Previous Substitute Command",
-      "description_zh": "使用 用 P 貼上到游標前，用 V 進入視覺模式（行選取），用 j 向下移動，用 y 複製（yank）。按鍵序列：VjjyP",
+      "description_zh": "依序按 V（進入視覺模式（行選取）） → j（向下移動） → y（複製（yank）） → P（貼上到游標前）\n按鍵序列：VjjyP",
       "description_en": "Repeat the Previous Substitute Command",
       "category": "combo",
       "difficulty": 2,
@@ -2475,12 +2475,12 @@
         "col": 0
       },
       "hint_commands": [
-        "P",
         "V",
         "j",
-        "y"
+        "y",
+        "P"
       ],
-      "hint_text": "1. P — 貼上到游標前\n2. V — 進入視覺模式（行選取）\n3. j — 向下移動\n4. y — 複製（yank）",
+      "hint_text": "步驟 1：按 V — 進入視覺模式（行選取）\n步驟 2：按 j — 向下移動\n步驟 3：按 y — 複製（yank）\n步驟 4：按 P — 貼上到游標前\n\n完整按鍵：VjjyP",
       "tags": [
         "P",
         "V",
@@ -2506,7 +2506,7 @@
       },
       "title_zh": "練習：u (復原)、v (進入視覺模式（字元選取）)",
       "title_en": "Repeat the Previous Substitute Command",
-      "description_zh": "使用 用 u 復原，用 v 進入視覺模式（字元選取）。按鍵序列：ugv",
+      "description_zh": "依序按 u（復原） → v（進入視覺模式（字元選取））\n按鍵序列：ugv",
       "description_en": "Repeat the Previous Substitute Command",
       "category": "visual",
       "difficulty": 1,
@@ -2520,7 +2520,7 @@
         "u",
         "v"
       ],
-      "hint_text": "1. u — 復原\n2. v — 進入視覺模式（字元選取）",
+      "hint_text": "步驟 1：按 u — 復原\n步驟 2：按 v — 進入視覺模式（字元選取）\n\n完整按鍵：ugv",
       "tags": [
         "u",
         "v"
@@ -2540,9 +2540,9 @@
         "section": "15.101",
         "tip_number": 101
       },
-      "title_zh": "練習：i{ (大括號內的文字)、v (進入視覺模式（字元選取）)",
+      "title_zh": "練習：v (進入視覺模式（字元選取）)、i{ (大括號內的文字)",
       "title_en": "Alphabetize the Properties of Each Rule in a CSS File",
-      "description_zh": "使用 用 i{ 大括號內的文字，用 v 進入視覺模式（字元選取）。按鍵序列：vi{",
+      "description_zh": "依序按 v（進入視覺模式（字元選取）） → i{（大括號內的文字）\n按鍵序列：vi{",
       "description_en": "Alphabetize the Properties of Each Rule in a CSS File",
       "category": "combo",
       "difficulty": 1,
@@ -2553,10 +2553,10 @@
         "col": 0
       },
       "hint_commands": [
-        "i{",
-        "v"
+        "v",
+        "i{"
       ],
-      "hint_text": "1. i{ — 大括號內的文字\n2. v — 進入視覺模式（字元選取）",
+      "hint_text": "步驟 1：按 v — 進入視覺模式（字元選取）\n步驟 2：按 i{ — 大括號內的文字\n\n完整按鍵：vi{",
       "tags": [
         "i{",
         "v"
@@ -2576,9 +2576,9 @@
         "section": "16.104",
         "tip_number": 104
       },
-      "title_zh": "練習：\u003c (減少縮排)、C (修改到行尾)",
+      "title_zh": "練習：f (向右搜尋字元)、\u003c (減少縮排)",
       "title_en": "Navigate Keyword Definitions with Vim’s Tag Navigation Commands",
-      "description_zh": "使用 用 \u003c 減少縮排，用 C 修改到行尾，用 f 向右搜尋字元。按鍵序列：fS\u003cC-]\u003e",
+      "description_zh": "依序按 f（向右搜尋字元） → \u003c（減少縮排） → C（修改到行尾）\n按鍵序列：fS\u003cC-]\u003e",
       "description_en": "Navigate Keyword Definitions with Vim’s Tag Navigation Commands",
       "category": "combo",
       "difficulty": 2,
@@ -2589,11 +2589,11 @@
         "col": 0
       },
       "hint_commands": [
+        "f",
         "\u003c",
-        "C",
-        "f"
+        "C"
       ],
-      "hint_text": "1. \u003c — 減少縮排\n2. C — 修改到行尾\n3. f — 向右搜尋字元",
+      "hint_text": "步驟 1：按 f — 向右搜尋字元\n步驟 2：按 \u003c — 減少縮排\n步驟 3：按 C — 修改到行尾\n\n完整按鍵：fS\u003cC-]\u003e",
       "tags": [
         "\u003c",
         "C",
@@ -2617,7 +2617,7 @@
       },
       "title_zh": "練習：o (在下方新增一行並進入插入模式)",
       "title_en": "Autocomplete Entire Lines",
-      "description_zh": "使用 用 o 在下方新增一行並進入插入模式。按鍵序列：oba\u003cC-x\u003e\u003cC-l\u003e\u003cEsc\u003e",
+      "description_zh": "依序按 o（在下方新增一行並進入插入模式）\n按鍵序列：oba\u003cC-x\u003e\u003cC-l\u003e\u003cEsc\u003e",
       "description_en": "Autocomplete Entire Lines",
       "category": "insert",
       "difficulty": 1,
@@ -2630,7 +2630,7 @@
       "hint_commands": [
         "o"
       ],
-      "hint_text": "1. o — 在下方新增一行並進入插入模式",
+      "hint_text": "步驟 1：按 o — 在下方新增一行並進入插入模式\n\n完整按鍵：oba\u003cC-x\u003e\u003cC-l\u003e\u003cEsc\u003e",
       "tags": [
         "o"
       ],
@@ -2650,7 +2650,7 @@
       },
       "title_zh": "練習：a (在游標後進入插入模式)",
       "title_en": "Autocomplete Sequences of Words",
-      "description_zh": "使用 用 a 在游標後進入插入模式。按鍵序列：a\u003cC-x\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e",
+      "description_zh": "依序按 a（在游標後進入插入模式）\n按鍵序列：a\u003cC-x\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e",
       "description_en": "Autocomplete Sequences of Words",
       "category": "insert",
       "difficulty": 1,
@@ -2663,7 +2663,7 @@
       "hint_commands": [
         "a"
       ],
-      "hint_text": "1. a — 在游標後進入插入模式",
+      "hint_text": "步驟 1：按 a — 在游標後進入插入模式\n\n完整按鍵：a\u003cC-x\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e",
       "tags": [
         "a"
       ],
@@ -2683,7 +2683,7 @@
       },
       "title_zh": "練習：i (在游標前進入插入模式)",
       "title_en": "Autocomplete Filenames",
-      "description_zh": "使用 用 i 在游標前進入插入模式。按鍵序列：ijs/ap\u003cC-x\u003e\u003cC-f\u003e",
+      "description_zh": "依序按 i（在游標前進入插入模式）\n按鍵序列：ijs/ap\u003cC-x\u003e\u003cC-f\u003e",
       "description_en": "Autocomplete Filenames",
       "category": "insert",
       "difficulty": 1,
@@ -2696,7 +2696,7 @@
       "hint_commands": [
         "i"
       ],
-      "hint_text": "1. i — 在游標前進入插入模式",
+      "hint_text": "步驟 1：按 i — 在游標前進入插入模式\n\n完整按鍵：ijs/ap\u003cC-x\u003e\u003cC-f\u003e",
       "tags": [
         "i"
       ],

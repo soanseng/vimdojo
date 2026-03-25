@@ -67,10 +67,16 @@ func buildChallenge(abbr string, ch extract.Chapter, sec extract.Section,
 	merged := detect.MergeCommands(cmds)
 	mergedStrs := detect.CommandStrings(merged)
 
+	// cmdStrs preserves detection order (sequence of operations)
+	// mergedStrs is deduplicated+sorted (for tags/categorization)
 	category := dominantCategory(cmds)
-	titleZh := buildTitleZh(sec.Title, mergedStrs)
-	descZh := buildDescriptionZh(mergedStrs, cb.Keystrokes)
-	hintText := buildHintTextZh(mergedStrs)
+
+	// Use ordered commands (cmdStrs) for hints — shows the actual sequence
+	// Use deduplicated (mergedStrs) for tags — for filtering/categorization
+	orderedUnique := uniquePreserveOrder(cmdStrs)
+	titleZh := buildTitleZh(sec.Title, orderedUnique)
+	descZh := buildDescriptionZh(orderedUnique, cb.Keystrokes)
+	hintText := buildHintTextZh(orderedUnique, cb.Keystrokes)
 	conceptsZh := buildConceptsZh(cmds)
 
 	needsTranslation := titleZh == sec.Title
@@ -92,7 +98,7 @@ func buildChallenge(abbr string, ch extract.Chapter, sec extract.Section,
 		InitialText:      cb.Before,
 		ExpectedText:     cb.After,
 		CursorStart:      CursorPos{Line: 0, Col: 0}, // TODO: extract cursor position from keystroke table's highlighted char
-		HintCommands:     mergedStrs,
+		HintCommands:     orderedUnique,
 		HintText:         hintText,
 		Tags:             mergedStrs,
 		ConceptsZh:       conceptsZh,
@@ -117,26 +123,45 @@ func buildTitleZh(tipTitle string, cmds []string) string {
 }
 
 func buildDescriptionZh(cmds []string, keystrokes string) string {
-	var parts []string
+	// Build a natural-language description based on the operation sequence
+	var steps []string
 	for _, cmd := range cmds {
 		if d := translate.CommandDesc(cmd); d != "" {
-			parts = append(parts, fmt.Sprintf("用 %s %s", cmd, d))
+			steps = append(steps, fmt.Sprintf("%s（%s）", cmd, d))
 		}
 	}
-	if len(parts) > 0 {
-		return "使用 " + strings.Join(parts, "，") + "。按鍵序列：" + keystrokes
+	if len(steps) > 0 {
+		return "依序按 " + strings.Join(steps, " → ") + "\n按鍵序列：" + keystrokes
 	}
 	return "按鍵序列：" + keystrokes
 }
 
-func buildHintTextZh(cmds []string) string {
+func buildHintTextZh(cmds []string, keystrokes string) string {
 	var steps []string
-	for i, cmd := range cmds {
+	stepNum := 0
+	for _, cmd := range cmds {
 		if d := translate.CommandDesc(cmd); d != "" {
-			steps = append(steps, fmt.Sprintf("%d. %s — %s", i+1, cmd, d))
+			stepNum++
+			steps = append(steps, fmt.Sprintf("步驟 %d：按 %s — %s", stepNum, cmd, d))
 		}
 	}
-	return strings.Join(steps, "\n")
+	if len(steps) > 0 {
+		return strings.Join(steps, "\n") + "\n\n完整按鍵：" + keystrokes
+	}
+	return "完整按鍵：" + keystrokes
+}
+
+// uniquePreserveOrder deduplicates while preserving first-occurrence order.
+func uniquePreserveOrder(strs []string) []string {
+	seen := make(map[string]bool)
+	var result []string
+	for _, s := range strs {
+		if !seen[s] {
+			seen[s] = true
+			result = append(result, s)
+		}
+	}
+	return result
 }
 
 func buildConceptsZh(cmds []detect.CommandInfo) []string {
