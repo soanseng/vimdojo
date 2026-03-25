@@ -1,6 +1,14 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import ChallengeList from './components/Challenge/ChallengeList'
+import ChallengeView from './components/Challenge/ChallengeView'
+
 export default function App() {
-  return <div className="min-h-screen bg-ctp-base text-ctp-text p-4">
-    <h1 className="text-2xl font-bold">VimDao 鍵道</h1>
-    <p className="text-ctp-subtext0">互動式 Vim 學習平台</p>
-  </div>
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<ChallengeList />} />
+        <Route path="/challenge/:id" element={<ChallengeView />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
