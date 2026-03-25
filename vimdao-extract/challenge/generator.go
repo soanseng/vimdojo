@@ -137,18 +137,24 @@ func buildDescriptionZh(cmds []string, keystrokes string) string {
 }
 
 func buildHintTextZh(cmds []string, keystrokes string) string {
-	var steps []string
-	stepNum := 0
+	// Explain each unique command, then show the full keystroke sequence
+	var explanations []string
 	for _, cmd := range cmds {
 		if d := translate.CommandDesc(cmd); d != "" {
-			stepNum++
-			steps = append(steps, fmt.Sprintf("步驟 %d：按 %s — %s", stepNum, cmd, d))
+			explanations = append(explanations, fmt.Sprintf("• %s — %s", cmd, d))
 		}
 	}
-	if len(steps) > 0 {
-		return strings.Join(steps, "\n") + "\n\n完整按鍵：" + keystrokes
+
+	var sb strings.Builder
+	if len(explanations) > 0 {
+		sb.WriteString("指令說明：\n")
+		sb.WriteString(strings.Join(explanations, "\n"))
+		sb.WriteString("\n\n")
 	}
-	return "完整按鍵：" + keystrokes
+	sb.WriteString("完整按鍵序列：" + keystrokes)
+	sb.WriteString("\n（請依序輸入以上按鍵，注意 . 是重複上一個修改操作，必須先執行一次操作後才有效）")
+
+	return sb.String()
 }
 
 // uniquePreserveOrder deduplicates while preserving first-occurrence order.
