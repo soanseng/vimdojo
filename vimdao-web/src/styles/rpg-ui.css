@@ -1,0 +1,38 @@
+/* BOSS challenge glowing border */
+.boss-frame {
+  border: 2px solid var(--color-ctp-red);
+  box-shadow: 0 0 20px rgba(243, 139, 168, 0.3), inset 0 0 20px rgba(243, 139, 168, 0.05);
+  border-radius: 12px;
+  padding: 4px;
+}
+
+/* XP bar gradient */
+.xp-bar-fill {
+  background: linear-gradient(90deg, var(--color-ctp-mauve), var(--color-ctp-blue));
+  border-radius: 4px;
+  height: 100%;
+  transition: width 0.5s ease;
+}
+
+/* Story dialog */
+.story-dialog {
+  border-left: 3px solid var(--color-ctp-yellow);
+  background: var(--color-ctp-mantle);
+  border-radius: 0 8px 8px 0;
+}
+
+/* Achievement toast animation */
+@keyframes toast-slide-in {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.achievement-toast {
+  animation: toast-slide-in 0.3s ease-out;
+}
+
+/* Pixel-style border for chapter cards */
+.pixel-border {
+  border: 2px solid var(--color-ctp-surface1);
+  image-rendering: pixelated;
+}
