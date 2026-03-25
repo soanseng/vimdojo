@@ -1,10 +1,51 @@
 import type { VimState, CursorPos } from './vim-types'
 
 /**
+ * Check whether a match at position `idx` in `line` is a whole-word match
+ * for a pattern of length `len`.
+ */
+function isWholeWordMatch(line: string, idx: number, len: number): boolean {
+  const before = idx > 0 ? line[idx - 1] : ''
+  const after = idx + len < line.length ? line[idx + len] : ''
+  if (before && /\w/.test(before)) return false
+  if (after && /\w/.test(after)) return false
+  return true
+}
+
+/**
+ * Find the first indexOf match in `line` starting from `from`, optionally
+ * requiring whole-word boundaries.
+ */
+function indexOfWord(line: string, pattern: string, from: number, wholeWord: boolean): number {
+  let idx = from
+  while (true) {
+    const match = line.indexOf(pattern, idx)
+    if (match === -1) return -1
+    if (!wholeWord || isWholeWordMatch(line, match, pattern.length)) return match
+    idx = match + 1
+  }
+}
+
+/**
+ * Find the last indexOf match in `line` up to position `maxPos`, optionally
+ * requiring whole-word boundaries.
+ */
+function lastIndexOfWord(line: string, pattern: string, maxPos: number, wholeWord: boolean): number {
+  let idx = maxPos
+  while (true) {
+    const match = line.lastIndexOf(pattern, idx)
+    if (match === -1) return -1
+    if (!wholeWord || isWholeWordMatch(line, match, pattern.length)) return match
+    idx = match - 1
+    if (idx < 0) return -1
+  }
+}
+
+/**
  * Search forward from the character AFTER the cursor, wrapping to the
  * start of the file.  Returns the position of the first match or null.
  */
-export function searchForward(state: VimState, pattern: string): CursorPos | null {
+export function searchForward(state: VimState, pattern: string, wholeWord: boolean = false): CursorPos | null {
   if (pattern.length === 0) return null
 
   const { lines, cursor } = state
@@ -15,7 +56,7 @@ export function searchForward(state: VimState, pattern: string): CursorPos | nul
   // Phase 1: search from cursor+1 to end of file
   // Current line from startCol onward
   const curLine = lines[startLine] ?? ''
-  const curLineMatch = curLine.indexOf(pattern, startCol)
+  const curLineMatch = indexOfWord(curLine, pattern, startCol, wholeWord)
   if (curLineMatch !== -1) {
     return { line: startLine, col: curLineMatch }
   }
@@ -23,14 +64,14 @@ export function searchForward(state: VimState, pattern: string): CursorPos | nul
   for (let i = 1; i < totalLines; i++) {
     const lineIdx = (startLine + i) % totalLines
     const line = lines[lineIdx] ?? ''
-    const idx = line.indexOf(pattern)
+    const idx = indexOfWord(line, pattern, 0, wholeWord)
     if (idx !== -1) {
       return { line: lineIdx, col: idx }
     }
   }
 
   // Phase 2: wrap — search the current line from col 0 (before cursor)
-  const wrapMatch = curLine.indexOf(pattern)
+  const wrapMatch = indexOfWord(curLine, pattern, 0, wholeWord)
   if (wrapMatch !== -1 && wrapMatch < startCol) {
     return { line: startLine, col: wrapMatch }
   }
@@ -42,7 +83,7 @@ export function searchForward(state: VimState, pattern: string): CursorPos | nul
  * Search backward from the character BEFORE the cursor, wrapping to the
  * end of the file.  Returns the position of the first match or null.
  */
-export function searchBackward(state: VimState, pattern: string): CursorPos | null {
+export function searchBackward(state: VimState, pattern: string, wholeWord: boolean = false): CursorPos | null {
   if (pattern.length === 0) return null
 
   const { lines, cursor } = state
@@ -58,13 +99,13 @@ export function searchBackward(state: VimState, pattern: string): CursorPos | nu
 
     if (i === 0) {
       // On the cursor line, only search up to cursor position (exclusive)
-      const idx = line.lastIndexOf(pattern, searchUpTo)
+      const idx = lastIndexOfWord(line, pattern, searchUpTo, wholeWord)
       if (idx !== -1) {
         return { line: lineIdx, col: idx }
       }
     } else {
       // On other lines, search the full line from the end
-      const idx = line.lastIndexOf(pattern)
+      const idx = lastIndexOfWord(line, pattern, line.length, wholeWord)
       if (idx !== -1) {
         return { line: lineIdx, col: idx }
       }
@@ -102,8 +143,8 @@ export function searchWordUnderCursor(state: VimState): { pattern: string; pos: 
 
   const word = line.slice(wordStart, wordEnd + 1)
 
-  // Search forward for the next occurrence of this word
-  const pos = searchForward(state, word)
+  // Search forward for the next whole-word occurrence of this word
+  const pos = searchForward(state, word, true)
   if (pos === null) return null
 
   return { pattern: word, pos }

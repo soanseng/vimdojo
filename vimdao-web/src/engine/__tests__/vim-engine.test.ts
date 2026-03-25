@@ -152,6 +152,12 @@ describe('dot command', () => {
   it('. repeats insert change', () => {
     expect(applyKeys('foo\nbar', ['A', ';', 'Escape', 'j', '.'])).toBe('foo;\nbar;')
   })
+  it('. repeats d2w (deletes 2 words again)', () => {
+    expect(applyKeys('one two three four five six', ['d', '2', 'w', '.'])).toBe('five six')
+  })
+  it('. repeats 3dd', () => {
+    expect(applyKeys('a\nb\nc\nd\ne\nf\ng', ['3', 'd', 'd', '.'])).toBe('g')
+  })
 })
 
 describe('inclusive motions with operators', () => {

@@ -484,7 +484,7 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
       while (wordStart > 0 && /\w/.test(line[wordStart - 1] ?? '')) wordStart--
       while (wordEnd < line.length - 1 && /\w/.test(line[wordEnd + 1] ?? '')) wordEnd++
       const word = line.slice(wordStart, wordEnd + 1)
-      const pos = searchBackward(state, word)
+      const pos = searchBackward(state, word, true)
       if (pos) {
         return {
           state: {
@@ -999,21 +999,20 @@ function handleOperatorPending(state: VimState, key: string): KeyResult {
     if (!range) return { state: s, handled: true }
 
     const changeKeys = [op, modifier, key]
-    const withUndoState = pushUndo(s)
 
     switch (op) {
       case 'd': {
-        const positioned = { ...withUndoState, cursor: range.start }
+        const positioned = { ...s, cursor: range.start }
         const result = ops.deleteToPos(positioned, range.end)
         return { state: { ...result, lastChange: { type: 'normal', keys: changeKeys } }, handled: true }
       }
       case 'c': {
-        const positioned = { ...withUndoState, cursor: range.start }
+        const positioned = { ...s, cursor: range.start }
         const result = ops.changeToPos(positioned, range.end)
         return { state: startInsertRecording(result, changeKeys), handled: true }
       }
       case 'y': {
-        const positioned = { ...withUndoState, cursor: range.start }
+        const positioned = { ...s, cursor: range.start }
         const result = ops.yankToPos(positioned, range.end)
         return { state: result, handled: true }
       }
@@ -1097,7 +1096,7 @@ function handleOperatorPending(state: VimState, key: string): KeyResult {
       if (nextPos) cursor = nextPos
       else break
     }
-    return executeOperatorMotion({ ...s, countPrefix: null, operatorCount: null }, op, effectiveKey, cursor)
+    return executeOperatorMotion({ ...s, countPrefix: null, operatorCount: null }, op, effectiveKey, cursor, totalCount)
   }
 
   // Unknown — cancel
@@ -1154,8 +1153,11 @@ function executeOperatorMotion(
   op: string,
   motionKey: string,
   target: CursorPos,
+  count: number = 1,
 ): KeyResult {
-  const changeKeys = [op, motionKey]
+  const changeKeys = count > 1
+    ? [String(count), op, motionKey]
+    : [op, motionKey]
 
   // Adjust target for inclusive motions (include the char at target position)
   let adjustedTarget = target
