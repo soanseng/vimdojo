@@ -17,7 +17,10 @@ const INCLUSIVE_MOTIONS = new Set(['e', 'E', 'f', 'F', 'l', '$', 'G', 'gg'])
 // ---------------------------------------------------------------------------
 
 export function processKey(state: VimState, key: string): KeyResult {
-  const s: VimState = { ...state, keyLog: [...state.keyLog, key] }
+  // Don't add replayed keys (from dot command) to the user-visible keyLog
+  const s: VimState = state.isDotReplaying
+    ? state
+    : { ...state, keyLog: [...state.keyLog, key] }
 
   switch (s.mode) {
     case 'insert':

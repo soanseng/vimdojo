@@ -99,6 +99,7 @@ func buildChallenge(abbr string, ch extract.Chapter, sec extract.Section,
 		ExpectedText:     cb.After,
 		CursorStart:      CursorPos{Line: 0, Col: 0}, // TODO: extract cursor position from keystroke table's highlighted char
 		HintCommands:     orderedUnique,
+		HintKeystrokes:   cb.Keystrokes,
 		HintText:         hintText,
 		Tags:             mergedStrs,
 		ConceptsZh:       conceptsZh,

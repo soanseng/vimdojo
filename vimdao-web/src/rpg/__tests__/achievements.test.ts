@@ -23,7 +23,7 @@ describe('checkAchievements', () => {
     const progress = makeProgress({
       challenges_completed: { 'a': { completed_at: '', keystrokes: 2 } }
     })
-    const challenges = [{ id: 'a', hint_commands: ['x', '.'], tags: [], source: { chapter: 1 } }]
+    const challenges = [{ id: 'a', hint_commands: ['x', '.'], hint_keystrokes: 'x.', tags: [], source: { chapter: 1 } }]
     const result = checkAchievements(progress, challenges, 69)
     expect(result).toContain('one-shot')
   })

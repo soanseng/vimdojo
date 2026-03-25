@@ -16,6 +16,7 @@ export interface Challenge {
   expected_text: string
   cursor_start: { line: number; col: number }
   hint_commands: string[]
+  hint_keystrokes: string
   hint_text: string
   tags: string[]
   concepts_zh: string[]

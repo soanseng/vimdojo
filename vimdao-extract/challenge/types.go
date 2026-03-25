@@ -21,6 +21,7 @@ type Challenge struct {
 	ExpectedText string          `json:"expected_text"`
 	CursorStart  CursorPos       `json:"cursor_start"`
 	HintCommands []string        `json:"hint_commands"`
+	HintKeystrokes string       `json:"hint_keystrokes"`
 	HintText     string          `json:"hint_text"`
 	Tags         []string        `json:"tags"`
 	ConceptsZh   []string        `json:"concepts_zh"`

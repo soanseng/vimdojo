@@ -55,7 +55,7 @@ export default function ChallengeResult({
         <h3 className="text-sm font-medium text-ctp-subtext1">按鍵比較</h3>
         <p className="text-sm text-ctp-text">
           你用了 <span className="font-mono text-ctp-blue font-bold">{keyLog.length}</span> 次按鍵
-          （書中建議 <span className="font-mono text-ctp-green font-bold">{challenge.hint_commands.length}</span> 次）
+          （書中建議 <span className="font-mono text-ctp-green font-bold">{challenge.hint_keystrokes.length}</span> 次）
         </p>
       </div>
 

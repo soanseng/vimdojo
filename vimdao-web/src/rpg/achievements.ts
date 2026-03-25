@@ -3,6 +3,7 @@ import type { UserProgress } from '../types'
 interface ChallengeInfo {
   id: string
   hint_commands: string[]
+  hint_keystrokes?: string
   tags: string[]
   source: { chapter: number }
 }
@@ -32,7 +33,7 @@ export function checkAchievements(
   // one-shot
   for (const c of challenges) {
     const record = progress.challenges_completed[c.id]
-    if (record && record.keystrokes <= c.hint_commands.length) {
+    if (record && c.hint_keystrokes && record.keystrokes <= c.hint_keystrokes.length) {
       award('one-shot')
       break
     }
