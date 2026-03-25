@@ -97,7 +97,7 @@ func buildChallenge(abbr string, ch extract.Chapter, sec extract.Section,
 		Difficulty:       ScoreDifficulty(cb.Keystrokes, cmdStrs),
 		InitialText:      cb.Before,
 		ExpectedText:     cb.After,
-		CursorStart:      CursorPos{Line: 0, Col: 0}, // TODO: extract cursor position from keystroke table's highlighted char
+		CursorStart:      inferCursorStart(cb.Before, cb.After),
 		HintCommands:     orderedUnique,
 		HintKeystrokes:   cb.Keystrokes,
 		HintText:         hintText,
@@ -198,6 +198,27 @@ func dominantCategory(cmds []detect.CommandInfo) string {
 		return "combo"
 	}
 	return best
+}
+
+// inferCursorStart tries to guess the starting cursor line by finding the
+// first line that differs between before and after text. This is a heuristic —
+// if the first N lines are identical, the cursor likely starts at line N.
+func inferCursorStart(before, after string) CursorPos {
+	beforeLines := strings.Split(before, "\n")
+	afterLines := strings.Split(after, "\n")
+
+	for i := 0; i < len(beforeLines) && i < len(afterLines); i++ {
+		if beforeLines[i] != afterLines[i] {
+			return CursorPos{Line: i, Col: 0}
+		}
+	}
+	// If all matching lines are the same, cursor starts at end
+	// (or lines were deleted/added at the end)
+	minLen := len(beforeLines)
+	if len(afterLines) < minLen {
+		minLen = len(afterLines)
+	}
+	return CursorPos{Line: minLen, Col: 0}
 }
 
 func nonNil(s []string) []string {

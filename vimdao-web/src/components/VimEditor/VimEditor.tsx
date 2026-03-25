@@ -86,11 +86,11 @@ function renderLine(line: string, lineIdx: number, state: VimState) {
     if (isCursorLine) {
       if (state.mode === 'insert') {
         return (
-          <span className="border-l-2 border-ctp-blue">{'\u00A0'}</span>
+          <span className="border-l-2 border-ctp-green animate-pulse">{'\u00A0'}</span>
         )
       }
       return (
-        <span className="bg-ctp-blue/80 text-ctp-base">{'\u00A0'}</span>
+        <span className="bg-ctp-blue text-ctp-crust">{'\u00A0'}</span>
       )
     }
     return <span>{'\u00A0'}</span>
@@ -101,7 +101,7 @@ function renderLine(line: string, lineIdx: number, state: VimState) {
   // In insert mode, if cursor is at position 0 on this line, show line cursor before first char
   if (isCursorLine && state.mode === 'insert' && cursorCol === 0) {
     chars.push(
-      <span key="cursor-insert" className="border-l-2 border-ctp-blue" />
+      <span key="cursor-insert" className="border-l-2 border-ctp-green animate-pulse" />
     )
   }
 
@@ -110,11 +110,11 @@ function renderLine(line: string, lineIdx: number, state: VimState) {
     if (isCursorLine && i === cursorCol) {
       if (state.mode === 'insert') {
         chars.push(
-          <span key={i} className="border-l-2 border-ctp-blue">{ch}</span>
+          <span key={i} className="border-l-2 border-ctp-green animate-pulse">{ch}</span>
         )
       } else {
         chars.push(
-          <span key={i} className="bg-ctp-blue/80 text-ctp-base">{ch}</span>
+          <span key={i} className="bg-ctp-blue text-ctp-crust font-bold">{ch}</span>
         )
       }
     } else {
@@ -125,7 +125,7 @@ function renderLine(line: string, lineIdx: number, state: VimState) {
   // Insert mode cursor at end of line
   if (isCursorLine && state.mode === 'insert' && cursorCol >= line.length) {
     chars.push(
-      <span key="cursor-end" className="border-l-2 border-ctp-blue">{'\u00A0'}</span>
+      <span key="cursor-end" className="border-l-2 border-ctp-green animate-pulse">{'\u00A0'}</span>
     )
   }
 

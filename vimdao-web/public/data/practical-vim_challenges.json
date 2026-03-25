@@ -1,6 +1,6 @@
 {
   "source_book": "Practical Vim",
-  "generated_at": "2026-03-25T23:07:29+08:00",
+  "generated_at": "2026-03-25T23:29:14+08:00",
   "challenges": [
     {
       "id": "pv-tip01-001",
@@ -91,7 +91,7 @@
       "initial_text": "Line one\nLine two\nLine three\nLine four",
       "expected_text": "Line one\n  Line two\n    Line three\n      Line four",
       "cursor_start": {
-        "line": 0,
+        "line": 1,
         "col": 0
       },
       "hint_commands": [
@@ -336,7 +336,7 @@
       "initial_text": ".blog, .news { background-image: url(/sprite.png); }\n.blog { background-position: 0px 0px }",
       "expected_text": ".blog, .news { background-image: url(/sprite.png); }\n.blog { background-position: 0px 0px }\n.news { background-position: -180px 0px }",
       "cursor_start": {
-        "line": 0,
+        "line": 2,
         "col": 0
       },
       "hint_commands": [
@@ -433,7 +433,7 @@
       "initial_text": "Practical Vim, by Drew Neil\nRead Drew Neil's",
       "expected_text": "Practical Vim, by Drew Neil\nRead Drew Neil's Practical Vim.",
       "cursor_start": {
-        "line": 0,
+        "line": 1,
         "col": 0
       },
       "hint_commands": [
@@ -548,7 +548,7 @@
       "initial_text": "def fib(n):\n    a, b = 0, 1\n    while a \u003c n:\nprint a,\na, b = b, a+b\nfib(42)",
       "expected_text": "def fib(n):\n    a, b = 0, 1\n    while a \u003c n:\n        print a,\n        a, b = b, a+b\nfib(42)",
       "cursor_start": {
-        "line": 0,
+        "line": 3,
         "col": 0
       },
       "hint_commands": [
@@ -805,7 +805,7 @@
       "initial_text": "Shopping list\n    Hardware Store\n        Buy new hammer\n    Beauty Parlor\n        Buy nail polish remover\n        Buy nails",
       "expected_text": "Shopping list\n    Hardware Store\n        Buy nails\n        Buy new hammer\n    Beauty Parlor\n        Buy nail polish remover\n        Buy nails",
       "cursor_start": {
-        "line": 0,
+        "line": 2,
         "col": 0
       },
       "hint_commands": null,
@@ -834,7 +834,7 @@
       "initial_text": "Shopping list\n    Hardware Store\n        Buy nails\n        Buy new hammer\n    Beauty Parlor\n        Buy nail polish remover\n        Buy nails",
       "expected_text": "Shopping list\n    Beauty Parlor\n        Buy nail polish remover\n        Buy nails\n    Hardware Store\n        Buy nails\n        Buy new hammer",
       "cursor_start": {
-        "line": 0,
+        "line": 1,
         "col": 0
       },
       "hint_commands": [
@@ -905,7 +905,7 @@
       "initial_text": "var foo = 1;\nvar bar = ’a’\nvar baz = ’z’ \nvar foobar = foo + bar \nvar foobarbaz = foo + bar + baz ",
       "expected_text": "var foo = 1;\nvar bar = 'a';\nvar baz = 'z';\nvar foobar = foo + bar;\nvar foobarbaz = foo + bar + baz;",
       "cursor_start": {
-        "line": 0,
+        "line": 1,
         "col": 0
       },
       "hint_commands": [
@@ -944,7 +944,7 @@
       "initial_text": "var tally;\nfor (tally=1; tally \u003c= 10; tally++) {\n  // do something with tally\n};",
       "expected_text": "var tally;\nfor (counter=1; tally \u003c= 10; tally++) {\n  // do something with tally\n};",
       "cursor_start": {
-        "line": 0,
+        "line": 1,
         "col": 0
       },
       "hint_commands": [
@@ -1589,7 +1589,7 @@
       "initial_text": "1) line one\n2) line two",
       "expected_text": "1) line one\n2) line two\n2) line two",
       "cursor_start": {
-        "line": 0,
+        "line": 2,
         "col": 0
       },
       "hint_commands": [
@@ -1625,7 +1625,7 @@
       "initial_text": "collection = getCollection();\nprocess(somethingInTheWay, target);",
       "expected_text": "collection = getCollection();\nprocess(collection, target);",
       "cursor_start": {
-        "line": 0,
+        "line": 1,
         "col": 0
       },
       "hint_commands": [
@@ -1674,7 +1674,7 @@
       "initial_text": "collection = getCollection();\nprocess(somethingInTheWay, target);",
       "expected_text": "collection = getCollection();\nprocess(collection, target);",
       "cursor_start": {
-        "line": 0,
+        "line": 1,
         "col": 0
       },
       "hint_commands": [
@@ -1708,7 +1708,7 @@
       "initial_text": "collection = getCollection();\nprocess(somethingInTheWay, target);",
       "expected_text": "collection = getCollection();\nprocess(collection, target);",
       "cursor_start": {
-        "line": 0,
+        "line": 1,
         "col": 0
       },
       "hint_commands": [
@@ -1755,7 +1755,7 @@
       "initial_text": "collection = getCollection();\nprocess(somethingInTheWay, target);",
       "expected_text": "collection = getCollection();\nprocess(collection, target);",
       "cursor_start": {
-        "line": 0,
+        "line": 1,
         "col": 0
       },
       "hint_commands": [
@@ -1854,7 +1854,7 @@
       "initial_text": "collection = getCollection();\nprocess(somethingInTheWay, target);",
       "expected_text": "collection = getCollection();\nprocess(collection, target);",
       "cursor_start": {
-        "line": 0,
+        "line": 1,
         "col": 0
       },
       "hint_commands": [
@@ -1903,7 +1903,7 @@
       "initial_text": "\u003ctable\u003e\n\n  \u003ctr\u003e\n    \u003ctd\u003eSymbol\u003c/td\u003e\n    \u003ctd\u003eName\u003c/td\u003e\n  \u003c/tr\u003e\n\n\u003c/table\u003e",
       "expected_text": "\u003ctable\u003e\n\n  \u003ctr\u003e\n    \u003ctd\u003eSymbol\u003c/td\u003e\n    \u003ctd\u003eName\u003c/td\u003e\n  \u003c/tr\u003e\n\n  \u003ctr\u003e\n    \u003ctd\u003eSymbol\u003c/td\u003e\n    \u003ctd\u003eName\u003c/td\u003e\n  \u003c/tr\u003e\n\n\u003c/table\u003e",
       "cursor_start": {
-        "line": 0,
+        "line": 7,
         "col": 0
       },
       "hint_commands": [
@@ -1982,7 +1982,7 @@
       "initial_text": "var foo = 1;\nbar = 'a'\nfoobar = foo + bar",
       "expected_text": "var foo = 1;\nvar bar = 'a';\nvar foobar = foo + bar;",
       "cursor_start": {
-        "line": 0,
+        "line": 1,
         "col": 0
       },
       "hint_commands": [
@@ -2059,7 +2059,7 @@
       "initial_text": "1) One\n2. two\n3. three\n4. four",
       "expected_text": "1) One\n2) Two\n3) Three\n4) Four",
       "cursor_start": {
-        "line": 0,
+        "line": 1,
         "col": 0
       },
       "hint_commands": [
@@ -2170,7 +2170,7 @@
       "initial_text": "# ...[end of copyright notice]\nclass Animal\n  # implementation...\nend",
       "expected_text": "# ...[end of copyright notice]\nmodule Rank\n  class Animal\n    # implementation...\n  end\nend",
       "cursor_start": {
-        "line": 0,
+        "line": 1,
         "col": 0
       },
       "hint_commands": [
@@ -2217,7 +2217,7 @@
       "initial_text": "module Rank\n  class Animal\n    # implementation...\n  end\nend",
       "expected_text": "module Rank\n  class Person\n    # implementation...\n  end\nend",
       "cursor_start": {
-        "line": 0,
+        "line": 1,
         "col": 0
       },
       "hint_commands": [
@@ -2291,7 +2291,7 @@
       "initial_text": "1) partridge in a pear tree\nturtle doves\nFrench hens\ncalling birds\ngolden rings",
       "expected_text": "1) partridge in a pear tree\n2) turtle doves\n3) French hens\n4) calling birds\n5) golden rings",
       "cursor_start": {
-        "line": 0,
+        "line": 1,
         "col": 0
       },
       "hint_commands": [
@@ -2367,7 +2367,7 @@
       "initial_text": "// last line of the file proper\n0f.r)wvUj",
       "expected_text": "// last line of the file proper",
       "cursor_start": {
-        "line": 0,
+        "line": 1,
         "col": 0
       },
       "hint_commands": [
@@ -2533,7 +2533,7 @@
       "initial_text": "mixin = {\n    applyName: function(config) {\n        return Factory(config, this.getName());\n    },\n}",
       "expected_text": "mixin = {\n    applyNumber: function(config) {\n        return Factory(config, this.getNumber());\n    },\n    applyNumber: function(config) {\n        return Factory(config, this.getNumber());\n    },\n}",
       "cursor_start": {
-        "line": 0,
+        "line": 1,
         "col": 0
       },
       "hint_commands": [
@@ -2576,7 +2576,7 @@
       "initial_text": "mixin = {\n    applyName: function(config) {\n        return Factory(config, this.getName());\n    },\n    applyName: function(config) {\n        return Factory(config, this.getName());\n    },\n}",
       "expected_text": "mixin = {\n    applyName: function(config) {\n        return Factory(config, this.getName());\n    },\n    applyNumber: function(config) {\n        return Factory(config, this.getNumber());\n    },\n}",
       "cursor_start": {
-        "line": 0,
+        "line": 4,
         "col": 0
       },
       "hint_commands": [
@@ -2613,7 +2613,7 @@
       "initial_text": "html {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n}",
       "expected_text": "html {\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  margin: 0;\n  padding: 0;\n  vertical-align: baseline;\n}",
       "cursor_start": {
-        "line": 0,
+        "line": 1,
         "col": 0
       },
       "hint_commands": [
@@ -2690,7 +2690,7 @@
       "initial_text": ".top {\n  background-color: #ef66ef; }\n.bottom {",
       "expected_text": ".top {\n  background-color: #ef66ef; }\n.bottom {\n  background-color: #ef66ef; }",
       "cursor_start": {
-        "line": 0,
+        "line": 3,
         "col": 0
       },
       "hint_commands": [
