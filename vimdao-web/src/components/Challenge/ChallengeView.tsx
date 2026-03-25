@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import type { Challenge, ChallengeSet, StoryData } from '../../types'
 import { useVimEditor } from '../../hooks/useVimEditor'
@@ -12,6 +12,7 @@ import VimEditor from '../VimEditor/VimEditor'
 import BossFrame from '../RPG/BossFrame'
 import StoryDialog from '../RPG/StoryDialog'
 import AchievementToast from '../RPG/AchievementToast'
+import ChallengeResult from './ChallengeResult'
 
 type SubmitResult = 'pass' | 'fail' | null
 
@@ -25,7 +26,7 @@ export default function ChallengeView() {
   const [error, setError] = useState<string | null>(null)
   const [result, setResult] = useState<SubmitResult>(null)
   const [showHint, setShowHint] = useState(false)
-  const [leveledUp, setLeveledUp] = useState(false)
+  const [_leveledUp, setLeveledUp] = useState(false)
 
   // Story dialog state
   const [bossIntro, setBossIntro] = useState<string[] | null>(null)
@@ -224,6 +225,20 @@ export default function ChallengeView() {
     setToastAchievement(null)
   }, [])
 
+  // Find next challenge: next in same chapter, or first of next chapter
+  const nextChallenge = useMemo(() => {
+    if (!challenge || allChallenges.length === 0) return null
+    const currentIdx = allChallenges.findIndex(c => c.id === challenge.id)
+    if (currentIdx === -1 || currentIdx >= allChallenges.length - 1) return null
+    return allChallenges[currentIdx + 1] ?? null
+  }, [challenge, allChallenges])
+
+  const handleNext = useCallback(() => {
+    if (nextChallenge) {
+      navigate(`/challenge/${nextChallenge.id}`)
+    }
+  }, [nextChallenge, navigate])
+
   if (loading) {
     return (
       <div className="min-h-screen bg-ctp-base text-ctp-text flex items-center justify-center">
@@ -323,49 +338,34 @@ export default function ChallengeView() {
         </BossFrame>
 
         {/* Actions & result */}
-        <div className="flex items-center gap-4 flex-wrap">
-          <button
-            onClick={handleSubmit}
-            className="px-4 py-2 bg-ctp-blue text-ctp-base rounded font-medium text-sm hover:opacity-90 transition-opacity"
-          >
-            提交答案
-          </button>
-          <button
-            onClick={handleRetry}
-            className="px-4 py-2 bg-ctp-surface1 text-ctp-text rounded text-sm hover:bg-ctp-surface2 transition-colors"
-          >
-            再練一次
-          </button>
-          <span className="text-xs text-ctp-overlay0 ml-auto">
-            按鍵次數: {state.keyLog.length}
-          </span>
-        </div>
-
-        {result === 'pass' && (
-          <div role="status" aria-live="polite" className="bg-ctp-green/10 border border-ctp-green/30 rounded-lg p-4 text-ctp-green font-medium">
-            通過 — 答案正確！共 {state.keyLog.length} 次按鍵
-            {challenge.xp_reward > 0 && !(challenge.id in progress.challenges_completed) && (
-              <span className="ml-2 text-ctp-yellow">+{challenge.xp_reward} XP</span>
-            )}
-            {leveledUp && (
-              <span className="ml-2 text-ctp-mauve font-bold">升級了！</span>
-            )}
-          </div>
-        )}
-        {result === 'fail' && (
-          <div role="status" aria-live="polite" className="bg-ctp-red/10 border border-ctp-red/30 rounded-lg p-4 text-ctp-red font-medium">
-            未通過 — 文字內容與預期不符，請再試一次
+        {result === null && (
+          <div className="flex items-center gap-4 flex-wrap">
+            <button
+              onClick={handleSubmit}
+              className="px-4 py-2 bg-ctp-blue text-ctp-base rounded font-medium text-sm hover:opacity-90 transition-opacity"
+            >
+              提交答案
+            </button>
+            <button
+              onClick={handleRetry}
+              className="px-4 py-2 bg-ctp-surface1 text-ctp-text rounded text-sm hover:bg-ctp-surface2 transition-colors"
+            >
+              再練一次
+            </button>
+            <span className="text-xs text-ctp-overlay0 ml-auto">
+              按鍵次數: {state.keyLog.length}
+            </span>
           </div>
         )}
 
-        {/* Expected text (shown after failure) */}
-        {result === 'fail' && (
-          <div className="space-y-2">
-            <h3 className="text-xs text-ctp-overlay0">預期結果:</h3>
-            <pre className="text-sm bg-ctp-surface0 rounded p-3 text-ctp-green font-mono whitespace-pre-wrap">
-              {challenge.expected_text}
-            </pre>
-          </div>
+        {result !== null && (
+          <ChallengeResult
+            challenge={challenge}
+            keyLog={state.keyLog}
+            passed={result === 'pass'}
+            onRetry={handleRetry}
+            onNext={nextChallenge ? handleNext : null}
+          />
         )}
       </main>
     </div>
