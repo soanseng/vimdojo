@@ -57,14 +57,9 @@ export default function ChallengeList() {
 
   return (
     <div className="min-h-screen bg-ctp-base text-ctp-text">
-      <header className="border-b border-ctp-surface0 px-6 py-4">
-        <h1 className="text-2xl font-bold text-ctp-text">VimDao 鍵道</h1>
-        <p className="text-sm text-ctp-subtext0 mt-1">互動式 Vim 學習平台</p>
-      </header>
-
       <main className="max-w-6xl mx-auto px-6 py-8">
         <h2 className="text-lg font-semibold text-ctp-subtext1 mb-6">
-          練習題目 ({challenges.length})
+          自由練習 ({challenges.length})
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
