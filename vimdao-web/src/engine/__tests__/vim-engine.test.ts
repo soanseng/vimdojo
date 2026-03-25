@@ -440,6 +440,68 @@ describe('> indent', () => {
   })
 })
 
+describe('text objects with operators', () => {
+  it('daw deletes a word with space', () => {
+    const s = createState('hello world foo')
+    s.cursor = { line: 0, col: 7 }
+    let result = s
+    for (const k of ['d', 'a', 'w']) result = processKey(result, k).state
+    expect(getText(result)).toBe('hello foo')
+  })
+
+  it('diw deletes inner word', () => {
+    const s = createState('hello world foo')
+    s.cursor = { line: 0, col: 7 }
+    let result = s
+    for (const k of ['d', 'i', 'w']) result = processKey(result, k).state
+    expect(getText(result)).toBe('hello  foo')
+  })
+
+  it('ciw changes inner word', () => {
+    expect(applyKeys('hello world', ['w', 'c', 'i', 'w', 'X', 'Escape'])).toBe('hello X')
+  })
+
+  it('di( deletes inside parens', () => {
+    const s = createState('call(arg1, arg2)')
+    s.cursor = { line: 0, col: 6 }
+    let result = s
+    for (const k of ['d', 'i', '(']) result = processKey(result, k).state
+    expect(getText(result)).toBe('call()')
+  })
+
+  it('ci" changes inside quotes', () => {
+    const s = createState('say "hello" end')
+    s.cursor = { line: 0, col: 6 }
+    let result = s
+    for (const k of ['c', 'i', '"', 'X', 'Escape']) result = processKey(result, k).state
+    expect(getText(result)).toBe('say "X" end')
+  })
+
+  it('da( deletes including parens', () => {
+    const s = createState('call(args)')
+    s.cursor = { line: 0, col: 6 }
+    let result = s
+    for (const k of ['d', 'a', '(']) result = processKey(result, k).state
+    expect(getText(result)).toBe('call')
+  })
+
+  it('yi{ yanks inside braces', () => {
+    const s = createState('{ hello }')
+    s.cursor = { line: 0, col: 4 }
+    let result = s
+    for (const k of ['y', 'i', '{']) result = processKey(result, k).state
+    expect(getText(result)).toBe('{ hello }') // unchanged
+    expect(result.register).toBe(' hello ')
+  })
+
+  it('daw is repeatable with dot', () => {
+    const s = createState('one two three')
+    let result = s
+    for (const k of ['d', 'a', 'w', '.']) result = processKey(result, k).state
+    expect(getText(result)).toBe('three')
+  })
+})
+
 describe('command mode', () => {
   it(':w sets lastCommand to write', () => {
     const s = applyKeysState('hello', [':', 'w', 'Enter'])

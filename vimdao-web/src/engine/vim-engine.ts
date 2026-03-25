@@ -3,6 +3,7 @@ import { clampCursor } from './vim-state'
 import * as motions from './vim-motions'
 import * as ops from './vim-operations'
 import { searchForward, searchBackward, searchWordUnderCursor } from './vim-search'
+import { resolveTextObject } from './vim-text-objects'
 
 // ---------------------------------------------------------------------------
 // Inclusive motions — these include the character at the target position
@@ -986,6 +987,41 @@ function handleOperatorFindChar(state: VimState, char: string): KeyResult {
 // ---------------------------------------------------------------------------
 
 function handleOperatorPending(state: VimState, key: string): KeyResult {
+  // Text object completion: pendingOperator='d', pendingKeys='i', key='w' → diw
+  if (state.pendingKeys === 'i' || state.pendingKeys === 'a') {
+    const modifier = state.pendingKeys as 'i' | 'a'
+    const op = state.pendingOperator!
+    const s: VimState = { ...state, pendingKeys: '', pendingOperator: null, countPrefix: null, operatorCount: null }
+
+    if (key === 'Escape') return { state: s, handled: true }
+
+    const range = resolveTextObject(s, modifier, key)
+    if (!range) return { state: s, handled: true }
+
+    const changeKeys = [op, modifier, key]
+    const withUndoState = pushUndo(s)
+
+    switch (op) {
+      case 'd': {
+        const positioned = { ...withUndoState, cursor: range.start }
+        const result = ops.deleteToPos(positioned, range.end)
+        return { state: { ...result, lastChange: { type: 'normal', keys: changeKeys } }, handled: true }
+      }
+      case 'c': {
+        const positioned = { ...withUndoState, cursor: range.start }
+        const result = ops.changeToPos(positioned, range.end)
+        return { state: startInsertRecording(result, changeKeys), handled: true }
+      }
+      case 'y': {
+        const positioned = { ...withUndoState, cursor: range.start }
+        const result = ops.yankToPos(positioned, range.end)
+        return { state: result, handled: true }
+      }
+      default:
+        return { state: s, handled: true }
+    }
+  }
+
   const op = state.pendingOperator!
   const s: VimState = { ...state, pendingOperator: null }
 
@@ -1023,6 +1059,14 @@ function handleOperatorPending(state: VimState, key: string): KeyResult {
   if (key === 'f' || key === 'F' || key === 't' || key === 'T') {
     return {
       state: { ...s, pendingOperator: op, pendingKeys: key },
+      handled: true,
+    }
+  }
+
+  // Text object modifier — wait for next key (the object type)
+  if (key === 'i' || key === 'a') {
+    return {
+      state: { ...state, pendingKeys: key },
       handled: true,
     }
   }
