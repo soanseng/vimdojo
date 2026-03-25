@@ -35,6 +35,25 @@ func Generate(book *extract.ExtractedBook, bookSlug string) *ChallengeSet {
 		}
 	}
 
+	// Second pass: mark BOSS challenges and assign XP rewards.
+	// The last challenge per chapter is BOSS.
+	lastByChapter := make(map[int]int) // chapter -> index of last challenge
+	for i, c := range cs.Challenges {
+		lastByChapter[c.Source.Chapter] = i
+	}
+	bossIndices := make(map[int]bool)
+	for _, idx := range lastByChapter {
+		bossIndices[idx] = true
+	}
+	for i := range cs.Challenges {
+		if bossIndices[i] {
+			cs.Challenges[i].IsBoss = true
+			cs.Challenges[i].XpReward = 80
+		} else {
+			cs.Challenges[i].XpReward = 15
+		}
+	}
+
 	return cs
 }
 

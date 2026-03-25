@@ -1,6 +1,6 @@
 {
   "source_book": "Practical Vim",
-  "generated_at": "2026-03-25T17:38:56+08:00",
+  "generated_at": "2026-03-25T20:48:23+08:00",
   "challenges": [
     {
       "id": "pv-tip01-001",
@@ -33,7 +33,9 @@
       ],
       "concepts_zh": [
         "其他"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip01-002",
@@ -66,7 +68,9 @@
       ],
       "concepts_zh": [
         "其他"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip01-003",
@@ -105,7 +109,9 @@
         "操作符",
         "移動指令",
         "其他"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip02-001",
@@ -142,7 +148,9 @@
         "插入模式",
         "移動指令",
         "其他"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip05-001",
@@ -186,7 +194,9 @@
         "操作符",
         "插入模式",
         "其他"
-      ]
+      ],
+      "is_boss": true,
+      "xp_reward": 80
     },
     {
       "id": "pv-tip09-001",
@@ -223,7 +233,9 @@
         "操作符",
         "移動指令",
         "其他"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip09-002",
@@ -259,7 +271,9 @@
       "concepts_zh": [
         "移動指令",
         "操作符"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip09-003",
@@ -293,7 +307,9 @@
       "concepts_zh": [
         "操作符",
         "文字物件"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip10-001",
@@ -307,7 +323,7 @@
       "title_en": "Use Counts to Do Simple Arithmetic",
       "description_zh": "使用 用 . 重複上次修改，用 0 移到行首，用 W 移到下一個 WORD 字首，用 c 修改（刪除並進入插入模式），用 e 移到單字字尾，用 n 搜尋下一個匹配，用 p 貼上到游標後，用 s 刪除字元並進入插入模式，用 w 移到下一個單字字首，用 yy 複製整行。按鍵序列：yypcW.news\u003cEsc\u003e180\u003cC-x\u003e",
       "description_en": "Use Counts to Do Simple Arithmetic",
-      "category": "combo",
+      "category": "motion",
       "difficulty": 2,
       "initial_text": ".blog, .news { background-image: url(/sprite.png); }\n.blog { background-position: 0px 0px }",
       "expected_text": ".blog, .news { background-image: url(/sprite.png); }\n.blog { background-position: 0px 0px }\n.news { background-position: -180px 0px }",
@@ -347,7 +363,9 @@
         "操作符",
         "移動指令",
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip11-001",
@@ -384,7 +402,9 @@
         "操作符",
         "移動指令",
         "插入模式"
-      ]
+      ],
+      "is_boss": true,
+      "xp_reward": 80
     },
     {
       "id": "pv-tip15-001",
@@ -425,7 +445,9 @@
         "操作符",
         "移動指令",
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip16-001",
@@ -456,7 +478,9 @@
       ],
       "concepts_zh": [
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip19-001",
@@ -490,7 +514,9 @@
       "concepts_zh": [
         "移動指令",
         "插入模式"
-      ]
+      ],
+      "is_boss": true,
+      "xp_reward": 80
     },
     {
       "id": "pv-tip22-001",
@@ -530,7 +556,9 @@
         "移動指令",
         "操作符",
         "其他"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip23-001",
@@ -564,7 +592,9 @@
       "concepts_zh": [
         "視覺模式",
         "文字物件"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip23-002",
@@ -604,7 +634,9 @@
         "文字物件",
         "移動指令",
         "其他"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip24-001",
@@ -653,7 +685,9 @@
         "其他",
         "移動指令",
         "視覺模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip25-001",
@@ -691,7 +725,9 @@
       "concepts_zh": [
         "移動指令",
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip26-001",
@@ -729,7 +765,9 @@
       "concepts_zh": [
         "移動指令",
         "插入模式"
-      ]
+      ],
+      "is_boss": true,
+      "xp_reward": 80
     },
     {
       "id": "pv-tip29-001",
@@ -755,7 +793,9 @@
       "hint_text": "",
       "tags": null,
       "concepts_zh": null,
-      "needs_translation": true
+      "needs_translation": true,
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip29-002",
@@ -789,7 +829,9 @@
       "concepts_zh": [
         "視覺模式",
         "移動指令"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip30-001",
@@ -820,7 +862,9 @@
       ],
       "concepts_zh": [
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip30-002",
@@ -856,7 +900,9 @@
       "concepts_zh": [
         "移動指令",
         "視覺模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip33-001",
@@ -895,7 +941,9 @@
         "移動指令",
         "操作符",
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip34-001",
@@ -929,7 +977,9 @@
       "concepts_zh": [
         "插入模式",
         "其他"
-      ]
+      ],
+      "is_boss": true,
+      "xp_reward": 80
     },
     {
       "id": "pv-tip49-001",
@@ -963,7 +1013,9 @@
       "concepts_zh": [
         "移動指令",
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip49-002",
@@ -1002,7 +1054,9 @@
         "操作符",
         "移動指令",
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip49-003",
@@ -1042,7 +1096,9 @@
         "移動指令",
         "文字物件",
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip50-001",
@@ -1081,7 +1137,9 @@
         "移動指令",
         "操作符",
         "其他"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip51-001",
@@ -1118,7 +1176,9 @@
         "視覺模式",
         "移動指令",
         "操作符"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip51-002",
@@ -1149,7 +1209,9 @@
       ],
       "concepts_zh": [
         "操作符"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip52-001",
@@ -1163,7 +1225,7 @@
       "title_en": "Trace Your Selection with Precision Text Objects",
       "description_zh": "使用 用 a\" 雙引號內的文字含引號，用 a] 方括號內的文字含方括號，用 at HTML 標籤內的文字含標籤，用 i\u003e 角括號內的文字，用 it HTML 標籤內的文字，用 i} 大括號內的文字，用 v 進入視覺模式（字元選取）。按鍵序列：vi}a\"i\u003eitata]",
       "description_en": "Trace Your Selection with Precision Text Objects",
-      "category": "combo",
+      "category": "text-object",
       "difficulty": 3,
       "initial_text": "var tpl = [\n  '\u003ca href=\"{url}\"\u003e{title}\u003c/a\u003e'\n]",
       "expected_text": "var tpl = [ \n  ’\u003ca href=\"{url}\"\u003e{title}\u003c/a\u003e’ \n]",
@@ -1193,7 +1255,9 @@
       "concepts_zh": [
         "視覺模式",
         "文字物件"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip52-002",
@@ -1237,7 +1301,9 @@
         "文字物件",
         "移動指令",
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip53-001",
@@ -1271,7 +1337,9 @@
       "concepts_zh": [
         "操作符",
         "文字物件"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip53-002",
@@ -1308,7 +1376,9 @@
         "操作符",
         "文字物件",
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip55-001",
@@ -1322,7 +1392,7 @@
       "title_en": "Jump Between Matching Parentheses",
       "description_zh": "使用 用 % 跳到配對的括號，用 d 刪除，用 r 替換游標下的字元，用 t 向右搜尋字元（游標停在前一格），用 { 移到上一個段落。按鍵序列：dt{%r]``r[",
       "description_en": "Jump Between Matching Parentheses",
-      "category": "combo",
+      "category": "motion",
       "difficulty": 2,
       "initial_text": "cities = %w{London Berlin New\\ York}",
       "expected_text": "cities = [London Berlin New\\ York]",
@@ -1349,7 +1419,9 @@
         "操作符",
         "移動指令",
         "其他"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip55-002",
@@ -1386,7 +1458,9 @@
         "視覺模式",
         "移動指令",
         "插入模式"
-      ]
+      ],
+      "is_boss": true,
+      "xp_reward": 80
     },
     {
       "id": "pv-tip60-001",
@@ -1420,7 +1494,9 @@
       "concepts_zh": [
         "移動指令",
         "其他"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip60-002",
@@ -1453,7 +1529,9 @@
       ],
       "concepts_zh": [
         "其他"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip60-003",
@@ -1486,7 +1564,9 @@
       ],
       "concepts_zh": [
         "其他"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip61-001",
@@ -1532,7 +1612,9 @@
         "文字物件",
         "移動指令",
         "其他"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip61-002",
@@ -1563,7 +1645,9 @@
       ],
       "concepts_zh": [
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip61-003",
@@ -1607,7 +1691,9 @@
         "文字物件",
         "移動指令",
         "其他"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip62-001",
@@ -1654,7 +1740,9 @@
         "移動指令",
         "視覺模式",
         "其他"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip62-002",
@@ -1700,7 +1788,9 @@
         "操作符",
         "視覺模式",
         "其他"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip63-001",
@@ -1746,7 +1836,9 @@
         "文字物件",
         "移動指令",
         "其他"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip63-002",
@@ -1783,7 +1875,9 @@
         "操作符",
         "文字物件",
         "其他"
-      ]
+      ],
+      "is_boss": true,
+      "xp_reward": 80
     },
     {
       "id": "pv-tip65-001",
@@ -1819,7 +1913,9 @@
       "concepts_zh": [
         "其他",
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip65-002",
@@ -1856,7 +1952,9 @@
         "移動指令",
         "其他",
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip68-001",
@@ -1890,7 +1988,9 @@
       "concepts_zh": [
         "其他",
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip68-002",
@@ -1924,7 +2024,9 @@
       "concepts_zh": [
         "其他",
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip68-003",
@@ -1958,7 +2060,9 @@
       "concepts_zh": [
         "其他",
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip68-004",
@@ -1992,7 +2096,9 @@
       "concepts_zh": [
         "其他",
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip70-001",
@@ -2036,7 +2142,9 @@
         "插入模式",
         "移動指令",
         "操作符"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip70-002",
@@ -2070,7 +2178,9 @@
       "concepts_zh": [
         "其他",
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip71-001",
@@ -2104,7 +2214,9 @@
       "concepts_zh": [
         "其他",
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip71-002",
@@ -2140,7 +2252,9 @@
       "concepts_zh": [
         "移動指令",
         "視覺模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip72-001",
@@ -2174,7 +2288,9 @@
       "concepts_zh": [
         "移動指令",
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip72-002",
@@ -2208,7 +2324,9 @@
       "concepts_zh": [
         "移動指令",
         "插入模式"
-      ]
+      ],
+      "is_boss": true,
+      "xp_reward": 80
     },
     {
       "id": "pv-tip83-001",
@@ -2245,7 +2363,9 @@
         "插入模式",
         "移動指令",
         "其他"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip84-001",
@@ -2282,7 +2402,9 @@
         "操作符",
         "移動指令",
         "其他"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip85-001",
@@ -2328,7 +2450,9 @@
         "操作符",
         "其他",
         "插入模式"
-      ]
+      ],
+      "is_boss": true,
+      "xp_reward": 80
     },
     {
       "id": "pv-tip93-001",
@@ -2368,7 +2492,9 @@
         "移動指令",
         "操作符",
         "其他"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip93-002",
@@ -2402,7 +2528,9 @@
       "concepts_zh": [
         "其他",
         "視覺模式"
-      ]
+      ],
+      "is_boss": true,
+      "xp_reward": 80
     },
     {
       "id": "pv-tip101-001",
@@ -2436,7 +2564,9 @@
       "concepts_zh": [
         "視覺模式",
         "文字物件"
-      ]
+      ],
+      "is_boss": true,
+      "xp_reward": 80
     },
     {
       "id": "pv-tip104-001",
@@ -2473,7 +2603,9 @@
         "移動指令",
         "操作符",
         "插入模式"
-      ]
+      ],
+      "is_boss": true,
+      "xp_reward": 80
     },
     {
       "id": "pv-tip116-001",
@@ -2504,7 +2636,9 @@
       ],
       "concepts_zh": [
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip117-001",
@@ -2535,7 +2669,9 @@
       ],
       "concepts_zh": [
         "插入模式"
-      ]
+      ],
+      "is_boss": false,
+      "xp_reward": 15
     },
     {
       "id": "pv-tip118-001",
@@ -2566,7 +2702,9 @@
       ],
       "concepts_zh": [
         "插入模式"
-      ]
+      ],
+      "is_boss": true,
+      "xp_reward": 80
     }
   ]
 }

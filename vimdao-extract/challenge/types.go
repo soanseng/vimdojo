@@ -25,6 +25,9 @@ type Challenge struct {
 	Tags         []string        `json:"tags"`
 	ConceptsZh   []string        `json:"concepts_zh"`
 	NeedsTranslation bool        `json:"needs_translation,omitempty"`
+	FlavorZh  string `json:"flavor_zh,omitempty"`
+	IsBoss    bool   `json:"is_boss"`
+	XpReward  int    `json:"xp_reward"`
 }
 
 // ChallengeSource tracks where this challenge came from.

@@ -144,6 +144,49 @@ func TestGenerateMultipleCodeBlocks(t *testing.T) {
 	}
 }
 
+func TestBossDetection(t *testing.T) {
+	book := &extract.ExtractedBook{
+		BookTitle: "Test",
+		Chapters: []extract.Chapter{
+			{ChapterID: 1, Title: "Ch1", Sections: []extract.Section{
+				{SectionID: "1.1", TipNumber: 1, Title: "Tip 1",
+					CodeBlocks: []extract.CodeBlock{{Before: "a", After: "b", Keystrokes: "x"}}},
+				{SectionID: "1.2", TipNumber: 2, Title: "Tip 2",
+					CodeBlocks: []extract.CodeBlock{{Before: "c", After: "d", Keystrokes: "dd"}}},
+			}},
+			{ChapterID: 2, Title: "Ch2", Sections: []extract.Section{
+				{SectionID: "2.1", TipNumber: 10, Title: "Tip 10",
+					CodeBlocks: []extract.CodeBlock{{Before: "e", After: "f", Keystrokes: "x"}}},
+			}},
+		},
+	}
+	cs := Generate(book, "practical-vim")
+	if len(cs.Challenges) != 3 {
+		t.Fatalf("expected 3, got %d", len(cs.Challenges))
+	}
+	// First challenge in ch1: not boss
+	if cs.Challenges[0].IsBoss {
+		t.Error("first challenge should not be boss")
+	}
+	if cs.Challenges[0].XpReward != 15 {
+		t.Errorf("regular XP: got %d", cs.Challenges[0].XpReward)
+	}
+	// Last challenge in ch1: boss
+	if !cs.Challenges[1].IsBoss {
+		t.Error("last in ch1 should be boss")
+	}
+	if cs.Challenges[1].XpReward != 80 {
+		t.Errorf("boss XP: got %d", cs.Challenges[1].XpReward)
+	}
+	// Single challenge in ch2: also boss (last = only)
+	if !cs.Challenges[2].IsBoss {
+		t.Error("only challenge in ch2 should be boss")
+	}
+	if cs.Challenges[2].XpReward != 80 {
+		t.Errorf("boss XP: got %d", cs.Challenges[2].XpReward)
+	}
+}
+
 func TestGenerateFromPracticalVim(t *testing.T) {
 	data, err := os.ReadFile("../dist/practical-vim-drew-neil/practical-vim-drew-neil_extracted.json")
 	if err != nil {
