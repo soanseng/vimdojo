@@ -16,6 +16,9 @@ export interface VimState {
   pendingKeys: string
   keyLog: string[]
   lastFind: FindParams | null
+  insertKeyBuf: string[]       // tracks keys typed during insert for dot replay
+  isRecordingInsert: boolean   // true while recording an insert session
+  isDotReplaying: boolean      // true during dot command replay (prevents re-recording)
 }
 
 export interface FindParams {

@@ -4,14 +4,11 @@ import * as motions from './vim-motions'
 import * as ops from './vim-operations'
 
 // ---------------------------------------------------------------------------
-// Insert-mode key buffer — tracks keys typed during an insert session
-// so that the dot command can replay them.
+// Inclusive motions — these include the character at the target position
+// when used with operators (d, c, y).
 // ---------------------------------------------------------------------------
 
-/** Module-level buffer used while recording an insert sequence. */
-let insertKeyBuf: string[] = []
-let isRecordingInsert = false
-let isDotReplaying = false
+const INCLUSIVE_MOTIONS = new Set(['e', 'E', 'f', 'F', 'l', '$', 'G', 'gg'])
 
 // ---------------------------------------------------------------------------
 // Public API
@@ -35,63 +32,64 @@ export function processKey(state: VimState, key: string): KeyResult {
 // ---------------------------------------------------------------------------
 
 function handleInsertMode(state: VimState, key: string): KeyResult {
-  // Track key for dot-command replay
-  if (isRecordingInsert) {
-    insertKeyBuf.push(key)
+  // Track key for dot-command replay (immutable — build new buffer)
+  let s = state
+  if (state.isRecordingInsert) {
+    s = { ...s, insertKeyBuf: [...s.insertKeyBuf, key] }
   }
 
   if (key === 'Escape') {
     // Move cursor back one (Vim behaviour) and clamp
-    const newCol = Math.max(0, state.cursor.col - 1)
-    let s: VimState = {
-      ...state,
+    const newCol = Math.max(0, s.cursor.col - 1)
+    let result: VimState = {
+      ...s,
       mode: 'normal',
-      cursor: { line: state.cursor.line, col: newCol },
+      cursor: { line: s.cursor.line, col: newCol },
     }
-    s = clampCursor(s)
+    result = clampCursor(result)
 
     // Record insert change for dot command
-    if (isRecordingInsert) {
-      s = {
-        ...s,
-        lastChange: { type: 'insert', keys: [...insertKeyBuf] },
+    if (s.isRecordingInsert) {
+      result = {
+        ...result,
+        lastChange: { type: 'insert', keys: [...s.insertKeyBuf] },
+        isRecordingInsert: false,
+        insertKeyBuf: [],
       }
-      isRecordingInsert = false
-      insertKeyBuf = []
     }
 
-    return { state: s, handled: true }
+    return { state: result, handled: true }
   }
 
   if (key === 'Backspace') {
-    if (state.cursor.col === 0) {
-      return { state, handled: true }
+    if (s.cursor.col === 0) {
+      return { state: s, handled: true }
     }
-    const line = state.lines[state.cursor.line] ?? ''
-    const newLine = line.slice(0, state.cursor.col - 1) + line.slice(state.cursor.col)
-    const newLines = [...state.lines]
-    newLines[state.cursor.line] = newLine
+    const line = s.lines[s.cursor.line] ?? ''
+    const newLine = line.slice(0, s.cursor.col - 1) + line.slice(s.cursor.col)
+    const newLines = [...s.lines]
+    newLines[s.cursor.line] = newLine
     return {
       state: {
-        ...state,
+        ...s,
         lines: newLines,
-        cursor: { line: state.cursor.line, col: state.cursor.col - 1 },
+        cursor: { line: s.cursor.line, col: s.cursor.col - 1 },
       },
       handled: true,
     }
   }
 
   if (key === 'Enter') {
-    const line = state.lines[state.cursor.line] ?? ''
-    const before = line.slice(0, state.cursor.col)
-    const after = line.slice(state.cursor.col)
-    const newLines = [...state.lines]
-    newLines.splice(state.cursor.line, 1, before, after)
+    const line = s.lines[s.cursor.line] ?? ''
+    const before = line.slice(0, s.cursor.col)
+    const after = line.slice(s.cursor.col)
+    const newLines = [...s.lines]
+    newLines.splice(s.cursor.line, 1, before, after)
     return {
       state: {
-        ...state,
+        ...s,
         lines: newLines,
-        cursor: { line: state.cursor.line + 1, col: 0 },
+        cursor: { line: s.cursor.line + 1, col: 0 },
       },
       handled: true,
     }
@@ -99,21 +97,21 @@ function handleInsertMode(state: VimState, key: string): KeyResult {
 
   // Regular character — insert at cursor
   if (key.length === 1) {
-    const line = state.lines[state.cursor.line] ?? ''
-    const newLine = line.slice(0, state.cursor.col) + key + line.slice(state.cursor.col)
-    const newLines = [...state.lines]
-    newLines[state.cursor.line] = newLine
+    const line = s.lines[s.cursor.line] ?? ''
+    const newLine = line.slice(0, s.cursor.col) + key + line.slice(s.cursor.col)
+    const newLines = [...s.lines]
+    newLines[s.cursor.line] = newLine
     return {
       state: {
-        ...state,
+        ...s,
         lines: newLines,
-        cursor: { line: state.cursor.line, col: state.cursor.col + 1 },
+        cursor: { line: s.cursor.line, col: s.cursor.col + 1 },
       },
       handled: true,
     }
   }
 
-  return { state, handled: false }
+  return { state: s, handled: false }
 }
 
 // ---------------------------------------------------------------------------
@@ -223,8 +221,7 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
 
   if (key === 'C') {
     const s = ops.changeToEnd(state)
-    startInsertRecording(['C'])
-    return { state: s, handled: true }
+    return { state: startInsertRecording(s, ['C']), handled: true }
   }
 
   if (key === 'Y') {
@@ -259,36 +256,32 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
 
   // --- Insert mode entry ---
   if (key === 'i') {
-    startInsertRecording(['i'])
     return {
-      state: { ...state, mode: 'insert' },
+      state: startInsertRecording({ ...state, mode: 'insert' }, ['i']),
       handled: true,
     }
   }
 
   if (key === 'I') {
     const pos = motions.caret(state)
-    startInsertRecording(['I'])
     return {
-      state: { ...state, mode: 'insert', cursor: pos },
+      state: startInsertRecording({ ...state, mode: 'insert', cursor: pos }, ['I']),
       handled: true,
     }
   }
 
   if (key === 'a') {
     const col = Math.min(state.cursor.col + 1, (state.lines[state.cursor.line] ?? '').length)
-    startInsertRecording(['a'])
     return {
-      state: { ...state, mode: 'insert', cursor: { line: state.cursor.line, col } },
+      state: startInsertRecording({ ...state, mode: 'insert', cursor: { line: state.cursor.line, col } }, ['a']),
       handled: true,
     }
   }
 
   if (key === 'A') {
     const line = state.lines[state.cursor.line] ?? ''
-    startInsertRecording(['A'])
     return {
-      state: { ...state, mode: 'insert', cursor: { line: state.cursor.line, col: line.length } },
+      state: startInsertRecording({ ...state, mode: 'insert', cursor: { line: state.cursor.line, col: line.length } }, ['A']),
       handled: true,
     }
   }
@@ -297,14 +290,13 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
     const newLines = [...state.lines]
     newLines.splice(state.cursor.line + 1, 0, '')
     const s = pushUndo(state)
-    startInsertRecording(['o'])
     return {
-      state: {
+      state: startInsertRecording({
         ...s,
         lines: newLines,
         mode: 'insert',
         cursor: { line: state.cursor.line + 1, col: 0 },
-      },
+      }, ['o']),
       handled: true,
     }
   }
@@ -313,14 +305,13 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
     const newLines = [...state.lines]
     newLines.splice(state.cursor.line, 0, '')
     const s = pushUndo(state)
-    startInsertRecording(['O'])
     return {
-      state: {
+      state: startInsertRecording({
         ...s,
         lines: newLines,
         mode: 'insert',
         cursor: { line: state.cursor.line, col: 0 },
-      },
+      }, ['O']),
       handled: true,
     }
   }
@@ -388,21 +379,28 @@ function handleOperatorFindChar(state: VimState, char: string): KeyResult {
     const withFind = { ...s, lastFind: findParams }
     // The motion key for recording is the findKey + char
     const changeKeys = [op, findKey, char]
+
+    // Find motions (f/F) are inclusive — include the char at target
+    const isInclusive = findType === 'f'
+    let adjustedPos = pos
+    if (isInclusive && pos.line === withFind.cursor.line) {
+      adjustedPos = { ...pos, col: pos.col + 1 }
+    }
+
     switch (op) {
       case 'd': {
-        const result = ops.deleteToPos(withFind, pos)
+        const result = ops.deleteToPos(withFind, adjustedPos)
         return {
           state: { ...result, lastChange: { type: 'normal', keys: changeKeys } },
           handled: true,
         }
       }
       case 'c': {
-        const result = ops.changeToPos(withFind, pos)
-        startInsertRecording(changeKeys)
-        return { state: result, handled: true }
+        const result = ops.changeToPos(withFind, adjustedPos)
+        return { state: startInsertRecording(result, changeKeys), handled: true }
       }
       case 'y': {
-        const result = ops.yankToPos(withFind, pos)
+        const result = ops.yankToPos(withFind, adjustedPos)
         return { state: result, handled: true }
       }
     }
@@ -463,8 +461,7 @@ function executeLineOp(state: VimState, op: string): KeyResult {
       }
     case 'c':
       s = ops.changeLine(state)
-      startInsertRecording(changeKeys)
-      return { state: s, handled: true }
+      return { state: startInsertRecording(s, changeKeys), handled: true }
     case 'y':
       s = ops.yankLine(state)
       return { state: s, handled: true }
@@ -481,21 +478,26 @@ function executeOperatorMotion(
 ): KeyResult {
   const changeKeys = [op, motionKey]
 
+  // Adjust target for inclusive motions (include the char at target position)
+  let adjustedTarget = target
+  if (INCLUSIVE_MOTIONS.has(motionKey) && target.line === state.cursor.line) {
+    adjustedTarget = { ...target, col: target.col + 1 }
+  }
+
   switch (op) {
     case 'd': {
-      const s = ops.deleteToPos(state, target)
+      const s = ops.deleteToPos(state, adjustedTarget)
       return {
         state: { ...s, lastChange: { type: 'normal', keys: changeKeys } },
         handled: true,
       }
     }
     case 'c': {
-      const s = ops.changeToPos(state, target)
-      startInsertRecording(changeKeys)
-      return { state: s, handled: true }
+      const s = ops.changeToPos(state, adjustedTarget)
+      return { state: startInsertRecording(s, changeKeys), handled: true }
     }
     case 'y': {
-      const s = ops.yankToPos(state, target)
+      const s = ops.yankToPos(state, adjustedTarget)
       return { state: s, handled: true }
     }
     default:
@@ -547,18 +549,15 @@ function executeDot(state: VimState): KeyResult {
   }
 
   const change = state.lastChange
-  isDotReplaying = true
+  let s: VimState = { ...state, isDotReplaying: true }
 
-  let s = state
   for (const k of change.keys) {
     const result = processKey(s, k)
     s = result.state
   }
 
-  isDotReplaying = false
-
-  // Restore the original lastChange so dot can be repeated
-  s = { ...s, lastChange: change }
+  // Restore the original lastChange so dot can be repeated, and stop replaying
+  s = { ...s, lastChange: change, isDotReplaying: false }
 
   return { state: s, handled: true }
 }
@@ -567,10 +566,9 @@ function executeDot(state: VimState): KeyResult {
 // Insert recording
 // ---------------------------------------------------------------------------
 
-function startInsertRecording(entryKeys: string[]): void {
-  if (isDotReplaying) return
-  isRecordingInsert = true
-  insertKeyBuf = [...entryKeys]
+function startInsertRecording(state: VimState, entryKeys: string[]): VimState {
+  if (state.isDotReplaying) return state
+  return { ...state, isRecordingInsert: true, insertKeyBuf: [...entryKeys] }
 }
 
 // ---------------------------------------------------------------------------

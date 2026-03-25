@@ -154,6 +154,26 @@ describe('dot command', () => {
   })
 })
 
+describe('inclusive motions with operators', () => {
+  it('de deletes to end of word inclusively', () => {
+    expect(applyKeys('hello world', ['d', 'e'])).toBe(' world')
+  })
+
+  it('d$ deletes to end of line inclusively', () => {
+    const s = createState('hello world')
+    s.cursor = { line: 0, col: 5 }
+    let result = s
+    for (const key of ['d', '$']) {
+      result = processKey(result, key).state
+    }
+    expect(getText(result)).toBe('hello')
+  })
+
+  it('df deletes through found char inclusively', () => {
+    expect(applyKeys('abcdef', ['d', 'f', 'd'])).toBe('ef')
+  })
+})
+
 // CRITICAL: These are the actual Practical Vim challenges
 describe('Practical Vim Tip 1', () => {
   it('x... deletes first 3 chars', () => {

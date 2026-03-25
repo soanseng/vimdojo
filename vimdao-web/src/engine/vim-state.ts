@@ -13,6 +13,9 @@ export function createState(text: string, cursor?: CursorPos): VimState {
     pendingKeys: '',
     keyLog: [],
     lastFind: null,
+    insertKeyBuf: [],
+    isRecordingInsert: false,
+    isDotReplaying: false,
   }
 }
 
