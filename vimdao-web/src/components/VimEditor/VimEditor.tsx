@@ -29,7 +29,11 @@ export default function VimEditor({ state, onKey, title, showKeyLog = true }: Vi
   }, [])
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
+    // Ignore IME composition events (e.g., Chinese input method active)
+    if (e.nativeEvent.isComposing) return
     if (IGNORED_KEYS.has(e.key)) return
+    // Skip unidentified/dead keys from IME
+    if (e.key === 'Dead' || e.key === 'Process' || e.key === 'Unidentified') return
 
     e.preventDefault()
     onKey(e.key)
