@@ -15,18 +15,21 @@ export default function ChallengeView() {
   const [error, setError] = useState<string | null>(null)
   const [result, setResult] = useState<SubmitResult>(null)
   const [showHint, setShowHint] = useState(false)
-  const [keystrokeCount, setKeystrokeCount] = useState(0)
 
   // Initialize with empty text; will be reset when challenge loads
   const { state, handleKey, reset } = useVimEditor('')
 
   useEffect(() => {
-    fetch('/data/practical-vim_challenges.json')
+    const controller = new AbortController()
+    fetch('/data/practical-vim_challenges.json', { signal: controller.signal })
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${String(res.status)}`)
         return res.json() as Promise<ChallengeSet>
       })
       .then(data => {
+        if (!Array.isArray(data?.challenges)) {
+          throw new Error('Invalid challenge data format')
+        }
         const found = data.challenges.find(c => c.id === id)
         if (!found) {
           setError('找不到此練習題')
@@ -37,15 +40,15 @@ export default function ChallengeView() {
         setLoading(false)
       })
       .catch(err => {
+        if (err instanceof Error && err.name === 'AbortError') return
         setError(err instanceof Error ? err.message : '載入失敗')
         setLoading(false)
       })
+    return () => { controller.abort() }
   }, [id, reset])
 
   const handleEditorKey = useCallback((key: string) => {
     handleKey(key)
-    setKeystrokeCount(prev => prev + 1)
-    // Clear previous result when user types
     setResult(null)
   }, [handleKey])
 
@@ -63,7 +66,6 @@ export default function ChallengeView() {
     if (!challenge) return
     reset(challenge.initial_text, challenge.cursor_start)
     setResult(null)
-    setKeystrokeCount(0)
   }, [challenge, reset])
 
   const handleBack = useCallback(() => {
@@ -150,17 +152,17 @@ export default function ChallengeView() {
             再練一次
           </button>
           <span className="text-xs text-ctp-overlay0 ml-auto">
-            按鍵次數: {keystrokeCount}
+            按鍵次數: {state.keyLog.length}
           </span>
         </div>
 
         {result === 'pass' && (
-          <div className="bg-ctp-green/10 border border-ctp-green/30 rounded-lg p-4 text-ctp-green font-medium">
-            通過 — 答案正確！共 {keystrokeCount} 次按鍵
+          <div role="status" aria-live="polite" className="bg-ctp-green/10 border border-ctp-green/30 rounded-lg p-4 text-ctp-green font-medium">
+            通過 — 答案正確！共 {state.keyLog.length} 次按鍵
           </div>
         )}
         {result === 'fail' && (
-          <div className="bg-ctp-red/10 border border-ctp-red/30 rounded-lg p-4 text-ctp-red font-medium">
+          <div role="status" aria-live="polite" className="bg-ctp-red/10 border border-ctp-red/30 rounded-lg p-4 text-ctp-red font-medium">
             未通過 — 文字內容與預期不符，請再試一次
           </div>
         )}

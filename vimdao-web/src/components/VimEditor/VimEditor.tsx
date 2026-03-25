@@ -40,12 +40,14 @@ export default function VimEditor({ state, onKey, title, showKeyLog = true }: Vi
       <div
         ref={editorRef}
         tabIndex={0}
+        role="application"
+        aria-label={title ?? 'Vim 編輯器'}
         onKeyDown={handleKeyDown}
         className="relative bg-ctp-base text-ctp-text outline-none flex-1 min-h-[200px] overflow-auto"
       >
         <div className="flex">
           {/* Line numbers gutter */}
-          <div className="bg-ctp-mantle text-ctp-overlay0 text-right select-none py-2 pr-3 pl-2">
+          <div aria-hidden="true" className="bg-ctp-mantle text-ctp-overlay0 text-right select-none py-2 pr-3 pl-2">
             {state.lines.map((_, i) => (
               <div key={i} className="leading-6">
                 {i + 1}

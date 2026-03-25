@@ -18,19 +18,25 @@ export default function ChallengeList() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    fetch('/data/practical-vim_challenges.json')
+    const controller = new AbortController()
+    fetch('/data/practical-vim_challenges.json', { signal: controller.signal })
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${String(res.status)}`)
         return res.json() as Promise<ChallengeSet>
       })
       .then(data => {
+        if (!Array.isArray(data?.challenges)) {
+          throw new Error('Invalid challenge data format')
+        }
         setChallenges(data.challenges)
         setLoading(false)
       })
       .catch(err => {
+        if (err instanceof Error && err.name === 'AbortError') return
         setError(err instanceof Error ? err.message : '載入失敗')
         setLoading(false)
       })
+    return () => { controller.abort() }
   }, [])
 
   if (loading) {
@@ -65,10 +71,13 @@ export default function ChallengeList() {
           {challenges.map(challenge => {
             const diff = difficultyLabel(challenge.difficulty)
             return (
-              <button
+              <div
                 key={challenge.id}
+                role="button"
+                tabIndex={0}
                 onClick={() => { navigate(`/challenge/${challenge.id}`) }}
-                className="text-left bg-ctp-surface0 rounded-lg p-4 hover:bg-ctp-surface1 transition-colors border border-ctp-surface1 hover:border-ctp-blue/50"
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') navigate(`/challenge/${challenge.id}`) }}
+                className="text-left bg-ctp-surface0 rounded-lg p-4 hover:bg-ctp-surface1 transition-colors border border-ctp-surface1 hover:border-ctp-blue/50 cursor-pointer"
               >
                 <div className="flex items-start justify-between gap-2 mb-2">
                   <h3 className="text-sm font-medium text-ctp-text leading-snug flex-1">
@@ -83,16 +92,16 @@ export default function ChallengeList() {
                   <span>Tip {String(challenge.source.tip_number)}</span>
                 </div>
                 <div className="mt-2 flex flex-wrap gap-1">
-                  {challenge.hint_commands.slice(0, 4).map(cmd => (
+                  {challenge.hint_commands.slice(0, 4).map((cmd, cmdIdx) => (
                     <span
-                      key={cmd}
+                      key={`${challenge.id}-cmd-${String(cmdIdx)}`}
                       className="text-xs font-mono bg-ctp-base px-1.5 py-0.5 rounded text-ctp-blue"
                     >
                       {cmd}
                     </span>
                   ))}
                 </div>
-              </button>
+              </div>
             )
           })}
         </div>
