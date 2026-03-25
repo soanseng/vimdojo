@@ -146,6 +146,15 @@ func WriteLazyVimTips(book *extract.LazyVimBook, outputDir, bookSlug string) err
 	return writeJSON(path, book.Tips)
 }
 
+// WriteNamedJSON writes any value as indented JSON to outputDir/filename.
+func WriteNamedJSON(v any, outputDir, filename string) error {
+	if err := os.MkdirAll(outputDir, 0o755); err != nil {
+		return fmt.Errorf("failed to create output dir: %w", err)
+	}
+	path := filepath.Join(outputDir, filename)
+	return writeJSON(path, v)
+}
+
 func writeJSON(path string, v any) error {
 	data, err := json.MarshalIndent(v, "", "  ")
 	if err != nil {

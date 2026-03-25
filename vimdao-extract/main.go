@@ -6,6 +6,9 @@ import (
 	"path/filepath"
 	"strings"
 
+	"encoding/json"
+
+	"github.com/scipio/vimdao-extract/challenge"
 	"github.com/scipio/vimdao-extract/epub"
 	"github.com/scipio/vimdao-extract/extract"
 	"github.com/scipio/vimdao-extract/output"
@@ -32,6 +35,35 @@ func main() {
 			fmt.Fprintf(os.Stderr, "error: %v\n", err)
 			os.Exit(1)
 		}
+	case "generate":
+		if len(os.Args) < 3 {
+			fmt.Fprintln(os.Stderr, "usage: vimdao-extract generate <file.epub> [output-dir]")
+			os.Exit(1)
+		}
+		epubPath := os.Args[2]
+		outputDir := "./dist"
+		if len(os.Args) >= 4 {
+			outputDir = os.Args[3]
+		}
+		if err := runGenerate(epubPath, outputDir); err != nil {
+			fmt.Fprintf(os.Stderr, "error: %v\n", err)
+			os.Exit(1)
+		}
+	case "merge":
+		if len(os.Args) < 4 {
+			fmt.Fprintln(os.Stderr, "usage: vimdao-extract merge <dir1> <dir2> [output-dir]")
+			os.Exit(1)
+		}
+		dir1 := os.Args[2]
+		dir2 := os.Args[3]
+		outputDir := "./dist/merged"
+		if len(os.Args) >= 5 {
+			outputDir = os.Args[4]
+		}
+		if err := runMerge(dir1, dir2, outputDir); err != nil {
+			fmt.Fprintf(os.Stderr, "error: %v\n", err)
+			os.Exit(1)
+		}
 	default:
 		fmt.Fprintf(os.Stderr, "unknown command: %s\n", os.Args[1])
 		printUsage()
@@ -43,7 +75,9 @@ func printUsage() {
 	fmt.Fprintln(os.Stderr, "usage: vimdao-extract <command> [args]")
 	fmt.Fprintln(os.Stderr, "")
 	fmt.Fprintln(os.Stderr, "commands:")
-	fmt.Fprintln(os.Stderr, "  extract <file.epub> [output-dir]  Extract content from EPUB")
+	fmt.Fprintln(os.Stderr, "  extract  <file.epub> [output-dir]   Extract content from EPUB")
+	fmt.Fprintln(os.Stderr, "  generate <file.epub> [output-dir]   Extract + generate challenges")
+	fmt.Fprintln(os.Stderr, "  merge    <dir1> <dir2> [output-dir] Merge command indices")
 }
 
 func runExtract(epubPath, outputDir string) error {
@@ -160,6 +194,118 @@ func runLazyVimExtract(book *epub.Book, subDir, slug string) error {
 	fmt.Printf("        %s/%s_keybindings.json\n", subDir, slug)
 	fmt.Printf("        %s/%s_tips.json\n", subDir, slug)
 
+	return nil
+}
+
+func runGenerate(epubPath, outputDir string) error {
+	book, err := epub.Open(epubPath)
+	if err != nil {
+		return fmt.Errorf("failed to open EPUB: %w", err)
+	}
+	fmt.Printf("Book: %s by %s\n", book.Title, book.Author)
+
+	slug := slugFromPath(epubPath)
+	subDir := filepath.Join(outputDir, slug)
+	isLV := detectIsLazyVim(book)
+
+	if isLV {
+		// LazyVim: extract + generate reference cards
+		fmt.Println("Extracting + generating reference cards (LazyVim)...")
+		lvBook, err := extract.ExtractLazyVimBook(book)
+		if err != nil {
+			return fmt.Errorf("extraction failed: %w", err)
+		}
+
+		rs := challenge.GenerateReference(lvBook)
+
+		if err := output.WriteNamedJSON(rs, subDir, slug+"_challenges.json"); err != nil {
+			return err
+		}
+		if err := output.WriteLazyVimKeybindings(lvBook, subDir, slug); err != nil {
+			return err
+		}
+		if err := output.WriteLazyVimTips(lvBook, subDir, slug); err != nil {
+			return err
+		}
+
+		fmt.Printf("\n=== LazyVim Generation Summary ===\n")
+		fmt.Printf("Reference cards: %d\n", len(rs.Cards))
+		fmt.Printf("Output: %s/%s_challenges.json\n", subDir, slug)
+		return nil
+	}
+
+	// Practical Vim: extract + generate challenges
+	fmt.Println("Extracting + generating challenges (Practical Vim)...")
+	extracted, err := extract.ExtractBook(book)
+	if err != nil {
+		return fmt.Errorf("extraction failed: %w", err)
+	}
+
+	cs := challenge.Generate(extracted, slug)
+
+	if err := output.WriteNamedJSON(cs, subDir, slug+"_challenges.json"); err != nil {
+		return err
+	}
+	if err := output.WriteCommandIndex(extracted, subDir, slug); err != nil {
+		return err
+	}
+
+	// Difficulty distribution
+	diffs := map[int]int{}
+	for _, ch := range cs.Challenges {
+		diffs[ch.Difficulty]++
+	}
+
+	fmt.Printf("\n=== Practical Vim Generation Summary ===\n")
+	fmt.Printf("Challenges: %d\n", len(cs.Challenges))
+	fmt.Printf("Difficulty: 入門=%d  進階=%d  精通=%d\n", diffs[1], diffs[2], diffs[3])
+	fmt.Printf("Output: %s/%s_challenges.json\n", subDir, slug)
+	fmt.Printf("        %s/%s_commands.json\n", subDir, slug)
+
+	return nil
+}
+
+func runMerge(dir1, dir2, outputDir string) error {
+	fmt.Printf("Merging command indices from %s and %s...\n", dir1, dir2)
+
+	load := func(dir string) (*output.CommandIndex, error) {
+		// Find *_commands.json in dir
+		entries, err := os.ReadDir(dir)
+		if err != nil {
+			return nil, fmt.Errorf("failed to read %s: %w", dir, err)
+		}
+		for _, e := range entries {
+			if strings.HasSuffix(e.Name(), "_commands.json") {
+				data, err := os.ReadFile(filepath.Join(dir, e.Name()))
+				if err != nil {
+					return nil, err
+				}
+				var idx output.CommandIndex
+				if err := json.Unmarshal(data, &idx); err != nil {
+					return nil, fmt.Errorf("failed to parse %s: %w", e.Name(), err)
+				}
+				return &idx, nil
+			}
+		}
+		return nil, nil
+	}
+
+	idx1, err := load(dir1)
+	if err != nil {
+		return err
+	}
+	idx2, err := load(dir2)
+	if err != nil {
+		return err
+	}
+
+	merged := output.MergeIndices(idx1, idx2)
+
+	if err := output.WriteNamedJSON(merged, outputDir, "merged_commands.json"); err != nil {
+		return err
+	}
+
+	fmt.Printf("Merged %d commands → %s/merged_commands.json\n", len(merged.Commands), outputDir)
 	return nil
 }
 
