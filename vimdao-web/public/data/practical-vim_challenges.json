@@ -771,7 +771,7 @@
         "N",
         "o"
       ],
-      "hint_keystrokes": "{start}Normal mode<C-v>jj$Visual-BlockA;Insert mode<Esc>Normal mode",
+      "hint_keystrokes": "A;<Esc>j.j.",
       "hint_text": "按鍵順序：{start}Normal mode<C-v>jj$Visual-BlockA;Insert mode<Esc>Normal mode\n\n• { — 移到上一個段落\n• s — 刪除字元並進入插入模式\n• N — 搜尋上一個匹配\n• o — 在下方新增一行並進入插入模式",
       "tags": [
         "N",
@@ -2665,7 +2665,7 @@
         "<",
         "C"
       ],
-      "hint_keystrokes": "fS<C-]>",
+      "hint_keystrokes": "",
       "hint_text": "按鍵順序：fS<C-]>\n\n• f — 向右搜尋字元\n• < — 減少縮排\n• C — 修改到行尾",
       "tags": [
         "<",
