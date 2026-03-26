@@ -424,3 +424,120 @@ describe('BUG-E12: indent with text objects', () => {
     expect(result).toBe('html {\n  margin: 0;\n  padding: 0;\n}')
   })
 })
+
+// ---------------------------------------------------------------------------
+// FEAT-1: gU/gu operators (uppercase/lowercase with motion)
+// ---------------------------------------------------------------------------
+
+describe('FEAT-1: gU/gu operators', () => {
+  it('gUw uppercases a word', () => {
+    const result = applyKeys('hello world', ['g', 'U', 'w'])
+    expect(result).toBe('HELLO world')
+  })
+
+  it('gUU uppercases entire line', () => {
+    const result = applyKeys('hello world\nsecond', ['g', 'U', 'U'])
+    expect(result).toBe('HELLO WORLD\nsecond')
+  })
+
+  it('guw lowercases a word', () => {
+    const result = applyKeys('HELLO WORLD', ['g', 'u', 'w'])
+    expect(result).toBe('hello WORLD')
+  })
+
+  it('guu lowercases entire line', () => {
+    const result = applyKeys('HELLO WORLD\nSECOND', ['g', 'u', 'u'])
+    expect(result).toBe('hello world\nSECOND')
+  })
+
+  it('gUiw uppercases inner word', () => {
+    const result = applyKeys(
+      'say hello please',
+      ['g', 'U', 'i', 'w'],
+      { line: 0, col: 4 },
+    )
+    expect(result).toBe('say HELLO please')
+  })
+
+  it('gUit uppercases inside tag', () => {
+    const result = applyKeys(
+      '<a href="#">one</a>',
+      ['g', 'U', 'i', 't'],
+      { line: 0, col: 12 },
+    )
+    expect(result).toBe('<a href="#">ONE</a>')
+  })
+
+  it('gU$ uppercases to end of line', () => {
+    const result = applyKeys(
+      'hello world',
+      ['g', 'U', '$'],
+      { line: 0, col: 6 },
+    )
+    expect(result).toBe('hello WORLD')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// FEAT-2: Replace mode (R)
+// ---------------------------------------------------------------------------
+
+describe('FEAT-2: replace mode', () => {
+  it('R replaces characters one by one', () => {
+    const result = applyKeys(
+      'hello world',
+      ['R', 'H', 'E', 'L', 'Escape'],
+    )
+    expect(result).toBe('HELlo world')
+  })
+
+  it('R at end of line extends the line', () => {
+    const result = applyKeys(
+      'hi',
+      ['R', 'H', 'E', 'L', 'L', 'O', 'Escape'],
+    )
+    expect(result).toBe('HELLO')
+  })
+
+  it('f.R,b<Esc> replaces chars at found position', () => {
+    const result = applyKeys(
+      'one.two.three',
+      ['f', '.', 'R', ',', 'b', 'Escape'],
+    )
+    expect(result).toBe('one,bwo.three')
+  })
+
+  it('Escape from replace mode returns to normal', () => {
+    const state = applyKeysState(
+      'hello',
+      ['R', 'X', 'Escape'],
+    )
+    expect(state.mode).toBe('normal')
+    expect(getText(state)).toBe('Xello')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// FEAT-3: gv (reselect last visual selection)
+// ---------------------------------------------------------------------------
+
+describe('FEAT-3: gv reselect visual', () => {
+  it('gv reselects after visual yank', () => {
+    const state = applyKeysState(
+      'hello world',
+      ['v', 'e', 'y', 'g', 'v'],
+    )
+    expect(state.mode).toBe('visual')
+    expect(state.visualStart).toEqual({ line: 0, col: 0 })
+    expect(state.cursor.col).toBe(4) // end of "hello"
+  })
+
+  it('gv after Vjy reselects visual lines', () => {
+    const state = applyKeysState(
+      'line1\nline2\nline3',
+      ['V', 'j', 'y', 'g', 'v'],
+    )
+    expect(state.mode).toBe('visual')
+    expect(state.visualMode).toBe('line')
+  })
+})

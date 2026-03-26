@@ -47,10 +47,7 @@ function isTestable(ks: string): boolean {
   if (/"[a-z0_]/.test(ks)) return false
   if (/`[a-z`]/.test(ks)) return false
   if (ks.includes('%')) return false
-  if (ks.includes('gU')) return false
   if (/vee?S/.test(ks)) return false
-  if (ks.includes('gv')) return false
-  if (/(?<![a-zA-Z])R[^e]/.test(ks) || /(?<![a-zA-Z])R,$/.test(ks)) return false
   return true
 }
 

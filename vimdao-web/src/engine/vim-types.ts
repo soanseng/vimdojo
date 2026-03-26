@@ -1,4 +1,4 @@
-export type VimMode = 'normal' | 'insert' | 'operator-pending' | 'visual' | 'command'
+export type VimMode = 'normal' | 'insert' | 'replace' | 'operator-pending' | 'visual' | 'command'
 
 export interface CursorPos {
   line: number
@@ -28,6 +28,9 @@ export interface VimState {
   visualMode: 'char' | 'line' | null  // character-wise or line-wise
   lastCommand: string | null      // last ex-command result (e.g. 'write', 'quit')
   highlightRange: { start: CursorPos; end: CursorPos } | null  // visual highlight for pending operations (surround, etc.)
+  lastVisualStart: CursorPos | null   // saved visual selection for gv
+  lastVisualEnd: CursorPos | null
+  lastVisualMode: 'char' | 'line' | null
 }
 
 export interface FindParams {

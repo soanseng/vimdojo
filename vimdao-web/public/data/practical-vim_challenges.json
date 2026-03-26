@@ -518,7 +518,7 @@
         "f",
         "R"
       ],
-      "hint_keystrokes": "f.R,b<Esc>",
+      "hint_keystrokes": "f.R, b<Esc>",
       "hint_text": "按鍵順序：f.R,b<Esc>\n\n• f — 向右搜尋字元\n• R — 進入取代模式",
       "tags": [
         "R",
@@ -629,7 +629,7 @@
       "expected_text": "<a href=\"#\">ONE</a>\n<a href=\"#\">TWO</a>\n<a href=\"#\">THREE</a>",
       "cursor_start": {
         "line": 0,
-        "col": 0
+        "col": 12
       },
       "hint_commands": [
         "gU",
@@ -2585,7 +2585,7 @@
         "u",
         "v"
       ],
-      "hint_keystrokes": "ugv",
+      "hint_keystrokes": "",
       "hint_text": "按鍵順序：ugv\n\n• u — 復原\n• v — 進入視覺模式（字元選取）",
       "tags": [
         "u",

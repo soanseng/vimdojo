@@ -27,6 +27,8 @@ export function processKey(state: VimState, key: string): KeyResult {
   switch (s.mode) {
     case 'insert':
       return handleInsertMode(s, key)
+    case 'replace':
+      return handleReplaceMode(s, key)
     case 'normal':
       return handleNormalMode(s, key)
     case 'visual':
@@ -126,6 +128,52 @@ function handleInsertMode(state: VimState, key: string): KeyResult {
 }
 
 // ---------------------------------------------------------------------------
+// Replace mode
+// ---------------------------------------------------------------------------
+
+function handleReplaceMode(state: VimState, key: string): KeyResult {
+  let s = state
+  if (state.isRecordingInsert) {
+    s = { ...s, insertKeyBuf: [...s.insertKeyBuf, key] }
+  }
+
+  if (key === 'Escape') {
+    const newCol = Math.max(0, s.cursor.col - 1)
+    let result: VimState = { ...s, mode: 'normal', cursor: { line: s.cursor.line, col: newCol } }
+    result = clampCursor(result)
+    if (s.isRecordingInsert) {
+      result = {
+        ...result,
+        lastChange: { type: 'insert', keys: [...s.insertKeyBuf] },
+        isRecordingInsert: false,
+        insertKeyBuf: [],
+      }
+    }
+    return { state: result, handled: true }
+  }
+
+  // Replace character at cursor, advance cursor
+  if (key.length === 1) {
+    const line = s.lines[s.cursor.line] ?? ''
+    const col = s.cursor.col
+    const newLines = [...s.lines]
+    if (col < line.length) {
+      // Replace existing character
+      newLines[s.cursor.line] = line.slice(0, col) + key + line.slice(col + 1)
+    } else {
+      // At or past end of line — append
+      newLines[s.cursor.line] = line + key
+    }
+    return {
+      state: { ...s, lines: newLines, cursor: { line: s.cursor.line, col: col + 1 } },
+      handled: true,
+    }
+  }
+
+  return { state: s, handled: false }
+}
+
+// ---------------------------------------------------------------------------
 // Normal mode
 // ---------------------------------------------------------------------------
 
@@ -143,6 +191,28 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
     }
     if (key === 's') {
       return { state: { ...s, pendingKeys: 'gs' }, handled: true }
+    }
+    if (key === 'U') {
+      return { state: { ...s, pendingOperator: 'gU', pendingKeys: '' }, handled: true }
+    }
+    if (key === 'u') {
+      return { state: { ...s, pendingOperator: 'gu', pendingKeys: '' }, handled: true }
+    }
+    // gv — reselect last visual selection
+    if (key === 'v') {
+      if (s.lastVisualStart && s.lastVisualEnd) {
+        return {
+          state: {
+            ...s,
+            mode: 'visual',
+            visualStart: { ...s.lastVisualStart },
+            visualMode: s.lastVisualMode ?? 'char',
+            cursor: { ...s.lastVisualEnd },
+          },
+          handled: true,
+        }
+      }
+      return { state: s, handled: true }
     }
     // Unknown g-combo — ignore
     return { state: s, handled: false }
@@ -638,6 +708,15 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
     }
   }
 
+  // --- Replace mode ---
+  if (key === 'R') {
+    const s = pushUndo(state)
+    return {
+      state: { ...s, mode: 'replace', isRecordingInsert: true, insertKeyBuf: ['R'] },
+      handled: true,
+    }
+  }
+
   // --- Dot command ---
   if (key === '.') {
     return executeDot(state)
@@ -736,7 +815,7 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
 // ---------------------------------------------------------------------------
 
 function handleVisualMode(state: VimState, key: string): KeyResult {
-  // Escape — exit visual, clear selection
+  // Escape — exit visual, clear selection (save for gv)
   if (key === 'Escape') {
     return {
       state: {
@@ -744,6 +823,9 @@ function handleVisualMode(state: VimState, key: string): KeyResult {
         mode: 'normal',
         visualStart: null,
         visualMode: null,
+        lastVisualStart: state.visualStart,
+        lastVisualEnd: state.cursor,
+        lastVisualMode: state.visualMode,
       },
       handled: true,
     }
@@ -758,6 +840,9 @@ function handleVisualMode(state: VimState, key: string): KeyResult {
           mode: 'normal',
           visualStart: null,
           visualMode: null,
+          lastVisualStart: state.visualStart,
+          lastVisualEnd: state.cursor,
+          lastVisualMode: state.visualMode,
         },
         handled: true,
       }
@@ -778,6 +863,9 @@ function handleVisualMode(state: VimState, key: string): KeyResult {
           mode: 'normal',
           visualStart: null,
           visualMode: null,
+          lastVisualStart: state.visualStart,
+          lastVisualEnd: state.cursor,
+          lastVisualMode: state.visualMode,
         },
         handled: true,
       }
@@ -946,6 +1034,9 @@ function executeVisualCharOperator(
     mode: 'normal' as const,
     visualStart: null,
     visualMode: null,
+    lastVisualStart: state.visualStart,
+    lastVisualEnd: state.cursor,
+    lastVisualMode: state.visualMode,
   }
 
   switch (op) {
@@ -1001,6 +1092,9 @@ function executeVisualLineOperator(
     mode: 'normal' as const,
     visualStart: null,
     visualMode: null,
+    lastVisualStart: state.visualStart,
+    lastVisualEnd: state.cursor,
+    lastVisualMode: state.visualMode,
   }
 
   switch (op) {
@@ -1072,6 +1166,9 @@ function executeVisualIndent(state: VimState, key: string): KeyResult {
     mode: 'normal' as const,
     visualStart: null,
     visualMode: null,
+    lastVisualStart: state.visualStart,
+    lastVisualEnd: state.cursor,
+    lastVisualMode: state.visualMode,
   }
 
   const s = pushUndo({ ...state, ...exitVisual })
@@ -1119,6 +1216,9 @@ function executeVisualCase(state: VimState, key: string): KeyResult {
     mode: 'normal' as const,
     visualStart: null,
     visualMode: null,
+    lastVisualStart: state.visualStart,
+    lastVisualEnd: state.cursor,
+    lastVisualMode: state.visualMode,
   }
 
   const s = pushUndo({ ...state, ...exitVisual })
@@ -1184,6 +1284,9 @@ function executeVisualPaste(state: VimState): KeyResult {
     mode: 'normal' as const,
     visualStart: null,
     visualMode: null,
+    lastVisualStart: state.visualStart,
+    lastVisualEnd: state.cursor,
+    lastVisualMode: state.visualMode,
   }
 
   const s = pushUndo({ ...state, ...exitVisual })
@@ -1479,7 +1582,8 @@ function handleOperatorPending(state: VimState, key: string): KeyResult {
     const range = resolveTextObject(s, modifier, key)
     if (!range) return { state: s, handled: true }
 
-    const changeKeys = [op, modifier, key]
+    // Split multi-char operators (gU, gu) into individual keys for dot replay
+    const changeKeys = op.length > 1 ? [...op.split(''), modifier, key] : [op, modifier, key]
 
     switch (op) {
       case 'd': {
@@ -1509,6 +1613,28 @@ function handleOperatorPending(state: VimState, key: string): KeyResult {
         )
         return { ...result, state: { ...result.state, lastChange: { type: 'normal', keys: changeKeys } } }
       }
+      case 'gU':
+      case 'gu': {
+        const toUpper = op === 'gU'
+        const withUndo = pushUndo(s)
+        const newLines = [...withUndo.lines]
+        // Apply case change to the range covered by the text object
+        if (range.start.line === range.end.line) {
+          const line = newLines[range.start.line] ?? ''
+          const seg = line.slice(range.start.col, range.end.col)
+          newLines[range.start.line] = line.slice(0, range.start.col)
+            + (toUpper ? seg.toUpperCase() : seg.toLowerCase())
+            + line.slice(range.end.col)
+        } else {
+          for (let i = range.start.line; i <= range.end.line; i++) {
+            newLines[i] = toUpper ? (newLines[i] ?? '').toUpperCase() : (newLines[i] ?? '').toLowerCase()
+          }
+        }
+        return {
+          state: { ...withUndo, lines: newLines, cursor: range.start, lastChange: { type: 'normal', keys: changeKeys } },
+          handled: true,
+        }
+      }
       default:
         return { state: s, handled: true }
     }
@@ -1527,6 +1653,19 @@ function handleOperatorPending(state: VimState, key: string): KeyResult {
     const current = state.countPrefix ?? 0
     return {
       state: { ...state, countPrefix: current * 10 + digit },
+      handled: true,
+    }
+  }
+
+  // gUU / guu — uppercase/lowercase entire line
+  if ((op === 'gU' && key === 'U') || (op === 'gu' && key === 'u')) {
+    const toUpper = op === 'gU'
+    const withUndo = pushUndo({ ...s, countPrefix: null, operatorCount: null, pendingOperator: null })
+    const newLines = [...withUndo.lines]
+    const ln = withUndo.cursor.line
+    newLines[ln] = toUpper ? (newLines[ln] ?? '').toUpperCase() : (newLines[ln] ?? '').toLowerCase()
+    return {
+      state: { ...withUndo, lines: newLines, lastChange: { type: 'normal', keys: ['g', key, key] } },
       handled: true,
     }
   }
@@ -1656,9 +1795,11 @@ function executeOperatorMotion(
   target: CursorPos,
   count: number = 1,
 ): KeyResult {
+  // Split multi-char operators (gU, gu) into individual keys for dot replay
+  const opKeys = op.length > 1 ? op.split('') : [op]
   const changeKeys = count > 1
-    ? [String(count), op, motionKey]
-    : [op, motionKey]
+    ? [String(count), ...opKeys, motionKey]
+    : [...opKeys, motionKey]
 
   // Adjust target for inclusive motions (include the char at target position)
   let adjustedTarget = target
@@ -1706,6 +1847,31 @@ function executeOperatorMotion(
         'dedent',
       )
       return { ...result, state: { ...result.state, lastChange: { type: 'normal', keys: changeKeys } } }
+    }
+    case 'gU':
+    case 'gu': {
+      const toUpper = op === 'gU'
+      const withUndo = pushUndo(state)
+      const start = state.cursor
+      const end = adjustedTarget
+      const newLines = [...withUndo.lines]
+      if (start.line === end.line) {
+        const line = newLines[start.line] ?? ''
+        const s = Math.min(start.col, end.col)
+        const e = Math.max(start.col, end.col)
+        const segment = line.slice(s, e)
+        newLines[start.line] = line.slice(0, s) + (toUpper ? segment.toUpperCase() : segment.toLowerCase()) + line.slice(e)
+      } else {
+        const startLn = Math.min(start.line, end.line)
+        const endLn = Math.max(start.line, end.line)
+        for (let i = startLn; i <= endLn; i++) {
+          newLines[i] = toUpper ? (newLines[i] ?? '').toUpperCase() : (newLines[i] ?? '').toLowerCase()
+        }
+      }
+      return {
+        state: { ...withUndo, lines: newLines, lastChange: { type: 'normal', keys: ['g', op === 'gU' ? 'U' : 'u', motionKey] } },
+        handled: true,
+      }
     }
     default:
       return { state, handled: false }

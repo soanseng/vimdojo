@@ -25,6 +25,9 @@ export function createState(text: string, cursor?: CursorPos): VimState {
     visualMode: null,
     lastCommand: null,
     highlightRange: null,
+    lastVisualStart: null,
+    lastVisualEnd: null,
+    lastVisualMode: null,
   }
 }
 
