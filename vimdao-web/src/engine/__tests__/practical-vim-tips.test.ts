@@ -68,10 +68,10 @@ describe('Practical Vim Tip 1 - Meet the Dot Command', () => {
     expect(result).toBe(c.expected_text)
   })
 
-  it('pv-tip01-003: j>Gj.j. indents incrementally', () => {
+  it('pv-tip01-003: >Gj.j. indents incrementally', () => {
     const c = challenges.find(ch => ch.id === 'pv-tip01-003')!
-    // j moves to line 1, >G indents lines 1-end, j. indents lines 2-end, j. indents line 3-end
-    const result = applyKeys(c.initial_text, ['j', '>', 'G', 'j', '.', 'j', '.'], c.cursor_start)
+    // cursor_start is line 1; >G indents lines 1-end, j. indents 2-end, j. indents 3-end
+    const result = applyKeys(c.initial_text, ['>', 'G', 'j', '.', 'j', '.'], c.cursor_start)
     expect(result).toBe(c.expected_text)
   })
 })
@@ -99,14 +99,14 @@ describe('Practical Vim Tip 2 - Don\'t Repeat Yourself', () => {
 // ---------------------------------------------------------------------------
 
 describe('Practical Vim Tip 5 - Find and Replace by Hand', () => {
-  it('pv-tip05-001: navigate to content, * search, selectively replace with cw and .', () => {
+  it('pv-tip05-001: * search from content, skip one, cw replace, n. repeat', () => {
     const c = challenges.find(ch => ch.id === 'pv-tip05-001')!
-    // 6x w to reach "content" on line 0, * searches and jumps to line 1,
+    // cursor_start is on "content" (col 21); * searches and jumps to next,
     // n skips to line 2, cwcopy<Esc> changes line 2,
     // n wraps to line 0, . repeats change on line 0
     const result = applyKeys(
       c.initial_text,
-      ['w', 'w', 'w', 'w', 'w', 'w', '*', 'n', 'c', 'w', 'c', 'o', 'p', 'y', 'Escape', 'n', '.'],
+      ['*', 'n', 'c', 'w', 'c', 'o', 'p', 'y', 'Escape', 'n', '.'],
       c.cursor_start,
     )
     expect(result).toBe(c.expected_text)
@@ -163,12 +163,12 @@ describe('Practical Vim Tip 10 - Use Counts to Do Simple Arithmetic', () => {
 // ---------------------------------------------------------------------------
 
 describe('Practical Vim Tip 11 - Don\'t Count If You Can Repeat', () => {
-  it('pv-tip11-001: ww c3w changes 3 words', () => {
+  it('pv-tip11-001: c3w changes 3 words from cursor', () => {
     const c = challenges.find(ch => ch.id === 'pv-tip11-001')!
-    // ww navigates to "a", c3w changes "a couple of ", type "some more ", Escape
+    // cursor_start is on "a" (col 7), c3w changes "a couple of ", type "some more ", Escape
     const result = applyKeys(
       c.initial_text,
-      ['w', 'w', 'c', '3', 'w', 's', 'o', 'm', 'e', ' ', 'm', 'o', 'r', 'e', ' ', 'Escape'],
+      ['c', '3', 'w', 's', 'o', 'm', 'e', ' ', 'm', 'o', 'r', 'e', ' ', 'Escape'],
       c.cursor_start,
     )
     expect(result).toBe(c.expected_text)

@@ -31,6 +31,9 @@ export function resolveTextObject(
   // Tag object
   if (obj === 't') return tagObject(state, modifier)
 
+  // Paragraph object
+  if (obj === 'p') return paragraphObject(state, modifier)
+
   return null
 }
 
@@ -143,6 +146,22 @@ function quoteObject(
         start: { line: state.cursor.line, col: open },
         end: { line: state.cursor.line, col: close + 1 },
       }
+    }
+  }
+
+  // Vim seeks forward: if cursor is before the first pair, use that pair
+  if (positions.length >= 2 && col < positions[0]!) {
+    const open = positions[0]!
+    const close = positions[1]!
+    if (modifier === 'i') {
+      return {
+        start: { line: state.cursor.line, col: open + 1 },
+        end: { line: state.cursor.line, col: close },
+      }
+    }
+    return {
+      start: { line: state.cursor.line, col: open },
+      end: { line: state.cursor.line, col: close + 1 },
     }
   }
 
@@ -276,6 +295,102 @@ function findMatchingClose(
   }
 
   return null
+}
+
+// ---------------------------------------------------------------------------
+// Paragraph object
+// ---------------------------------------------------------------------------
+
+function paragraphObject(
+  state: VimState,
+  modifier: 'i' | 'a',
+): { start: CursorPos; end: CursorPos } | null {
+  const { lines, cursor } = state
+  const isBlank = (ln: number) => ln < 0 || ln >= lines.length || (lines[ln] ?? '').trim() === ''
+
+  // Find start of current paragraph (first non-blank line looking backward)
+  let startLine = cursor.line
+  // If on blank line, move to next non-blank for paragraph context
+  if (isBlank(startLine)) {
+    // On a blank line — for 'ip', the inner is just the blank lines
+    // For 'ap', include up to next paragraph
+    if (modifier === 'i') {
+      let blankStart = startLine
+      while (blankStart > 0 && isBlank(blankStart - 1)) blankStart--
+      let blankEnd = startLine
+      while (blankEnd < lines.length - 1 && isBlank(blankEnd + 1)) blankEnd++
+      return {
+        start: { line: blankStart, col: 0 },
+        end: { line: blankEnd + 1, col: 0 },
+      }
+    }
+    return null // ap on blank line is not useful
+  }
+
+  while (startLine > 0 && !isBlank(startLine - 1)) {
+    startLine--
+  }
+
+  // Find end of current paragraph
+  let endLine = cursor.line
+  while (endLine < lines.length - 1 && !isBlank(endLine + 1)) {
+    endLine++
+  }
+
+  if (modifier === 'i') {
+    // Inner: just the non-blank lines.
+    // Return range that covers from start of first line to end of last line
+    // Using line+1 col 0 to represent "end of endLine" for multi-line deletion
+    if (endLine + 1 < lines.length) {
+      return {
+        start: { line: startLine, col: 0 },
+        end: { line: endLine + 1, col: 0 },
+      }
+    }
+    // At end of buffer
+    return {
+      start: { line: startLine, col: 0 },
+      end: { line: endLine, col: (lines[endLine] ?? '').length },
+    }
+  }
+
+  // 'a' paragraph: include trailing blank lines
+  let trailingEnd = endLine
+  while (trailingEnd + 1 < lines.length && isBlank(trailingEnd + 1)) {
+    trailingEnd++
+  }
+
+  if (trailingEnd > endLine) {
+    // Has trailing blank lines
+    if (trailingEnd + 1 < lines.length) {
+      return {
+        start: { line: startLine, col: 0 },
+        end: { line: trailingEnd + 1, col: 0 },
+      }
+    }
+    return {
+      start: { line: startLine, col: 0 },
+      end: { line: trailingEnd, col: (lines[trailingEnd] ?? '').length },
+    }
+  }
+
+  // No trailing blanks — include leading blank lines
+  let leadingStart = startLine
+  while (leadingStart > 0 && isBlank(leadingStart - 1)) {
+    leadingStart--
+  }
+
+  if (leadingStart + 1 < lines.length) {
+    return {
+      start: { line: leadingStart, col: 0 },
+      end: { line: endLine + 1, col: 0 },
+    }
+  }
+
+  return {
+    start: { line: leadingStart, col: 0 },
+    end: { line: endLine, col: (lines[endLine] ?? '').length },
+  }
 }
 
 // ---------------------------------------------------------------------------

@@ -218,6 +218,13 @@ func inferCursorStart(before, after string) CursorPos {
 	if len(afterLines) < minLen {
 		minLen = len(afterLines)
 	}
+	// Clamp to valid range (0-indexed, last line)
+	if minLen >= len(beforeLines) {
+		minLen = len(beforeLines) - 1
+	}
+	if minLen < 0 {
+		minLen = 0
+	}
 	return CursorPos{Line: minLen, Col: 0}
 }
 

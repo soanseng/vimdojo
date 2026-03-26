@@ -82,9 +82,9 @@
         "section": "1.1",
         "tip_number": 1
       },
-      "title_zh": "練習：\u003e (增加縮排)、G (移到檔案結尾)",
+      "title_zh": "練習：> (增加縮排)、G (移到檔案結尾)",
       "title_en": "Meet the Dot Command",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：\u003eGj.j.",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：>Gj.j.",
       "description_en": "Meet the Dot Command",
       "category": "combo",
       "difficulty": 2,
@@ -95,16 +95,16 @@
         "col": 0
       },
       "hint_commands": [
-        "\u003e",
+        ">",
         "G",
         "j",
         "."
       ],
-      "hint_keystrokes": "\u003eGj.j.",
-      "hint_text": "按鍵順序：\u003eGj.j.\n\n• \u003e — 增加縮排\n• G — 移到檔案結尾\n• j — 向下移動\n• . — 重複上次修改",
+      "hint_keystrokes": ">Gj.j.",
+      "hint_text": "按鍵順序：>Gj.j.\n\n• > — 增加縮排\n• G — 移到檔案結尾\n• j — 向下移動\n• . — 重複上次修改",
       "tags": [
         ".",
-        "\u003e",
+        ">",
         "G",
         "j"
       ],
@@ -126,7 +126,7 @@
       },
       "title_zh": "練習：A (在行尾進入插入模式)、j (向下移動)",
       "title_en": "Don’t Repeat Yourself",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：A;\u003cEsc\u003ej.j.",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：A;<Esc>j.j.",
       "description_en": "Don’t Repeat Yourself",
       "category": "combo",
       "difficulty": 2,
@@ -141,8 +141,8 @@
         "j",
         "."
       ],
-      "hint_keystrokes": "A;\u003cEsc\u003ej.j.",
-      "hint_text": "按鍵順序：A;\u003cEsc\u003ej.j.\n\n• A — 在行尾進入插入模式\n• j — 向下移動\n• . — 重複上次修改",
+      "hint_keystrokes": "A;<Esc>j.j.",
+      "hint_text": "按鍵順序：A;<Esc>j.j.\n\n• A — 在行尾進入插入模式\n• j — 向下移動\n• . — 重複上次修改",
       "tags": [
         ".",
         "A",
@@ -166,7 +166,7 @@
       },
       "title_zh": "練習：* (搜尋游標下的單字)、c (修改（刪除並進入插入模式）)",
       "title_en": "Find and Replace by Hand",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：*cwcopy\u003cEsc\u003en.",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：*cwcopy<Esc>n.",
       "description_en": "Find and Replace by Hand",
       "category": "combo",
       "difficulty": 2,
@@ -174,7 +174,7 @@
       "expected_text": "...We're waiting for copy before the site can go live...\n...If you are content with this, let's go ahead with it...\n...We'll launch as soon as we have the copy...",
       "cursor_start": {
         "line": 0,
-        "col": 0
+        "col": 21
       },
       "hint_commands": [
         "*",
@@ -184,8 +184,8 @@
         "n",
         "."
       ],
-      "hint_keystrokes": "*cwcopy\u003cEsc\u003en.",
-      "hint_text": "按鍵順序：*cwcopy\u003cEsc\u003en.\n\n• * — 搜尋游標下的單字\n• c — 修改（刪除並進入插入模式）\n• w — 移到下一個單字字首\n• o — 在下方新增一行並進入插入模式\n• n — 搜尋下一個匹配\n• . — 重複上次修改",
+      "hint_keystrokes": "*ncwcopy<Esc>n.",
+      "hint_text": "按鍵順序：*cwcopy<Esc>n.\n\n• * — 搜尋游標下的單字\n• c — 修改（刪除並進入插入模式）\n• w — 移到下一個單字字首\n• o — 在下方新增一行並進入插入模式\n• n — 搜尋下一個匹配\n• . — 重複上次修改",
       "tags": [
         "*",
         ".",
@@ -221,7 +221,7 @@
       "expected_text": "The end is ",
       "cursor_start": {
         "line": 0,
-        "col": 0
+        "col": 14
       },
       "hint_commands": [
         "d",
@@ -261,7 +261,7 @@
       "expected_text": "The end is ",
       "cursor_start": {
         "line": 0,
-        "col": 0
+        "col": 14
       },
       "hint_commands": [
         "b",
@@ -300,7 +300,7 @@
       "expected_text": "The end is",
       "cursor_start": {
         "line": 0,
-        "col": 0
+        "col": 11
       },
       "hint_commands": [
         "d",
@@ -329,14 +329,14 @@
       },
       "title_zh": "練習：yy (複製整行)、p (貼上到游標後)",
       "title_en": "Use Counts to Do Simple Arithmetic",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：yypcW.news\u003cEsc\u003e180\u003cC-x\u003e",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：yypcW.news<Esc>180<C-x>",
       "description_en": "Use Counts to Do Simple Arithmetic",
       "category": "motion",
       "difficulty": 2,
       "initial_text": ".blog, .news { background-image: url(/sprite.png); }\n.blog { background-position: 0px 0px }",
       "expected_text": ".blog, .news { background-image: url(/sprite.png); }\n.blog { background-position: 0px 0px }\n.news { background-position: -180px 0px }",
       "cursor_start": {
-        "line": 2,
+        "line": 1,
         "col": 0
       },
       "hint_commands": [
@@ -350,14 +350,14 @@
         "w",
         "s",
         "0",
-        "\u003cC-x\u003e"
+        "<C-x>"
       ],
-      "hint_keystrokes": "yypcW.news\u003cEsc\u003e180\u003cC-x\u003e",
-      "hint_text": "按鍵順序：yypcW.news\u003cEsc\u003e180\u003cC-x\u003e\n\n• yy — 複製整行\n• p — 貼上到游標後\n• c — 修改（刪除並進入插入模式）\n• W — 移到下一個 WORD 字首\n• . — 重複上次修改\n• n — 搜尋下一個匹配\n• e — 移到單字字尾\n• w — 移到下一個單字字首\n• s — 刪除字元並進入插入模式\n• 0 — 移到行首",
+      "hint_keystrokes": "yypcW.news<Esc>180<C-x>",
+      "hint_text": "按鍵順序：yypcW.news<Esc>180<C-x>\n\n• yy — 複製整行\n• p — 貼上到游標後\n• c — 修改（刪除並進入插入模式）\n• W — 移到下一個 WORD 字首\n• . — 重複上次修改\n• n — 搜尋下一個匹配\n• e — 移到單字字尾\n• w — 移到下一個單字字首\n• s — 刪除字元並進入插入模式\n• 0 — 移到行首",
       "tags": [
         ".",
         "0",
-        "\u003cC-x\u003e",
+        "<C-x>",
         "W",
         "c",
         "e",
@@ -386,7 +386,7 @@
       },
       "title_zh": "練習：c (修改（刪除並進入插入模式）)、w (移到下一個單字字首)",
       "title_en": "Don’t Count If You Can Repeat",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：c3wsome more\u003cEsc\u003e",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：c3wsome more<Esc>",
       "description_en": "Don’t Count If You Can Repeat",
       "category": "combo",
       "difficulty": 2,
@@ -394,15 +394,15 @@
       "expected_text": "I have some more questions.",
       "cursor_start": {
         "line": 0,
-        "col": 0
+        "col": 7
       },
       "hint_commands": [
         "c",
         "w",
         "s"
       ],
-      "hint_keystrokes": "c3wsome more\u003cEsc\u003e",
-      "hint_text": "按鍵順序：c3wsome more\u003cEsc\u003e\n\n• c — 修改（刪除並進入插入模式）\n• w — 移到下一個單字字首\n• s — 刪除字元並進入插入模式",
+      "hint_keystrokes": "c3wsome more <Esc>",
+      "hint_text": "按鍵順序：c3wsome more<Esc>\n\n• c — 修改（刪除並進入插入模式）\n• w — 移到下一個單字字首\n• s — 刪除字元並進入插入模式",
       "tags": [
         "c",
         "s",
@@ -426,7 +426,7 @@
       },
       "title_zh": "練習：y (複製（yank）)、t (向右搜尋字元（游標停在前一格）)",
       "title_en": "Paste from a Register Without Leaving Insert Mode",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：yt,jA\u003cC-r\u003e0.\u003cEsc\u003e",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：yt,jA<C-r>0.<Esc>",
       "description_en": "Paste from a Register Without Leaving Insert Mode",
       "category": "combo",
       "difficulty": 2,
@@ -443,8 +443,8 @@
         "j",
         "A"
       ],
-      "hint_keystrokes": "yt,jA\u003cC-r\u003e0.\u003cEsc\u003e",
-      "hint_text": "按鍵順序：yt,jA\u003cC-r\u003e0.\u003cEsc\u003e\n\n• y — 複製（yank）\n• t — 向右搜尋字元（游標停在前一格）\n• , — 反向重複上次 f/t 搜尋\n• j — 向下移動\n• A — 在行尾進入插入模式",
+      "hint_keystrokes": "yt,jA<C-r>0.<Esc>",
+      "hint_text": "按鍵順序：yt,jA<C-r>0.<Esc>\n\n• y — 複製（yank）\n• t — 向右搜尋字元（游標停在前一格）\n• , — 反向重複上次 f/t 搜尋\n• j — 向下移動\n• A — 在行尾進入插入模式",
       "tags": [
         ",",
         "A",
@@ -470,7 +470,7 @@
       },
       "title_zh": "練習：A (在行尾進入插入模式)",
       "title_en": "Do Back-of-the-Envelope Calculations in Place",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：A\u003cC-r\u003e=6*35\u003cCR\u003e",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：A<C-r>=6*35<CR>",
       "description_en": "Do Back-of-the-Envelope Calculations in Place",
       "category": "insert",
       "difficulty": 1,
@@ -483,8 +483,8 @@
       "hint_commands": [
         "A"
       ],
-      "hint_keystrokes": "A\u003cC-r\u003e=6*35\u003cCR\u003e",
-      "hint_text": "按鍵順序：A\u003cC-r\u003e=6*35\u003cCR\u003e\n\n• A — 在行尾進入插入模式",
+      "hint_keystrokes": "A<C-r>=6*35<CR>",
+      "hint_text": "按鍵順序：A<C-r>=6*35<CR>\n\n• A — 在行尾進入插入模式",
       "tags": [
         "A"
       ],
@@ -504,7 +504,7 @@
       },
       "title_zh": "練習：f (向右搜尋字元)、R (進入取代模式)",
       "title_en": "Overwrite Existing Text with Replace Mode",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：f.R,b\u003cEsc\u003e",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：f.R,b<Esc>",
       "description_en": "Overwrite Existing Text with Replace Mode",
       "category": "combo",
       "difficulty": 1,
@@ -518,8 +518,8 @@
         "f",
         "R"
       ],
-      "hint_keystrokes": "f.R,b\u003cEsc\u003e",
-      "hint_text": "按鍵順序：f.R,b\u003cEsc\u003e\n\n• f — 向右搜尋字元\n• R — 進入取代模式",
+      "hint_keystrokes": "f.R,b<Esc>",
+      "hint_text": "按鍵順序：f.R,b<Esc>\n\n• f — 向右搜尋字元\n• R — 進入取代模式",
       "tags": [
         "R",
         "f"
@@ -541,12 +541,12 @@
       },
       "title_zh": "練習：V (進入視覺模式（行選取）)、j (向下移動)",
       "title_en": "Repeat Line-Wise Visual Commands",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：Vj\u003e.",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：Vj>.",
       "description_en": "Repeat Line-Wise Visual Commands",
       "category": "combo",
       "difficulty": 2,
-      "initial_text": "def fib(n):\n    a, b = 0, 1\n    while a \u003c n:\nprint a,\na, b = b, a+b\nfib(42)",
-      "expected_text": "def fib(n):\n    a, b = 0, 1\n    while a \u003c n:\n        print a,\n        a, b = b, a+b\nfib(42)",
+      "initial_text": "def fib(n):\n    a, b = 0, 1\n    while a < n:\nprint a,\na, b = b, a+b\nfib(42)",
+      "expected_text": "def fib(n):\n    a, b = 0, 1\n    while a < n:\n    print a,\n    a, b = b, a+b\nfib(42)",
       "cursor_start": {
         "line": 3,
         "col": 0
@@ -554,14 +554,14 @@
       "hint_commands": [
         "V",
         "j",
-        "\u003e",
+        ">",
         "."
       ],
-      "hint_keystrokes": "Vj\u003e.",
-      "hint_text": "按鍵順序：Vj\u003e.\n\n• V — 進入視覺模式（行選取）\n• j — 向下移動\n• \u003e — 增加縮排\n• . — 重複上次修改",
+      "hint_keystrokes": "Vj>.",
+      "hint_text": "按鍵順序：Vj>.\n\n• V — 進入視覺模式（行選取）\n• j — 向下移動\n• > — 增加縮排\n• . — 重複上次修改",
       "tags": [
         ".",
-        "\u003e",
+        ">",
         "V",
         "j"
       ],
@@ -588,11 +588,11 @@
       "description_en": "Prefer Operators to Visual Commands Where Possible",
       "category": "combo",
       "difficulty": 2,
-      "initial_text": "\u003ca href=\"#\"\u003eone\u003c/a\u003e\n\u003ca href=\"#\"\u003etwo\u003c/a\u003e\n\u003ca href=\"#\"\u003ethree\u003c/a\u003e",
-      "expected_text": "\u003ca href=\"#\"\u003eONE\u003c/a\u003e\n\u003ca href=\"#\"\u003etwo\u003c/a\u003e\n\u003ca href=\"#\"\u003ethree\u003c/a\u003e",
+      "initial_text": "<a href=\"#\">one</a>\n<a href=\"#\">two</a>\n<a href=\"#\">three</a>",
+      "expected_text": "<a href=\"#\">ONE</a>\n<a href=\"#\">two</a>\n<a href=\"#\">three</a>",
       "cursor_start": {
         "line": 0,
-        "col": 0
+        "col": 12
       },
       "hint_commands": [
         "v",
@@ -625,8 +625,8 @@
       "description_en": "Prefer Operators to Visual Commands Where Possible",
       "category": "combo",
       "difficulty": 3,
-      "initial_text": "\u003ca href=\"#\"\u003eone\u003c/a\u003e\n\u003ca href=\"#\"\u003etwo\u003c/a\u003e\n\u003ca href=\"#\"\u003ethree\u003c/a\u003e",
-      "expected_text": "\u003ca href=\"#\"\u003eONE\u003c/a\u003e\n\u003ca href=\"#\"\u003eTWO\u003c/a\u003e\n\u003ca href=\"#\"\u003eTHREE\u003c/a\u003e",
+      "initial_text": "<a href=\"#\">one</a>\n<a href=\"#\">two</a>\n<a href=\"#\">three</a>",
+      "expected_text": "<a href=\"#\">ONE</a>\n<a href=\"#\">TWO</a>\n<a href=\"#\">THREE</a>",
       "cursor_start": {
         "line": 0,
         "col": 0
@@ -662,9 +662,9 @@
         "section": "4.24",
         "tip_number": 24
       },
-      "title_zh": "練習：\u003cC-v\u003e (進入視覺模式（區塊選取）)、j (向下移動)",
+      "title_zh": "練習：<C-v> (進入視覺模式（區塊選取）)、j (向下移動)",
       "title_en": "Edit Tabular Data with Visual-Block Mode",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：\u003cC-v\u003e3jx...gvr|yypVr-",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：<C-v>3jx...gvr|yypVr-",
       "description_en": "Edit Tabular Data with Visual-Block Mode",
       "category": "combo",
       "difficulty": 3,
@@ -675,7 +675,7 @@
         "col": 0
       },
       "hint_commands": [
-        "\u003cC-v\u003e",
+        "<C-v>",
         "j",
         "x",
         ".",
@@ -685,11 +685,11 @@
         "p",
         "V"
       ],
-      "hint_keystrokes": "\u003cC-v\u003e3jx...gvr|yypVr-",
-      "hint_text": "按鍵順序：\u003cC-v\u003e3jx...gvr|yypVr-\n\n• \u003cC-v\u003e — 進入視覺模式（區塊選取）\n• j — 向下移動\n• x — 刪除游標下的字元\n• . — 重複上次修改\n• v — 進入視覺模式（字元選取）\n• r — 替換游標下的字元\n• yy — 複製整行\n• p — 貼上到游標後\n• V — 進入視覺模式（行選取）",
+      "hint_keystrokes": "<C-v>3jx...gvr|yypVr-",
+      "hint_text": "按鍵順序：<C-v>3jx...gvr|yypVr-\n\n• <C-v> — 進入視覺模式（區塊選取）\n• j — 向下移動\n• x — 刪除游標下的字元\n• . — 重複上次修改\n• v — 進入視覺模式（字元選取）\n• r — 替換游標下的字元\n• yy — 複製整行\n• p — 貼上到游標後\n• V — 進入視覺模式（行選取）",
       "tags": [
         ".",
-        "\u003cC-v\u003e",
+        "<C-v>",
         "V",
         "j",
         "p",
@@ -716,7 +716,7 @@
       },
       "title_zh": "練習：{ (移到上一個段落)、s (刪除字元並進入插入模式)",
       "title_en": "Change Columns of Text",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：{start}Normal mode\u003cC-v\u003ejjeVisual modecInsert modecomponentsInsert mode\u003cEsc\u003eNormal mode",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：{start}Normal mode<C-v>jjeVisual modecInsert modecomponentsInsert mode<Esc>Normal mode",
       "description_en": "Change Columns of Text",
       "category": "combo",
       "difficulty": 2,
@@ -732,8 +732,8 @@
         "N",
         "o"
       ],
-      "hint_keystrokes": "{start}Normal mode\u003cC-v\u003ejjeVisual modecInsert modecomponentsInsert mode\u003cEsc\u003eNormal mode",
-      "hint_text": "按鍵順序：{start}Normal mode\u003cC-v\u003ejjeVisual modecInsert modecomponentsInsert mode\u003cEsc\u003eNormal mode\n\n• { — 移到上一個段落\n• s — 刪除字元並進入插入模式\n• N — 搜尋上一個匹配\n• o — 在下方新增一行並進入插入模式",
+      "hint_keystrokes": "{start}Normal mode<C-v>jjeVisual modecInsert modecomponentsInsert mode<Esc>Normal mode",
+      "hint_text": "按鍵順序：{start}Normal mode<C-v>jjeVisual modecInsert modecomponentsInsert mode<Esc>Normal mode\n\n• { — 移到上一個段落\n• s — 刪除字元並進入插入模式\n• N — 搜尋上一個匹配\n• o — 在下方新增一行並進入插入模式",
       "tags": [
         "N",
         "o",
@@ -757,7 +757,7 @@
       },
       "title_zh": "練習：{ (移到上一個段落)、s (刪除字元並進入插入模式)",
       "title_en": "Append After a Ragged Visual Block",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：{start}Normal mode\u003cC-v\u003ejj$Visual-BlockA;Insert mode\u003cEsc\u003eNormal mode",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：{start}Normal mode<C-v>jj$Visual-BlockA;Insert mode<Esc>Normal mode",
       "description_en": "Append After a Ragged Visual Block",
       "category": "combo",
       "difficulty": 2,
@@ -773,8 +773,8 @@
         "N",
         "o"
       ],
-      "hint_keystrokes": "{start}Normal mode\u003cC-v\u003ejj$Visual-BlockA;Insert mode\u003cEsc\u003eNormal mode",
-      "hint_text": "按鍵順序：{start}Normal mode\u003cC-v\u003ejj$Visual-BlockA;Insert mode\u003cEsc\u003eNormal mode\n\n• { — 移到上一個段落\n• s — 刪除字元並進入插入模式\n• N — 搜尋上一個匹配\n• o — 在下方新增一行並進入插入模式",
+      "hint_keystrokes": "{start}Normal mode<C-v>jj$Visual-BlockA;Insert mode<Esc>Normal mode",
+      "hint_text": "按鍵順序：{start}Normal mode<C-v>jj$Visual-BlockA;Insert mode<Esc>Normal mode\n\n• { — 移到上一個段落\n• s — 刪除字元並進入插入模式\n• N — 搜尋上一個匹配\n• o — 在下方新增一行並進入插入模式",
       "tags": [
         "N",
         "o",
@@ -864,7 +864,7 @@
       },
       "title_zh": "練習：A (在行尾進入插入模式)",
       "title_en": "Run Normal Mode Commands Across a Range",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：A;\u003cEsc\u003e",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：A;<Esc>",
       "description_en": "Run Normal Mode Commands Across a Range",
       "category": "insert",
       "difficulty": 1,
@@ -877,8 +877,8 @@
       "hint_commands": [
         "A"
       ],
-      "hint_keystrokes": "A;\u003cEsc\u003e",
-      "hint_text": "按鍵順序：A;\u003cEsc\u003e\n\n• A — 在行尾進入插入模式",
+      "hint_keystrokes": "A;<Esc>",
+      "hint_text": "按鍵順序：A;<Esc>\n\n• A — 在行尾進入插入模式",
       "tags": [
         "A"
       ],
@@ -937,15 +937,15 @@
       },
       "title_zh": "練習：* (搜尋游標下的單字)、c (修改（刪除並進入插入模式）)",
       "title_en": "Insert the Current Word at the Command Prompt",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：*cwcounter\u003cEsc\u003e",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：*cwcounter<Esc>",
       "description_en": "Insert the Current Word at the Command Prompt",
       "category": "combo",
       "difficulty": 2,
-      "initial_text": "var tally;\nfor (tally=1; tally \u003c= 10; tally++) {\n  // do something with tally\n};",
-      "expected_text": "var tally;\nfor (counter=1; tally \u003c= 10; tally++) {\n  // do something with tally\n};",
+      "initial_text": "var tally;\nfor (tally=1; tally <= 10; tally++) {\n  // do something with tally\n};",
+      "expected_text": "var tally;\nfor (tally=1; counter <= 10; tally++) {\n  // do something with tally\n};",
       "cursor_start": {
         "line": 1,
-        "col": 0
+        "col": 5
       },
       "hint_commands": [
         "*",
@@ -953,8 +953,8 @@
         "w",
         "o"
       ],
-      "hint_keystrokes": "*cwcounter\u003cEsc\u003e",
-      "hint_text": "按鍵順序：*cwcounter\u003cEsc\u003e\n\n• * — 搜尋游標下的單字\n• c — 修改（刪除並進入插入模式）\n• w — 移到下一個單字字首\n• o — 在下方新增一行並進入插入模式",
+      "hint_keystrokes": "*cwcounter<Esc>",
+      "hint_text": "按鍵順序：*cwcounter<Esc>\n\n• * — 搜尋游標下的單字\n• c — 修改（刪除並進入插入模式）\n• w — 移到下一個單字字首\n• o — 在下方新增一行並進入插入模式",
       "tags": [
         "*",
         "c",
@@ -979,12 +979,12 @@
       },
       "title_zh": "練習：A (在行尾進入插入模式)、J (合併下一行)",
       "title_en": "Recall Commands from History",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：A|\u003cEsc\u003eJ",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：A|<Esc>J",
       "description_en": "Recall Commands from History",
       "category": "insert",
       "difficulty": 1,
       "initial_text": "write\n!ruby %",
-      "expected_text": "update | !ruby %",
+      "expected_text": "write | !ruby %",
       "cursor_start": {
         "line": 0,
         "col": 0
@@ -993,8 +993,8 @@
         "A",
         "J"
       ],
-      "hint_keystrokes": "A|\u003cEsc\u003eJ",
-      "hint_text": "按鍵順序：A|\u003cEsc\u003eJ\n\n• A — 在行尾進入插入模式\n• J — 合併下一行",
+      "hint_keystrokes": "A |<Esc>J",
+      "hint_text": "按鍵順序：A|<Esc>J\n\n• A — 在行尾進入插入模式\n• J — 合併下一行",
       "tags": [
         "A",
         "J"
@@ -1016,7 +1016,7 @@
       },
       "title_zh": "練習：e (移到單字字尾)、a (在游標後進入插入模式)",
       "title_en": "Move Word-Wise",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：eaer\u003cEsc\u003e",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：eaer<Esc>",
       "description_en": "Move Word-Wise",
       "category": "combo",
       "difficulty": 1,
@@ -1024,14 +1024,14 @@
       "expected_text": "Go faster.",
       "cursor_start": {
         "line": 0,
-        "col": 0
+        "col": 3
       },
       "hint_commands": [
         "e",
         "a"
       ],
-      "hint_keystrokes": "eaer\u003cEsc\u003e",
-      "hint_text": "按鍵順序：eaer\u003cEsc\u003e\n\n• e — 移到單字字尾\n• a — 在游標後進入插入模式",
+      "hint_keystrokes": "eaer<Esc>",
+      "hint_text": "按鍵順序：eaer<Esc>\n\n• e — 移到單字字尾\n• a — 在游標後進入插入模式",
       "tags": [
         "a",
         "e"
@@ -1053,7 +1053,7 @@
       },
       "title_zh": "練習：c (修改（刪除並進入插入模式）)、w (移到下一個單字字首)",
       "title_en": "Move Word-Wise",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：cwyou\u003cEsc\u003e",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：cwyou<Esc>",
       "description_en": "Move Word-Wise",
       "category": "combo",
       "difficulty": 2,
@@ -1061,7 +1061,7 @@
       "expected_text": "e.g. you're going too slow",
       "cursor_start": {
         "line": 0,
-        "col": 0
+        "col": 5
       },
       "hint_commands": [
         "c",
@@ -1069,8 +1069,8 @@
         "y",
         "o"
       ],
-      "hint_keystrokes": "cwyou\u003cEsc\u003e",
-      "hint_text": "按鍵順序：cwyou\u003cEsc\u003e\n\n• c — 修改（刪除並進入插入模式）\n• w — 移到下一個單字字首\n• y — 複製（yank）\n• o — 在下方新增一行並進入插入模式",
+      "hint_keystrokes": "cwyou<Esc>",
+      "hint_text": "按鍵順序：cwyou<Esc>\n\n• c — 修改（刪除並進入插入模式）\n• w — 移到下一個單字字首\n• y — 複製（yank）\n• o — 在下方新增一行並進入插入模式",
       "tags": [
         "c",
         "o",
@@ -1095,7 +1095,7 @@
       },
       "title_zh": "練習：c (修改（刪除並進入插入模式）)、W (移到下一個 WORD 字首)",
       "title_en": "Move Word-Wise",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：cWit’s\u003cEsc\u003e",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：cWit’s<Esc>",
       "description_en": "Move Word-Wise",
       "category": "combo",
       "difficulty": 3,
@@ -1103,7 +1103,7 @@
       "expected_text": "e.g. it's going too slow",
       "cursor_start": {
         "line": 0,
-        "col": 0
+        "col": 5
       },
       "hint_commands": [
         "c",
@@ -1111,8 +1111,8 @@
         "it",
         "s"
       ],
-      "hint_keystrokes": "cWit’s\u003cEsc\u003e",
-      "hint_text": "按鍵順序：cWit’s\u003cEsc\u003e\n\n• c — 修改（刪除並進入插入模式）\n• W — 移到下一個 WORD 字首\n• it — HTML 標籤內的文字\n• s — 刪除字元並進入插入模式",
+      "hint_keystrokes": "cWit's<Esc>",
+      "hint_text": "按鍵順序：cWit’s<Esc>\n\n• c — 修改（刪除並進入插入模式）\n• W — 移到下一個 WORD 字首\n• it — HTML 標籤內的文字\n• s — 刪除字元並進入插入模式",
       "tags": [
         "W",
         "c",
@@ -1180,7 +1180,7 @@
       },
       "title_zh": "練習：v (進入視覺模式（字元選取）)、h (向左移動)",
       "title_en": "Search to Navigate",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：v\u003cCR\u003ehd",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：v<CR>hd",
       "description_en": "Search to Navigate",
       "category": "combo",
       "difficulty": 2,
@@ -1188,15 +1188,14 @@
       "expected_text": "This phrase gets to the point.",
       "cursor_start": {
         "line": 0,
-        "col": 0
+        "col": 12
       },
       "hint_commands": [
-        "v",
-        "h",
-        "d"
+        "d",
+        "/"
       ],
-      "hint_keystrokes": "v\u003cCR\u003ehd",
-      "hint_text": "按鍵順序：v\u003cCR\u003ehd\n\n• v — 進入視覺模式（字元選取）\n• h — 向左移動\n• d — 刪除",
+      "hint_keystrokes": "d/gets<CR>",
+      "hint_text": "按鍵順序：v<CR>hd\n\n• v — 進入視覺模式（字元選取）\n• h — 向左移動\n• d — 刪除",
       "tags": [
         "d",
         "h",
@@ -1220,7 +1219,7 @@
       },
       "title_zh": "練習：d (刪除)",
       "title_en": "Search to Navigate",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：d\u003cCR\u003e",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：d<CR>",
       "description_en": "Search to Navigate",
       "category": "operator",
       "difficulty": 1,
@@ -1228,13 +1227,14 @@
       "expected_text": "This phrase gets to the point.",
       "cursor_start": {
         "line": 0,
-        "col": 0
+        "col": 12
       },
       "hint_commands": [
-        "d"
+        "d",
+        "/"
       ],
-      "hint_keystrokes": "d\u003cCR\u003e",
-      "hint_text": "按鍵順序：d\u003cCR\u003e\n\n• d — 刪除",
+      "hint_keystrokes": "d/gets<CR>",
+      "hint_text": "按鍵順序：d<CR>\n\n• d — 刪除",
       "tags": [
         "d"
       ],
@@ -1254,12 +1254,12 @@
       },
       "title_zh": "練習：v (進入視覺模式（字元選取）)、i} (大括號內的文字)",
       "title_en": "Trace Your Selection with Precision Text Objects",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：vi}a\"i\u003eitata]",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：vi}a\"i>itata]",
       "description_en": "Trace Your Selection with Precision Text Objects",
       "category": "text-object",
       "difficulty": 3,
-      "initial_text": "var tpl = [\n  '\u003ca href=\"{url}\"\u003e{title}\u003c/a\u003e'\n]",
-      "expected_text": "var tpl = [ \n  ’\u003ca href=\"{url}\"\u003e{title}\u003c/a\u003e’ \n]",
+      "initial_text": "var tpl = [\n  '<a href=\"{url}\">{title}</a>'\n]",
+      "expected_text": "var tpl = [ \n  ’<a href=\"{url}\">{title}</a>’ \n]",
       "cursor_start": {
         "line": 0,
         "col": 0
@@ -1268,18 +1268,18 @@
         "v",
         "i}",
         "a\"",
-        "i\u003e",
+        "i>",
         "it",
         "at",
         "a]"
       ],
-      "hint_keystrokes": "vi}a\"i\u003eitata]",
-      "hint_text": "按鍵順序：vi}a\"i\u003eitata]\n\n• v — 進入視覺模式（字元選取）\n• i} — 大括號內的文字\n• a\" — 雙引號內的文字含引號\n• i\u003e — 角括號內的文字\n• it — HTML 標籤內的文字\n• at — HTML 標籤內的文字含標籤\n• a] — 方括號內的文字含方括號",
+      "hint_keystrokes": "vi}a\"i>itata]",
+      "hint_text": "按鍵順序：vi}a\"i>itata]\n\n• v — 進入視覺模式（字元選取）\n• i} — 大括號內的文字\n• a\" — 雙引號內的文字含引號\n• i> — 角括號內的文字\n• it — HTML 標籤內的文字\n• at — HTML 標籤內的文字含標籤\n• a] — 方括號內的文字含方括號",
       "tags": [
         "a\"",
         "a]",
         "at",
-        "i\u003e",
+        "i>",
         "it",
         "i}",
         "v"
@@ -1301,12 +1301,12 @@
       },
       "title_zh": "練習：c (修改（刪除並進入插入模式）)、i\" (雙引號內的文字)",
       "title_en": "Trace Your Selection with Precision Text Objects",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：ci\"#\u003cEsc\u003ecitclick here\u003cEsc\u003e",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：ci\"#<Esc>citclick here<Esc>",
       "description_en": "Trace Your Selection with Precision Text Objects",
       "category": "combo",
       "difficulty": 3,
-      "initial_text": "'\u003ca href=\"{url}\"\u003e{title}\u003c/a\u003e'",
-      "expected_text": "'\u003ca href=\"#\"\u003eclick here\u003c/a\u003e'",
+      "initial_text": "'<a href=\"{url}\">{title}</a>'",
+      "expected_text": "'<a href=\"#\">click here</a>'",
       "cursor_start": {
         "line": 0,
         "col": 0
@@ -1319,8 +1319,8 @@
         "l",
         "i"
       ],
-      "hint_keystrokes": "ci\"#\u003cEsc\u003ecitclick here\u003cEsc\u003e",
-      "hint_text": "按鍵順序：ci\"#\u003cEsc\u003ecitclick here\u003cEsc\u003e\n\n• c — 修改（刪除並進入插入模式）\n• i\" — 雙引號內的文字\n• # — 反向搜尋游標下的單字\n• it — HTML 標籤內的文字\n• l — 向右移動\n• i — 在游標前進入插入模式",
+      "hint_keystrokes": "ci\"#<Esc>citclick here<Esc>",
+      "hint_text": "按鍵順序：ci\"#<Esc>citclick here<Esc>\n\n• c — 修改（刪除並進入插入模式）\n• i\" — 雙引號內的文字\n• # — 反向搜尋游標下的單字\n• it — HTML 標籤內的文字\n• l — 向右移動\n• i — 在游標前進入插入模式",
       "tags": [
         "#",
         "c",
@@ -1356,7 +1356,7 @@
       "expected_text": "Improve your writing by deleting adjectives.",
       "cursor_start": {
         "line": 0,
-        "col": 0
+        "col": 37
       },
       "hint_commands": [
         "d",
@@ -1385,7 +1385,7 @@
       },
       "title_zh": "練習：c (修改（刪除並進入插入模式）)、iw (游標所在的單字（inner word）)",
       "title_en": "Delete Around, or Change Inside",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：ciwmost\u003cEsc\u003e",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：ciwmost<Esc>",
       "description_en": "Delete Around, or Change Inside",
       "category": "combo",
       "difficulty": 2,
@@ -1393,15 +1393,15 @@
       "expected_text": "Improve your writing by deleting most adjectives.",
       "cursor_start": {
         "line": 0,
-        "col": 0
+        "col": 33
       },
       "hint_commands": [
         "c",
         "iw",
         "o"
       ],
-      "hint_keystrokes": "ciwmost\u003cEsc\u003e",
-      "hint_text": "按鍵順序：ciwmost\u003cEsc\u003e\n\n• c — 修改（刪除並進入插入模式）\n• iw — 游標所在的單字（inner word）\n• o — 在下方新增一行並進入插入模式",
+      "hint_keystrokes": "ciwmost<Esc>",
+      "hint_text": "按鍵順序：ciwmost<Esc>\n\n• c — 修改（刪除並進入插入模式）\n• iw — 游標所在的單字（inner word）\n• o — 在下方新增一行並進入插入模式",
       "tags": [
         "c",
         "iw",
@@ -1517,13 +1517,13 @@
       "expected_text": "Practical vim",
       "cursor_start": {
         "line": 0,
-        "col": 0
+        "col": 8
       },
       "hint_commands": [
         "F",
         "p"
       ],
-      "hint_keystrokes": "Fxp",
+      "hint_keystrokes": "xp",
       "hint_text": "按鍵順序：Fxp\n\n• F — 向左搜尋字元\n• p — 貼上到游標後",
       "tags": [
         "F",
@@ -1589,7 +1589,7 @@
       "initial_text": "1) line one\n2) line two",
       "expected_text": "1) line one\n2) line two\n2) line two",
       "cursor_start": {
-        "line": 2,
+        "line": 1,
         "col": 0
       },
       "hint_commands": [
@@ -1755,7 +1755,7 @@
       "initial_text": "collection = getCollection();\nprocess(somethingInTheWay, target);",
       "expected_text": "collection = getCollection();\nprocess(collection, target);",
       "cursor_start": {
-        "line": 1,
+        "line": 0,
         "col": 0
       },
       "hint_commands": [
@@ -1847,7 +1847,7 @@
       },
       "title_zh": "練習：y (複製（yank）)、iw (游標所在的單字（inner word）)",
       "title_en": "Paste from a Register",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：yiwjwwciw\u003cC-r\u003e0\u003cEsc\u003e",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：yiwjwwciw<C-r>0<Esc>",
       "description_en": "Paste from a Register",
       "category": "combo",
       "difficulty": 3,
@@ -1863,14 +1863,14 @@
         "j",
         "w",
         "c",
-        "\u003cC-r\u003e",
+        "<C-r>",
         "0"
       ],
-      "hint_keystrokes": "yiwjwwciw\u003cC-r\u003e0\u003cEsc\u003e",
-      "hint_text": "按鍵順序：yiwjwwciw\u003cC-r\u003e0\u003cEsc\u003e\n\n• y — 複製（yank）\n• iw — 游標所在的單字（inner word）\n• j — 向下移動\n• w — 移到下一個單字字首\n• c — 修改（刪除並進入插入模式）\n• 0 — 移到行首",
+      "hint_keystrokes": "yiwjwwciw<C-r>0<Esc>",
+      "hint_text": "按鍵順序：yiwjwwciw<C-r>0<Esc>\n\n• y — 複製（yank）\n• iw — 游標所在的單字（inner word）\n• j — 向下移動\n• w — 移到下一個單字字首\n• c — 修改（刪除並進入插入模式）\n• 0 — 移到行首",
       "tags": [
         "0",
-        "\u003cC-r\u003e",
+        "<C-r>",
         "c",
         "iw",
         "j",
@@ -1900,10 +1900,10 @@
       "description_en": "Paste from a Register",
       "category": "combo",
       "difficulty": 2,
-      "initial_text": "\u003ctable\u003e\n\n  \u003ctr\u003e\n    \u003ctd\u003eSymbol\u003c/td\u003e\n    \u003ctd\u003eName\u003c/td\u003e\n  \u003c/tr\u003e\n\n\u003c/table\u003e",
-      "expected_text": "\u003ctable\u003e\n\n  \u003ctr\u003e\n    \u003ctd\u003eSymbol\u003c/td\u003e\n    \u003ctd\u003eName\u003c/td\u003e\n  \u003c/tr\u003e\n\n  \u003ctr\u003e\n    \u003ctd\u003eSymbol\u003c/td\u003e\n    \u003ctd\u003eName\u003c/td\u003e\n  \u003c/tr\u003e\n\n\u003c/table\u003e",
+      "initial_text": "<table>\n\n  <tr>\n    <td>Symbol</td>\n    <td>Name</td>\n  </tr>\n\n</table>",
+      "expected_text": "<table>\n\n  <tr>\n    <td>Symbol</td>\n    <td>Name</td>\n  </tr>\n\n  <tr>\n    <td>Symbol</td>\n    <td>Name</td>\n  </tr>\n\n</table>",
       "cursor_start": {
-        "line": 7,
+        "line": 2,
         "col": 0
       },
       "hint_commands": [
@@ -1911,7 +1911,7 @@
         "ap",
         "P"
       ],
-      "hint_keystrokes": "yapgP",
+      "hint_keystrokes": "yapP",
       "hint_text": "按鍵順序：yapgP\n\n• y — 複製（yank）\n• P — 貼上到游標前",
       "tags": [
         "P",
@@ -1936,7 +1936,7 @@
       },
       "title_zh": "練習：q (錄製巨集)、a (在游標後進入插入模式)",
       "title_en": "Record and Execute a Macro",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：qaA;\u003cEsc\u003eIvar\u003cEsc\u003eq",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：qaA;<Esc>Ivar<Esc>q",
       "description_en": "Record and Execute a Macro",
       "category": "insert",
       "difficulty": 3,
@@ -1951,8 +1951,8 @@
         "a",
         "I"
       ],
-      "hint_keystrokes": "qaA;\u003cEsc\u003eIvar\u003cEsc\u003eq",
-      "hint_text": "按鍵順序：qaA;\u003cEsc\u003eIvar\u003cEsc\u003eq\n\n• q — 錄製巨集\n• a — 在游標後進入插入模式\n• I — 在行首進入插入模式",
+      "hint_keystrokes": "qaA;<Esc>Ivar<Esc>q",
+      "hint_text": "按鍵順序：qaA;<Esc>Ivar<Esc>q\n\n• q — 錄製巨集\n• a — 在游標後進入插入模式\n• I — 在行首進入插入模式",
       "tags": [
         "I",
         "a",
@@ -2163,7 +2163,7 @@
       },
       "title_zh": "練習：q (錄製巨集)、a (在游標後進入插入模式)",
       "title_en": "Act Upon a Collection of Files",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：qagg\u003cCR\u003eOmodule Rank\u003cEsc\u003ej\u003eGGoend\u003cEsc\u003eq",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：qagg<CR>Omodule Rank<Esc>j>GGoend<Esc>q",
       "description_en": "Act Upon a Collection of Files",
       "category": "combo",
       "difficulty": 3,
@@ -2177,14 +2177,14 @@
         "q",
         "a",
         "j",
-        "\u003e",
+        ">",
         "G",
         "o"
       ],
-      "hint_keystrokes": "qagg\u003cCR\u003eOmodule Rank\u003cEsc\u003ej\u003eGGoend\u003cEsc\u003eq",
-      "hint_text": "按鍵順序：qagg\u003cCR\u003eOmodule Rank\u003cEsc\u003ej\u003eGGoend\u003cEsc\u003eq\n\n• q — 錄製巨集\n• a — 在游標後進入插入模式\n• j — 向下移動\n• \u003e — 增加縮排\n• G — 移到檔案結尾\n• o — 在下方新增一行並進入插入模式",
+      "hint_keystrokes": "qagg<CR>Omodule Rank<Esc>j>GGoend<Esc>q",
+      "hint_text": "按鍵順序：qagg<CR>Omodule Rank<Esc>j>GGoend<Esc>q\n\n• q — 錄製巨集\n• a — 在游標後進入插入模式\n• j — 向下移動\n• > — 增加縮排\n• G — 移到檔案結尾\n• o — 在下方新增一行並進入插入模式",
       "tags": [
-        "\u003e",
+        ">",
         "G",
         "a",
         "j",
@@ -2247,7 +2247,7 @@
       },
       "title_zh": "練習：q (錄製巨集)、a (在游標後進入插入模式)",
       "title_en": "Evaluate an Iterator to Number Items in a List",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：qaI\u003cC-r\u003e=i\u003cCR\u003e) \u003cEsc\u003eq",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：qaI<C-r>=i<CR>) <Esc>q",
       "description_en": "Evaluate an Iterator to Number Items in a List",
       "category": "insert",
       "difficulty": 2,
@@ -2261,8 +2261,8 @@
         "q",
         "a"
       ],
-      "hint_keystrokes": "qaI\u003cC-r\u003e=i\u003cCR\u003e) \u003cEsc\u003eq",
-      "hint_text": "按鍵順序：qaI\u003cC-r\u003e=i\u003cCR\u003e) \u003cEsc\u003eq\n\n• q — 錄製巨集\n• a — 在游標後進入插入模式",
+      "hint_keystrokes": "qaI<C-r>=i<CR>) <Esc>q",
+      "hint_text": "按鍵順序：qaI<C-r>=i<CR>) <Esc>q\n\n• q — 錄製巨集\n• a — 在游標後進入插入模式",
       "tags": [
         "a",
         "q"
@@ -2323,7 +2323,7 @@
       },
       "title_zh": "練習：f (向右搜尋字元)、s (刪除字元並進入插入模式)",
       "title_en": "Edit the Contents of a Macro",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：f~svU\u003cEsc\u003e",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：f~svU<Esc>",
       "description_en": "Edit the Contents of a Macro",
       "category": "combo",
       "difficulty": 1,
@@ -2337,8 +2337,8 @@
         "f",
         "s"
       ],
-      "hint_keystrokes": "f~svU\u003cEsc\u003e",
-      "hint_text": "按鍵順序：f~svU\u003cEsc\u003e\n\n• f — 向右搜尋字元\n• s — 刪除字元並進入插入模式",
+      "hint_keystrokes": "f~svU<Esc>",
+      "hint_text": "按鍵順序：f~svU<Esc>\n\n• f — 向右搜尋字元\n• s — 刪除字元並進入插入模式",
       "tags": [
         "f",
         "s"
@@ -2397,7 +2397,7 @@
       },
       "title_zh": "練習：a (在游標後進入插入模式)、n (搜尋下一個匹配)",
       "title_en": "Offset the Cursor to the End of a Search Match",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：\u003cCR\u003eauage\u003cEsc\u003en.n.",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：<CR>auage<Esc>n.n.",
       "description_en": "Offset the Cursor to the End of a Search Match",
       "category": "combo",
       "difficulty": 2,
@@ -2405,15 +2405,16 @@
       "expected_text": "Aim to learn a new programming language each year.\nWhich language did you pick up last year?\nWhich languages would you like to learn?",
       "cursor_start": {
         "line": 0,
-        "col": 0
+        "col": 34
       },
       "hint_commands": [
+        "/",
         "a",
         "n",
         "."
       ],
-      "hint_keystrokes": "\u003cCR\u003eauage\u003cEsc\u003en.n.",
-      "hint_text": "按鍵順序：\u003cCR\u003eauage\u003cEsc\u003en.n.\n\n• a — 在游標後進入插入模式\n• n — 搜尋下一個匹配\n• . — 重複上次修改",
+      "hint_keystrokes": "auage<Esc>/lang<CR>eauage<Esc>n3lauage<Esc>",
+      "hint_text": "按鍵順序：<CR>auage<Esc>n.n.\n\n• a — 在游標後進入插入模式\n• n — 搜尋下一個匹配\n• . — 重複上次修改",
       "tags": [
         ".",
         "a",
@@ -2437,12 +2438,12 @@
       },
       "title_zh": "練習：gU (轉大寫)、n (搜尋下一個匹配)",
       "title_en": "Operate on a Complete Search Match",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：\u003cCR\u003egUgnn.n..",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：<CR>gUgnn.n..",
       "description_en": "Operate on a Complete Search Match",
       "category": "combo",
       "difficulty": 2,
-      "initial_text": "class XhtmlDocument \u003c XmlDocument; end\nclass XhtmlTag \u003c XmlTag; end",
-      "expected_text": "class XHTMLDocument \u003c XMLDocument; end\nclass XHTMLTag \u003c XMLTag; end",
+      "initial_text": "class XhtmlDocument < XmlDocument; end\nclass XhtmlTag < XmlTag; end",
+      "expected_text": "class XHTMLDocument < XMLDocument; end\nclass XHTMLTag < XMLTag; end",
       "cursor_start": {
         "line": 0,
         "col": 0
@@ -2452,8 +2453,8 @@
         "n",
         "."
       ],
-      "hint_keystrokes": "\u003cCR\u003egUgnn.n..",
-      "hint_text": "按鍵順序：\u003cCR\u003egUgnn.n..\n\n• gU — 轉大寫\n• n — 搜尋下一個匹配\n• . — 重複上次修改",
+      "hint_keystrokes": "<CR>gUgnn.n..",
+      "hint_text": "按鍵順序：<CR>gUgnn.n..\n\n• gU — 轉大寫\n• n — 搜尋下一個匹配\n• . — 重複上次修改",
       "tags": [
         ".",
         "gU",
@@ -2477,7 +2478,7 @@
       },
       "title_zh": "練習：f (向右搜尋字元)、c (修改（刪除並進入插入模式）)",
       "title_en": "Create Complex Patterns by Iterating upon Search History",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：f[c%(\u003cC-r\u003e\")\u003cEsc\u003ei|’\\w\u003cEsc\u003e",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：f[c%(<C-r>\")<Esc>i|’\\w<Esc>",
       "description_en": "Create Complex Patterns by Iterating upon Search History",
       "category": "combo",
       "difficulty": 2,
@@ -2492,17 +2493,17 @@
         "c",
         "%",
         "(",
-        "\u003cC-r\u003e",
+        "<C-r>",
         ")",
         "i"
       ],
-      "hint_keystrokes": "f[c%(\u003cC-r\u003e\")\u003cEsc\u003ei|’\\w\u003cEsc\u003e",
-      "hint_text": "按鍵順序：f[c%(\u003cC-r\u003e\")\u003cEsc\u003ei|’\\w\u003cEsc\u003e\n\n• f — 向右搜尋字元\n• c — 修改（刪除並進入插入模式）\n• % — 跳到配對的括號\n• ( — 移到上一個句子\n• ) — 移到下一個句子\n• i — 在游標前進入插入模式",
+      "hint_keystrokes": "f[c%(<C-r>\")<Esc>i|’\\w<Esc>",
+      "hint_text": "按鍵順序：f[c%(<C-r>\")<Esc>i|’\\w<Esc>\n\n• f — 向右搜尋字元\n• c — 修改（刪除並進入插入模式）\n• % — 跳到配對的括號\n• ( — 移到上一個句子\n• ) — 移到下一個句子\n• i — 在游標前進入插入模式",
       "tags": [
         "%",
         "(",
         ")",
-        "\u003cC-r\u003e",
+        "<C-r>",
         "c",
         "f",
         "i"
@@ -2531,7 +2532,7 @@
       "category": "combo",
       "difficulty": 2,
       "initial_text": "mixin = {\n    applyName: function(config) {\n        return Factory(config, this.getName());\n    },\n}",
-      "expected_text": "mixin = {\n    applyNumber: function(config) {\n        return Factory(config, this.getNumber());\n    },\n    applyNumber: function(config) {\n        return Factory(config, this.getNumber());\n    },\n}",
+      "expected_text": "mixin = {\n    applyName: function(config) {\n        return Factory(config, this.getName());\n    },\n    applyName: function(config) {\n        return Factory(config, this.getName());\n    },\n}",
       "cursor_start": {
         "line": 1,
         "col": 0
@@ -2641,13 +2642,13 @@
         "section": "16.104",
         "tip_number": 104
       },
-      "title_zh": "練習：f (向右搜尋字元)、\u003c (減少縮排)",
+      "title_zh": "練習：f (向右搜尋字元)、< (減少縮排)",
       "title_en": "Navigate Keyword Definitions with Vim’s Tag Navigation Commands",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：fS\u003cC-]\u003e",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：fS<C-]>",
       "description_en": "Navigate Keyword Definitions with Vim’s Tag Navigation Commands",
       "category": "combo",
       "difficulty": 2,
-      "initial_text": "require './speaker.rb'\nclass Anglophone \u003c Speaker\n  def speak\n    puts \"Hello, my name is #{@name}\"\n  end\nend\nAnglophone.new('Jack').speak",
+      "initial_text": "require './speaker.rb'\nclass Anglophone < Speaker\n  def speak\n    puts \"Hello, my name is #{@name}\"\n  end\nend\nAnglophone.new('Jack').speak",
       "expected_text": "class Speaker\n  def initialize(name)\n    @name = name\n  end\n  def speak\n    puts \"#{name}\"\n  end\nend",
       "cursor_start": {
         "line": 0,
@@ -2655,13 +2656,13 @@
       },
       "hint_commands": [
         "f",
-        "\u003c",
+        "<",
         "C"
       ],
-      "hint_keystrokes": "fS\u003cC-]\u003e",
-      "hint_text": "按鍵順序：fS\u003cC-]\u003e\n\n• f — 向右搜尋字元\n• \u003c — 減少縮排\n• C — 修改到行尾",
+      "hint_keystrokes": "fS<C-]>",
+      "hint_text": "按鍵順序：fS<C-]>\n\n• f — 向右搜尋字元\n• < — 減少縮排\n• C — 修改到行尾",
       "tags": [
-        "\u003c",
+        "<",
         "C",
         "f"
       ],
@@ -2683,21 +2684,21 @@
       },
       "title_zh": "練習：o (在下方新增一行並進入插入模式)",
       "title_en": "Autocomplete Entire Lines",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：oba\u003cC-x\u003e\u003cC-l\u003e\u003cEsc\u003e",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：oba<C-x><C-l><Esc>",
       "description_en": "Autocomplete Entire Lines",
       "category": "insert",
       "difficulty": 1,
       "initial_text": ".top {\n  background-color: #ef66ef; }\n.bottom {",
       "expected_text": ".top {\n  background-color: #ef66ef; }\n.bottom {\n  background-color: #ef66ef; }",
       "cursor_start": {
-        "line": 3,
+        "line": 2,
         "col": 0
       },
       "hint_commands": [
         "o"
       ],
-      "hint_keystrokes": "oba\u003cC-x\u003e\u003cC-l\u003e\u003cEsc\u003e",
-      "hint_text": "按鍵順序：oba\u003cC-x\u003e\u003cC-l\u003e\u003cEsc\u003e\n\n• o — 在下方新增一行並進入插入模式",
+      "hint_keystrokes": "oba<C-x><C-l><Esc>",
+      "hint_text": "按鍵順序：oba<C-x><C-l><Esc>\n\n• o — 在下方新增一行並進入插入模式",
       "tags": [
         "o"
       ],
@@ -2717,12 +2718,12 @@
       },
       "title_zh": "練習：a (在游標後進入插入模式)",
       "title_en": "Autocomplete Sequences of Words",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：a\u003cC-x\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：a<C-x><C-p><C-x><C-p><C-p><C-x><C-p><C-x><C-p>",
       "description_en": "Autocomplete Sequences of Words",
       "category": "insert",
       "difficulty": 1,
-      "initial_text": "\u003cvimr",
-      "expected_text": "\u003cvimref href=\"http://vimhelp ",
+      "initial_text": "<vimr",
+      "expected_text": "<vimref href=\"http://vimhelp ",
       "cursor_start": {
         "line": 0,
         "col": 0
@@ -2730,8 +2731,8 @@
       "hint_commands": [
         "a"
       ],
-      "hint_keystrokes": "a\u003cC-x\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e",
-      "hint_text": "按鍵順序：a\u003cC-x\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e\u003cC-x\u003e\u003cC-p\u003e\n\n• a — 在游標後進入插入模式",
+      "hint_keystrokes": "a<C-x><C-p><C-x><C-p><C-p><C-x><C-p><C-x><C-p>",
+      "hint_text": "按鍵順序：a<C-x><C-p><C-x><C-p><C-p><C-x><C-p><C-x><C-p>\n\n• a — 在游標後進入插入模式",
       "tags": [
         "a"
       ],
@@ -2751,12 +2752,12 @@
       },
       "title_zh": "練習：i (在游標前進入插入模式)",
       "title_en": "Autocomplete Filenames",
-      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：ijs/ap\u003cC-x\u003e\u003cC-f\u003e",
+      "description_zh": "將初始文字修改為目標文字。\n提示按鍵：ijs/ap<C-x><C-f>",
       "description_en": "Autocomplete Filenames",
       "category": "insert",
       "difficulty": 1,
-      "initial_text": "\u003cscript src=\"\"/\u003e",
-      "expected_text": "\u003cscript src=\"js/application.js\"/\u003e",
+      "initial_text": "<script src=\"\"/>",
+      "expected_text": "<script src=\"js/application.js\"/>",
       "cursor_start": {
         "line": 0,
         "col": 0
@@ -2764,8 +2765,8 @@
       "hint_commands": [
         "i"
       ],
-      "hint_keystrokes": "ijs/ap\u003cC-x\u003e\u003cC-f\u003e",
-      "hint_text": "按鍵順序：ijs/ap\u003cC-x\u003e\u003cC-f\u003e\n\n• i — 在游標前進入插入模式",
+      "hint_keystrokes": "ijs/ap<C-x><C-f>",
+      "hint_text": "按鍵順序：ijs/ap<C-x><C-f>\n\n• i — 在游標前進入插入模式",
       "tags": [
         "i"
       ],

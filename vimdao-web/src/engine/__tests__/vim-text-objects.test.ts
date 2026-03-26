@@ -112,11 +112,14 @@ describe('quote objects', () => {
     expect(r).toEqual({ start: { line: 0, col: 4 }, end: { line: 0, col: 10 } })
   })
 
-  it('returns null when cursor is outside quotes', () => {
+  it('seeks forward when cursor is before quotes', () => {
     const s = createState('say "hello" please')
     s.cursor = { line: 0, col: 0 }
     const r = resolveTextObject(s, 'i', '"')
-    expect(r).toBeNull()
+    // Now seeks forward to the next pair instead of returning null
+    expect(r).not.toBeNull()
+    expect(r!.start.col).toBe(5) // after opening "
+    expect(r!.end.col).toBe(10) // at closing "
   })
 
   it('handles empty quotes', () => {

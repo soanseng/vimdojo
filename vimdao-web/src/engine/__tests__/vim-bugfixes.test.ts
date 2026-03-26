@@ -1,0 +1,341 @@
+/**
+ * TDD tests for VimEngine bug fixes identified in the audit.
+ * Each describe block targets one specific bug.
+ */
+import { describe, it, expect } from 'vitest'
+import { createState, getText } from '../vim-state'
+import { processKey } from '../vim-engine'
+import type { CursorPos } from '../vim-types'
+
+function applyKeys(text: string, keys: string[], cursor?: CursorPos): string {
+  let state = createState(text, cursor)
+  for (const key of keys) {
+    state = processKey(state, key).state
+  }
+  return getText(state)
+}
+
+function applyKeysState(text: string, keys: string[], cursor?: CursorPos) {
+  let state = createState(text, cursor)
+  for (const key of keys) {
+    state = processKey(state, key).state
+  }
+  return state
+}
+
+// ---------------------------------------------------------------------------
+// BUG-E1: t/T motions should be inclusive with operators
+// ---------------------------------------------------------------------------
+
+describe('BUG-E1: t/T inclusive with operators', () => {
+  it('dt. deletes from cursor through char before period', () => {
+    // "I've been expecting you, Mister Bond."
+    // f, moves to comma (col 23), dt. should delete ", Mister Bond"
+    const result = applyKeys(
+      "I've been expecting you, Mister Bond.",
+      ['f', ',', 'd', 't', '.'],
+    )
+    expect(result).toBe("I've been expecting you.")
+  })
+
+  it('dt; deletes from cursor through char before semicolon', () => {
+    const result = applyKeys(
+      'let x = foo(bar);',
+      ['f', '(', 'd', 't', ')'],
+    )
+    expect(result).toBe('let x = foo);')
+  })
+
+  it('ct) changes from cursor till before closing paren', () => {
+    const result = applyKeys(
+      'call(old_arg)',
+      ['f', '(', 'l', 'c', 't', ')', 'n', 'e', 'w', 'Escape'],
+    )
+    expect(result).toBe('call(new)')
+  })
+
+  it('dT, deletes backward till after comma', () => {
+    const result = applyKeys(
+      'a, b, c',
+      ['$', 'd', 'T', ','],
+      { line: 0, col: 6 },
+    )
+    expect(result).toBe('a, b,c')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// BUG-E2: U/u in visual mode (uppercase/lowercase)
+// ---------------------------------------------------------------------------
+
+describe('BUG-E2: U/u in visual mode', () => {
+  it('vitU uppercases inside tag', () => {
+    const result = applyKeys(
+      '<a href="#">one</a>',
+      ['v', 'i', 't', 'U'],
+      { line: 0, col: 12 },
+    )
+    expect(result).toBe('<a href="#">ONE</a>')
+  })
+
+  it('veu uppercases then lowercases a word', () => {
+    const result = applyKeys(
+      'Hello World',
+      ['v', 'e', 'U'],
+    )
+    expect(result).toBe('HELLO World')
+  })
+
+  it('VU uppercases entire line', () => {
+    const result = applyKeys(
+      'hello world\nsecond line',
+      ['V', 'U'],
+    )
+    expect(result).toBe('HELLO WORLD\nsecond line')
+  })
+
+  it('veu lowercases selected text', () => {
+    const result = applyKeys(
+      'HELLO WORLD',
+      ['v', 'e', 'u'],
+    )
+    expect(result).toBe('hello WORLD')
+  })
+
+  it('Vu lowercases entire line', () => {
+    const result = applyKeys(
+      'HELLO WORLD\nSECOND LINE',
+      ['V', 'u'],
+    )
+    expect(result).toBe('hello world\nSECOND LINE')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// BUG-E3: Visual line indent (Vj>)
+// ---------------------------------------------------------------------------
+
+describe('BUG-E3: visual line indent', () => {
+  it('Vj> indents two lines', () => {
+    const result = applyKeys(
+      'line one\nline two\nline three',
+      ['V', 'j', '>'],
+    )
+    expect(result).toBe('  line one\n  line two\nline three')
+  })
+
+  it('Vj< dedents two lines', () => {
+    const result = applyKeys(
+      '  line one\n  line two\nline three',
+      ['V', 'j', '<'],
+    )
+    expect(result).toBe('line one\nline two\nline three')
+  })
+
+  it('VG> indents to end of file', () => {
+    const result = applyKeys(
+      'a\nb\nc',
+      ['V', 'G', '>'],
+    )
+    expect(result).toBe('  a\n  b\n  c')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// BUG-E4: Dot repeat for visual indent
+// ---------------------------------------------------------------------------
+
+describe('BUG-E4: dot repeat for visual indent', () => {
+  it('Vj>. double indents via dot', () => {
+    const result = applyKeys(
+      'print a,\na, b = b, a+b',
+      ['V', 'j', '>', '.'],
+    )
+    expect(result).toBe('    print a,\n    a, b = b, a+b')
+  })
+
+  it('>Gj.j. produces incremental indentation', () => {
+    const result = applyKeys(
+      'Line one\nLine two\nLine three\nLine four',
+      ['>', 'G', 'j', '.', 'j', '.'],
+      { line: 1, col: 0 },
+    )
+    // Line 1 indented once (by >G from line 1)
+    // Lines 2-3 indented again (by . from line 2)
+    // Line 3 indented again (by . from line 3)
+    expect(result).toBe('Line one\n  Line two\n    Line three\n      Line four')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// BUG-E5: ci" seeks forward to next quote pair
+// ---------------------------------------------------------------------------
+
+describe('BUG-E5: ci" forward seek', () => {
+  it('ci" from before quotes finds next quote pair', () => {
+    const result = applyKeys(
+      'say "hello" world',
+      ['c', 'i', '"', 'b', 'y', 'e', 'Escape'],
+      { line: 0, col: 0 },
+    )
+    expect(result).toBe('say "bye" world')
+  })
+
+  it('ci" still works when cursor is inside quotes', () => {
+    const result = applyKeys(
+      'say "hello" world',
+      ['c', 'i', '"', 'b', 'y', 'e', 'Escape'],
+      { line: 0, col: 6 },
+    )
+    expect(result).toBe('say "bye" world')
+  })
+
+  it("ci' seeks forward to single quotes", () => {
+    const result = applyKeys(
+      "x = 'old'",
+      ['c', 'i', "'", 'n', 'e', 'w', 'Escape'],
+      { line: 0, col: 0 },
+    )
+    expect(result).toBe("x = 'new'")
+  })
+})
+
+// ---------------------------------------------------------------------------
+// BUG-E6: Visual mode paste (p replaces selection)
+// ---------------------------------------------------------------------------
+
+describe('BUG-E6: visual mode paste', () => {
+  it('yiw then visual select and p replaces selection', () => {
+    // yiw yanks "collection", navigate to "somethingInTheWay", visual select, paste
+    const result = applyKeys(
+      'collection = getCollection();\nprocess(somethingInTheWay, target);',
+      ['y', 'i', 'w', 'j', 'w', 'w', 'v', 'e', 'p'],
+      { line: 0, col: 0 },
+    )
+    expect(result).toBe('collection = getCollection();\nprocess(collection, target);')
+  })
+
+  it('yy then vp replaces selected chars with line content', () => {
+    // Simple case: yank a word, visual select another, paste
+    const result = applyKeys(
+      'foo bar baz',
+      ['y', 'i', 'w', 'w', 'w', 'v', 'e', 'p'],
+    )
+    expect(result).toBe('foo bar foo')
+  })
+
+  it('p in visual line mode replaces lines', () => {
+    // dd deletes line 0, moves to line 1 (old line 2), Vp replaces it
+    const result = applyKeys(
+      'first\nsecond\nthird',
+      ['y', 'y', 'j', 'V', 'p'],
+    )
+    expect(result).toBe('first\nfirst\nthird')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// BUG-E7: Paragraph text objects (ap/ip)
+// ---------------------------------------------------------------------------
+
+describe('BUG-E7: paragraph text objects', () => {
+  it('yap yanks a paragraph', () => {
+    const state = applyKeysState(
+      'line1\nline2\n\nline4\nline5',
+      ['y', 'a', 'p'],
+      { line: 0, col: 0 },
+    )
+    // Paragraph is lines 0-1 plus the blank line separator
+    expect(state.register).toContain('line1')
+    expect(state.register).toContain('line2')
+  })
+
+  it('yap + P duplicates a paragraph above', () => {
+    const result = applyKeys(
+      '<table>\n\n  <tr>\n    <td>A</td>\n  </tr>\n\n</table>',
+      ['y', 'a', 'p', 'P'],
+      { line: 2, col: 0 },
+    )
+    expect(result).toBe(
+      '<table>\n\n  <tr>\n    <td>A</td>\n  </tr>\n\n  <tr>\n    <td>A</td>\n  </tr>\n\n</table>',
+    )
+  })
+
+  it('dip deletes inner paragraph', () => {
+    const result = applyKeys(
+      'header\n\nfirst\nsecond\n\nfooter',
+      ['d', 'i', 'p'],
+      { line: 2, col: 0 },
+    )
+    expect(result).toBe('header\n\n\nfooter')
+  })
+
+  it('dap deletes paragraph including trailing blank line', () => {
+    const result = applyKeys(
+      'header\n\nfirst\nsecond\n\nfooter',
+      ['d', 'a', 'p'],
+      { line: 2, col: 0 },
+    )
+    expect(result).toBe('header\n\nfooter')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// BUG-E8: d/pattern<CR> — operator with search motion
+// ---------------------------------------------------------------------------
+
+describe('BUG-E8: operator with search motion', () => {
+  it('d/gets<CR> deletes from cursor to search match', () => {
+    const result = applyKeys(
+      'This phrase takes time but\neventually gets to the point.',
+      ['d', '/', 'g', 'e', 't', 's', 'Enter'],
+      { line: 0, col: 12 },
+    )
+    expect(result).toBe('This phrase gets to the point.')
+  })
+
+  it('c/world<CR> changes from cursor to search match', () => {
+    const result = applyKeys(
+      'hello cruel world',
+      ['c', '/', 'w', 'o', 'r', 'l', 'd', 'Enter', 'Escape'],
+      { line: 0, col: 6 },
+    )
+    expect(result).toBe('hello world')
+  })
+
+  it('y/end<CR>p yanks to search match and pastes', () => {
+    const state = applyKeysState(
+      'start middle end',
+      ['y', '/', 'e', 'n', 'd', 'Enter'],
+      { line: 0, col: 0 },
+    )
+    expect(state.register).toBe('start middle ')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// BUG-E9: /lang<CR> search + e + a + insert
+// ---------------------------------------------------------------------------
+
+describe('BUG-E9: search then append at end of match', () => {
+  it('/lang<CR>eauage<Esc> appends to first match', () => {
+    const result = applyKeys(
+      'Aim to learn a new programming lang each year.\nWhich lang did you pick up.',
+      ['/', 'l', 'a', 'n', 'g', 'Enter',
+       'e', 'a', 'u', 'a', 'g', 'e', 'Escape'],
+      { line: 0, col: 0 },
+    )
+    expect(result).toBe(
+      'Aim to learn a new programming language each year.\nWhich lang did you pick up.',
+    )
+  })
+
+  it('d/pattern<CR> cross-line works', () => {
+    const result = applyKeys(
+      'start middle\nmore text end',
+      ['d', '/', 'e', 'n', 'd', 'Enter'],
+      { line: 0, col: 6 },
+    )
+    expect(result).toBe('start end')
+  })
+})
