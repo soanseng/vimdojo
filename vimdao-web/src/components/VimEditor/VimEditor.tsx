@@ -138,8 +138,35 @@ function renderLine(line: string, lineIdx: number, state: VimState) {
     )
   }
 
+  // Determine highlight range: either explicit highlightRange or visual mode selection
+  let hr = state.highlightRange
+  if (!hr && state.mode === 'visual' && state.visualStart) {
+    // Build range from visual selection
+    const vs = state.visualStart
+    const cur = state.cursor
+    if (state.visualMode === 'char') {
+      const startBefore = vs.line < cur.line || (vs.line === cur.line && vs.col <= cur.col)
+      hr = startBefore
+        ? { start: vs, end: { line: cur.line, col: cur.col + 1 } }
+        : { start: cur, end: { line: vs.line, col: vs.col + 1 } }
+    } else if (state.visualMode === 'line') {
+      const startLine = Math.min(vs.line, cur.line)
+      const endLine = Math.max(vs.line, cur.line)
+      hr = { start: { line: startLine, col: 0 }, end: { line: endLine, col: 99999 } }
+    }
+  }
+
+  // Check if this line intersects the highlight range
+  const isHighlightLine = hr !== null && lineIdx >= hr.start.line && lineIdx <= hr.end.line
+  const hlStartCol = hr && lineIdx === hr.start.line ? hr.start.col : 0
+  const hlEndCol = hr && lineIdx === hr.end.line ? hr.end.col : line.length
+
   for (let i = 0; i < line.length; i++) {
     const ch = line[i]!
+
+    // Check if this char is in the highlight range
+    const inHighlight = isHighlightLine && i >= hlStartCol && i < hlEndCol
+
     if (isCursorLine && i === cursorCol) {
       if (state.mode === 'insert') {
         chars.push(
@@ -147,9 +174,13 @@ function renderLine(line: string, lineIdx: number, state: VimState) {
         )
       } else {
         chars.push(
-          <span key={i} className="bg-ctp-blue text-ctp-crust font-bold">{ch}</span>
+          <span key={i} className={`font-bold ${inHighlight ? 'bg-ctp-yellow text-ctp-crust' : 'bg-ctp-blue text-ctp-crust'}`}>{ch}</span>
         )
       }
+    } else if (inHighlight) {
+      chars.push(
+        <span key={i} className="bg-ctp-yellow/40 text-ctp-yellow">{ch}</span>
+      )
     } else {
       chars.push(<span key={i}>{ch}</span>)
     }

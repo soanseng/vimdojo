@@ -27,6 +27,7 @@ export interface VimState {
   visualStart: CursorPos | null  // anchor point where selection started
   visualMode: 'char' | 'line' | null  // character-wise or line-wise
   lastCommand: string | null      // last ex-command result (e.g. 'write', 'quit')
+  highlightRange: { start: CursorPos; end: CursorPos } | null  // visual highlight for pending operations (surround, etc.)
 }
 
 export interface FindParams {

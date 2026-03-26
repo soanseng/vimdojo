@@ -12,7 +12,7 @@ import { toggleLineComment, toggleRangeComment } from './vim-comment'
 // when used with operators (d, c, y).
 // ---------------------------------------------------------------------------
 
-const INCLUSIVE_MOTIONS = new Set(['e', 'E', 'f', 'F', 'l', '$', 'G', 'gg'])
+const INCLUSIVE_MOTIONS = new Set(['e', 'E', 'f', 'F', 't', 'T', 'l', '$', 'G', 'gg'])
 
 // ---------------------------------------------------------------------------
 // Public API
@@ -201,7 +201,17 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
 
   // --- gsai/gsaa: waiting for text object type (w, ", (, etc.) ---
   if (state.pendingKeys === 'gsai' || state.pendingKeys === 'gsaa') {
-    return { state: { ...state, pendingKeys: state.pendingKeys + key }, handled: true }
+    // Resolve the text object range now to highlight it while waiting for surround char
+    const modifier = state.pendingKeys[3] as 'i' | 'a'
+    const range = resolveTextObject(state, modifier, key)
+    return {
+      state: {
+        ...state,
+        pendingKeys: state.pendingKeys + key,
+        highlightRange: range,
+      },
+      handled: true,
+    }
   }
 
   // --- gsaiX or gsaaX: waiting for surround character ---
@@ -210,7 +220,7 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
     const modifier = state.pendingKeys[3] as 'i' | 'a'
     const objChar = state.pendingKeys[4]!
     const surroundChar = key
-    const s: VimState = { ...state, pendingKeys: '' }
+    const s: VimState = { ...state, pendingKeys: '', highlightRange: null }
     const range = resolveTextObject(s, modifier, objChar)
     if (range) {
       const withUndo = pushUndo(s)
@@ -218,6 +228,7 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
       return {
         state: {
           ...result,
+          highlightRange: null,
           lastChange: { type: 'normal', keys: ['g', 's', 'a', modifier, objChar, surroundChar] },
         },
         handled: true,
@@ -798,6 +809,27 @@ function handleVisualMode(state: VimState, key: string): KeyResult {
     return handleVisualFindChar(state, key)
   }
 
+  // Pending text object (vi/va + object key)
+  if (state.pendingKeys === 'vi' || state.pendingKeys === 'va') {
+    const modifier = state.pendingKeys === 'vi' ? 'i' : 'a' as 'i' | 'a'
+    const s: VimState = { ...state, pendingKeys: '' }
+    if (key === 'Escape') return { state: s, handled: true }
+    const range = resolveTextObject(s, modifier, key)
+    if (range) {
+      // Extend visual selection: anchor becomes range start, cursor becomes range end - 1
+      const endCol = Math.max(0, range.end.col - 1)
+      return {
+        state: {
+          ...s,
+          visualStart: range.start,
+          cursor: { line: range.end.line, col: endCol },
+        },
+        handled: true,
+      }
+    }
+    return { state: s, handled: false }
+  }
+
   // Motions — move cursor, selection extends from visualStart to cursor
   const motionPos = trySimpleMotion(state, key)
     ?? resolveMotion(state, key)
@@ -827,9 +859,29 @@ function handleVisualMode(state: VimState, key: string): KeyResult {
     return { state: { ...state, pendingKeys: key }, handled: true }
   }
 
+  // Text object modifiers (i/a) — extend visual selection to text object
+  if (key === 'i' || key === 'a') {
+    return { state: { ...state, pendingKeys: 'v' + key }, handled: true }
+  }
+
   // Operators: d, c, y
   if (key === 'd' || key === 'c' || key === 'y') {
     return executeVisualOperator(state, key)
+  }
+
+  // Indent/dedent in visual mode
+  if (key === '>' || key === '<') {
+    return executeVisualIndent(state, key)
+  }
+
+  // U/u — uppercase/lowercase in visual mode
+  if (key === 'U' || key === 'u') {
+    return executeVisualCase(state, key)
+  }
+
+  // p — paste replacing selection
+  if (key === 'p') {
+    return executeVisualPaste(state)
   }
 
   return { state, handled: false }
@@ -1004,6 +1056,184 @@ function extractVisualText(lines: string[], start: CursorPos, endExcl: CursorPos
 }
 
 // ---------------------------------------------------------------------------
+// Visual indent
+// ---------------------------------------------------------------------------
+
+function executeVisualIndent(state: VimState, key: string): KeyResult {
+  const anchor = state.visualStart!
+  const cursor = state.cursor
+  const startLine = Math.min(anchor.line, cursor.line)
+  const endLine = Math.max(anchor.line, cursor.line)
+
+  // For character-wise visual, still indent full lines
+  const exitVisual = {
+    mode: 'normal' as const,
+    visualStart: null,
+    visualMode: null,
+  }
+
+  const s = pushUndo({ ...state, ...exitVisual })
+  const newLines = [...s.lines]
+  const end = Math.min(endLine, newLines.length - 1)
+  const direction = key === '>' ? 'indent' : 'dedent'
+
+  for (let i = startLine; i <= end; i++) {
+    const line = newLines[i] ?? ''
+    if (direction === 'indent') {
+      newLines[i] = '  ' + line
+    } else {
+      newLines[i] = line.replace(/^  /, '')
+    }
+  }
+
+  const lineCount = end - startLine + 1
+  // Record as normal-mode equivalent (e.g. >j for 2 lines, >2j for 3 lines)
+  const motionKeys: string[] = lineCount > 2
+    ? [key, String(lineCount - 1), 'j']
+    : lineCount === 2
+      ? [key, 'j']
+      : [key, key]
+  return {
+    state: {
+      ...s,
+      lines: newLines,
+      cursor: { line: startLine, col: 0 },
+      lastChange: { type: 'normal' as const, keys: motionKeys },
+    },
+    handled: true,
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Visual case (U/u)
+// ---------------------------------------------------------------------------
+
+function executeVisualCase(state: VimState, key: string): KeyResult {
+  const anchor = state.visualStart!
+  const cursor = state.cursor
+  const toUpper = key === 'U'
+
+  const exitVisual = {
+    mode: 'normal' as const,
+    visualStart: null,
+    visualMode: null,
+  }
+
+  const s = pushUndo({ ...state, ...exitVisual })
+
+  if (state.visualMode === 'line') {
+    const startLine = Math.min(anchor.line, cursor.line)
+    const endLine = Math.max(anchor.line, cursor.line)
+    const newLines = [...s.lines]
+    for (let i = startLine; i <= endLine; i++) {
+      newLines[i] = toUpper ? (newLines[i] ?? '').toUpperCase() : (newLines[i] ?? '').toLowerCase()
+    }
+    return {
+      state: { ...s, lines: newLines, cursor: { line: startLine, col: 0 } },
+      handled: true,
+    }
+  }
+
+  // Character-wise visual
+  const before = anchor.line < cursor.line
+    || (anchor.line === cursor.line && anchor.col <= cursor.col)
+  const start = before ? anchor : cursor
+  const end = before ? cursor : anchor
+
+  const newLines = [...s.lines]
+
+  if (start.line === end.line) {
+    const line = newLines[start.line] ?? ''
+    const segment = line.slice(start.col, end.col + 1)
+    const transformed = toUpper ? segment.toUpperCase() : segment.toLowerCase()
+    newLines[start.line] = line.slice(0, start.col) + transformed + line.slice(end.col + 1)
+  } else {
+    // Multi-line char-wise
+    const firstLine = newLines[start.line] ?? ''
+    const firstSeg = firstLine.slice(start.col)
+    newLines[start.line] = firstLine.slice(0, start.col) + (toUpper ? firstSeg.toUpperCase() : firstSeg.toLowerCase())
+
+    for (let i = start.line + 1; i < end.line; i++) {
+      newLines[i] = toUpper ? (newLines[i] ?? '').toUpperCase() : (newLines[i] ?? '').toLowerCase()
+    }
+
+    const lastLine = newLines[end.line] ?? ''
+    const lastSeg = lastLine.slice(0, end.col + 1)
+    newLines[end.line] = (toUpper ? lastSeg.toUpperCase() : lastSeg.toLowerCase()) + lastLine.slice(end.col + 1)
+  }
+
+  return {
+    state: { ...s, lines: newLines, cursor: start },
+    handled: true,
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Visual paste
+// ---------------------------------------------------------------------------
+
+function executeVisualPaste(state: VimState): KeyResult {
+  if (!state.register) return { state, handled: false }
+
+  const anchor = state.visualStart!
+  const cursor = state.cursor
+
+  const exitVisual = {
+    mode: 'normal' as const,
+    visualStart: null,
+    visualMode: null,
+  }
+
+  const s = pushUndo({ ...state, ...exitVisual })
+
+  if (state.visualMode === 'line') {
+    const startLine = Math.min(anchor.line, cursor.line)
+    const endLine = Math.max(anchor.line, cursor.line)
+    const newLines = [...s.lines]
+    const pasteLines = s.register.endsWith('\n')
+      ? s.register.slice(0, -1).split('\n')
+      : [s.register]
+    newLines.splice(startLine, endLine - startLine + 1, ...pasteLines)
+    return {
+      state: { ...s, lines: newLines, cursor: { line: startLine, col: 0 } },
+      handled: true,
+    }
+  }
+
+  // Character-wise: replace selected text with register content
+  const before = anchor.line < cursor.line
+    || (anchor.line === cursor.line && anchor.col <= cursor.col)
+  const start = before ? anchor : cursor
+  const end = before ? cursor : anchor
+
+  // Save register content before delete (delete overwrites register)
+  const pasteText = s.register
+
+  // Delete selected text
+  const newLines = [...s.lines]
+  const endExcl: CursorPos = { line: end.line, col: end.col + 1 }
+  const positioned = { ...s, cursor: start, lines: newLines }
+  const afterDelete = ops.deleteToPos(positioned, endExcl)
+
+  // Insert saved register content at the start of the deleted range
+  const insertLine = start.line
+  const insertCol = start.col
+  const line = afterDelete.lines[insertLine] ?? ''
+  const insertText = pasteText
+  const finalLines = [...afterDelete.lines]
+  finalLines[insertLine] = line.slice(0, insertCol) + insertText + line.slice(insertCol)
+
+  return {
+    state: {
+      ...afterDelete,
+      lines: finalLines,
+      cursor: { line: insertLine, col: insertCol + insertText.length - 1 },
+    },
+    handled: true,
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Command mode (/ search, : commands)
 // ---------------------------------------------------------------------------
 
@@ -1169,10 +1399,9 @@ function handleOperatorFindChar(state: VimState, char: string): KeyResult {
     // The motion key for recording is the findKey + char
     const changeKeys = [op, findKey, char]
 
-    // Find motions (f/F) are inclusive — include the char at target
-    const isInclusive = findType === 'f'
+    // Forward find motions (f/t) are inclusive — include the char at target
     let adjustedPos = pos
-    if (isInclusive && pos.line === withFind.cursor.line) {
+    if (direction === 'forward' && pos.line === withFind.cursor.line) {
       adjustedPos = { ...pos, col: pos.col + 1 }
     }
 
