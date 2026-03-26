@@ -149,9 +149,11 @@ export function changeToEnd(state: VimState): VimState {
 
 export function yankLine(state: VimState): VimState {
   const line = lineAt(state, state.cursor.line)
+  const text = line + '\n'
   return {
     ...state,
-    register: line + '\n',
+    register: text,
+    registers: { ...state.registers, '0': text },
   }
 }
 
@@ -323,5 +325,6 @@ export function yankToPos(state: VimState, target: CursorPos): VimState {
   return {
     ...state,
     register: text,
+    registers: { ...state.registers, '0': text },
   }
 }

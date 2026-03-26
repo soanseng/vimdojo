@@ -12,7 +12,7 @@ import { toggleLineComment, toggleRangeComment } from './vim-comment'
 // when used with operators (d, c, y).
 // ---------------------------------------------------------------------------
 
-const INCLUSIVE_MOTIONS = new Set(['e', 'E', 'f', 'F', 't', 'T', 'l', '$', 'G', 'gg'])
+const INCLUSIVE_MOTIONS = new Set(['e', 'E', 'f', 'F', 't', 'T', 'l', '$', 'G', 'gg', '%'])
 
 // ---------------------------------------------------------------------------
 // Public API
@@ -20,9 +20,26 @@ const INCLUSIVE_MOTIONS = new Set(['e', 'E', 'f', 'F', 't', 'T', 'l', '$', 'G', 
 
 export function processKey(state: VimState, key: string): KeyResult {
   // Don't add replayed keys (from dot command) to the user-visible keyLog
-  const s: VimState = state.isDotReplaying
+  let s: VimState = state.isDotReplaying
     ? state
     : { ...state, keyLog: [...state.keyLog, key] }
+
+  // Record key for macro (if recording and not during dot/macro replay)
+  if (s.macroRecording && !s.isDotReplaying) {
+    // q in normal mode with no pending state stops recording
+    if (key === 'q' && s.mode === 'normal' && s.pendingKeys === '' && s.pendingOperator === null) {
+      return {
+        state: {
+          ...s,
+          macroRegisters: { ...s.macroRegisters, [s.macroRecording]: [...s.macroBuf] },
+          macroRecording: null,
+          macroBuf: [],
+        },
+        handled: true,
+      }
+    }
+    s = { ...s, macroBuf: [...s.macroBuf, key] }
+  }
 
   switch (s.mode) {
     case 'insert':
@@ -49,6 +66,56 @@ function handleInsertMode(state: VimState, key: string): KeyResult {
   let s = state
   if (state.isRecordingInsert) {
     s = { ...s, insertKeyBuf: [...s.insertKeyBuf, key] }
+  }
+
+  // Control-r — paste register in insert mode
+  if (key === 'Control-r' || key === 'C-r') {
+    return { state: { ...s, pendingKeys: 'C-r' }, handled: true }
+  }
+  if (s.pendingKeys === 'C-r') {
+    const cleared: VimState = { ...s, pendingKeys: '' }
+    if (key === 'Escape') {
+      return { state: { ...cleared, mode: 'normal' }, handled: true }
+    }
+    // Get register content: '"' = unnamed, '0' = last yank, 'a'-'z' = named
+    let content = ''
+    if (key === '"') {
+      content = cleared.register
+    } else if (key === '0') {
+      content = cleared.registers['0'] ?? cleared.register
+    } else if (key >= 'a' && key <= 'z') {
+      content = cleared.registers[key] ?? ''
+    }
+    if (content) {
+      // Insert register content at cursor position
+      const line = cleared.lines[cleared.cursor.line] ?? ''
+      const col = cleared.cursor.col
+      const newLines = [...cleared.lines]
+      // Handle multi-line register content
+      const regLines = content.endsWith('\n') ? content.slice(0, -1).split('\n') : content.split('\n')
+      const firstRegLine = regLines[0] ?? ''
+      if (regLines.length === 1) {
+        newLines[cleared.cursor.line] = line.slice(0, col) + firstRegLine + line.slice(col)
+        return {
+          state: { ...cleared, lines: newLines, cursor: { line: cleared.cursor.line, col: col + firstRegLine.length } },
+          handled: true,
+        }
+      }
+      // Multi-line paste in insert mode
+      const before = line.slice(0, col)
+      const after = line.slice(col)
+      const lastRegLine = regLines[regLines.length - 1] ?? ''
+      newLines.splice(cleared.cursor.line, 1, before + firstRegLine, ...regLines.slice(1, -1), lastRegLine + after)
+      return {
+        state: {
+          ...cleared,
+          lines: newLines,
+          cursor: { line: cleared.cursor.line + regLines.length - 1, col: lastRegLine.length },
+        },
+        handled: true,
+      }
+    }
+    return { state: cleared, handled: true }
   }
 
   if (key === 'Escape') {
@@ -210,6 +277,54 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
             cursor: { ...s.lastVisualEnd },
           },
           handled: true,
+        }
+      }
+      return { state: s, handled: true }
+    }
+    // gn — select/operate on next search match
+    if (key === 'n' || key === 'N') {
+      const searchFn = key === 'n' ? searchForward : searchBackward
+      if (s.searchPattern && s.pendingOperator) {
+        const op = s.pendingOperator
+        const pos = searchFn(s, s.searchPattern)
+        if (pos) {
+          const matchEnd = { line: pos.line, col: pos.col + s.searchPattern.length }
+          const withOp: VimState = { ...s, pendingOperator: null, cursor: pos }
+          switch (op) {
+            case 'gU': {
+              const wu = pushUndo(withOp)
+              const nl = [...wu.lines]
+              const line = nl[pos.line] ?? ''
+              nl[pos.line] = line.slice(0, pos.col) + line.slice(pos.col, matchEnd.col).toUpperCase() + line.slice(matchEnd.col)
+              return { state: { ...wu, lines: nl, lastChange: { type: 'normal', keys: ['g', 'U', 'g', 'n'] } }, handled: true }
+            }
+            case 'gu': {
+              const wu = pushUndo(withOp)
+              const nl = [...wu.lines]
+              const line = nl[pos.line] ?? ''
+              nl[pos.line] = line.slice(0, pos.col) + line.slice(pos.col, matchEnd.col).toLowerCase() + line.slice(matchEnd.col)
+              return { state: { ...wu, lines: nl, lastChange: { type: 'normal', keys: ['g', 'u', 'g', 'n'] } }, handled: true }
+            }
+            case 'c': {
+              const result = ops.changeToPos(pushUndo(withOp), matchEnd)
+              return { state: startInsertRecording(result, ['c', 'g', 'n']), handled: true }
+            }
+            case 'd': {
+              const result = ops.deleteToPos(pushUndo(withOp), matchEnd)
+              return { state: { ...result, lastChange: { type: 'normal', keys: ['d', 'g', 'n'] } }, handled: true }
+            }
+          }
+        }
+        return { state: { ...s, pendingOperator: null }, handled: true }
+      }
+      if (s.searchPattern) {
+        const pos = searchFn(s, s.searchPattern)
+        if (pos) {
+          return {
+            state: { ...s, mode: 'visual', visualStart: pos, visualMode: 'char',
+              cursor: { line: pos.line, col: pos.col + s.searchPattern.length - 1 } },
+            handled: true,
+          }
         }
       }
       return { state: s, handled: true }
@@ -424,6 +539,68 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
       return handleOperatorFindChar(state, key)
     }
     return handleFindChar(state, key)
+  }
+
+  // --- Pending " (register prefix) ---
+  if (state.pendingKeys === '"') {
+    const s: VimState = { ...state, pendingKeys: '', pendingRegister: key }
+    return { state: s, handled: true }
+  }
+
+  // --- Pending q (macro record start) ---
+  if (state.pendingKeys === 'q') {
+    const s: VimState = { ...state, pendingKeys: '' }
+    if (key >= 'a' && key <= 'z') {
+      return { state: { ...s, macroRecording: key, macroBuf: [] }, handled: true }
+    }
+    return { state: s, handled: false }
+  }
+
+  // --- Pending @ (macro playback) ---
+  if (state.pendingKeys === '@') {
+    const s: VimState = { ...state, pendingKeys: '' }
+    const regKey = key === '@' ? (s.lastMacroRegister ?? '') : key
+    const macro = s.macroRegisters[regKey]
+    if (macro && macro.length > 0) {
+      const count = s.countPrefix ?? 1
+      let current: VimState = { ...s, countPrefix: null, lastMacroRegister: regKey, isDotReplaying: true }
+      for (let c = 0; c < count; c++) {
+        for (const k of macro) {
+          current = processKey(current, k).state
+        }
+      }
+      return { state: { ...current, isDotReplaying: false }, handled: true }
+    }
+    return { state: { ...s, countPrefix: null }, handled: true }
+  }
+
+  // --- Pending m (set mark) ---
+  if (state.pendingKeys === 'm') {
+    const s: VimState = { ...state, pendingKeys: '' }
+    if (key >= 'a' && key <= 'z') {
+      return { state: { ...s, marks: { ...s.marks, [key]: { ...s.cursor } } }, handled: true }
+    }
+    return { state: s, handled: false }
+  }
+
+  // --- Pending ` (jump to mark) ---
+  if (state.pendingKeys === '`') {
+    const s: VimState = { ...state, pendingKeys: '' }
+    if (key === '`') {
+      // `` — jump to position before last jump
+      if (s.lastJumpPos) {
+        const saved = { ...s.cursor }
+        return { state: { ...s, cursor: s.lastJumpPos, lastJumpPos: saved }, handled: true }
+      }
+      return { state: s, handled: true }
+    }
+    if (key >= 'a' && key <= 'z') {
+      const mark = s.marks[key]
+      if (mark) {
+        return { state: { ...s, cursor: mark, lastJumpPos: { ...s.cursor } }, handled: true }
+      }
+    }
+    return { state: s, handled: false }
   }
 
   // --- Pending operator (d/c/y waiting for motion or double-press) ---
@@ -807,7 +984,85 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
     return { state, handled: true }
   }
 
+  // --- Register prefix (") ---
+  if (key === '"') {
+    return { state: { ...state, pendingKeys: '"' }, handled: true }
+  }
+
+  // --- Macro record (q) ---
+  if (key === 'q' && !state.macroRecording) {
+    return { state: { ...state, pendingKeys: 'q' }, handled: true }
+  }
+
+  // --- Macro playback (@) ---
+  if (key === '@') {
+    return { state: { ...state, pendingKeys: '@' }, handled: true }
+  }
+
+  // --- Set mark (m) ---
+  if (key === 'm') {
+    return { state: { ...state, pendingKeys: 'm' }, handled: true }
+  }
+
+  // --- Jump to mark (`) ---
+  if (key === '`') {
+    return { state: { ...state, pendingKeys: '`' }, handled: true }
+  }
+
+  // --- % bracket match ---
+  if (key === '%') {
+    const pos = matchBracket(state)
+    if (pos) {
+      return { state: { ...state, cursor: pos, countPrefix: null }, handled: true }
+    }
+    return { state, handled: true }
+  }
+
   return { state, handled: false }
+}
+
+// ---------------------------------------------------------------------------
+// Bracket match (%)
+// ---------------------------------------------------------------------------
+
+function matchBracket(state: VimState): CursorPos | null {
+  const line = state.lines[state.cursor.line] ?? ''
+  const ch = line[state.cursor.col]
+  const pairs: Record<string, string> = { '(': ')', ')': '(', '{': '}', '}': '{', '[': ']', ']': '[', '<': '>', '>': '<' }
+  const match = pairs[ch ?? '']
+  if (!ch || !match) return null
+
+  const isOpen = '({[<'.includes(ch)
+  if (isOpen) {
+    // Scan forward
+    let depth = 0
+    for (let ln = state.cursor.line; ln < state.lines.length; ln++) {
+      const lineStr = state.lines[ln] ?? ''
+      const sc = ln === state.cursor.line ? state.cursor.col + 1 : 0
+      for (let c = sc; c < lineStr.length; c++) {
+        if (lineStr[c] === ch) depth++
+        else if (lineStr[c] === match) {
+          if (depth === 0) return { line: ln, col: c }
+          depth--
+        }
+      }
+    }
+  } else {
+    // Scan backward
+    let depth = 0
+    for (let ln = state.cursor.line; ln >= 0; ln--) {
+      const lineStr = state.lines[ln] ?? ''
+      const sc = ln === state.cursor.line ? state.cursor.col - 1 : lineStr.length - 1
+      for (let c = sc; c >= 0; c--) {
+        if (lineStr[c] === ch) depth++
+        else if (lineStr[c] === match) {
+          if (depth === 0) return { line: ln, col: c }
+          depth--
+        }
+      }
+    }
+  }
+  return null
 }
 
 // ---------------------------------------------------------------------------
@@ -1069,6 +1324,7 @@ function executeVisualCharOperator(
           ...state,
           ...exitVisual,
           register: text,
+          registers: { ...state.registers, '0': text },
           cursor: start,
         },
         handled: true,
@@ -1123,11 +1379,13 @@ function executeVisualLineOperator(
     }
     case 'y': {
       const yankedLines = state.lines.slice(startLine, endLine + 1)
+      const yankText = yankedLines.join('\n') + '\n'
       return {
         state: {
           ...state,
           ...exitVisual,
-          register: yankedLines.join('\n') + '\n',
+          register: yankText,
+          registers: { ...state.registers, '0': yankText },
           cursor: { line: startLine, col: 0 },
         },
         handled: true,
@@ -1702,6 +1960,11 @@ function handleOperatorPending(state: VimState, key: string): KeyResult {
     }
   }
 
+  // g prefix in operator-pending — for gn/gg motions
+  if (key === 'g') {
+    return { state: { ...state, pendingKeys: 'g' }, handled: true }
+  }
+
   // Text object modifier — wait for next key (the object type)
   if (key === 'i' || key === 'a') {
     return {
@@ -1777,7 +2040,8 @@ function executeLineOp(state: VimState, op: string, count: number = 1): KeyResul
         const startLine = s.cursor.line
         const endLine = Math.min(startLine + count - 1, s.lines.length - 1)
         const yankedLines = s.lines.slice(startLine, endLine + 1)
-        s = { ...s, register: yankedLines.join('\n') + '\n' }
+        const yankText = yankedLines.join('\n') + '\n'
+        s = { ...s, register: yankText, registers: { ...s.registers, '0': yankText } }
       } else {
         s = ops.yankLine(s)
       }
@@ -1910,6 +2174,9 @@ function resolveMotion(state: VimState, key: string): CursorPos | null {
 
   // G goes to last line
   if (key === 'G') return motions.G(state)
+
+  // % bracket match
+  if (key === '%') return matchBracket(state)
 
   return null
 }

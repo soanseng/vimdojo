@@ -28,6 +28,14 @@ export function createState(text: string, cursor?: CursorPos): VimState {
     lastVisualStart: null,
     lastVisualEnd: null,
     lastVisualMode: null,
+    registers: {},
+    pendingRegister: null,
+    macroRecording: null,
+    macroBuf: [],
+    macroRegisters: {},
+    lastMacroRegister: null,
+    marks: {},
+    lastJumpPos: null,
   }
 }
 

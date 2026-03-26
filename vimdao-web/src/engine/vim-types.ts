@@ -31,6 +31,17 @@ export interface VimState {
   lastVisualStart: CursorPos | null   // saved visual selection for gv
   lastVisualEnd: CursorPos | null
   lastVisualMode: 'char' | 'line' | null
+  // Named registers
+  registers: Record<string, string>   // 'a'-'z', '0' (last yank), '_' (blackhole)
+  pendingRegister: string | null      // set by " prefix, e.g. "a before yank/delete/paste
+  // Macros
+  macroRecording: string | null       // register being recorded to
+  macroBuf: string[]                  // keys accumulated during recording
+  macroRegisters: Record<string, string[]>  // stored macros by register
+  lastMacroRegister: string | null    // for @@ (repeat last playback)
+  // Marks
+  marks: Record<string, CursorPos>    // 'a'-'z' user marks
+  lastJumpPos: CursorPos | null       // for `` (jump back)
 }
 
 export interface FindParams {

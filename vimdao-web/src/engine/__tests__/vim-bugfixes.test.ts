@@ -541,3 +541,186 @@ describe('FEAT-3: gv reselect visual', () => {
     expect(state.visualMode).toBe('line')
   })
 })
+
+// ---------------------------------------------------------------------------
+// Macros (q record / @ playback)
+// ---------------------------------------------------------------------------
+
+describe('macros', () => {
+  it('qa records and q stops', () => {
+    const state = applyKeysState('hello', ['q', 'a', 'x', 'q'])
+    expect(state.macroRegisters?.a).toEqual(['x'])
+    expect(getText(state)).toBe('ello')
+  })
+
+  it('@a plays recorded macro', () => {
+    const result = applyKeys('hello world',
+      ['q', 'a', 'x', 'q', '@', 'a'])
+    expect(result).toBe('llo world')
+  })
+
+  it('3@a repeats macro 3 times', () => {
+    const result = applyKeys('abcdef',
+      ['q', 'a', 'x', 'q', '3', '@', 'a'])
+    expect(result).toBe('ef')
+  })
+
+  it('@@ repeats last played macro', () => {
+    const result = applyKeys('abcdef',
+      ['q', 'a', 'x', 'q', '@', 'a', '@', '@'])
+    expect(result).toBe('def')
+  })
+
+  it('qa A;<Esc>Ivar <Esc> q records complex macro', () => {
+    const result = applyKeys('foo = 1\nbar = a\nfoobar = foo + bar',
+      ['q', 'a', 'A', ';', 'Escape', 'I', 'v', 'a', 'r', ' ', 'Escape', 'q'])
+    expect(result).toBe('var foo = 1;\nbar = a\nfoobar = foo + bar')
+  })
+
+  it('j@a applies macro to next line', () => {
+    let state = createState('foo = 1\nbar = a\nfoobar = foo + bar')
+    // Record macro that adds "var " at start and ";" at end
+    for (const k of ['q', 'a', 'A', ';', 'Escape', 'I', 'v', 'a', 'r', ' ', 'Escape', 'q']) {
+      state = processKey(state, k).state
+    }
+    // Line 0 is already transformed by the recording
+    expect(getText(state)).toBe('var foo = 1;\nbar = a\nfoobar = foo + bar')
+    // Play on lines 1 and 2
+    for (const k of ['j', '@', 'a', 'j', '@', 'a']) {
+      state = processKey(state, k).state
+    }
+    expect(getText(state)).toBe('var foo = 1;\nvar bar = a;\nvar foobar = foo + bar;')
+  })
+
+  it('macro recording indicator is set during recording', () => {
+    let state = createState('hello')
+    state = processKey(state, 'q').state
+    state = processKey(state, 'a').state
+    expect(state.macroRecording).toBe('a')
+    state = processKey(state, 'x').state
+    expect(state.macroRecording).toBe('a')
+    state = processKey(state, 'q').state
+    expect(state.macroRecording).toBeNull()
+  })
+
+  it('empty macro does nothing on playback', () => {
+    const result = applyKeys('hello',
+      ['q', 'a', 'q', '@', 'a'])
+    expect(result).toBe('hello')
+  })
+
+  it('macro with j motion across lines', () => {
+    const result = applyKeys('aaa\nbbb\nccc',
+      ['q', 'a', 'x', 'j', 'q', '2', '@', 'a'])
+    // qa: x deletes 'a', j goes to line 1. q stops.
+    // 2@a: first replay: x on 'b' at col 0 line 1, j to line 2
+    //       second replay: x on 'c' at col 0 line 2, j (no more lines, stays)
+    expect(result).toBe('aa\nbb\ncc')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// Control-r in insert mode (register paste)
+// ---------------------------------------------------------------------------
+
+describe('Control-r in insert mode', () => {
+  it('pastes unnamed register with Control-r "', () => {
+    // yiw yanks "hello" into unnamed register, then i<C-r>" pastes it
+    const result = applyKeys(
+      'hello world',
+      ['y', 'i', 'w', 'w', 'i', 'Control-r', '"', 'Escape'],
+    )
+    expect(result).toBe('hello helloworld')
+  })
+
+  it('pastes register 0 (last yank = unnamed register)', () => {
+    const result = applyKeys(
+      'hello world',
+      ['y', 'i', 'w', 'w', 'i', 'Control-r', '0', 'Escape'],
+    )
+    expect(result).toBe('hello helloworld')
+  })
+
+  it('yiw then ciw<C-r>0 pastes yanked text', () => {
+    const result = applyKeys(
+      'collection = getCollection();\nprocess(somethingInTheWay, target);',
+      ['y', 'i', 'w',  // yank "collection"
+       'j', 'w', 'w',  // navigate to "somethingInTheWay"
+       'c', 'i', 'w',  // change inner word
+       'Control-r', '0',     // paste register 0
+       'Escape'],
+      { line: 0, col: 0 },
+    )
+    expect(result).toBe('collection = getCollection();\nprocess(collection, target);')
+  })
+
+  it('C-r with Escape cancels register paste', () => {
+    const result = applyKeys(
+      'hello',
+      ['i', 'Control-r', 'Escape'],
+    )
+    // Should return to normal mode without pasting
+    expect(result).toBe('hello')
+  })
+
+  it('macro keys recorded include Control-r sequence', () => {
+    // Record a macro that yanks word, goes to end, enters insert and pastes
+    const state = applyKeysState('abc def',
+      ['y', 'i', 'w', '$', 'q', 'a', 'a', ' ', 'Control-r', '"', 'Escape', 'q'])
+    expect(state.macroRegisters?.a).toEqual(['a', ' ', 'Control-r', '"', 'Escape'])
+    expect(getText(state)).toBe('abc def abc')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// FEAT-4: gn motion (search match text object)
+// ---------------------------------------------------------------------------
+
+describe('FEAT-4: gn motion', () => {
+  it('gUgn uppercases next search match', () => {
+    const state = createState('class XhtmlDocument < XmlDocument; end', { line: 0, col: 0 })
+    state.searchPattern = 'Xhtml'
+    let s = state
+    for (const k of ['g', 'U', 'g', 'n']) s = processKey(s, k).state
+    expect(getText(s)).toBe('class XHTMLDocument < XmlDocument; end')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// FEAT-5: % bracket match motion
+// ---------------------------------------------------------------------------
+
+describe('FEAT-5: % bracket match', () => {
+  it('% jumps from ( to matching )', () => {
+    const s = createState('foo(bar(baz))')
+    s.cursor = { line: 0, col: 3 }
+    const r = processKey(s, '%').state
+    expect(r.cursor.col).toBe(12)
+  })
+  it('% jumps from ) back to matching (', () => {
+    const s = createState('foo(bar)')
+    s.cursor = { line: 0, col: 7 }
+    const r = processKey(s, '%').state
+    expect(r.cursor.col).toBe(3)
+  })
+  it('d% deletes from cursor to matching bracket', () => {
+    const result = applyKeys('cities = %w{London Berlin}', ['d', '%'], { line: 0, col: 11 })
+    expect(result).toBe('cities = %w')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// FEAT-6: marks (m{a-z} to set, `{a-z} to jump)
+// ---------------------------------------------------------------------------
+
+describe('FEAT-6: marks', () => {
+  it('ma sets mark, `a jumps back', () => {
+    let s = createState('line1\nline2\nline3')
+    s = processKey(s, 'm').state
+    s = processKey(s, 'a').state  // set mark 'a' at 0,0
+    s.cursor = { line: 2, col: 0 }  // move manually
+    s = processKey(s, '`').state
+    s = processKey(s, 'a').state  // jump to mark 'a'
+    expect(s.cursor).toEqual({ line: 0, col: 0 })
+  })
+})

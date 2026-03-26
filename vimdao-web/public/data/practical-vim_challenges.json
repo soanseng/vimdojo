@@ -2454,7 +2454,7 @@
         "n",
         "."
       ],
-      "hint_keystrokes": "<CR>gUgnn.n..",
+      "hint_keystrokes": "/Xhtml<CR>gUgnn./Xml<CR>gUgnn.",
       "hint_text": "按鍵順序：<CR>gUgnn.n..\n\n• gU — 轉大寫\n• n — 搜尋下一個匹配\n• . — 重複上次修改",
       "tags": [
         ".",
