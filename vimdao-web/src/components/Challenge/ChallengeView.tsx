@@ -45,14 +45,20 @@ export default function ChallengeView() {
   // Initialize with empty text; will be reset when challenge loads
   const { state, handleKey, reset } = useVimEditor('')
 
+  const isLazyVim = id?.startsWith('lv-') ?? false
+
   useEffect(() => {
     const controller = new AbortController()
 
+    const challengeUrl = isLazyVim
+      ? '/data/lazyvim_exercises.json'
+      : '/data/practical-vim_challenges.json'
+
     Promise.all([
-      fetch('/data/practical-vim_challenges.json', { signal: controller.signal })
+      fetch(challengeUrl, { signal: controller.signal })
         .then(res => {
           if (!res.ok) throw new Error(`HTTP ${String(res.status)}`)
-          return res.json() as Promise<ChallengeSet>
+          return res.json()
         }),
       fetch('/data/story.json', { signal: controller.signal })
         .then(res => {
@@ -60,16 +66,29 @@ export default function ChallengeView() {
           return res.json() as Promise<StoryData>
         }),
     ])
-      .then(([challengeData, storyData]) => {
-        if (!Array.isArray(challengeData?.challenges)) {
-          throw new Error('Invalid challenge data format')
+      .then(([rawData, storyData]) => {
+        let exercises: Challenge[]
+
+        if (isLazyVim) {
+          // LazyVim exercises — filter to engine type only, cast to Challenge
+          const lvData = rawData as { exercises?: Array<{ type?: string } & Record<string, unknown>> }
+          exercises = ((lvData.exercises ?? []) as unknown as Challenge[]).filter(
+            (e: unknown) => (e as { type?: string }).type === 'engine'
+          )
+        } else {
+          const challengeData = rawData as ChallengeSet
+          if (!Array.isArray(challengeData?.challenges)) {
+            throw new Error('Invalid challenge data format')
+          }
+          exercises = challengeData.challenges
         }
-        const found = challengeData.challenges.find(c => c.id === id)
+
+        const found = exercises.find(c => c.id === id)
         if (!found) {
           setError('找不到此練習題')
         } else {
           setChallenge(found)
-          setAllChallenges(challengeData.challenges)
+          setAllChallenges(exercises)
           reset(found.initial_text, found.cursor_start)
 
           // If BOSS challenge and not yet completed, show boss intro from story
@@ -102,7 +121,7 @@ export default function ChallengeView() {
       })
 
     return () => { controller.abort() }
-  }, [id, reset, progress.challenges_completed])
+  }, [id, reset, progress.challenges_completed, isLazyVim])
 
   // Show pending achievements one by one
   useEffect(() => {
@@ -295,7 +314,10 @@ export default function ChallengeView() {
           返回列表
         </button>
         <span className="text-xs text-ctp-overlay0">
-          Practical Vim Tip {String(challenge.source.tip_number)}
+          {isLazyVim
+            ? `LazyVim${'plugin' in challenge ? ` \u00B7 ${(challenge as unknown as { plugin: string }).plugin}` : ''}`
+            : `Practical Vim Tip ${String(challenge.source.tip_number)}`
+          }
         </span>
       </header>
 

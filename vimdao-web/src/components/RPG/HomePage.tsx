@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import type { Challenge, ChallengeSet, StoryData, StoryChapter } from '../../types'
+import type { Challenge, ChallengeSet, StoryData, StoryChapter, LazyVimStoryData, LazyVimStoryChapter, LazyVimExerciseSet, QuizExercise } from '../../types'
 import { useProgress } from '../../hooks/useProgress'
 import CharacterPanel from './CharacterPanel'
 import ChapterMap from './ChapterMap'
@@ -8,6 +8,8 @@ import ChapterMap from './ChapterMap'
 export default function HomePage() {
   const [chapters, setChapters] = useState<StoryChapter[]>([])
   const [challenges, setChallenges] = useState<Challenge[]>([])
+  const [lvChapters, setLvChapters] = useState<LazyVimStoryChapter[]>([])
+  const [lvExercises, setLvExercises] = useState<Array<QuizExercise | Challenge>>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const { progress } = useProgress()
@@ -27,8 +29,18 @@ export default function HomePage() {
           if (!res.ok) throw new Error(`HTTP ${String(res.status)}`)
           return res.json() as Promise<ChallengeSet>
         }),
+      fetch('/data/lazyvim_story.json', { signal: controller.signal })
+        .then(res => {
+          if (!res.ok) throw new Error(`HTTP ${String(res.status)}`)
+          return res.json() as Promise<LazyVimStoryData>
+        }),
+      fetch('/data/lazyvim_exercises.json', { signal: controller.signal })
+        .then(res => {
+          if (!res.ok) throw new Error(`HTTP ${String(res.status)}`)
+          return res.json() as Promise<LazyVimExerciseSet>
+        }),
     ])
-      .then(([storyData, challengeData]) => {
+      .then(([storyData, challengeData, lvStoryData, lvExData]) => {
         if (!Array.isArray(storyData?.chapters)) {
           throw new Error('Invalid story data format')
         }
@@ -37,6 +49,8 @@ export default function HomePage() {
         }
         setChapters(storyData.chapters)
         setChallenges(challengeData.challenges)
+        setLvChapters(lvStoryData?.chapters ?? [])
+        setLvExercises(lvExData?.exercises ?? [])
         setLoading(false)
       })
       .catch(err => {
@@ -60,6 +74,11 @@ export default function HomePage() {
       // All completed — go to the first one for replay
       navigate(`/challenge/${chapterChallenges[0]!.id}`)
     }
+  }
+
+  const handleSelectLvChapter = (chapter: LazyVimStoryChapter) => {
+    const pluginParam = chapter.plugins.join(',')
+    navigate(`/lazyvim?plugins=${encodeURIComponent(pluginParam)}`)
   }
 
   if (loading) {
@@ -88,17 +107,70 @@ export default function HomePage() {
           </div>
 
           {/* Main: chapter map */}
-          <div className="lg:col-span-2">
-            <h2 className="text-lg font-semibold text-ctp-subtext1 mb-4">
-              修練路徑
-            </h2>
-            <ChapterMap
-              chapters={chapters}
-              unlockedChapters={progress.chapters_unlocked}
-              completedChallenges={progress.challenges_completed}
-              allChallenges={challenges}
-              onSelectChapter={handleSelectChapter}
-            />
+          <div className="lg:col-span-2 space-y-8">
+            <div>
+              <h2 className="text-lg font-semibold text-ctp-subtext1 mb-4">
+                修練路徑
+              </h2>
+              <ChapterMap
+                chapters={chapters}
+                unlockedChapters={progress.chapters_unlocked}
+                completedChallenges={progress.challenges_completed}
+                allChallenges={challenges}
+                onSelectChapter={handleSelectChapter}
+              />
+            </div>
+
+            {/* LazyVim path */}
+            {lvChapters.length > 0 && (
+              <div>
+                <h2 className="text-lg font-semibold text-ctp-mauve mb-4">
+                  LazyVim 進階修煉
+                </h2>
+                <div className="space-y-3">
+                  {lvChapters.map(chapter => {
+                    const chapterExercises = lvExercises.filter(e => {
+                      if ('plugin' in e) {
+                        return chapter.plugins.includes(e.plugin)
+                      }
+                      return false
+                    })
+                    const completedCount = chapterExercises.filter(
+                      e => e.id in progress.challenges_completed
+                    ).length
+
+                    return (
+                      <button
+                        key={chapter.chapter_id}
+                        onClick={() => { handleSelectLvChapter(chapter) }}
+                        className="pixel-border w-full text-left rounded-lg p-4 bg-ctp-mantle hover:bg-ctp-surface0 transition-colors"
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="space-y-1">
+                            <span className="text-sm font-bold text-ctp-text">
+                              {chapter.title_zh}
+                            </span>
+                            <div className="flex flex-wrap gap-1.5">
+                              {chapter.plugins.map(plugin => (
+                                <span
+                                  key={plugin}
+                                  className="text-xs px-1.5 py-0.5 rounded bg-ctp-mauve/20 text-ctp-mauve"
+                                >
+                                  {plugin}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                          <span className="text-xs text-ctp-subtext0">
+                            {completedCount}/{chapterExercises.length} 練習完成
+                          </span>
+                        </div>
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </main>
