@@ -4,6 +4,7 @@ import type { QuizExercise, LazyVimExerciseSet, PluginInfo, PluginData } from '.
 import { useProgress } from '../../hooks/useProgress'
 import { addXp, updateStreak } from '../../rpg/progression'
 import BossFrame from '../RPG/BossFrame'
+import PluginSimulator from './PluginSimulator'
 
 function difficultyLabel(level: number): { text: string; stars: string } {
   switch (level) {
@@ -270,6 +271,11 @@ export default function QuizView() {
             </p>
           </div>
         </BossFrame>
+
+        {/* Plugin simulation */}
+        <div className="my-4">
+          <PluginSimulator plugin={exercise.plugin} scenario={exercise.scenario_zh} isActive={!submitted} />
+        </div>
 
         {/* Key input area */}
         {!submitted && (

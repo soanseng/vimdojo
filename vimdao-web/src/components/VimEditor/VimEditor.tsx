@@ -77,6 +77,32 @@ export default function VimEditor({ state, onKey, title, showKeyLog = true }: Vi
             ))}
           </div>
         </div>
+        {/* Surround / operator pending indicators */}
+        {state.pendingKeys.startsWith('gs') && (
+          <div className="absolute top-2 right-2 text-xs bg-ctp-green/20 text-ctp-green px-2 py-1 rounded">
+            {state.pendingKeys === 'gs' && '\u74B0\u7E5E\uFF1A\u9078\u64C7 a(\u52A0) d(\u522A) r(\u63DB)'}
+            {state.pendingKeys === 'gsa' && '\u74B0\u7E5E\u65B0\u589E\uFF1A\u9078\u64C7\u6587\u5B57\u7269\u4EF6 (iw, i", i(...)'}
+            {state.pendingKeys.startsWith('gsai') && '\u74B0\u7E5E\u65B0\u589E\uFF1A\u8F38\u5165\u74B0\u7E5E\u7B26\u865F (" \' ( [ { <)'}
+            {state.pendingKeys === 'gsd' && '\u74B0\u7E5E\u522A\u9664\uFF1A\u8F38\u5165\u8981\u522A\u9664\u7684\u7B26\u865F'}
+            {state.pendingKeys === 'gsr' && '\u74B0\u7E5E\u66FF\u63DB\uFF1A\u8F38\u5165\u820A\u7B26\u865F'}
+            {state.pendingKeys.length === 4 && state.pendingKeys.startsWith('gsr') && '\u74B0\u7E5E\u66FF\u63DB\uFF1A\u8F38\u5165\u65B0\u7B26\u865F'}
+          </div>
+        )}
+        {state.pendingKeys === 'gc' && (
+          <div className="absolute top-2 right-2 text-xs bg-ctp-yellow/20 text-ctp-yellow px-2 py-1 rounded">
+            {'\u8A3B\u89E3\uFF1A\u6309 c \u5207\u63DB\u7576\u524D\u884C\uFF0C\u6216\u6309\u79FB\u52D5\u9375\u9078\u7BC4\u570D'}
+          </div>
+        )}
+        {(state.pendingKeys === '[' || state.pendingKeys === ']') && (
+          <div className="absolute top-2 right-2 text-xs bg-ctp-peach/20 text-ctp-peach px-2 py-1 rounded">
+            {'\u6309 e \u79FB\u52D5\u884C'}
+          </div>
+        )}
+        {state.pendingOperator && !state.pendingKeys.startsWith('gs') && state.pendingKeys !== 'gc' && state.pendingKeys !== '[' && state.pendingKeys !== ']' && (
+          <div className="absolute top-2 right-2 text-xs bg-ctp-blue/20 text-ctp-blue px-2 py-1 rounded">
+            {'\u64CD\u4F5C\u7B26'} {state.pendingOperator}{'\uFF1A\u8F38\u5165\u79FB\u52D5\u6216\u6587\u5B57\u7269\u4EF6'}
+          </div>
+        )}
       </div>
       <StatusBar state={state} title={title} />
       {showKeyLog && <KeyLog keys={state.keyLog} />}

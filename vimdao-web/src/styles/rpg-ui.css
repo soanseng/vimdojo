@@ -31,6 +31,15 @@
   animation: toast-slide-in 0.3s ease-out;
 }
 
+/* Surround operation flash highlight */
+@keyframes surround-flash {
+  0% { background-color: rgba(166, 227, 161, 0.5); }
+  100% { background-color: transparent; }
+}
+.surround-flash {
+  animation: surround-flash 0.5s ease-out;
+}
+
 /* Pixel-style border for chapter cards */
 .pixel-border {
   border: 2px solid var(--color-ctp-surface1);
