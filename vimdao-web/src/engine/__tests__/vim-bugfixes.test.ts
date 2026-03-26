@@ -339,3 +339,88 @@ describe('BUG-E9: search then append at end of match', () => {
     expect(result).toBe('start end')
   })
 })
+
+// ---------------------------------------------------------------------------
+// BUG-E10: cit when cursor is inside opening tag attributes
+// ---------------------------------------------------------------------------
+
+describe('BUG-E10: cit from inside tag attributes', () => {
+  it('ci"#<Esc>citclick here<Esc> full combo', () => {
+    const result = applyKeys(
+      "'<a href=\"{url}\">{title}</a>'",
+      ['c', 'i', '"', '#', 'Escape',
+       'c', 'i', 't', 'c', 'l', 'i', 'c', 'k', ' ', 'h', 'e', 'r', 'e', 'Escape'],
+      { line: 0, col: 0 },
+    )
+    expect(result).toBe("'<a href=\"#\">click here</a>'")
+  })
+
+  it('cit works when cursor is on tag attribute char', () => {
+    const result = applyKeys(
+      '<div class="box">content</div>',
+      ['c', 'i', 't', 'n', 'e', 'w', 'Escape'],
+      { line: 0, col: 8 },  // on 's' in "class"
+    )
+    expect(result).toBe('<div class="box">new</div>')
+  })
+
+  it('cit works when cursor is on > of opening tag', () => {
+    const result = applyKeys(
+      '<p>hello</p>',
+      ['c', 'i', 't', 'b', 'y', 'e', 'Escape'],
+      { line: 0, col: 3 },  // cursor right after > (on 'h')
+    )
+    expect(result).toBe('<p>bye</p>')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// BUG-E11: Visual line delete should accumulate register
+// ---------------------------------------------------------------------------
+
+describe('BUG-E11: Vjjd accumulates all deleted lines in register', () => {
+  it('Vjjd puts all 3 lines in register', () => {
+    const state = applyKeysState(
+      'line0\nline1\nline2\nline3',
+      ['V', 'j', 'j', 'd'],
+      { line: 0, col: 0 },
+    )
+    expect(state.register).toBe('line0\nline1\nline2\n')
+    expect(getText(state)).toBe('line3')
+  })
+
+  it('Vjjdjjp swaps sections correctly', () => {
+    const result = applyKeys(
+      'Shopping list\n    Hardware Store\n        Buy nails\n        Buy new hammer\n    Beauty Parlor\n        Buy nail polish remover\n        Buy nails',
+      ['V', 'j', 'j', 'd', 'j', 'j', 'p'],
+      { line: 1, col: 0 },
+    )
+    expect(result).toBe(
+      'Shopping list\n    Beauty Parlor\n        Buy nail polish remover\n        Buy nails\n    Hardware Store\n        Buy nails\n        Buy new hammer',
+    )
+  })
+})
+
+// ---------------------------------------------------------------------------
+// BUG-E12: >i{ indent with text object
+// ---------------------------------------------------------------------------
+
+describe('BUG-E12: indent with text objects', () => {
+  it('>i{ indents inside braces', () => {
+    const result = applyKeys(
+      'html {\n  margin: 0;\n  padding: 0;\n}',
+      ['>', 'i', '{'],
+      { line: 1, col: 0 },
+    )
+    expect(result).toBe('html {\n    margin: 0;\n    padding: 0;\n}')
+  })
+
+  it('<i{ dedents inside braces', () => {
+    const result = applyKeys(
+      'html {\n    margin: 0;\n    padding: 0;\n}',
+      ['<', 'i', '{'],
+      { line: 1, col: 0 },
+    )
+    expect(result).toBe('html {\n  margin: 0;\n  padding: 0;\n}')
+  })
+})

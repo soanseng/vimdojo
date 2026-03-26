@@ -1005,14 +1005,16 @@ function executeVisualLineOperator(
 
   switch (op) {
     case 'd': {
+      // Yank all lines first (deleteLine overwrites register each call)
+      const yankedLines = state.lines.slice(startLine, endLine + 1)
+      const register = yankedLines.join('\n') + '\n'
       let s: VimState = { ...state, ...exitVisual, cursor: { line: startLine, col: 0 } }
-      // Delete lines from endLine down to startLine
       const lineCount = endLine - startLine + 1
       for (let i = 0; i < lineCount; i++) {
         s = ops.deleteLine(s)
       }
       return {
-        state: { ...s, lastChange: null },
+        state: { ...s, register, lastChange: null },
         handled: true,
       }
     }
@@ -1494,6 +1496,18 @@ function handleOperatorPending(state: VimState, key: string): KeyResult {
         const positioned = { ...s, cursor: range.start }
         const result = ops.yankToPos(positioned, range.end)
         return { state: result, handled: true }
+      }
+      case '>':
+      case '<': {
+        const startLine = range.start.line
+        const endLine = range.end.line > range.start.line && range.end.col === 0
+          ? range.end.line - 1  // exclusive end on next line means endLine is previous
+          : range.end.line
+        const result = executeIndent(
+          s, startLine, endLine,
+          op === '>' ? 'indent' : 'dedent',
+        )
+        return { ...result, state: { ...result.state, lastChange: { type: 'normal', keys: changeKeys } } }
       }
       default:
         return { state: s, handled: true }

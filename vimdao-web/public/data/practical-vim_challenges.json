@@ -839,9 +839,11 @@
       },
       "hint_commands": [
         "V",
-        "j"
+        "j",
+        "d",
+        "p"
       ],
-      "hint_keystrokes": "Vjj",
+      "hint_keystrokes": "Vjjdjjp",
       "hint_text": "按鍵順序：Vjj\n\n• V — 進入視覺模式（行選取）\n• j — 向下移動",
       "tags": [
         "V",
@@ -902,18 +904,18 @@
       "description_en": "Run Normal Mode Commands Across a Range",
       "category": "combo",
       "difficulty": 1,
-      "initial_text": "var foo = 1;\nvar bar = ’a’\nvar baz = ’z’ \nvar foobar = foo + bar \nvar foobarbaz = foo + bar + baz ",
+      "initial_text": "var foo = 1;\nvar bar = 'a'\nvar baz = 'z'\nvar foobar = foo + bar\nvar foobarbaz = foo + bar + baz",
       "expected_text": "var foo = 1;\nvar bar = 'a';\nvar baz = 'z';\nvar foobar = foo + bar;\nvar foobarbaz = foo + bar + baz;",
       "cursor_start": {
         "line": 1,
         "col": 0
       },
       "hint_commands": [
+        "A",
         "j",
-        "V",
-        "G"
+        "."
       ],
-      "hint_keystrokes": "jVG",
+      "hint_keystrokes": "A;<Esc>j.j.j.",
       "hint_text": "按鍵順序：jVG\n\n• j — 向下移動\n• V — 進入視覺模式（行選取）\n• G — 移到檔案結尾",
       "tags": [
         "G",
@@ -2295,11 +2297,10 @@
         "col": 0
       },
       "hint_commands": [
-        "j",
-        "V",
-        "G"
+        "I",
+        "j"
       ],
-      "hint_keystrokes": "jVG",
+      "hint_keystrokes": "I2) <Esc>jI3) <Esc>jI4) <Esc>jI5) <Esc>",
       "hint_text": "按鍵順序：jVG\n\n• j — 向下移動\n• V — 進入視覺模式（行選取）\n• G — 移到檔案結尾",
       "tags": [
         "G",
@@ -2612,16 +2613,16 @@
       "category": "combo",
       "difficulty": 1,
       "initial_text": "html {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n}",
-      "expected_text": "html {\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  margin: 0;\n  padding: 0;\n  vertical-align: baseline;\n}",
+      "expected_text": "html {\n    margin: 0;\n    padding: 0;\n    border: 0;\n    font-size: 100%;\n    font: inherit;\n    vertical-align: baseline;\n}",
       "cursor_start": {
         "line": 1,
         "col": 0
       },
       "hint_commands": [
-        "v",
+        ">",
         "i{"
       ],
-      "hint_keystrokes": "vi{",
+      "hint_keystrokes": ">i{",
       "hint_text": "按鍵順序：vi{\n\n• v — 進入視覺模式（字元選取）\n• i{ — 大括號內的文字",
       "tags": [
         "i{",

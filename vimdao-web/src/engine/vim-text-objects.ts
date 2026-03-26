@@ -422,6 +422,22 @@ function tagObject(
     if (openTagEnd) break
   }
 
+  // Fallback: cursor may be inside the opening tag (before '>').
+  // Scan forward to find the '>' that closes the opening tag.
+  if (!openTagEnd) {
+    for (let ln = curLine; ln < state.lines.length; ln++) {
+      const lineStr = state.lines[ln] ?? ''
+      const sc = ln === curLine ? curCol + 1 : 0
+      for (let c = sc; c < lineStr.length; c++) {
+        if (lineStr[c] === '>') {
+          openTagEnd = { line: ln, col: c }
+          break
+        }
+      }
+      if (openTagEnd) break
+    }
+  }
+
   if (!openTagEnd) return null
 
   // Find the '<' that starts this opening tag
