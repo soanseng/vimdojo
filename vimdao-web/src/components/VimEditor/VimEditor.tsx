@@ -36,6 +36,13 @@ export default function VimEditor({ state, onKey, title, showKeyLog = true }: Vi
     if (e.key === 'Dead' || e.key === 'Process' || e.key === 'Unidentified') return
 
     e.preventDefault()
+
+    // Handle Ctrl combos (Ctrl-a, Ctrl-x, etc.)
+    if (e.ctrlKey && e.key.length === 1) {
+      onKey(`Control-${e.key}`)
+      return
+    }
+
     onKey(e.key)
   }, [onKey])
 

@@ -5,6 +5,7 @@ import * as ops from './vim-operations'
 import { searchForward, searchBackward, searchWordUnderCursor } from './vim-search'
 import { resolveTextObject } from './vim-text-objects'
 import { addSurround, deleteSurround, replaceSurround } from './vim-surround'
+import { toggleLineComment, toggleRangeComment } from './vim-comment'
 
 // ---------------------------------------------------------------------------
 // Inclusive motions — these include the character at the target position
@@ -137,10 +138,41 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
       const pos = count === 1 ? motions.gg(s) : { line: Math.min(count - 1, s.lines.length - 1), col: 0 }
       return { state: { ...s, cursor: pos, countPrefix: null }, handled: true }
     }
+    if (key === 'c') {
+      return { state: { ...s, pendingKeys: 'gc' }, handled: true }
+    }
     if (key === 's') {
       return { state: { ...s, pendingKeys: 'gs' }, handled: true }
     }
     // Unknown g-combo — ignore
+    return { state: s, handled: false }
+  }
+
+  // --- Pending gc (comment toggle) ---
+  if (state.pendingKeys === 'gc') {
+    const s: VimState = { ...state, pendingKeys: '' }
+    if (key === 'c') {
+      // gcc — toggle comment on current line
+      const result = toggleLineComment(pushUndo(s), s.cursor.line, s.cursor.line)
+      return {
+        state: { ...result, lastChange: { type: 'normal', keys: ['g', 'c', 'c'] } },
+        handled: true,
+      }
+    }
+    if (key === 'Escape') {
+      return { state: s, handled: true }
+    }
+    // gc + motion — resolve motion, comment range
+    const motion = resolveMotion(s, key)
+    if (motion) {
+      const startLine = Math.min(s.cursor.line, motion.line)
+      const endLine = Math.max(s.cursor.line, motion.line)
+      const result = toggleRangeComment(pushUndo(s), startLine, endLine)
+      return {
+        state: { ...result, lastChange: { type: 'normal', keys: ['g', 'c', key] } },
+        handled: true,
+      }
+    }
     return { state: s, handled: false }
   }
 
@@ -254,6 +286,56 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
     }
   }
 
+  // --- Pending [ (bracket prefix) ---
+  if (state.pendingKeys === '[') {
+    const s: VimState = { ...state, pendingKeys: '' }
+    if (key === 'e') {
+      // [e — move current line UP
+      if (s.cursor.line === 0) return { state: s, handled: true }
+      const withUndo = pushUndo(s)
+      const newLines = [...withUndo.lines]
+      const currentLine = newLines[s.cursor.line]!
+      newLines.splice(s.cursor.line, 1)
+      newLines.splice(s.cursor.line - 1, 0, currentLine)
+      return {
+        state: {
+          ...withUndo,
+          lines: newLines,
+          cursor: { line: s.cursor.line - 1, col: s.cursor.col },
+          lastChange: { type: 'normal', keys: ['[', 'e'] },
+        },
+        handled: true,
+      }
+    }
+    if (key === 'Escape') return { state: s, handled: true }
+    return { state: s, handled: false }
+  }
+
+  // --- Pending ] (bracket prefix) ---
+  if (state.pendingKeys === ']') {
+    const s: VimState = { ...state, pendingKeys: '' }
+    if (key === 'e') {
+      // ]e — move current line DOWN
+      if (s.cursor.line >= s.lines.length - 1) return { state: s, handled: true }
+      const withUndo = pushUndo(s)
+      const newLines = [...withUndo.lines]
+      const currentLine = newLines[s.cursor.line]!
+      newLines.splice(s.cursor.line, 1)
+      newLines.splice(s.cursor.line + 1, 0, currentLine)
+      return {
+        state: {
+          ...withUndo,
+          lines: newLines,
+          cursor: { line: s.cursor.line + 1, col: s.cursor.col },
+          lastChange: { type: 'normal', keys: [']', 'e'] },
+        },
+        handled: true,
+      }
+    }
+    if (key === 'Escape') return { state: s, handled: true }
+    return { state: s, handled: false }
+  }
+
   // --- Pending find (f/F/t/T waiting for char), possibly with operator ---
   if (state.pendingKeys === 'f' || state.pendingKeys === 'F' ||
       state.pendingKeys === 't' || state.pendingKeys === 'T') {
@@ -306,6 +388,41 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
   // --- r{char} — replace character under cursor ---
   if (key === 'r') {
     return { state: { ...state, pendingKeys: 'r' }, handled: true }
+  }
+
+  // --- [ and ] prefix ---
+  if (key === '[' || key === ']') {
+    return { state: { ...state, pendingKeys: key }, handled: true }
+  }
+
+  // --- Ctrl-a / Ctrl-x (increment / decrement number) ---
+  if (key === 'Control-a' || key === 'Control-x') {
+    const line = state.lines[state.cursor.line] ?? ''
+    // Find number at or after cursor
+    const after = line.slice(state.cursor.col)
+    const match = after.match(/\d+/)
+    if (!match || match.index === undefined) return { state, handled: true }
+
+    const numStart = state.cursor.col + match.index
+    const numStr = match[0]
+    const num = parseInt(numStr, 10)
+    const newNum = key === 'Control-a' ? num + 1 : num - 1
+    const newNumStr = String(newNum)
+
+    const withUndo = pushUndo(state)
+    const newLine = line.slice(0, numStart) + newNumStr + line.slice(numStart + numStr.length)
+    const newLines = [...withUndo.lines]
+    newLines[state.cursor.line] = newLine
+
+    return {
+      state: {
+        ...withUndo,
+        lines: newLines,
+        cursor: { line: state.cursor.line, col: numStart + newNumStr.length - 1 },
+        lastChange: { type: 'normal', keys: [key] },
+      },
+      handled: true,
+    }
   }
 
   // --- Find motions (f/F/t/T) ---

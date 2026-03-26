@@ -554,3 +554,65 @@ describe('surround via engine', () => {
     expect(applyKeys('hello world', ['g', 's', 'a', 'i', 'w', '('])).toBe('(hello) world')
   })
 })
+
+describe('gcc comment toggle', () => {
+  it('gcc comments current line', () => {
+    expect(applyKeys('hello', ['g', 'c', 'c'])).toBe('// hello')
+  })
+  it('gcc uncomments', () => {
+    expect(applyKeys('// hello', ['g', 'c', 'c'])).toBe('hello')
+  })
+  it('gcj comments 2 lines', () => {
+    expect(applyKeys('aaa\nbbb\nccc', ['g', 'c', 'j'])).toBe('// aaa\n// bbb\nccc')
+  })
+})
+
+describe('[e ]e line move', () => {
+  it(']e moves line down', () => {
+    expect(applyKeys('aaa\nbbb\nccc', [']', 'e'])).toBe('bbb\naaa\nccc')
+  })
+  it('[e moves line up from line 1', () => {
+    const s = createState('aaa\nbbb\nccc')
+    s.cursor = { line: 1, col: 0 }
+    let result = s
+    for (const k of ['[', 'e']) result = processKey(result, k).state
+    expect(getText(result)).toBe('bbb\naaa\nccc')
+  })
+  it('[e at line 0 does nothing', () => {
+    expect(applyKeys('aaa\nbbb', ['[', 'e'])).toBe('aaa\nbbb')
+  })
+  it(']e at last line does nothing', () => {
+    const s = createState('aaa\nbbb')
+    s.cursor = { line: 1, col: 0 }
+    let result = s
+    for (const k of [']', 'e']) result = processKey(result, k).state
+    expect(getText(result)).toBe('aaa\nbbb')
+  })
+})
+
+describe('Ctrl-a / Ctrl-x', () => {
+  it('Control-a increments number', () => {
+    const s = createState('count = 5')
+    s.cursor = { line: 0, col: 8 }
+    const result = processKey(s, 'Control-a').state
+    expect(getText(result)).toBe('count = 6')
+  })
+  it('Control-x decrements number', () => {
+    const s = createState('count = 5')
+    s.cursor = { line: 0, col: 8 }
+    const result = processKey(s, 'Control-x').state
+    expect(getText(result)).toBe('count = 4')
+  })
+  it('Control-a finds next number on line', () => {
+    const s = createState('val = abc 42 end')
+    s.cursor = { line: 0, col: 0 }
+    const result = processKey(s, 'Control-a').state
+    expect(getText(result)).toBe('val = abc 43 end')
+  })
+  it('Control-x decrements to negative', () => {
+    const s = createState('x = 0')
+    s.cursor = { line: 0, col: 4 }
+    const result = processKey(s, 'Control-x').state
+    expect(getText(result)).toBe('x = -1')
+  })
+})
