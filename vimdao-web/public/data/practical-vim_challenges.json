@@ -1,6 +1,6 @@
 {
   "source_book": "Practical Vim",
-  "generated_at": "2026-03-25T23:29:14+08:00",
+  "generated_at": "2026-03-26T09:03:57+08:00",
   "challenges": [
     {
       "id": "pv-tip01-001",
@@ -808,7 +808,7 @@
         "line": 2,
         "col": 0
       },
-      "hint_commands": null,
+      "hint_commands": [],
       "hint_keystrokes": "",
       "hint_text": "按鍵順序：",
       "tags": [],

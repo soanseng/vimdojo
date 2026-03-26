@@ -209,7 +209,7 @@ export default function ChallengeList() {
                   <span>Tip {String(challenge.source.tip_number)}</span>
                 </div>
                 <div className="mt-2 flex flex-wrap gap-1">
-                  {challenge.hint_commands.slice(0, 4).map((cmd, cmdIdx) => (
+                  {(challenge.hint_commands ?? []).slice(0, 4).map((cmd, cmdIdx) => (
                     <span
                       key={`${challenge.id}-cmd-${String(cmdIdx)}`}
                       className="text-xs font-mono bg-ctp-base px-1.5 py-0.5 rounded text-ctp-blue"
