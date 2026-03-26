@@ -47,9 +47,7 @@ function isTestable(ks: string): boolean {
   if (ks.includes('<C-v>')) return false           // visual block mode
   if (ks.includes('<C-]>')) return false           // tag jump
   if (ks.includes('<C-x><C-')) return false        // insert completion
-  if (ks.includes('<C-r>=')) return false           // expression register
   if (ks.includes('{start}')) return false          // complex workflow description
-  if (/vee?S/.test(ks)) return false               // visual surround (S)
   return true
 }
 

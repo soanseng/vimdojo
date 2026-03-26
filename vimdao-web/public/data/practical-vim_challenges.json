@@ -474,8 +474,8 @@
       "description_en": "Do Back-of-the-Envelope Calculations in Place",
       "category": "insert",
       "difficulty": 1,
-      "initial_text": "6 chairs, each costing $35, totals $ ",
-      "expected_text": "6 chairs, each costing $35, totals $210 ",
+      "initial_text": "6 chairs, each costing $35, totals $",
+      "expected_text": "6 chairs, each costing $35, totals $210",
       "cursor_start": {
         "line": 0,
         "col": 0
@@ -805,11 +805,15 @@
       "initial_text": "Shopping list\n    Hardware Store\n        Buy new hammer\n    Beauty Parlor\n        Buy nail polish remover\n        Buy nails",
       "expected_text": "Shopping list\n    Hardware Store\n        Buy nails\n        Buy new hammer\n    Beauty Parlor\n        Buy nail polish remover\n        Buy nails",
       "cursor_start": {
-        "line": 2,
+        "line": 0,
         "col": 0
       },
-      "hint_commands": [],
-      "hint_keystrokes": "",
+      "hint_commands": [
+        "yy",
+        "G",
+        "P"
+      ],
+      "hint_keystrokes": "Gyy3GP",
       "hint_text": "按鍵順序：",
       "tags": [],
       "concepts_zh": [],
@@ -1479,7 +1483,7 @@
       "expected_text": "cities = [\"London\", \"Berlin\", \"New York\"]",
       "cursor_start": {
         "line": 0,
-        "col": 0
+        "col": 30
       },
       "hint_commands": [
         "v",
@@ -2105,7 +2109,7 @@
         "@",
         "a"
       ],
-      "hint_keystrokes": "",
+      "hint_keystrokes": "qa0f.r)w~jq@a",
       "hint_text": "按鍵順序：5@a\n\n• @ — 播放巨集\n• a — 在游標後進入插入模式",
       "tags": [
         "@",
@@ -2183,7 +2187,7 @@
         "G",
         "o"
       ],
-      "hint_keystrokes": "",
+      "hint_keystrokes": "Omodule Rank<Esc>jVjj>Goend<Esc>",
       "hint_text": "按鍵順序：qagg<CR>Omodule Rank<Esc>j>GGoend<Esc>q\n\n• q — 錄製巨集\n• a — 在游標後進入插入模式\n• j — 向下移動\n• > — 增加縮排\n• G — 移到檔案結尾\n• o — 在下方新增一行並進入插入模式",
       "tags": [
         ">",
@@ -2220,13 +2224,13 @@
       "expected_text": "module Rank\n  class Person\n    # implementation...\n  end\nend",
       "cursor_start": {
         "line": 1,
-        "col": 0
+        "col": 8
       },
       "hint_commands": [
-        "q",
-        "A"
+        "c",
+        "w"
       ],
-      "hint_keystrokes": "",
+      "hint_keystrokes": "cwPerson<Esc>",
       "hint_text": "按鍵順序：qAq22@a\n\n• q — 錄製巨集\n• A — 在行尾進入插入模式",
       "tags": [
         "A",
@@ -2263,7 +2267,7 @@
         "q",
         "a"
       ],
-      "hint_keystrokes": "qaI<C-r>=i<CR>) <Esc>q",
+      "hint_keystrokes": "I1) <Esc>",
       "hint_text": "按鍵順序：qaI<C-r>=i<CR>) <Esc>q\n\n• q — 錄製巨集\n• a — 在游標後進入插入模式",
       "tags": [
         "a",
@@ -2582,10 +2586,13 @@
         "col": 0
       },
       "hint_commands": [
-        "u",
-        "v"
+        "/",
+        "c",
+        "w",
+        "n",
+        "."
       ],
-      "hint_keystrokes": "",
+      "hint_keystrokes": "/Name<CR>cwNumber<Esc>n.",
       "hint_text": "按鍵順序：ugv\n\n• u — 復原\n• v — 進入視覺模式（字元選取）",
       "tags": [
         "u",

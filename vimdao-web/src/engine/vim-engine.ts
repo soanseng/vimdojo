@@ -68,6 +68,37 @@ function handleInsertMode(state: VimState, key: string): KeyResult {
     s = { ...s, insertKeyBuf: [...s.insertKeyBuf, key] }
   }
 
+  // Expression register accumulation (C-r= + expression + Enter)
+  if (s.pendingKeys === 'C-r=') {
+    if (key === 'Enter') {
+      // Evaluate simple arithmetic expression
+      const expr = s.commandBuffer
+      let result = ''
+      try {
+        // Only allow safe arithmetic: digits, +, -, *, /, (), spaces
+        if (/^[\d\s+\-*/().]+$/.test(expr)) {
+          result = String(new Function('return ' + expr)())
+        }
+      } catch { /* ignore eval errors */ }
+      const cleared: VimState = { ...s, pendingKeys: '', commandBuffer: '' }
+      if (result) {
+        const line = cleared.lines[cleared.cursor.line] ?? ''
+        const col = cleared.cursor.col
+        const newLines = [...cleared.lines]
+        newLines[cleared.cursor.line] = line.slice(0, col) + result + line.slice(col)
+        return { state: { ...cleared, lines: newLines, cursor: { line: cleared.cursor.line, col: col + result.length } }, handled: true }
+      }
+      return { state: cleared, handled: true }
+    }
+    if (key === 'Escape') {
+      return { state: { ...s, pendingKeys: '', commandBuffer: '' }, handled: true }
+    }
+    if (key.length === 1) {
+      return { state: { ...s, commandBuffer: s.commandBuffer + key }, handled: true }
+    }
+    return { state: s, handled: true }
+  }
+
   // Control-r — paste register in insert mode
   if (key === 'Control-r' || key === 'C-r') {
     return { state: { ...s, pendingKeys: 'C-r' }, handled: true }
@@ -76,6 +107,10 @@ function handleInsertMode(state: VimState, key: string): KeyResult {
     const cleared: VimState = { ...s, pendingKeys: '' }
     if (key === 'Escape') {
       return { state: { ...cleared, mode: 'normal' }, handled: true }
+    }
+    // = register — enter expression mode (accumulate expression until Enter)
+    if (key === '=') {
+      return { state: { ...cleared, pendingKeys: 'C-r=', commandBuffer: '' }, handled: true }
     }
     // Get register content: '"' = unnamed, '0' = last yank, 'a'-'z' = named
     let content = ''
@@ -1243,6 +1278,35 @@ function handleVisualMode(state: VimState, key: string): KeyResult {
   }
 
   // Pending text object (vi/va + object key)
+  // Pending vS — surround selection with char
+  if (state.pendingKeys === 'vS') {
+    const anchor = state.visualStart!
+    const cursor = state.cursor
+    const s: VimState = { ...state, pendingKeys: '', mode: 'normal', visualStart: null, visualMode: null,
+      lastVisualStart: state.visualStart, lastVisualEnd: state.cursor, lastVisualMode: state.visualMode }
+    const withUndo = pushUndo(s)
+
+    if (state.visualMode === 'line') {
+      const startLine = Math.min(anchor.line, cursor.line)
+      const endLine = Math.max(anchor.line, cursor.line)
+      const newLines = [...withUndo.lines]
+      const openChar = key === '(' || key === ')' ? '(' : key === '{' || key === '}' ? '{' : key === '[' || key === ']' ? '[' : key
+      const closeChar = key === '(' || key === ')' ? ')' : key === '{' || key === '}' ? '}' : key === '[' || key === ']' ? ']' : key
+      for (let i = endLine; i >= startLine; i--) {
+        newLines[i] = openChar + (newLines[i] ?? '') + closeChar
+      }
+      return { state: { ...withUndo, lines: newLines }, handled: true }
+    }
+
+    // Character-wise
+    const before = anchor.line < cursor.line || (anchor.line === cursor.line && anchor.col <= cursor.col)
+    const start = before ? anchor : cursor
+    const end = before ? cursor : anchor
+    const range = { start, end: { line: end.line, col: end.col + 1 } }
+    const result = addSurround(withUndo, range, key)
+    return { state: result, handled: true }
+  }
+
   if (state.pendingKeys === 'vi' || state.pendingKeys === 'va') {
     const modifier = state.pendingKeys === 'vi' ? 'i' : 'a' as 'i' | 'a'
     const s: VimState = { ...state, pendingKeys: '' }
@@ -1316,6 +1380,14 @@ function handleVisualMode(state: VimState, key: string): KeyResult {
   if (key === 'p') {
     return executeVisualPaste(state)
   }
+
+  // S — surround selection (wait for surround char)
+  if (key === 'S') {
+    return { state: { ...state, pendingKeys: 'vS' }, handled: true }
+  }
+
+  // Pending vS — waiting for surround char
+  if (false) { /* handled above in pendingKeys check */ }
 
   return { state, handled: false }
 }

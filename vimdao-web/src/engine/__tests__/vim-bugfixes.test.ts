@@ -724,3 +724,64 @@ describe('FEAT-6: marks', () => {
     expect(s.cursor).toEqual({ line: 0, col: 0 })
   })
 })
+
+// ---------------------------------------------------------------------------
+// FEAT-7: S in visual mode (surround selection)
+// ---------------------------------------------------------------------------
+
+describe('FEAT-7: visual surround S', () => {
+  it('veeS" wraps selected text in quotes', () => {
+    const result = applyKeys(
+      'hello world',
+      ['v', 'e', 'e', 'S', '"'],
+    )
+    expect(result).toBe('"hello world"')
+  })
+
+  it('vitS( wraps tag content in parens', () => {
+    const result = applyKeys(
+      '<p>hello</p>',
+      ['v', 'i', 't', 'S', '('],
+      { line: 0, col: 3 },
+    )
+    expect(result).toBe('<p>(hello)</p>')
+  })
+
+  it('VS" wraps entire line in quotes', () => {
+    const result = applyKeys(
+      'hello world\nsecond',
+      ['V', 'S', '"'],
+    )
+    expect(result).toBe('"hello world"\nsecond')
+  })
+})
+
+// ---------------------------------------------------------------------------
+// FEAT-8: Expression register <C-r>=
+// ---------------------------------------------------------------------------
+
+describe('FEAT-8: expression register', () => {
+  it('A<C-r>=6*35<CR> appends calculation result', () => {
+    const result = applyKeys(
+      'Total: ',
+      ['A', 'Control-r', '=', '6', '*', '3', '5', 'Enter', 'Escape'],
+    )
+    expect(result).toBe('Total: 210')
+  })
+
+  it('<C-r>=10+20<CR> in insert mode', () => {
+    const result = applyKeys(
+      'sum = ',
+      ['A', 'Control-r', '=', '1', '0', '+', '2', '0', 'Enter', 'Escape'],
+    )
+    expect(result).toBe('sum = 30')
+  })
+
+  it('<C-r>=100-25<CR> subtraction', () => {
+    const result = applyKeys(
+      'x = ',
+      ['A', 'Control-r', '=', '1', '0', '0', '-', '2', '5', 'Enter', 'Escape'],
+    )
+    expect(result).toBe('x = 75')
+  })
+})
