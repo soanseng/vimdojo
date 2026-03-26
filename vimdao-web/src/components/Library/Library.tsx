@@ -94,9 +94,10 @@ export default function Library() {
         {/* Practical Vim */}
         <section>
           <h3 className="text-base font-bold text-ctp-blue mb-1">
-            Practical Vim, 2nd Edition
+            Vim 核心修煉
           </h3>
-          <p className="text-xs text-ctp-overlay0 mb-4">Drew Neil &middot; {challenges.length} 道練習題</p>
+          <p className="text-xs text-ctp-overlay0 mb-2">{challenges.length} 道練習題</p>
+          <p className="text-xs text-ctp-overlay1 mb-4">推薦閱讀：<em>Practical Vim, 2nd Edition</em> — Drew Neil 著</p>
 
           <div className="space-y-2">
             {chapters.map(ch => {
@@ -162,11 +163,10 @@ export default function Library() {
         {/* LazyVim */}
         <section>
           <h3 className="text-base font-bold text-ctp-mauve mb-1">
-            LazyVim for Ambitious Developers
+            LazyVim 進階技巧
           </h3>
-          <p className="text-xs text-ctp-overlay0 mb-4">
-            Dusty Phillips &middot; {keybindings.length} 個快捷鍵 &middot; {kbByCategory.size} 個分類
-          </p>
+          <p className="text-xs text-ctp-overlay0 mb-2">{keybindings.length} 個快捷鍵 &middot; {kbByCategory.size} 個分類</p>
+          <p className="text-xs text-ctp-overlay1 mb-4">推薦閱讀：<em>LazyVim for Ambitious Developers</em> — Dusty Phillips 著</p>
 
           <div className="space-y-2">
             {Array.from(kbByCategory.entries()).map(([category, kbs]) => {

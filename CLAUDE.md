@@ -1,14 +1,18 @@
 # VimDao 鍵道
 
-互動式 Vim 學習平台，從 Vim 教學書籍（EPUB）提取內容，自動生成練習題目，在瀏覽器中實際操作練習。
+互動式 Vim 學習平台，自動生成練習題目，在瀏覽器中實際操作練習。
 
 ## 核心原則
 
-**所有練習內容從書籍提取生成，不手動編寫。** 來源書籍：
-1. *LazyVim for Ambitious Developers* — Dusty Phillips
-2. *Practical Vim, 2nd Edition* — Drew Neil
+**練習內容自動生成，不手動編寫。**
 
-提取流程：EPUB → 結構化 JSON → 練習題 JSON → 前端載入
+推薦搭配閱讀：
+1. *Practical Vim, 2nd Edition* — Drew Neil
+2. *LazyVim for Ambitious Developers* — Dusty Phillips
+
+**重要：UI 中不得標示練習內容「來自」或「擷取自」特定書籍。書籍僅作為推薦閱讀呈現。**
+
+資料流程：結構化 JSON → 練習題 JSON → 前端載入
 
 ## 語言
 

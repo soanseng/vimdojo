@@ -331,7 +331,7 @@ export default function ChallengeView() {
         <span className="text-xs text-ctp-overlay0">
           {isLazyVim
             ? `LazyVim${'plugin' in challenge ? ` \u00B7 ${(challenge as unknown as { plugin: string }).plugin}` : ''}`
-            : `Practical Vim Tip ${String(challenge.source.tip_number)}`
+            : `Vim 核心 Tip ${String(challenge.source.tip_number)}`
           }
         </span>
       </header>

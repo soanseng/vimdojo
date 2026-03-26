@@ -190,7 +190,7 @@ export default function Dashboard() {
                     {completedCount}/{totalChallenges}
                   </div>
                   <div className="text-xs text-ctp-subtext0 mt-1">
-                    Practical Vim
+                    Vim 核心修煉
                   </div>
                 </div>
                 <div className="rounded-lg bg-ctp-mantle p-4 text-center">
