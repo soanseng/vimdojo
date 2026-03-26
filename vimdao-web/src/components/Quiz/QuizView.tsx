@@ -5,6 +5,7 @@ import { useProgress } from '../../hooks/useProgress'
 import { addXp, updateStreak } from '../../rpg/progression'
 import BossFrame from '../RPG/BossFrame'
 import PluginSimulator from './PluginSimulator'
+import TelescopeSimulator from './TelescopeSimulator'
 
 function difficultyLabel(level: number): { text: string; stars: string } {
   switch (level) {
@@ -272,13 +273,42 @@ export default function QuizView() {
           </div>
         </BossFrame>
 
-        {/* Plugin simulation */}
+        {/* Plugin simulation — interactive for telescope, static for others */}
         <div className="my-4">
-          <PluginSimulator plugin={exercise.plugin} scenario={exercise.scenario_zh} isActive={!submitted} />
+          {exercise.plugin === 'telescope' ? (
+            <TelescopeSimulator
+              goal="open"
+              onComplete={() => {
+                // Auto-mark as correct when telescope interaction completes
+                setSubmitted(true)
+                setCorrect(true)
+                const alreadyCompleted = exercise.id in progress.challenges_completed
+                if (!alreadyCompleted) {
+                  const today = new Date().toISOString().slice(0, 10)
+                  update(prev => {
+                    const xpResult = addXp(prev.xp, exercise.xp_reward)
+                    const streakResult = updateStreak(prev.last_practice_date, today, prev.streak_days)
+                    return {
+                      ...prev,
+                      xp: xpResult.xp, level: xpResult.level, title: xpResult.title,
+                      streak_days: streakResult.streak, last_practice_date: streakResult.date,
+                      challenges_completed: {
+                        ...prev.challenges_completed,
+                        [exercise.id]: { completed_at: today, keystrokes: 0 },
+                      },
+                    }
+                  })
+                }
+              }}
+              isActive={!submitted}
+            />
+          ) : (
+            <PluginSimulator plugin={exercise.plugin} scenario={exercise.scenario_zh} isActive={!submitted} />
+          )}
         </div>
 
-        {/* Key input area */}
-        {!submitted && (
+        {/* Key input area (not shown for interactive telescope) */}
+        {!submitted && exercise.plugin !== 'telescope' && (
           <div className="space-y-3">
             <label className="text-sm font-medium text-ctp-subtext1">
               你的答案：

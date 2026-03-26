@@ -1270,6 +1270,39 @@ function handleCommandMode(state: VimState, key: string): KeyResult {
         }
       }
       const pos = searchForward(state, pattern)
+
+      // If an operator is pending (d/pattern, c/pattern, y/pattern),
+      // apply the operator from original cursor to search result
+      if (state.pendingOperator && pos) {
+        const op = state.pendingOperator
+        const s: VimState = {
+          ...state,
+          mode: 'normal',
+          commandBuffer: '',
+          searchPattern: pattern,
+          searchDirection: 'forward',
+          pendingOperator: null,
+        }
+        const changeKeys = [op, '/', ...pattern.split(''), 'Enter']
+        switch (op) {
+          case 'd': {
+            const result = ops.deleteToPos(s, pos)
+            return {
+              state: { ...result, lastChange: { type: 'normal', keys: changeKeys } },
+              handled: true,
+            }
+          }
+          case 'c': {
+            const result = ops.changeToPos(s, pos)
+            return { state: startInsertRecording(result, changeKeys), handled: true }
+          }
+          case 'y': {
+            const result = ops.yankToPos(s, pos)
+            return { state: result, handled: true }
+          }
+        }
+      }
+
       return {
         state: {
           ...state,
@@ -1277,6 +1310,7 @@ function handleCommandMode(state: VimState, key: string): KeyResult {
           commandBuffer: '',
           searchPattern: pattern,
           searchDirection: 'forward',
+          pendingOperator: null,
           cursor: pos ?? state.cursor,
         },
         handled: true,
@@ -1503,6 +1537,14 @@ function handleOperatorPending(state: VimState, key: string): KeyResult {
   if (key === 'f' || key === 'F' || key === 't' || key === 'T') {
     return {
       state: { ...s, pendingOperator: op, pendingKeys: key },
+      handled: true,
+    }
+  }
+
+  // Search as operator motion — d/pattern<CR>, c/pattern<CR>, y/pattern<CR>
+  if (key === '/') {
+    return {
+      state: { ...state, mode: 'command', commandBuffer: '/', pendingOperator: op },
       handled: true,
     }
   }
