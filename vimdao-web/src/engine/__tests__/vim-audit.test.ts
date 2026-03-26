@@ -22,6 +22,7 @@ function parseKeystrokes(raw: string): string[] {
         else if (token === 'C-r') keys.push('Control-r')
         else if (token === 'C-x') keys.push('Control-x')
         else if (token === 'C-a') keys.push('Control-a')
+        else if (token === 'C-v') keys.push('Control-v')
         else keys.push(`<${token}>`)
         i = end + 1
         continue
@@ -44,7 +45,6 @@ function applyKeys(text: string, keys: string[], cursor?: CursorPos): string {
 function isTestable(ks: string): boolean {
   if (!ks || ks.trim() === '') return false
   // Still unsupported:
-  if (ks.includes('<C-v>')) return false           // visual block mode
   if (ks.includes('<C-]>')) return false           // tag jump
   if (ks.includes('<C-x><C-')) return false        // insert completion
   if (ks.includes('{start}')) return false          // complex workflow description

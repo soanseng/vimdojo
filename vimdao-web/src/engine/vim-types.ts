@@ -25,12 +25,12 @@ export interface VimState {
   searchDirection: 'forward' | 'backward'
   commandBuffer: string         // for / and : command input
   visualStart: CursorPos | null  // anchor point where selection started
-  visualMode: 'char' | 'line' | null  // character-wise or line-wise
+  visualMode: 'char' | 'line' | 'block' | null  // character-wise, line-wise, or block
   lastCommand: string | null      // last ex-command result (e.g. 'write', 'quit')
   highlightRange: { start: CursorPos; end: CursorPos } | null  // visual highlight for pending operations (surround, etc.)
   lastVisualStart: CursorPos | null   // saved visual selection for gv
   lastVisualEnd: CursorPos | null
-  lastVisualMode: 'char' | 'line' | null
+  lastVisualMode: 'char' | 'line' | 'block' | null
   // Named registers
   registers: Record<string, string>   // 'a'-'z', '0' (last yank), '_' (blackhole)
   pendingRegister: string | null      // set by " prefix, e.g. "a before yank/delete/paste

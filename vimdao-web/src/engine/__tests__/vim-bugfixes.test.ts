@@ -785,3 +785,50 @@ describe('FEAT-8: expression register', () => {
     expect(result).toBe('x = 75')
   })
 })
+
+// ---------------------------------------------------------------------------
+// FEAT-9: Visual block mode (<C-v>)
+// ---------------------------------------------------------------------------
+
+describe('FEAT-9: visual block mode', () => {
+  it('<C-v>jjx deletes a column', () => {
+    const result = applyKeys(
+      'abc\ndef\nghi',
+      ['Control-v', 'j', 'j', 'x'],
+    )
+    expect(result).toBe('bc\nef\nhi')
+  })
+
+  it('<C-v>jjlx deletes 2-wide column', () => {
+    const result = applyKeys(
+      'abcde\nfghij\nklmno',
+      ['Control-v', 'j', 'j', 'l', 'x'],
+    )
+    expect(result).toBe('cde\nhij\nmno')
+  })
+
+  it('<C-v>jjI// <Esc> prepends to lines', () => {
+    const result = applyKeys(
+      'line1\nline2\nline3',
+      ['Control-v', 'j', 'j', 'I', '/', '/', ' ', 'Escape'],
+    )
+    expect(result).toBe('// line1\n// line2\n// line3')
+  })
+
+  it('<C-v>jj$A;<Esc> appends to lines', () => {
+    const result = applyKeys(
+      'var a = 1\nvar b = 2\nvar c = 3',
+      ['Control-v', 'j', 'j', '$', 'A', ';', 'Escape'],
+    )
+    expect(result).toBe('var a = 1;\nvar b = 2;\nvar c = 3;')
+  })
+
+  it('<C-v>jjr* replaces block with char', () => {
+    const result = applyKeys(
+      'abcde\nfghij\nklmno',
+      ['Control-v', 'j', 'j', 'r', '*'],
+      { line: 0, col: 2 },
+    )
+    expect(result).toBe('ab*de\nfg*ij\nkl*no')
+  })
+})

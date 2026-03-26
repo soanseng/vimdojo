@@ -173,6 +173,32 @@ function handleInsertMode(state: VimState, key: string): KeyResult {
       }
     }
 
+    // Block insert/append: apply typed text to remaining lines
+    if (s.pendingKeys.startsWith('vBI:') || s.pendingKeys.startsWith('vBA:')) {
+      const parts = s.pendingKeys.split(':')
+      const startLine = parseInt(parts[1]!, 10)
+      const endLine = parseInt(parts[2]!, 10)
+      const colInfo = parts[3]!
+      const isAppend = s.pendingKeys.startsWith('vBA:')
+
+      // Extract what was typed on the first line (excluding the entry key I/A)
+      const typedKeys = s.insertKeyBuf.slice(1) // skip 'I' or 'A'
+      const typedText = typedKeys.filter(k => k.length === 1).join('')
+
+      const newLines = [...result.lines]
+      for (let i = startLine + 1; i <= endLine && i < newLines.length; i++) {
+        const line = newLines[i] ?? ''
+        if (isAppend) {
+          const insertAt = colInfo === 'eol' ? line.length : Math.min(parseInt(colInfo, 10), line.length)
+          newLines[i] = line.slice(0, insertAt) + typedText + line.slice(insertAt)
+        } else {
+          const insertAt = Math.min(parseInt(colInfo, 10), line.length)
+          newLines[i] = line.slice(0, insertAt) + typedText + line.slice(insertAt)
+        }
+      }
+      result = { ...result, lines: newLines, pendingKeys: '' }
+    }
+
     return { state: result, handled: true }
   }
 
@@ -869,6 +895,19 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
     }
   }
 
+  if (key === 'Control-v') {
+    return {
+      state: {
+        ...state,
+        mode: 'visual',
+        visualMode: 'block',
+        visualStart: { ...state.cursor },
+        countPrefix: null,
+      },
+      handled: true,
+    }
+  }
+
   // --- Operators (d/c/y/>/< ) — transfer count to operator ---
   if (key === 'd' || key === 'c' || key === 'y' || key === '>' || key === '<') {
     return {
@@ -1277,6 +1316,30 @@ function handleVisualMode(state: VimState, key: string): KeyResult {
     return handleVisualFindChar(state, key)
   }
 
+  // Pending vBr — block replace with char
+  if (state.pendingKeys === 'vBr') {
+    const anchor = state.visualStart!
+    const cursor = state.cursor
+    const startLine = Math.min(anchor.line, cursor.line)
+    const endLine = Math.max(anchor.line, cursor.line)
+    const startCol = Math.min(anchor.col, cursor.col)
+    const endCol = Math.max(anchor.col, cursor.col)
+    const s: VimState = { ...state, pendingKeys: '', mode: 'normal', visualStart: null, visualMode: null,
+      lastVisualStart: state.visualStart, lastVisualEnd: state.cursor, lastVisualMode: state.visualMode }
+    const withUndo = pushUndo(s)
+    const newLines = [...withUndo.lines]
+    for (let i = startLine; i <= endLine; i++) {
+      const line = newLines[i] ?? ''
+      let newLine = ''
+      for (let c = 0; c < line.length; c++) {
+        if (c >= startCol && c <= endCol) newLine += key
+        else newLine += line[c]
+      }
+      newLines[i] = newLine
+    }
+    return { state: { ...withUndo, lines: newLines, cursor: { line: startLine, col: startCol } }, handled: true }
+  }
+
   // Pending text object (vi/va + object key)
   // Pending vS — surround selection with char
   if (state.pendingKeys === 'vS') {
@@ -1361,9 +1424,19 @@ function handleVisualMode(state: VimState, key: string): KeyResult {
     return { state: { ...state, pendingKeys: 'v' + key }, handled: true }
   }
 
+  // x in visual = d (delete selection)
+  if (key === 'x') {
+    return executeVisualOperator(state, 'd')
+  }
+
   // Operators: d, c, y
   if (key === 'd' || key === 'c' || key === 'y') {
     return executeVisualOperator(state, key)
+  }
+
+  // Block-specific: I (insert), A (append), r (replace) in block mode
+  if (state.visualMode === 'block' && (key === 'I' || key === 'A' || key === 'r')) {
+    return executeVisualBlockSpecial(state, key)
   }
 
   // Indent/dedent in visual mode
@@ -1428,8 +1501,119 @@ function executeVisualOperator(state: VimState, op: string): KeyResult {
     return executeVisualLineOperator(state, op, anchor, cursor)
   }
 
+  if (state.visualMode === 'block') {
+    return executeVisualBlockOperator(state, op, anchor, cursor)
+  }
+
   // Character-wise visual
   return executeVisualCharOperator(state, op, anchor, cursor)
+}
+
+function executeVisualBlockOperator(
+  state: VimState,
+  op: string,
+  anchor: CursorPos,
+  cursor: CursorPos,
+): KeyResult {
+  const startLine = Math.min(anchor.line, cursor.line)
+  const endLine = Math.max(anchor.line, cursor.line)
+  const startCol = Math.min(anchor.col, cursor.col)
+  const endCol = Math.max(anchor.col, cursor.col)
+
+  const exitVisual = {
+    mode: 'normal' as const,
+    visualStart: null,
+    visualMode: null,
+    lastVisualStart: state.visualStart,
+    lastVisualEnd: state.cursor,
+    lastVisualMode: state.visualMode,
+  }
+
+  if (op === 'd') {
+    const s = pushUndo({ ...state, ...exitVisual })
+    const newLines = [...s.lines]
+    for (let i = startLine; i <= endLine; i++) {
+      const line = newLines[i] ?? ''
+      newLines[i] = line.slice(0, startCol) + line.slice(endCol + 1)
+    }
+    return {
+      state: { ...s, lines: newLines, cursor: { line: startLine, col: startCol } },
+      handled: true,
+    }
+  }
+
+  if (op === 'y') {
+    const yanked = []
+    for (let i = startLine; i <= endLine; i++) {
+      const line = state.lines[i] ?? ''
+      yanked.push(line.slice(startCol, endCol + 1))
+    }
+    return {
+      state: { ...state, ...exitVisual, register: yanked.join('\n'), cursor: { line: startLine, col: startCol } },
+      handled: true,
+    }
+  }
+
+  return { state: { ...state, ...exitVisual }, handled: false }
+}
+
+function executeVisualBlockSpecial(state: VimState, key: string): KeyResult {
+  const anchor = state.visualStart!
+  const cursor = state.cursor
+  const startLine = Math.min(anchor.line, cursor.line)
+  const endLine = Math.max(anchor.line, cursor.line)
+  const startCol = Math.min(anchor.col, cursor.col)
+  const endCol = Math.max(anchor.col, cursor.col)
+  const isEOL = endCol >= 9999 // $ sets col very high
+
+  const exitVisual = {
+    mode: 'normal' as const,
+    visualStart: null,
+    visualMode: null,
+    lastVisualStart: state.visualStart,
+    lastVisualEnd: state.cursor,
+    lastVisualMode: state.visualMode,
+  }
+
+  if (key === 'r') {
+    // r waits for next char — set pending
+    return { state: { ...state, pendingKeys: 'vBr' }, handled: true }
+  }
+
+  if (key === 'I') {
+    // Block insert — enter insert mode, record keys, apply to all lines on Escape
+    return {
+      state: {
+        ...state,
+        ...exitVisual,
+        mode: 'insert',
+        cursor: { line: startLine, col: startCol },
+        isRecordingInsert: true,
+        insertKeyBuf: ['I'],
+        // Store block info for applying on Escape
+        pendingKeys: 'vBI:' + startLine + ':' + endLine + ':' + startCol,
+      },
+      handled: true,
+    }
+  }
+
+  if (key === 'A') {
+    const insertCol = isEOL ? undefined : endCol + 1
+    return {
+      state: {
+        ...state,
+        ...exitVisual,
+        mode: 'insert',
+        cursor: { line: startLine, col: insertCol ?? (state.lines[startLine] ?? '').length },
+        isRecordingInsert: true,
+        insertKeyBuf: ['A'],
+        pendingKeys: 'vBA:' + startLine + ':' + endLine + ':' + (isEOL ? 'eol' : String(insertCol)),
+      },
+      handled: true,
+    }
+  }
+
+  return { state, handled: false }
 }
 
 function executeVisualCharOperator(
