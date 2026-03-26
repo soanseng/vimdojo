@@ -63,12 +63,12 @@ export default function QuizView() {
     const controller = new AbortController()
 
     Promise.all([
-      fetch('/data/lazyvim_exercises.json', { signal: controller.signal })
+      fetch(import.meta.env.BASE_URL + 'data/lazyvim_exercises.json', { signal: controller.signal })
         .then(res => {
           if (!res.ok) throw new Error(`HTTP ${String(res.status)}`)
           return res.json() as Promise<LazyVimExerciseSet>
         }),
-      fetch('/data/lazyvim_plugins.json', { signal: controller.signal })
+      fetch(import.meta.env.BASE_URL + 'data/lazyvim_plugins.json', { signal: controller.signal })
         .then(res => {
           if (!res.ok) throw new Error(`HTTP ${String(res.status)}`)
           return res.json() as Promise<PluginData>

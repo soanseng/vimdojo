@@ -19,22 +19,22 @@ export default function HomePage() {
     const controller = new AbortController()
 
     Promise.all([
-      fetch('/data/story.json', { signal: controller.signal })
+      fetch(import.meta.env.BASE_URL + 'data/story.json', { signal: controller.signal })
         .then(res => {
           if (!res.ok) throw new Error(`HTTP ${String(res.status)}`)
           return res.json() as Promise<StoryData>
         }),
-      fetch('/data/practical-vim_challenges.json', { signal: controller.signal })
+      fetch(import.meta.env.BASE_URL + 'data/practical-vim_challenges.json', { signal: controller.signal })
         .then(res => {
           if (!res.ok) throw new Error(`HTTP ${String(res.status)}`)
           return res.json() as Promise<ChallengeSet>
         }),
-      fetch('/data/lazyvim_story.json', { signal: controller.signal })
+      fetch(import.meta.env.BASE_URL + 'data/lazyvim_story.json', { signal: controller.signal })
         .then(res => {
           if (!res.ok) throw new Error(`HTTP ${String(res.status)}`)
           return res.json() as Promise<LazyVimStoryData>
         }),
-      fetch('/data/lazyvim_exercises.json', { signal: controller.signal })
+      fetch(import.meta.env.BASE_URL + 'data/lazyvim_exercises.json', { signal: controller.signal })
         .then(res => {
           if (!res.ok) throw new Error(`HTTP ${String(res.status)}`)
           return res.json() as Promise<LazyVimExerciseSet>

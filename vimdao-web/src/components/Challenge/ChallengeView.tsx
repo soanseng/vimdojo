@@ -56,9 +56,10 @@ export default function ChallengeView() {
   useEffect(() => {
     const controller = new AbortController()
 
+    const base = import.meta.env.BASE_URL
     const challengeUrl = isLazyVim
-      ? '/data/lazyvim_exercises.json'
-      : '/data/practical-vim_challenges.json'
+      ? base + 'data/lazyvim_exercises.json'
+      : base + 'data/practical-vim_challenges.json'
 
     // Reset result when navigating to a new challenge (BUG-4 fix)
     setResult(null)
@@ -69,7 +70,7 @@ export default function ChallengeView() {
           if (!res.ok) throw new Error(`HTTP ${String(res.status)}`)
           return res.json()
         }),
-      fetch('/data/story.json', { signal: controller.signal })
+      fetch(import.meta.env.BASE_URL + 'data/story.json', { signal: controller.signal })
         .then(res => {
           if (!res.ok) throw new Error(`HTTP ${String(res.status)}`)
           return res.json() as Promise<StoryData>

@@ -32,7 +32,7 @@ export default function CommandRef() {
 
   useEffect(() => {
     const controller = new AbortController()
-    fetch('/data/merged_commands.json', { signal: controller.signal })
+    fetch(import.meta.env.BASE_URL + 'data/merged_commands.json', { signal: controller.signal })
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${String(res.status)}`)
         return res.json() as Promise<CommandIndex>
