@@ -19,6 +19,13 @@
   --color-ctp-mauve: #cba6f7;
   --color-ctp-teal: #94e2d5;
   --color-ctp-lavender: #b4befe;
+  --color-ctp-overlay1: #7f849c;
+  --color-ctp-flamingo: #f2cdcd;
+  --color-ctp-maroon: #eba0ac;
+  --color-ctp-sapphire: #74c7ec;
+  --color-ctp-sky: #89dceb;
+  --color-ctp-pink: #f5c2e7;
+  --color-ctp-rosewater: #f5e0dc;
 }
 
 .vim-editor {

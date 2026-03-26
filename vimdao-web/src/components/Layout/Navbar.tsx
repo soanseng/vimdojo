@@ -64,6 +64,22 @@ export default function Navbar() {
         >
           書庫
         </NavLink>
+        <NavLink
+          to="/guide"
+          className={({ isActive }) =>
+            `text-sm font-medium transition-colors ${isActive ? 'text-ctp-blue' : 'text-ctp-subtext0 hover:text-ctp-text'}`
+          }
+        >
+          指南
+        </NavLink>
+        <NavLink
+          to="/welcome"
+          className={({ isActive }) =>
+            `text-sm font-medium transition-colors ${isActive ? 'text-ctp-blue' : 'text-ctp-subtext0 hover:text-ctp-text'}`
+          }
+        >
+          關於
+        </NavLink>
       </div>
 
       {/* Right: character badge */}
