@@ -4,6 +4,7 @@ import * as motions from './vim-motions'
 import * as ops from './vim-operations'
 import { searchForward, searchBackward, searchWordUnderCursor } from './vim-search'
 import { resolveTextObject } from './vim-text-objects'
+import { addSurround, deleteSurround, replaceSurround } from './vim-surround'
 
 // ---------------------------------------------------------------------------
 // Inclusive motions — these include the character at the target position
@@ -136,8 +137,103 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
       const pos = count === 1 ? motions.gg(s) : { line: Math.min(count - 1, s.lines.length - 1), col: 0 }
       return { state: { ...s, cursor: pos, countPrefix: null }, handled: true }
     }
+    if (key === 's') {
+      return { state: { ...s, pendingKeys: 'gs' }, handled: true }
+    }
     // Unknown g-combo — ignore
     return { state: s, handled: false }
+  }
+
+  // --- Pending gs (surround) ---
+  if (state.pendingKeys === 'gs') {
+    const s: VimState = { ...state, pendingKeys: '' }
+    if (key === 'a') {
+      return { state: { ...s, pendingKeys: 'gsa' }, handled: true }
+    }
+    if (key === 'd') {
+      return { state: { ...s, pendingKeys: 'gsd' }, handled: true }
+    }
+    if (key === 'r') {
+      return { state: { ...s, pendingKeys: 'gsr' }, handled: true }
+    }
+    return { state: s, handled: false }
+  }
+
+  // --- gsa: waiting for text object modifier (i/a) ---
+  if (state.pendingKeys === 'gsa') {
+    if (key === 'i' || key === 'a') {
+      return { state: { ...state, pendingKeys: 'gsa' + key }, handled: true }
+    }
+    return { state: { ...state, pendingKeys: '' }, handled: false }
+  }
+
+  // --- gsai/gsaa: waiting for text object type (w, ", (, etc.) ---
+  if (state.pendingKeys === 'gsai' || state.pendingKeys === 'gsaa') {
+    return { state: { ...state, pendingKeys: state.pendingKeys + key }, handled: true }
+  }
+
+  // --- gsaiX or gsaaX: waiting for surround character ---
+  if (state.pendingKeys.length === 5 &&
+      (state.pendingKeys.startsWith('gsai') || state.pendingKeys.startsWith('gsaa'))) {
+    const modifier = state.pendingKeys[3] as 'i' | 'a'
+    const objChar = state.pendingKeys[4]!
+    const surroundChar = key
+    const s: VimState = { ...state, pendingKeys: '' }
+    const range = resolveTextObject(s, modifier, objChar)
+    if (range) {
+      const withUndo = pushUndo(s)
+      const result = addSurround(withUndo, range, surroundChar)
+      return {
+        state: {
+          ...result,
+          lastChange: { type: 'normal', keys: ['g', 's', 'a', modifier, objChar, surroundChar] },
+        },
+        handled: true,
+      }
+    }
+    return { state: s, handled: true }
+  }
+
+  // --- gsd: waiting for char to delete surrounding ---
+  if (state.pendingKeys === 'gsd') {
+    const s: VimState = { ...state, pendingKeys: '' }
+    const result = deleteSurround(s, key)
+    if (result) {
+      const withUndo = pushUndo(s)
+      const deleted = deleteSurround(withUndo, key)
+      return {
+        state: {
+          ...deleted!,
+          lastChange: { type: 'normal', keys: ['g', 's', 'd', key] },
+        },
+        handled: true,
+      }
+    }
+    return { state: s, handled: true }
+  }
+
+  // --- gsr: waiting for old char ---
+  if (state.pendingKeys === 'gsr') {
+    return { state: { ...state, pendingKeys: 'gsr' + key }, handled: true }
+  }
+
+  // --- gsrX: waiting for new char ---
+  if (state.pendingKeys.length === 4 && state.pendingKeys.startsWith('gsr')) {
+    const oldChar = state.pendingKeys[3]!
+    const s: VimState = { ...state, pendingKeys: '' }
+    const result = replaceSurround(s, oldChar, key)
+    if (result) {
+      const withUndo = pushUndo(s)
+      const replaced = replaceSurround(withUndo, oldChar, key)
+      return {
+        state: {
+          ...replaced!,
+          lastChange: { type: 'normal', keys: ['g', 's', 'r', oldChar, key] },
+        },
+        handled: true,
+      }
+    }
+    return { state: s, handled: true }
   }
 
   // --- Pending r{char} — replace character under cursor ---

@@ -531,3 +531,26 @@ describe('command mode', () => {
     expect(s.mode).toBe('normal')
   })
 })
+
+describe('surround via engine', () => {
+  it('gsaiw" wraps word in quotes', () => {
+    expect(applyKeys('hello world', ['g', 's', 'a', 'i', 'w', '"'])).toBe('"hello" world')
+  })
+  it('gsd" removes quotes', () => {
+    const s = createState('"hello" world')
+    s.cursor = { line: 0, col: 3 }
+    let result = s
+    for (const k of ['g', 's', 'd', '"']) result = processKey(result, k).state
+    expect(getText(result)).toBe('hello world')
+  })
+  it('gsr"\' replaces quotes', () => {
+    const s = createState('"hello" world')
+    s.cursor = { line: 0, col: 3 }
+    let result = s
+    for (const k of ['g', 's', 'r', '"', "'"]) result = processKey(result, k).state
+    expect(getText(result)).toBe("'hello' world")
+  })
+  it('gsaiw( wraps in parens', () => {
+    expect(applyKeys('hello world', ['g', 's', 'a', 'i', 'w', '('])).toBe('(hello) world')
+  })
+})
