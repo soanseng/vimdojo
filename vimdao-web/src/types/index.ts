@@ -85,3 +85,60 @@ export interface KeybindingEntry {
   section_id?: string
   requires: string
 }
+
+export interface QuizExercise {
+  id: string
+  type: 'quiz'
+  plugin: string
+  category: string
+  title_zh: string
+  title_en: string
+  scenario_zh: string
+  answer_keys: string
+  answer_aliases?: string[]
+  explanation_zh: string
+  explanation_en: string
+  difficulty: number
+  xp_reward: number
+  is_boss: boolean
+  flavor_zh?: string
+  reference_url?: string
+}
+
+export interface PluginInfo {
+  id: string
+  name: string
+  repo_url: string
+  description_zh: string
+  description_en: string
+  category: string
+  stars: string
+  author: string
+}
+
+export interface LazyVimExerciseSet {
+  source: string
+  exercises: Array<QuizExercise | Challenge>
+}
+
+export interface PluginData {
+  plugins: PluginInfo[]
+}
+
+export interface LazyVimStoryChapter {
+  chapter_id: number
+  title_zh: string
+  title_en: string
+  plugins: string[]
+  intro_story: string[]
+  outro_story: string[]
+  boss_intro: string[]
+  scene_image: string
+  unlock_requires: number | null
+}
+
+export interface LazyVimStoryData {
+  path_title_zh: string
+  path_title_en: string
+  chapters: LazyVimStoryChapter[]
+}

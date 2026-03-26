@@ -1,0 +1,181 @@
+{
+  "path_title_zh": "LazyVim 進階修煉",
+  "path_title_en": "LazyVim Advanced Training",
+  "chapters": [
+    {
+      "chapter_id": 101,
+      "title_zh": "搜尋的藝術",
+      "title_en": "The Art of Search",
+      "plugins": ["telescope", "flash"],
+      "intro_story": [
+        "「修煉者，你已掌握了鍵道的基礎。」導師的全像投影泛著新的光芒。",
+        "「但真正的終端高手，不靠逐字搜尋 — 他們用模糊搜尋瞬間找到目標。」",
+        "「Telescope 是你的千里眼。Flash 是你的瞬步術。掌握它們，整個專案盡在掌握。」"
+      ],
+      "outro_story": [
+        "模糊搜尋的力量在你指尖流轉。檔案、文字、symbol — 一切都在彈指之間。",
+        "「不錯，」導師微笑，「但找到目標只是第一步。管理它們，才是真正的修行。」"
+      ],
+      "boss_intro": [
+        "「最終試煉：在龐大的專案中，用最少的按鍵找到目標。」",
+        "「Telescope 的 picker 中有許多隱藏技巧 — 分割開啟、快捷鍵查詢。展示你的搜尋之力。」"
+      ],
+      "scene_image": "lv-ch1-search.png",
+      "unlock_requires": null
+    },
+    {
+      "chapter_id": 102,
+      "title_zh": "檔案管理之道",
+      "title_en": "The Way of File Management",
+      "plugins": ["neo-tree", "harpoon"],
+      "intro_story": [
+        "「你能找到目標了，」導師帶你走進一座龐大的數位藏經閣，無數光點構成的檔案樹向四面八方延伸。",
+        "「但修煉者不只要能找到經卷，還要能管理它們 — 新增、刪除、重命名、移動。Neo-tree 是你的藏經閣管理術。」",
+        "「而 Harpoon，」導師的手指劃過虛空，三道光線連接了三個遙遠的節點，「它讓你在最常用的檔案間瞬間穿梭。不需要搜尋，不需要記路 — 標記、跳躍，如此簡單。」"
+      ],
+      "outro_story": [
+        "藏經閣在你手中變得井然有序。新增一個檔案只需一個 'a'，Harpoon 的標記讓你在三個核心檔案間來去自如。",
+        "「掌握了檔案之道，你已經超越了大多數開發者。」導師看著你，「下一步，我們要學習操控文字本身。」"
+      ],
+      "boss_intro": [
+        "「檔案樹守護者」從樹影中浮現，它的身體由無數檔案路徑構成。",
+        "「這棵大樹的每個枝節，都是一個檔案的生命。新增、刪除、移動、重命名 — 你能掌控這棵生命之樹嗎？」",
+        "「同時，Harpoon 的飛鏢已經射出。在三個戰場間快速穿梭，展示你的空間折疊術！」"
+      ],
+      "scene_image": "lv-ch2-files.png",
+      "unlock_requires": 101
+    },
+    {
+      "chapter_id": 103,
+      "title_zh": "環繞與註解",
+      "title_en": "Surround and Comment",
+      "plugins": ["mini-surround"],
+      "intro_story": [
+        "「文字操控的進階修煉 — 環繞術與注釋術。」導師揮手，一行程式碼浮現在空中：hello world。",
+        "「環繞術（Surround）讓你為文字穿上鎧甲 — 引號、括號、方括號。gsa 新增，gsd 刪除，gsr 替換。三招之內，任何符號都在你的掌控。」",
+        "「注釋術（Comment）則讓你控制程式碼的生與死。gcc 切換一行，gc{motion} 操控多行。被註解的程式碼暫時沉睡，等待你的喚醒。」"
+      ],
+      "outro_story": [
+        "引號在你指間跳舞，括號隨意變換。你已經掌握了文字的鎧甲術 — 新增、刪除、替換，一氣呵成。",
+        "「環繞與註解看似簡單，」導師說，「但在日常開發中，它們的使用頻率遠超你的想像。掌握它們，你的編輯速度將飛躍提升。」"
+      ],
+      "boss_intro": [
+        "「環繞術宗師」與「注釋之靈」同時出現，一個操控符號，一個操控程式碼的沉默。",
+        "「符號是程式碼的鎧甲，註解是程式碼的封印。你能在兩種力量間自如切換嗎？」",
+        "「展示你的環繞三術（gsa/gsd/gsr）和注釋雙法（gcc/gc{motion}），證明你配得上這份力量。」"
+      ],
+      "scene_image": "lv-ch3-surround.png",
+      "unlock_requires": 102
+    },
+    {
+      "chapter_id": 104,
+      "title_zh": "程式碼品質",
+      "title_en": "Code Quality",
+      "plugins": ["trouble", "todo-comments", "conform"],
+      "intro_story": [
+        "「真正的修煉者不只寫程式碼，還要維護程式碼的品質。」導師帶你進入一個佈滿紅色警告光芒的空間。",
+        "「Trouble 是你的診斷之眼，能看穿所有錯誤和警告。Todo-comments 追蹤你留下的標記。Conform 則確保程式碼的格式完美無瑕。」",
+        "「<leader>xx 開啟診斷面板，]t 跳到下一個 TODO，<leader>cf 格式化程式碼。這三件法器，讓你的程式碼品質無懈可擊。」"
+      ],
+      "outro_story": [
+        "紅色的警告逐一消失，TODO 標記被一一處理，程式碼在格式化後變得整齊劃一。你的程式碼品質達到了新的境界。",
+        "「品質不是終點，而是持續的修行。」導師滿意地點頭，「每次寫完程式碼，先用 Trouble 檢查，再用 Conform 格式化。這是修煉者的基本功。」"
+      ],
+      "boss_intro": [
+        "「品質守衛」從錯誤訊息中凝聚成形，它的身體由警告和錯誤構成。",
+        "「你的程式碼中潛藏著 Bug 和未完成的 TODO。用 Trouble 找出它們，用 ]t 追蹤它們，用 Conform 淨化它們。」",
+        "「只有通過品質的試煉，你才配繼續前進！」"
+      ],
+      "scene_image": "lv-ch4-quality.png",
+      "unlock_requires": 103
+    },
+    {
+      "chapter_id": 105,
+      "title_zh": "Git 修煉",
+      "title_en": "Git Mastery",
+      "plugins": ["gitsigns"],
+      "intro_story": [
+        "「版本控制是修煉者的時間管理術。」導師的手劃過時間線，無數分支在虛空中交錯。",
+        "「Gitsigns 在你的編輯器中直接顯示變更 — 新增的行是綠色，修改的是藍色，刪除的是紅色。你不需要離開編輯器就能掌握所有變化。」",
+        "「]c 跳到下一個變更，<leader>hp 預覽差異，<leader>hs 暫存，<leader>hr 還原。逐 hunk 審查，這才是精準的版本控制。」"
+      ],
+      "outro_story": [
+        "時間線在你手中變得清晰。每個 hunk 都經過你的審視 — stage、reset、preview，你對每一行程式碼的變更都了如指掌。",
+        "「掌握了 Gitsigns，你就能在不離開編輯器的情況下完成大部分 Git 操作。」導師說，「搭配 <leader>gg 開啟 Lazygit，你的 Git 工作流將無懈可擊。」"
+      ],
+      "boss_intro": [
+        "「版本守護者」從時間線的分岔點浮現，它的身體由無數 commit 和 diff 構成。",
+        "「每一次修改都是歷史的分岔。你能審視每個變更，決定哪些該保留、哪些該捨棄嗎？」",
+        "「展示你的 hunk 審查術：跳轉、預覽、暫存、還原。讓時間線按照你的意志流動！」"
+      ],
+      "scene_image": "lv-ch5-git.png",
+      "unlock_requires": 104
+    },
+    {
+      "chapter_id": 106,
+      "title_zh": "補全與效率",
+      "title_en": "Completion and Efficiency",
+      "plugins": ["blink-cmp", "snacks"],
+      "intro_story": [
+        "「修煉至此，你已掌握了搜尋、檔案、文字、品質、版本控制。」導師帶你進入一個充滿浮動面板的空間。",
+        "「但真正的效率大師，懂得讓機器替自己思考。blink.cmp 的自動補全能預測你想輸入的程式碼。Snacks 的工具集則在各個細節提升你的體驗。」",
+        "「<C-n> 向下選擇，<C-p> 向上，<CR> 確認，<C-e> 取消，<C-Space> 手動觸發。五個按鍵，掌控自動補全的全部。」"
+      ],
+      "outro_story": [
+        "自動補全在你輸入時精準地預測下一步。Snacks 的通知、終端、dashboard 讓你的 Neovim 體驗更加順暢。",
+        "「效率不是打字速度，而是用最少的操作完成最多的事。」導師說，「自動補全就是最好的例子 — 讓機器替你完成重複的工作。」"
+      ],
+      "boss_intro": [
+        "「效率之神」從浮動面板的光芒中凝聚，它的思維速度超越了任何人類。",
+        "「自動補全是智慧的延伸 — 但你必須知道如何與它合作。選擇、確認、取消、觸發，每個操作都要精準。」",
+        "「同時，終端、Lazygit、通知管理 — 展示你對 Neovim 生態系統的完全掌控！」"
+      ],
+      "scene_image": "lv-ch6-completion.png",
+      "unlock_requires": 105
+    },
+    {
+      "chapter_id": 107,
+      "title_zh": "知識管理",
+      "title_en": "Knowledge Management",
+      "plugins": ["obsidian"],
+      "intro_story": [
+        "「終端修煉者不只寫程式碼，還要管理知識。」導師帶你進入一座由連結構成的網狀空間 — Obsidian vault。",
+        "「obsidian.nvim 讓你在 Neovim 中直接操作 Obsidian vault。搜尋筆記、建立連結、撰寫 daily note — 所有知識管理操作，都在你的編輯器中完成。」",
+        "「<leader>od 開啟今日記錄，<leader>os 搜尋筆記，<leader>on 新增筆記，]o/[o 在連結間跳躍。你的知識庫，就在指尖。」"
+      ],
+      "outro_story": [
+        "知識的網絡在你手中逐漸成形。每天的記錄匯聚成習慣，連結串起的筆記構成了你獨有的知識體系。",
+        "「程式碼會更新，技術會過時，但系統化的知識管理是永恆的修行。」導師看著你的知識網絡，「你已經不只是一個開發者 — 你是一個知識修煉者。」"
+      ],
+      "boss_intro": [
+        "「知識守護者」從書卷與連結的光芒中浮現，它的存在本身就是一座活的知識庫。",
+        "「散落的知識碎片，唯有連結才能匯聚成智慧。每日記錄、搜尋回顧、連結串聯 — 你能建立完整的知識修煉體系嗎？」",
+        "「展示你的知識管理工作流：daily note → 搜尋 → 連結導航。讓知識在你的 vault 中自由流動！」"
+      ],
+      "scene_image": "lv-ch7-obsidian.png",
+      "unlock_requires": 106
+    },
+    {
+      "chapter_id": 108,
+      "title_zh": "終極試煉",
+      "title_en": "The Final Trial",
+      "plugins": ["telescope", "neo-tree", "mini-surround", "trouble", "gitsigns", "blink-cmp", "obsidian", "flash", "harpoon", "which-key", "snacks", "noice", "todo-comments", "conform"],
+      "intro_story": [
+        "「修煉者，你已經走過了七重試煉。搜尋、檔案、環繞、品質、版本、補全、知識 — 每一重都為你注入了新的力量。」導師的全像投影前所未有地明亮。",
+        "「但孤立的技能不是真正的實力。真正的終端大師，能將所有技能融為一體，在日常開發中行雲流水般運用。」",
+        "「最終試煉不考驗單一技能 — 它考驗你對整個 LazyVim 生態系統的掌握。:Lazy、:Mason、:LazyExtras、:checkhealth — 這些是你掌控環境的命令。結合之前學到的所有插件快捷鍵，展示你的終極之力！」"
+      ],
+      "outro_story": [
+        "所有技能匯聚成一道光流，Telescope 的搜尋之眼、Flash 的瞬步、Harpoon 的標記、Neo-tree 的管理、Surround 的環繞、Comment 的封印、Trouble 的診斷、Gitsigns 的版本控制、blink.cmp 的補全、Obsidian 的知識 — 在你體內融為一體。",
+        "「從今以後，你不再是學徒。」導師的投影緩緩消散，「你是 LazyVim 之道的修煉者。終端即是你的劍，鍵盤即是你的琴。去吧，用你的力量改變世界的程式碼。鍵道永存。」"
+      ],
+      "boss_intro": [
+        "天空裂開，所有章節的守衛同時現身 — 「搜尋之眼」、「飛鏢使者」、「檔案樹守護者」、「環繞術宗師」、「注釋之靈」、「品質守衛」、「版本守護者」、「效率之神」、「知識守護者」。",
+        "「最終試煉。」它們齊聲說道。「不是單一的戰鬥，而是所有力量的融合。」",
+        "「LazyVim 的命令體系 — :Lazy、:Mason、:checkhealth、:Telescope keymaps — 加上你學到的每一個快捷鍵。將它們串連成完美的工作流，證明你配得上『終端修煉者』的稱號！」"
+      ],
+      "scene_image": "lv-ch8-final.png",
+      "unlock_requires": 107
+    }
+  ]
+}

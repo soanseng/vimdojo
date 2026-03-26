@@ -1,0 +1,144 @@
+{
+  "plugins": [
+    {
+      "id": "telescope",
+      "name": "telescope.nvim",
+      "repo_url": "https://github.com/nvim-telescope/telescope.nvim",
+      "description_zh": "高度可擴展的模糊搜尋器，可搜尋檔案、文字、buffer、git 等一切",
+      "description_en": "Highly extensible fuzzy finder over lists — files, grep, buffers, git, and more",
+      "category": "file-navigation",
+      "stars": "19K",
+      "author": "nvim-telescope"
+    },
+    {
+      "id": "harpoon",
+      "name": "harpoon",
+      "repo_url": "https://github.com/ThePrimeagen/harpoon",
+      "description_zh": "快速標記並在常用檔案間瞬間切換",
+      "description_en": "Mark and instantly navigate between frequently used files",
+      "category": "file-navigation",
+      "stars": "9K",
+      "author": "ThePrimeagen"
+    },
+    {
+      "id": "neo-tree",
+      "name": "neo-tree.nvim",
+      "repo_url": "https://github.com/nvim-neo-tree/neo-tree.nvim",
+      "description_zh": "現代化的檔案樹瀏覽器，支援 git 狀態顯示與檔案操作",
+      "description_en": "Modern file tree browser with git status and file operations",
+      "category": "file-navigation",
+      "stars": "5K",
+      "author": "nvim-neo-tree"
+    },
+    {
+      "id": "mini-surround",
+      "name": "mini.surround",
+      "repo_url": "https://github.com/echasnovski/mini.surround",
+      "description_zh": "快速新增、刪除、替換環繞符號（引號、括號等）",
+      "description_en": "Fast surround actions — add, delete, replace surrounding characters",
+      "category": "editing",
+      "stars": "9K",
+      "author": "echasnovski"
+    },
+    {
+      "id": "blink-cmp",
+      "name": "blink.cmp",
+      "repo_url": "https://github.com/Saghen/blink.cmp",
+      "description_zh": "高效能的自動補全引擎，支援 LSP 與多種來源",
+      "description_en": "High-performance completion engine with LSP and multiple sources",
+      "category": "completion",
+      "stars": "6K",
+      "author": "Saghen"
+    },
+    {
+      "id": "obsidian",
+      "name": "obsidian.nvim",
+      "repo_url": "https://github.com/obsidian-nvim/obsidian.nvim",
+      "description_zh": "在 Neovim 中操作 Obsidian vault，支援筆記、搜尋、每日記錄",
+      "description_en": "Interact with Obsidian vaults in Neovim — notes, search, daily logs",
+      "category": "notes",
+      "stars": "7K",
+      "author": "obsidian-nvim"
+    },
+    {
+      "id": "flash",
+      "name": "flash.nvim",
+      "repo_url": "https://github.com/folke/flash.nvim",
+      "description_zh": "閃電般的光標跳躍，輸入少量字元即可精準定位",
+      "description_en": "Lightning-fast cursor navigation with minimal keystrokes",
+      "category": "file-navigation",
+      "stars": "4K",
+      "author": "folke"
+    },
+    {
+      "id": "which-key",
+      "name": "which-key.nvim",
+      "repo_url": "https://github.com/folke/which-key.nvim",
+      "description_zh": "按鍵後顯示可用的後續按鍵與說明，幫助記憶快捷鍵",
+      "description_en": "Displays available keybindings in popup after pressing a key",
+      "category": "ui",
+      "stars": "7K",
+      "author": "folke"
+    },
+    {
+      "id": "gitsigns",
+      "name": "gitsigns.nvim",
+      "repo_url": "https://github.com/lewis6991/gitsigns.nvim",
+      "description_zh": "在行號旁顯示 git 變更標記，支援 hunk 操作與 blame",
+      "description_en": "Git decorations — inline change signs, hunk actions, and blame",
+      "category": "git",
+      "stars": "7K",
+      "author": "lewis6991"
+    },
+    {
+      "id": "trouble",
+      "name": "trouble.nvim",
+      "repo_url": "https://github.com/folke/trouble.nvim",
+      "description_zh": "優雅的診斷列表，集中顯示錯誤、警告與 TODO",
+      "description_en": "Pretty diagnostics list for errors, warnings, and TODOs",
+      "category": "diagnostics",
+      "stars": "7K",
+      "author": "folke"
+    },
+    {
+      "id": "todo-comments",
+      "name": "todo-comments.nvim",
+      "repo_url": "https://github.com/folke/todo-comments.nvim",
+      "description_zh": "高亮並搜尋程式碼中的 TODO、FIXME、HACK 等註解",
+      "description_en": "Highlight and search TODO, FIXME, HACK comments in code",
+      "category": "diagnostics",
+      "stars": "4K",
+      "author": "folke"
+    },
+    {
+      "id": "conform",
+      "name": "conform.nvim",
+      "repo_url": "https://github.com/stevearc/conform.nvim",
+      "description_zh": "輕量級格式化工具管理器，支援多種語言的自動格式化",
+      "description_en": "Lightweight formatter manager with support for multiple languages",
+      "category": "diagnostics",
+      "stars": "5K",
+      "author": "stevearc"
+    },
+    {
+      "id": "noice",
+      "name": "noice.nvim",
+      "repo_url": "https://github.com/folke/noice.nvim",
+      "description_zh": "重新設計 Neovim 的訊息、命令列與彈出通知介面",
+      "description_en": "Replaces messages, cmdline, and popupmenu UI with modern design",
+      "category": "ui",
+      "stars": "6K",
+      "author": "folke"
+    },
+    {
+      "id": "snacks",
+      "name": "snacks.nvim",
+      "repo_url": "https://github.com/folke/snacks.nvim",
+      "description_zh": "一系列實用小工具集合 — 通知、終端、儀表板等",
+      "description_en": "Collection of small utilities — notifications, terminal, dashboard, and more",
+      "category": "ui",
+      "stars": "7K",
+      "author": "folke"
+    }
+  ]
+}
