@@ -41,6 +41,14 @@ export default function Navbar() {
           自由練習
         </NavLink>
         <NavLink
+          to="/lazyvim"
+          className={({ isActive }) =>
+            `text-sm font-medium transition-colors ${isActive ? 'text-ctp-mauve' : 'text-ctp-subtext0 hover:text-ctp-text'}`
+          }
+        >
+          LazyVim 修煉
+        </NavLink>
+        <NavLink
           to="/commands"
           className={({ isActive }) =>
             `text-sm font-medium transition-colors ${isActive ? 'text-ctp-blue' : 'text-ctp-subtext0 hover:text-ctp-text'}`

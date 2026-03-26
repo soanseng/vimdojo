@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import type { Challenge, ChallengeSet, StoryData, StoryChapter, UserProgress } from '../../types'
+import type { Challenge, ChallengeSet, StoryData, StoryChapter, UserProgress, LazyVimExerciseSet, QuizExercise } from '../../types'
 import { useProgress } from '../../hooks/useProgress'
 import CharacterPanel from '../RPG/CharacterPanel'
 
@@ -11,19 +11,6 @@ function difficultyLabel(level: number): { text: string; className: string } {
     case 3: return { text: '精通', className: 'bg-ctp-red/20 text-ctp-red' }
     default: return { text: '其他', className: 'bg-ctp-surface1 text-ctp-subtext0' }
   }
-}
-
-function getRecommendations(challenges: Challenge[], progress: UserProgress): Challenge[] {
-  const incomplete = challenges.filter(c => !(c.id in progress.challenges_completed))
-  if (incomplete.length === 0) return challenges.slice(0, 3)
-
-  const sorted = [...incomplete].sort((a, b) => {
-    const aInCurrentCh = progress.chapters_unlocked.includes(a.source.chapter) ? 0 : 1
-    const bInCurrentCh = progress.chapters_unlocked.includes(b.source.chapter) ? 0 : 1
-    if (aInCurrentCh !== bInCurrentCh) return aInCurrentCh - bInCurrentCh
-    return a.difficulty - b.difficulty
-  })
-  return sorted.slice(0, 3)
 }
 
 interface CompletedChallenge {
@@ -48,9 +35,66 @@ function getRecentlyCompleted(challenges: Challenge[], progress: UserProgress): 
   return completed.slice(0, 5)
 }
 
+interface RecommendableExercise {
+  id: string
+  title_zh: string
+  difficulty: number
+  category: string
+  hint_commands?: string[]
+  source_type: 'practical-vim' | 'lazyvim'
+  plugin?: string
+}
+
+function toRecommendable(challenge: Challenge): RecommendableExercise {
+  return {
+    id: challenge.id,
+    title_zh: challenge.title_zh,
+    difficulty: challenge.difficulty,
+    category: challenge.category,
+    hint_commands: challenge.hint_commands,
+    source_type: 'practical-vim',
+  }
+}
+
+function quizToRecommendable(quiz: QuizExercise): RecommendableExercise {
+  return {
+    id: quiz.id,
+    title_zh: quiz.title_zh,
+    difficulty: quiz.difficulty,
+    category: quiz.category,
+    source_type: 'lazyvim',
+    plugin: quiz.plugin,
+  }
+}
+
+function getMixedRecommendations(
+  challenges: Challenge[],
+  lvExercises: Array<QuizExercise | Challenge>,
+  progress: UserProgress,
+): RecommendableExercise[] {
+  const pvItems = challenges.map(toRecommendable)
+  const lvItems = lvExercises
+    .filter((e): e is QuizExercise => 'type' in e && e.type === 'quiz')
+    .map(quizToRecommendable)
+
+  const all = [...pvItems, ...lvItems]
+  const incomplete = all.filter(e => !(e.id in progress.challenges_completed))
+  if (incomplete.length === 0) return all.slice(0, 3)
+
+  const sorted = [...incomplete].sort((a, b) => a.difficulty - b.difficulty)
+  // Take a mix: at most 2 from PV, then fill from LV (or vice versa)
+  const pvIncomplete = sorted.filter(e => e.source_type === 'practical-vim')
+  const lvIncomplete = sorted.filter(e => e.source_type === 'lazyvim')
+  const result: RecommendableExercise[] = []
+  result.push(...pvIncomplete.slice(0, 2))
+  result.push(...lvIncomplete.slice(0, 2))
+  return result.slice(0, 3)
+}
+
 export default function Dashboard() {
   const [challenges, setChallenges] = useState<Challenge[]>([])
   const [chapters, setChapters] = useState<StoryChapter[]>([])
+  const [lvExercises, setLvExercises] = useState<Array<QuizExercise | Challenge>>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const { progress } = useProgress()
@@ -70,8 +114,13 @@ export default function Dashboard() {
           if (!res.ok) throw new Error(`HTTP ${String(res.status)}`)
           return res.json() as Promise<StoryData>
         }),
+      fetch('/data/lazyvim_exercises.json', { signal: controller.signal })
+        .then(res => {
+          if (!res.ok) throw new Error(`HTTP ${String(res.status)}`)
+          return res.json() as Promise<LazyVimExerciseSet>
+        }),
     ])
-      .then(([challengeData, storyData]) => {
+      .then(([challengeData, storyData, lvExData]) => {
         if (!Array.isArray(challengeData?.challenges)) {
           throw new Error('Invalid challenge data format')
         }
@@ -80,6 +129,7 @@ export default function Dashboard() {
         }
         setChallenges(challengeData.challenges)
         setChapters(storyData.chapters)
+        setLvExercises(lvExData?.exercises ?? [])
         setLoading(false)
       })
       .catch(err => {
@@ -108,11 +158,15 @@ export default function Dashboard() {
   }
 
   const totalChallenges = challenges.length
-  const completedCount = Object.keys(progress.challenges_completed).length
+  const completedCount = challenges.filter(c => c.id in progress.challenges_completed).length
   const unlockedChapters = progress.chapters_unlocked.length
   const totalChapters = chapters.length
-  const recommendations = getRecommendations(challenges, progress)
+  const recommendations = getMixedRecommendations(challenges, lvExercises, progress)
   const recentlyCompleted = getRecentlyCompleted(challenges, progress)
+
+  // LazyVim stats
+  const lvTotal = lvExercises.length
+  const lvCompleted = lvExercises.filter(e => e.id in progress.challenges_completed).length
 
   return (
     <div className="min-h-screen bg-ctp-base text-ctp-text">
@@ -130,13 +184,21 @@ export default function Dashboard() {
               <h2 className="text-lg font-semibold text-ctp-subtext1 mb-4">
                 進度概覽
               </h2>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div className="rounded-lg bg-ctp-mantle p-4 text-center">
                   <div className="text-2xl font-bold text-ctp-blue">
                     {completedCount}/{totalChallenges}
                   </div>
                   <div className="text-xs text-ctp-subtext0 mt-1">
-                    已完成練習
+                    Practical Vim
+                  </div>
+                </div>
+                <div className="rounded-lg bg-ctp-mantle p-4 text-center">
+                  <div className="text-2xl font-bold text-ctp-mauve">
+                    {lvCompleted}/{lvTotal}
+                  </div>
+                  <div className="text-xs text-ctp-subtext0 mt-1">
+                    LazyVim 進度
                   </div>
                 </div>
                 <div className="rounded-lg bg-ctp-mantle p-4 text-center">
@@ -164,39 +226,55 @@ export default function Dashboard() {
                 今日推薦練習
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {recommendations.map(challenge => {
-                  const diff = difficultyLabel(challenge.difficulty)
+                {recommendations.map(rec => {
+                  const diff = difficultyLabel(rec.difficulty)
+                  const linkPath = rec.source_type === 'lazyvim'
+                    ? `/lazyvim?highlight=${encodeURIComponent(rec.id)}`
+                    : `/challenge/${rec.id}`
                   return (
                     <div
-                      key={challenge.id}
+                      key={rec.id}
                       role="button"
                       tabIndex={0}
-                      onClick={() => { navigate(`/challenge/${challenge.id}`) }}
-                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') navigate(`/challenge/${challenge.id}`) }}
+                      onClick={() => { navigate(linkPath) }}
+                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') navigate(linkPath) }}
                       className="bg-ctp-surface0 rounded-lg p-4 hover:bg-ctp-surface1 transition-colors border border-ctp-surface1 hover:border-ctp-blue/50 cursor-pointer"
                     >
                       <div className="flex items-start justify-between gap-2 mb-2">
                         <h3 className="text-sm font-medium text-ctp-text leading-snug flex-1">
-                          {challenge.title_zh}
+                          {rec.title_zh}
                         </h3>
-                        <span className={`text-xs px-2 py-0.5 rounded-full shrink-0 ${diff.className}`}>
-                          {diff.text}
-                        </span>
+                        <div className="flex items-center gap-1 shrink-0">
+                          {rec.source_type === 'lazyvim' && (
+                            <span className="text-xs px-1.5 py-0.5 rounded-full bg-ctp-mauve/20 text-ctp-mauve">
+                              LV
+                            </span>
+                          )}
+                          <span className={`text-xs px-2 py-0.5 rounded-full ${diff.className}`}>
+                            {diff.text}
+                          </span>
+                        </div>
                       </div>
                       <div className="flex items-center gap-2 text-xs text-ctp-overlay0">
-                        <span>{challenge.category}</span>
-                        <span>Ch.{challenge.source.chapter}</span>
-                      </div>
-                      <div className="mt-2 flex flex-wrap gap-1">
-                        {(challenge.hint_commands ?? []).slice(0, 3).map((cmd, cmdIdx) => (
-                          <span
-                            key={`${challenge.id}-cmd-${String(cmdIdx)}`}
-                            className="text-xs font-mono bg-ctp-base px-1.5 py-0.5 rounded text-ctp-blue"
-                          >
-                            {cmd}
+                        <span>{rec.category}</span>
+                        {rec.plugin && (
+                          <span className="text-xs px-1.5 py-0.5 rounded bg-ctp-mauve/15 text-ctp-mauve">
+                            {rec.plugin}
                           </span>
-                        ))}
+                        )}
                       </div>
+                      {rec.hint_commands && rec.hint_commands.length > 0 && (
+                        <div className="mt-2 flex flex-wrap gap-1">
+                          {rec.hint_commands.slice(0, 3).map((cmd, cmdIdx) => (
+                            <span
+                              key={`${rec.id}-cmd-${String(cmdIdx)}`}
+                              className="text-xs font-mono bg-ctp-base px-1.5 py-0.5 rounded text-ctp-blue"
+                            >
+                              {cmd}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   )
                 })}

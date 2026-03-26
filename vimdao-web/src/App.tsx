@@ -5,6 +5,8 @@ import ChallengeList from './components/Challenge/ChallengeList'
 import ChallengeView from './components/Challenge/ChallengeView'
 import CommandRef from './components/CommandRef/CommandRef'
 import Library from './components/Library/Library'
+import QuizList from './components/Quiz/QuizList'
+import QuizView from './components/Quiz/QuizView'
 import Navbar from './components/Layout/Navbar'
 
 export default function App() {
@@ -18,6 +20,8 @@ export default function App() {
         <Route path="/challenge/:id" element={<ChallengeView />} />
         <Route path="/commands" element={<CommandRef />} />
         <Route path="/library" element={<Library />} />
+        <Route path="/lazyvim" element={<QuizList />} />
+        <Route path="/quiz/:id" element={<QuizView />} />
       </Routes>
     </BrowserRouter>
   )
