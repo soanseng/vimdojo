@@ -265,6 +265,77 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
     if (key === 'u') {
       return { state: { ...s, pendingOperator: 'gu', pendingKeys: '' }, handled: true }
     }
+    // gn — search match text object
+    if (key === 'n') {
+      if (!s.searchPattern) return { state: s, handled: true }
+      const pattern = s.searchPattern
+      // Find match at or after cursor (searchForward starts from cursor+1,
+      // so first check if the match starts at the cursor position itself)
+      const line = s.lines[s.cursor.line] ?? ''
+      let matchPos: CursorPos | null = null
+      if (line.indexOf(pattern, s.cursor.col) === s.cursor.col) {
+        matchPos = { line: s.cursor.line, col: s.cursor.col }
+      } else {
+        matchPos = searchForward(s, pattern)
+      }
+      if (!matchPos) return { state: s, handled: true }
+      const matchEnd: CursorPos = { line: matchPos.line, col: matchPos.col + pattern.length - 1 }
+
+      if (s.pendingOperator) {
+        const op = s.pendingOperator
+        const opState: VimState = { ...s, pendingOperator: null, cursor: matchPos }
+        const targetExcl: CursorPos = { line: matchPos.line, col: matchPos.col + pattern.length }
+        const changeKeys = op.length > 1 ? [...op.split(''), 'g', 'n'] : [op, 'g', 'n']
+        switch (op) {
+          case 'd': {
+            const result = ops.deleteToPos(opState, targetExcl)
+            return { state: { ...result, lastChange: { type: 'normal', keys: changeKeys } }, handled: true }
+          }
+          case 'c': {
+            const result = ops.changeToPos(opState, targetExcl)
+            return { state: startInsertRecording(result, changeKeys), handled: true }
+          }
+          case 'y': {
+            const result = ops.yankToPos(opState, targetExcl)
+            return { state: result, handled: true }
+          }
+          case 'gU':
+          case 'gu': {
+            const toUpper = op === 'gU'
+            const withUndo = pushUndo(s)
+            const newLines = [...withUndo.lines]
+            const matchLine = newLines[matchPos.line] ?? ''
+            const seg = matchLine.slice(matchPos.col, matchPos.col + pattern.length)
+            newLines[matchPos.line] = matchLine.slice(0, matchPos.col)
+              + (toUpper ? seg.toUpperCase() : seg.toLowerCase())
+              + matchLine.slice(matchPos.col + pattern.length)
+            return {
+              state: {
+                ...withUndo,
+                lines: newLines,
+                pendingOperator: null,
+                cursor: matchPos,
+                lastChange: { type: 'normal', keys: changeKeys },
+              },
+              handled: true,
+            }
+          }
+          default:
+            return { state: { ...s, pendingOperator: null }, handled: true }
+        }
+      }
+      // No pending operator — enter visual mode selecting the match
+      return {
+        state: {
+          ...s,
+          mode: 'visual',
+          visualMode: 'char',
+          visualStart: { ...matchPos },
+          cursor: { ...matchEnd },
+        },
+        handled: true,
+      }
+    }
     // gv — reselect last visual selection
     if (key === 'v') {
       if (s.lastVisualStart && s.lastVisualEnd) {
@@ -648,6 +719,23 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
     return { state: { ...state, pendingKeys: 'r' }, handled: true }
   }
 
+  // --- ~ toggle case of char under cursor ---
+  if (key === '~') {
+    const line = state.lines[state.cursor.line] ?? ''
+    const ch = line[state.cursor.col]
+    if (ch) {
+      const toggled = ch === ch.toUpperCase() ? ch.toLowerCase() : ch.toUpperCase()
+      const newLines = [...state.lines]
+      newLines[state.cursor.line] = line.slice(0, state.cursor.col) + toggled + line.slice(state.cursor.col + 1)
+      const newCol = Math.min(state.cursor.col + 1, (newLines[state.cursor.line] ?? '').length - 1)
+      return {
+        state: { ...pushUndo(state), lines: newLines, cursor: { line: state.cursor.line, col: newCol }, lastChange: { type: 'normal', keys: ['~'] } },
+        handled: true,
+      }
+    }
+    return { state, handled: true }
+  }
+
   // --- [ and ] prefix ---
   if (key === '[' || key === ']') {
     return { state: { ...state, pendingKeys: key }, handled: true }
@@ -664,7 +752,8 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
     const numStart = state.cursor.col + match.index
     const numStr = match[0]
     const num = parseInt(numStr, 10)
-    const newNum = key === 'Control-a' ? num + 1 : num - 1
+    const count = state.countPrefix ?? 1
+    const newNum = key === 'Control-a' ? num + count : num - count
     const newNumStr = String(newNum)
 
     const withUndo = pushUndo(state)
@@ -677,6 +766,7 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
         ...withUndo,
         lines: newLines,
         cursor: { line: state.cursor.line, col: numStart + newNumStr.length - 1 },
+        countPrefix: null,
         lastChange: { type: 'normal', keys: [key] },
       },
       handled: true,
@@ -1013,7 +1103,7 @@ function handleNormalMode(state: VimState, key: string): KeyResult {
   if (key === '%') {
     const pos = matchBracket(state)
     if (pos) {
-      return { state: { ...state, cursor: pos, countPrefix: null }, handled: true }
+      return { state: { ...state, cursor: pos, countPrefix: null, lastJumpPos: { ...state.cursor } }, handled: true }
     }
     return { state, handled: true }
   }

@@ -433,7 +433,7 @@
       "initial_text": "Practical Vim, by Drew Neil\nRead Drew Neil's",
       "expected_text": "Practical Vim, by Drew Neil\nRead Drew Neil's Practical Vim.",
       "cursor_start": {
-        "line": 1,
+        "line": 0,
         "col": 0
       },
       "hint_commands": [
@@ -443,7 +443,7 @@
         "j",
         "A"
       ],
-      "hint_keystrokes": "yt,jA<C-r>0.<Esc>",
+      "hint_keystrokes": "yt,jA <C-r>0.<Esc>",
       "hint_text": "按鍵順序：yt,jA<C-r>0.<Esc>\n\n• y — 複製（yank）\n• t — 向右搜尋字元（游標停在前一格）\n• , — 反向重複上次 f/t 搜尋\n• j — 向下移動\n• A — 在行尾進入插入模式",
       "tags": [
         ",",
@@ -1275,7 +1275,7 @@
         "at",
         "a]"
       ],
-      "hint_keystrokes": "vi}a\"i>itata]",
+      "hint_keystrokes": "",
       "hint_text": "按鍵順序：vi}a\"i>itata]\n\n• v — 進入視覺模式（字元選取）\n• i} — 大括號內的文字\n• a\" — 雙引號內的文字含引號\n• i> — 角括號內的文字\n• it — HTML 標籤內的文字\n• at — HTML 標籤內的文字含標籤\n• a] — 方括號內的文字含方括號",
       "tags": [
         "a\"",
@@ -1435,7 +1435,7 @@
       "expected_text": "cities = [London Berlin New\\ York]",
       "cursor_start": {
         "line": 0,
-        "col": 0
+        "col": 9
       },
       "hint_commands": [
         "d",
@@ -1627,7 +1627,7 @@
       "initial_text": "collection = getCollection();\nprocess(somethingInTheWay, target);",
       "expected_text": "collection = getCollection();\nprocess(collection, target);",
       "cursor_start": {
-        "line": 1,
+        "line": 0,
         "col": 0
       },
       "hint_commands": [
@@ -1639,7 +1639,7 @@
         "0",
         "P"
       ],
-      "hint_keystrokes": "yiwjwwdiw\"0P",
+      "hint_keystrokes": "yiwjwwciw<C-r>0<Esc>",
       "hint_text": "按鍵順序：yiwjwwdiw\"0P\n\n• y — 複製（yank）\n• iw — 游標所在的單字（inner word）\n• j — 向下移動\n• w — 移到下一個單字字首\n• d — 刪除\n• 0 — 移到行首\n• P — 貼上到游標前",
       "tags": [
         "0",
@@ -1676,13 +1676,13 @@
       "initial_text": "collection = getCollection();\nprocess(somethingInTheWay, target);",
       "expected_text": "collection = getCollection();\nprocess(collection, target);",
       "cursor_start": {
-        "line": 1,
+        "line": 0,
         "col": 0
       },
       "hint_commands": [
         "a"
       ],
-      "hint_keystrokes": "\"ayiwjwwdiw\"aP",
+      "hint_keystrokes": "yiwjwwciw<C-r>0<Esc>",
       "hint_text": "按鍵順序：\"ayiwjwwdiw\"aP\n\n• a — 在游標後進入插入模式",
       "tags": [
         "a"
@@ -1710,7 +1710,7 @@
       "initial_text": "collection = getCollection();\nprocess(somethingInTheWay, target);",
       "expected_text": "collection = getCollection();\nprocess(collection, target);",
       "cursor_start": {
-        "line": 1,
+        "line": 0,
         "col": 0
       },
       "hint_commands": [
@@ -1721,7 +1721,7 @@
         "d",
         "P"
       ],
-      "hint_keystrokes": "yiwjww\"_diwP",
+      "hint_keystrokes": "yiwjwwciw<C-r>0<Esc>",
       "hint_text": "按鍵順序：yiwjww\"_diwP\n\n• y — 複製（yank）\n• iw — 游標所在的單字（inner word）\n• j — 向下移動\n• w — 移到下一個單字字首\n• d — 刪除\n• P — 貼上到游標前",
       "tags": [
         "P",
@@ -1856,7 +1856,7 @@
       "initial_text": "collection = getCollection();\nprocess(somethingInTheWay, target);",
       "expected_text": "collection = getCollection();\nprocess(collection, target);",
       "cursor_start": {
-        "line": 1,
+        "line": 0,
         "col": 0
       },
       "hint_commands": [
@@ -1953,7 +1953,7 @@
         "a",
         "I"
       ],
-      "hint_keystrokes": "qaA;<Esc>Ivar<Esc>q",
+      "hint_keystrokes": "qaA;<Esc>Ivar <Esc>q",
       "hint_text": "按鍵順序：qaA;<Esc>Ivar<Esc>q\n\n• q — 錄製巨集\n• a — 在游標後進入插入模式\n• I — 在行首進入插入模式",
       "tags": [
         "I",
@@ -1981,10 +1981,10 @@
       "description_en": "Record and Execute a Macro",
       "category": "combo",
       "difficulty": 2,
-      "initial_text": "var foo = 1;\nbar = 'a'\nfoobar = foo + bar",
+      "initial_text": "foo = 1\nbar = 'a'\nfoobar = foo + bar",
       "expected_text": "var foo = 1;\nvar bar = 'a';\nvar foobar = foo + bar;",
       "cursor_start": {
-        "line": 1,
+        "line": 0,
         "col": 0
       },
       "hint_commands": [
@@ -1992,7 +1992,7 @@
         "@",
         "a"
       ],
-      "hint_keystrokes": "j@aj@@",
+      "hint_keystrokes": "qaA;<Esc>Ivar <Esc>qj@aj@@",
       "hint_text": "按鍵順序：j@aj@@\n\n• j — 向下移動\n• @ — 播放巨集\n• a — 在游標後進入插入模式",
       "tags": [
         "@",
@@ -2058,17 +2058,17 @@
       "description_en": "Repeat a Change on Contiguous Lines",
       "category": "insert",
       "difficulty": 1,
-      "initial_text": "1) One\n2. two\n3. three\n4. four",
+      "initial_text": "1. one\n2. two\n3. three\n4. four",
       "expected_text": "1) One\n2) Two\n3) Three\n4) Four",
       "cursor_start": {
-        "line": 1,
+        "line": 0,
         "col": 0
       },
       "hint_commands": [
         "@",
         "a"
       ],
-      "hint_keystrokes": "3@a",
+      "hint_keystrokes": "qa0f.r)w~jq3@a",
       "hint_text": "按鍵順序：3@a\n\n• @ — 播放巨集\n• a — 在游標後進入插入模式",
       "tags": [
         "@",
@@ -2105,7 +2105,7 @@
         "@",
         "a"
       ],
-      "hint_keystrokes": "5@a",
+      "hint_keystrokes": "",
       "hint_text": "按鍵順序：5@a\n\n• @ — 播放巨集\n• a — 在游標後進入插入模式",
       "tags": [
         "@",
@@ -2132,8 +2132,8 @@
       "description_en": "Repeat a Change on Contiguous Lines",
       "category": "insert",
       "difficulty": 2,
-      "initial_text": "1. one",
-      "expected_text": "1) One\n2) Two\n// break up the monotony\n3) Three\n4) Four",
+      "initial_text": "1. one\n2. two\n3. three\n4. four",
+      "expected_text": "1) One\n2) Two\n3) Three\n4) Four",
       "cursor_start": {
         "line": 0,
         "col": 0
@@ -2142,7 +2142,7 @@
         "q",
         "a"
       ],
-      "hint_keystrokes": "qa0f.r)w~qjVG",
+      "hint_keystrokes": "qa0f.r)w~jq3@a",
       "hint_text": "按鍵順序：qa0f.r)w~qjVG\n\n• q — 錄製巨集\n• a — 在游標後進入插入模式",
       "tags": [
         "a",
@@ -2183,7 +2183,7 @@
         "G",
         "o"
       ],
-      "hint_keystrokes": "qagg<CR>Omodule Rank<Esc>j>GGoend<Esc>q",
+      "hint_keystrokes": "",
       "hint_text": "按鍵順序：qagg<CR>Omodule Rank<Esc>j>GGoend<Esc>q\n\n• q — 錄製巨集\n• a — 在游標後進入插入模式\n• j — 向下移動\n• > — 增加縮排\n• G — 移到檔案結尾\n• o — 在下方新增一行並進入插入模式",
       "tags": [
         ">",
@@ -2226,7 +2226,7 @@
         "q",
         "A"
       ],
-      "hint_keystrokes": "qAq22@a",
+      "hint_keystrokes": "",
       "hint_text": "按鍵順序：qAq22@a\n\n• q — 錄製巨集\n• A — 在行尾進入插入模式",
       "tags": [
         "A",
@@ -2498,7 +2498,7 @@
         ")",
         "i"
       ],
-      "hint_keystrokes": "f[c%(<C-r>\")<Esc>i|’\\w<Esc>",
+      "hint_keystrokes": "",
       "hint_text": "按鍵順序：f[c%(<C-r>\")<Esc>i|’\\w<Esc>\n\n• f — 向右搜尋字元\n• c — 修改（刪除並進入插入模式）\n• % — 跳到配對的括號\n• ( — 移到上一個句子\n• ) — 移到下一個句子\n• i — 在游標前進入插入模式",
       "tags": [
         "%",
