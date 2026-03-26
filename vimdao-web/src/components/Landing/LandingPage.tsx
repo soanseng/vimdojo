@@ -127,6 +127,20 @@ export default function LandingPage() {
           </button>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="py-8 text-center text-xs text-ctp-overlay0 space-y-1">
+        <p>
+          <a href="https://anatomind.com" target="_blank" rel="noopener noreferrer" className="hover:text-ctp-blue transition-colors">
+            Tân Soân-sêng — 析心事務所
+          </a>
+        </p>
+        <p>
+          <a href="https://github.com/soanseng/vimdojo" target="_blank" rel="noopener noreferrer" className="hover:text-ctp-blue transition-colors">
+            GitHub
+          </a>
+        </p>
+      </footer>
     </div>
   )
 }

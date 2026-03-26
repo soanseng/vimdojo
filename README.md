@@ -90,6 +90,12 @@ npx vite build     # 建置
 - *Practical Vim, 2nd Edition* — Drew Neil
 - *LazyVim for Ambitious Developers* — Dusty Phillips
 
+## 作者
+
+**Tân Soân-sêng** — [析心事務所](https://anatomind.com)
+
+- GitHub: [github.com/soanseng/vimdojo](https://github.com/soanseng/vimdojo)
+
 ## License
 
 MIT
