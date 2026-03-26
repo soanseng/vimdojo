@@ -45,6 +45,12 @@ export default function ChallengeView() {
   // Initialize with empty text; will be reset when challenge loads
   const { state, handleKey, reset } = useVimEditor('')
 
+  // Snapshot keyLog and editor lines at submission time so that the result
+  // view keeps displaying them even when the underlying editor state is reset
+  // (e.g. by the data-fetching effect re-running after progress changes).
+  const [submittedKeyLog, setSubmittedKeyLog] = useState<string[]>([])
+  const [submittedLines, setSubmittedLines] = useState<string[]>([])
+
   const isLazyVim = id?.startsWith('lv-') ?? false
 
   useEffect(() => {
@@ -53,6 +59,9 @@ export default function ChallengeView() {
     const challengeUrl = isLazyVim
       ? '/data/lazyvim_exercises.json'
       : '/data/practical-vim_challenges.json'
+
+    // Reset result when navigating to a new challenge (BUG-4 fix)
+    setResult(null)
 
     Promise.all([
       fetch(challengeUrl, { signal: controller.signal })
@@ -121,7 +130,7 @@ export default function ChallengeView() {
       })
 
     return () => { controller.abort() }
-  }, [id, reset, progress.challenges_completed, isLazyVim])
+  }, [id, reset, isLazyVim])
 
   // Show pending achievements one by one
   useEffect(() => {
@@ -143,6 +152,12 @@ export default function ChallengeView() {
   const handleSubmit = useCallback(() => {
     if (!challenge) return
     const currentText = getText(state)
+
+    // Snapshot keyLog and editor lines BEFORE setting the result, so
+    // the result view can display them even if the editor state resets.
+    setSubmittedKeyLog([...state.keyLog])
+    setSubmittedLines([...state.lines])
+
     if (currentText === challenge.expected_text) {
       setResult('pass')
 
@@ -322,10 +337,12 @@ export default function ChallengeView() {
       </header>
 
       <main className="max-w-4xl mx-auto px-6 py-6 space-y-6">
-        {/* Title & description */}
+        {/* Title & description (strip hint spoilers from description) */}
         <div>
           <h1 className="text-xl font-bold text-ctp-text mb-2">{challenge.title_zh}</h1>
-          <p className="text-sm text-ctp-subtext0 whitespace-pre-wrap">{challenge.description_zh}</p>
+          <p className="text-sm text-ctp-subtext0 whitespace-pre-wrap">
+            {(challenge.description_zh ?? '').replace(/\n?提示按鍵：.*$/m, '').trim() || '將初始文字修改為目標文字。'}
+          </p>
         </div>
 
         {/* Target text preview */}
@@ -389,7 +406,8 @@ export default function ChallengeView() {
         {result !== null && (
           <ChallengeResult
             challenge={challenge}
-            keyLog={state.keyLog}
+            keyLog={submittedKeyLog}
+            editorLines={submittedLines}
             passed={result === 'pass'}
             onRetry={handleRetry}
             onNext={nextChallenge ? handleNext : null}

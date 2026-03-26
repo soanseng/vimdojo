@@ -3,6 +3,7 @@ import type { Challenge } from '../../types'
 interface ChallengeResultProps {
   challenge: Challenge
   keyLog: string[]
+  editorLines: string[]
   passed: boolean
   onRetry: () => void
   onNext: (() => void) | null
@@ -21,6 +22,7 @@ function formatKey(key: string): string {
 export default function ChallengeResult({
   challenge,
   keyLog,
+  editorLines,
   passed,
   onRetry,
   onNext,
@@ -49,6 +51,14 @@ export default function ChallengeResult({
           <div className="text-ctp-yellow font-bold mt-1">+{challenge.xp_reward} XP</div>
         )}
       </div>
+
+      {/* Your result text (BUG-3 fix: show what the user produced) */}
+      {passed && editorLines.length > 0 && (
+        <div className="bg-ctp-surface0 rounded-lg p-4">
+          <h3 className="text-xs font-medium text-ctp-subtext0 mb-2">你的結果</h3>
+          <pre className="text-sm font-mono text-ctp-green whitespace-pre-wrap">{editorLines.join('\n')}</pre>
+        </div>
+      )}
 
       {/* Keystroke comparison */}
       <div className="bg-ctp-surface0 rounded-lg p-4 space-y-3">
